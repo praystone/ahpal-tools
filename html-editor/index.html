@@ -91,6 +91,9 @@
             <button class="btn btn-brand" id="btn-copy" onclick="copyCode()">複製代碼</button>
             <button class="btn btn-brand" onclick="openInNewTab()">新分頁開啟</button>
             <button class="btn btn-brand" onclick="downloadPreviewImage()">下載預覽圖</button>
+            <button class="btn btn-brand" onclick="applyArticleTemplate()" title="注入雅寶文章樣式">🦞 套用文章模板</button>
+            <button class="btn btn-brand" onclick="exportHighlights()" title="抓出螢光筆標註的文字">📋 匯出螢光重點</button>
+            <button class="btn btn-brand" onclick="copyCleanHTML()" title="複製不含編輯器髒東西的 HTML">🧹 複製乾淨版</button>
         </div>
         <div class="tool-group">
             <button class="btn btn-light" onclick="clearAll()">清除內容</button>
@@ -128,6 +131,74 @@
     </div>
 
     <script>
+        // ============================================================
+        // 2026-10-31: 雅寶專屬三個功能
+        // ============================================================
+
+        function applyArticleTemplate() {
+            const doc = previewFrame.contentDocument || previewFrame.contentWindow.document;
+            const templateCSS = "body{font-family:'Microsoft JhengHei','Segoe UI',sans-serif;padding:48px;max-width:720px;margin:0 auto;line-height:1.9;color:#E6EDF3;background:#0D1117;}"
+                + "h1{color:#D4AF37;border-left:5px solid #D4AF37;padding-left:16px;font-size:1.6rem;margin:0 0 8px;}"
+                + "h2{color:#58A6FF;font-size:1.2rem;margin:32px 0 12px;padding-bottom:6px;border-bottom:1px solid #2D303A;}"
+                + "h3{color:#D4AF37;font-size:1.05rem;margin:24px 0 10px;}"
+                + "p{color:#C9D1D9;margin-bottom:14px;}"
+                + "a{color:#58A6FF;text-decoration:none;}a:hover{text-decoration:underline;}"
+                + "blockquote{background:rgba(212,175,55,0.06);border-left:4px solid #D4AF37;padding:16px 20px;margin:20px 0;color:#E6EDF3;border-radius:6px;}"
+                + "code{background:#161B22;color:#58A6FF;padding:2px 8px;border-radius:4px;font-family:Consolas,monospace;font-size:0.9em;}"
+                + "pre{background:#161B22;border:1px solid #2D303A;border-radius:8px;padding:16px;overflow-x:auto;}pre code{background:none;padding:0;}"
+                + "ul,ol{color:#C9D1D9;padding-left:24px;margin-bottom:16px;}li{margin-bottom:6px;}"
+                + "table{width:100%;border-collapse:collapse;margin:16px 0;}"
+                + "th{background:rgba(212,175,55,0.12);color:#D4AF37;padding:10px 14px;border:1px solid #2D303A;text-align:left;}"
+                + "td{padding:10px 14px;border:1px solid #2D303A;color:#C9D1D9;}"
+                + "hr{border:none;border-top:1px solid #2D303A;margin:24px 0;}"
+                + "img{max-width:100%;height:auto;border-radius:8px;}";
+            let styleTag = doc.getElementById('ahpal-article-template');
+            if (!styleTag) {
+                styleTag = doc.createElement('style');
+                styleTag.id = 'ahpal-article-template';
+                doc.head.appendChild(styleTag);
+            }
+            styleTag.textContent = templateCSS;
+            doc.body.style.background = '#0D1117';
+            doc.body.style.color = '#E6EDF3';
+            updateEditorFromPreview(doc);
+            alert('✅ 已套用雅寶文章模板\n\n標題金色、正文淺色、背景黑、引用金邊。只套樣式，不動內容。');
+        }
+
+        function exportHighlights() {
+            const doc = previewFrame.contentDocument || previewFrame.contentWindow.document;
+            const spans = doc.querySelectorAll('span[style*="background-color: rgb(212, 175, 55)"], span[style*="background-color:#D4AF37"], span[style*="background-color: #D4AF37"]');
+            if (spans.length === 0) {
+                alert('⚠️ 目前沒有螢光標註。\n\n用法：在右側選取文字 → 按 ⌘+H 或 Alt+H 加上螢光筆，再回來匯出。');
+                return;
+            }
+            const lines = ['## 螢光重點', ''];
+            spans.forEach((s, i) => {
+                const text = s.textContent.trim();
+                if (text) lines.push((i + 1) + '. ' + text);
+            });
+            const markdown = lines.join('\n');
+            navigator.clipboard.writeText(markdown).then(() => {
+                alert('✅ 已複製 ' + spans.length + ' 條螢光重點到剪貼簿\n\n內容：\n' + markdown.slice(0, 300) + (markdown.length > 300 ? '...' : ''));
+            }).catch(() => { prompt('複製失敗，請手動複製：', markdown); });
+        }
+
+        function copyCleanHTML() {
+            const doc = previewFrame.contentDocument || previewFrame.contentWindow.document;
+            const clone = doc.documentElement.cloneNode(true);
+            clone.querySelectorAll('[contenteditable]').forEach(el => el.removeAttribute('contenteditable'));
+            clone.querySelectorAll('span[style*="background-color"]').forEach(span => {
+                const text = doc.createTextNode(span.textContent);
+                span.parentNode.replaceChild(text, span);
+            });
+            const templateStyle = clone.querySelector('#ahpal-article-template');
+            if (templateStyle) templateStyle.remove();
+            const fullHTML = '<!DOCTYPE html>\n' + clone.outerHTML;
+            navigator.clipboard.writeText(fullHTML).then(() => {
+                alert('✅ 已複製乾淨 HTML（' + fullHTML.length + ' 字元）\n\n已移除：contenteditable、螢光筆 span、編輯器注入的 style。');
+            }).catch(() => { prompt('複製失敗，請手動複製：', fullHTML); });
+        }
+
         const previewFrame = document.getElementById('preview-frame');
         const editorSide = document.getElementById('editor-side');
         const resizer = document.getElementById('resizer');
