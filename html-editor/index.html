@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+
+    <!-- Primary SEO -->
+    <title>視覺化 HTML 編輯器 · 雅寶工具箱 | AHPAL.COM</title>
+    <meta name="description" content="免費視覺化 HTML 編輯器，貼上代碼即時預覽，支援雙向同步編輯、代碼追蹤定位、螢光筆標註（⌘+H）、手機版模擬與一鍵截圖下載。">
+    <meta name="keywords" content="視覺化 html 編輯器, html 編輯器, 即時預覽 html, 線上 html 測試工具, html 雙向編輯, 網頁前端工具">
+    <link rel="canonical" href="https://tools.ahpal.com/html-editor/">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tools.ahpal.com/html-editor/">
+    <meta property="og:title" content="視覺化 HTML 編輯器｜免費即時雙向預覽工具">
+    <meta property="og:description" content="免費視覺化 HTML 編輯器，貼上代碼即時預覽，支援雙向同步編輯、螢光筆標註與手機版模擬。">
+    <meta property="og:locale" content="zh_TW">
+    <meta property="og:site_name" content="雅寶社區 AHPAL.COM">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="視覺化 HTML 編輯器｜免費即時雙向預覽工具">
+    <meta name="twitter:description" content="免費視覺化 HTML 編輯器，貼上代碼即時預覽，支援雙向同步編輯、螢光筆標註與手機版模擬。">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "視覺化 HTML 編輯器",
+      "url": "https://tools.ahpal.com/html-editor/",
+      "description": "免費視覺化 HTML 編輯器，支援即時雙向預覽、代碼追蹤定位、螢光筆標註與手機版模擬。",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "TWD"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "龍蝦總工程師",
+        "url": "https://tools.ahpal.com"
+      }
+    }
+    </script>
+
+    <!-- html2canvas：截圖功能，defer 延後載入不影響主功能 -->
+    <script defer src="./vendor/html2canvas.min.js"></script>
+    <!-- CodeMirror：編輯器核心，必須同步載入保證初始化順序 -->
+    <link rel="stylesheet" href="./vendor/codemirror.min.css">
+    <link rel="stylesheet" href="./vendor/neo.min.css">
+    <script src="./vendor/codemirror.min.js"></script>
+    <script src="./vendor/xml.min.js"></script>
+    <script src="./vendor/javascript.min.js"></script>
+    <script src="./vendor/css.min.js"></script>
+    <script src="./vendor/htmlmixed.min.js"></script>
+    <script src="./vendor/searchcursor.min.js"></script>
+    <!-- 非阻塞字型載入：不拖慢 LCP -->
+    
+    
+    <link rel="preload" as="style"  onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" ></noscript>
+
+    <style>
+        :root {
+            --brand-color: #697861;
+            --brand-hover: #54604d;
+            --bg-color: #f8f9fa;
+            --border-color: #d1d5db;
+            --main-font: 'JetBrains Mono', "Microsoft JhengHei", sans-serif;
+        }
+
+        * { box-sizing: border-box; }
+        body { margin: 0; font-family: var(--main-font); height: 100vh; display: flex; flex-direction: column; overflow: hidden; background: var(--bg-color); }
+
+        /* Toolbar */
+        .toolbar {
+            height: 60px;
+            background: #ffffff;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            z-index: 1000;
+            flex-shrink: 0;
+        }
+
+        .tool-group { display: flex; gap: 10px; align-items: center; }
+
+        .btn {
+            padding: 7px 15px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            font-size: 13.5px;
+            font-family: var(--main-font);
+            background: #fff;
+            color: #333;
+            transition: all 0.2s ease;
+            display: flex; align-items: center; gap: 6px;
+            font-weight: 500;
+        }
+
+        .btn-brand { background: var(--brand-color); color: white; border: none; }
+        .btn-brand:hover { background-color: var(--brand-hover); transform: translateY(-1px); }
+        .btn-light:hover { background: #f0f0f0; }
+        .btn-cta {
+            background: #fff;
+            color: var(--brand-color);
+            border: 1.5px solid var(--brand-color);
+            font-weight: 700;
+            font-size: 13px;
+        }
+        .btn-cta:hover {
+            background: var(--brand-color);
+            color: #fff;
+        }
+        .btn-cta .cta-dot {
+            width: 7px; height: 7px;
+            background: #4caf50;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        /* Main Container */
+        .main-container { display: flex; flex: 1; height: calc(100vh - 90px); overflow: hidden; position: relative; }
+
+        .editor-side { width: 50%; height: 100%; min-width: 250px; position: relative; display: flex; flex-direction: column; }
+        .CodeMirror { height: 100% !important; font-family: 'JetBrains Mono', monospace !important; font-size: 14px; line-height: 1.6; }
+
+        /* Resizer */
+        .resizer {
+            width: 10px; background: #eee; cursor: col-resize;
+            display: flex; align-items: center; justify-content: center;
+            border-left: 1px solid #ccc; border-right: 1px solid #ccc; z-index: 100;
+        }
+        .resizer:hover, .resizer.dragging { background: var(--brand-color); }
+        .resizer::after { content: "||"; color: #888; font-size: 10px; font-weight: bold; }
+
+        /* Preview Side */
+        .preview-side { flex: 1; background: #e9ecef; display: flex; flex-direction: column; padding: 25px; overflow: hidden; align-items: center; min-width: 250px; position: relative; }
+        #preview-frame { width: 100%; height: 100%; background: #fff; border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+
+        .iframe-cover { position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 50; display: none; }
+        .resizer.dragging + .preview-side .iframe-cover { display: block; }
+
+        .mobile-mode #preview-frame { width: 375px !important; height: 667px !important; border: 12px solid #333 !important; border-radius: 36px; flex: none; }
+
+        .footer-bar {
+            height: 30px; background: #fff; border-top: 1px solid var(--border-color);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 11.5px; color: #999;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="toolbar">
+        <div class="tool-group">
+            <button class="btn btn-brand" id="btn-copy" onclick="copyCode()">複製代碼</button>
+            <button class="btn btn-brand" onclick="openInNewTab()">在新分頁開啟</button>
+            <button class="btn btn-brand" onclick="downloadPreviewImage()">下載預覽圖</button>
+        </div>
+        <div class="tool-group">
+            <button class="btn btn-light" onclick="clearAll()">清除內容</button>
+            <button class="btn btn-light" id="view-toggle" onclick="toggleView()">手機版預覽</button>
+            
+            <a href="/cdn-cgi/l/email-protection#dcaebda5b1b3b2b89cb1a5bfb3b2a8b9b2a8afa8aebda8b9bbb5b9aff2bfb3b1" class="btn btn-cta">
+                <span class="cta-dot"></span>
+                SEO 免費諮詢
+            </a>
+        </div>
+    </div>
+
+    <div class="main-container" id="main-container">
+        <div class="editor-side" id="editor-side">
+            <textarea id="code-input"></textarea>
+        </div>
+        <div class="resizer" id="resizer"></div>
+        <div class="preview-side" id="preview-side">
+            <div class="iframe-cover"></div>
+            <iframe id="preview-frame"></iframe>
+        </div>
+    </div>
+
+    <div class="footer-bar">
+        免責聲明：本工具僅供網頁前端測試使用，本工作室不儲存任何用戶輸入內容。 © 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)
+    </div>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        const previewFrame = document.getElementById('preview-frame');
+        const editorSide = document.getElementById('editor-side');
+        const resizer = document.getElementById('resizer');
+        const mainContainer = document.getElementById('main-container');
+        const previewSide = document.getElementById('preview-side');
+        
+        let isMobile = false;
+        let syncLocked = false;
+
+        const editor = CodeMirror.fromTextArea(document.getElementById('code-input'), {
+            mode: "htmlmixed",
+            theme: "neo",
+            lineNumbers: true,
+            lineWrapping: true,
+            indentUnit: 4
+        });
+
+        // 預設內容
+        editor.setValue(`<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    padding: 48px;
+    max-width: 720px;
+    margin: 0 auto;
+    line-height: 1.85;
+    color: #333;
+    background: #fff;
+  }
+  h1 {
+    color: #697861;
+    border-left: 5px solid #697861;
+    padding-left: 16px;
+    font-size: 1.5rem;
+    margin-bottom: 6px;
+  }
+  .subtitle {
+    color: #888;
+    font-size: 0.88rem;
+    margin-bottom: 36px;
+    padding-left: 21px;
+  }
+  h2 {
+    font-size: 1rem;
+    color: #444;
+    margin: 28px 0 10px;
+  }
+  ul {
+    padding-left: 20px;
+    margin: 0 0 8px;
+  }
+  ul li {
+    margin-bottom: 6px;
+    font-size: 0.95rem;
+    color: #555;
+  }
+  .tag {
+    display: inline-block;
+    background: #DFE5DC;
+    color: #697861;
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 20px;
+    margin-right: 4px;
+    vertical-align: middle;
+  }
+  .highlight {
+    background-color: #fff176;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+  .cta {
+    margin-top: 40px;
+    padding: 24px 28px;
+    background: #f7f9f6;
+    border: 1px solid #DFE5DC;
+    border-radius: 10px;
+    font-size: 0.93rem;
+    color: #555;
+  }
+  .cta a {
+    color: #697861;
+    font-weight: 700;
+    text-decoration: underline;
+  }
+</style>
+</head>
+<body>
+
+  <h1>視覺化 HTML 編輯器</h1>
+  <p class="subtitle">雅寶社區 · 頂客論壇 · 工具箱</p>
+
+  <h2>✦ 工具功能一覽</h2>
+  <ul>
+    <li><span class="tag">即時預覽</span> 左側輸入代碼，右側<span class="highlight">同步渲染</span>，不需重新整理</li>
+    <li><span class="tag">雙向同步</span> 直接在右側修改文字，左側 HTML 代碼同步更新</li>
+    <li><span class="tag">代碼追蹤</span> 選取右側文字，左側自動跳轉並標記對應位置</li>
+    <li><span class="tag">手機預覽</span> 一鍵切換 375px 手機框，模擬行動裝置版面</li>
+    <li><span class="tag">下載截圖</span> 將右側預覽畫面輸出為 PNG，方便存檔或給客戶確認</li>
+    <li><span class="tag">複製代碼</span> 一鍵複製完整 HTML，直接貼進你的專案</li>
+  </ul>
+
+  </body>
+</html>`);
+
+        function updatePreview() {
+            if (syncLocked) return;
+            syncLocked = true;
+            const doc = previewFrame.contentDocument || previewFrame.contentWindow.document;
+            doc.open(); doc.write(editor.getValue()); doc.close();
+            doc.body.contentEditable = 'true';
+            doc.body.style.outline = 'none';
+
+            doc.body.oninput = () => { updateEditorFromPreview(doc); };
+
+            doc.onkeydown = (e) => {
+                const isH = e.key.toLowerCase() === 'h';
+                if ((e.metaKey || e.altKey) && isH) {
+                    e.preventDefault();
+                    applyHighlightFromKey(doc);
+                }
+            };
+
+            doc.onselectionchange = () => {
+                const sel = previewFrame.contentWindow.getSelection();
+                if (!sel.isCollapsed && sel.toString().length > 2) {
+                    const cursor = editor.getSearchCursor(sel.toString().trim());
+                    if (cursor.findNext()) {
+                        editor.setSelection(cursor.from(), cursor.to());
+                        editor.scrollIntoView({from: cursor.from(), to: cursor.to()}, 250);
+                    }
+                }
+            };
+            syncLocked = false;
+        }
+
+        function applyHighlightFromKey(doc) {
+            const sel = previewFrame.contentWindow.getSelection();
+            if (!sel || sel.rangeCount === 0 || sel.isCollapsed) return;
+
+            const range = sel.getRangeAt(0);
+
+            // 檢查選取範圍是否剛好是一個螢光筆 span
+            const parent = range.commonAncestorContainer;
+            const spanNode = parent.nodeType === 1 ? parent : parent.parentElement;
+            const isHighlighted = spanNode && spanNode.tagName === 'SPAN' && spanNode.style.backgroundColor === 'rgb(255, 241, 118)';
+
+            if (isHighlighted) {
+                // 取消：把 span 拆掉，只留文字
+                const textNode = doc.createTextNode(spanNode.textContent);
+                spanNode.parentNode.replaceChild(textNode, spanNode);
+                sel.removeAllRanges();
+            } else {
+                // 加上螢光筆
+                const span = doc.createElement('span');
+                span.style.backgroundColor = '#fff176';
+                span.style.padding = '2px 4px';
+                span.style.borderRadius = '4px';
+                span.style.fontWeight = '500';
+                try {
+                    range.surroundContents(span);
+                } catch (e) { console.warn("選取範圍過於複雜"); }
+            }
+
+            updateEditorFromPreview(doc);
+        }
+
+        function updateEditorFromPreview(doc) {
+            if (syncLocked) return;
+            syncLocked = true;
+            const cloneBody = doc.body.cloneNode(true);
+            cloneBody.removeAttribute('contenteditable');
+            const fullHTML = `<!DOCTYPE html>\n<html>\n<head>\n${doc.head.innerHTML}\n</head>\n<body>\n${cloneBody.innerHTML}\n</body>\n</html>`;
+            const scroll = editor.getScrollInfo();
+            const cursor = editor.getCursor();
+            editor.setValue(fullHTML);
+            editor.scrollTo(scroll.left, scroll.top);
+            editor.setCursor(cursor);
+            syncLocked = false;
+        }
+
+        function copyCode() {
+            navigator.clipboard.writeText(editor.getValue()).then(() => {
+                const btn = document.getElementById('btn-copy');
+                btn.innerText = '已複製！'; btn.classList.add('btn-success');
+                setTimeout(() => { btn.innerText = '複製代碼'; btn.classList.remove('btn-success'); }, 1500);
+            });
+        }
+
+        function openInNewTab() {
+            const win = window.open();
+            win.document.write(editor.getValue()); win.document.close();
+        }
+
+        function downloadPreviewImage() {
+            const doc = previewFrame.contentDocument;
+            const was = doc.body.contentEditable; doc.body.contentEditable = 'false';
+            html2canvas(doc.documentElement, { scale: 2, useCORS: true }).then(canvas => {
+                const a = document.createElement('a'); a.download = `McStudio-${Date.now()}.png`;
+                a.href = canvas.toDataURL(); a.click(); doc.body.contentEditable = was;
+            });
+        }
+
+        function clearAll() { if(confirm('清除所有內容？')) { editor.setValue(''); updatePreview(); } }
+
+        function toggleView() {
+            isMobile = !isMobile;
+            const btn = document.getElementById('view-toggle');
+            previewSide.classList.toggle('mobile-mode');
+            btn.innerText = isMobile ? '電腦版預覽' : '手機版預覽';
+        }
+
+        let isResizing = false;
+        resizer.addEventListener('mousedown', () => { isResizing = true; resizer.classList.add('dragging'); });
+        document.addEventListener('mousemove', (e) => {
+            if (!isResizing) return;
+            let offset = (e.clientX / mainContainer.offsetWidth) * 100;
+            if (offset > 15 && offset < 85) { editorSide.style.width = `${offset}%`; editor.refresh(); }
+        });
+        document.addEventListener('mouseup', () => { isResizing = false; resizer.classList.remove('dragging'); });
+
+        editor.on('change', () => { if (!syncLocked) setTimeout(updatePreview, 500); });
+        updatePreview();
+    </script>
+
+</body>
+</html>
