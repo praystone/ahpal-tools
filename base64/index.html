@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Base64 編碼解碼器 · 雅寶工具箱 | AHPAL.COM</title>
+<meta name="description" content="免費線上 Base64 編碼與解碼工具，支援 UTF-8 中文。">
+<link rel="canonical" href="https://tools.ahpal.com/base64/">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.7;padding:20px;}
+.container{max-width:1100px;margin:0 auto;}
+h1{color:#D4AF37;font-size:28px;margin-bottom:8px;text-align:center;}
+.sub{color:#8B949E;text-align:center;margin-bottom:20px;}
+.toolbar{display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap;justify-content:center;}
+.btn{padding:8px 18px;border:none;border-radius:6px;cursor:pointer;font-size:14px;font-weight:600;transition:all 0.2s;}
+.btn-primary{background:#D4AF37;color:#0D1117;}
+.btn-primary:hover{background:#b8942e;}
+.btn-secondary{background:#161B22;color:#58A6FF;border:1px solid #58A6FF;}
+.btn-secondary:hover{background:#1f2937;}
+.section{background:#161B22;border:1px solid #2D303A;border-radius:8px;padding:16px;margin-bottom:16px;}
+.section h3{color:#58A6FF;font-size:16px;margin-bottom:10px;}
+textarea{width:100%;min-height:100px;padding:12px;background:#0D1117;color:#E6EDF3;border:1px solid #2D303A;border-radius:6px;font-family:Consolas,'Courier New',monospace;font-size:13px;resize:vertical;outline:none;}
+textarea:focus{border-color:#D4AF37;}
+.msg{padding:10px 14px;border-radius:6px;margin-top:12px;font-size:14px;}
+.msg.ok{background:rgba(63,185,80,0.1);color:#3FB950;border-left:4px solid #3FB950;}
+.msg.err{background:rgba(248,81,73,0.1);color:#F85149;border-left:4px solid #F85149;}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🔐 Base64 編碼解碼器</h1>
+<p class="sub">支援 UTF-8 中文 · 完全離線</p>
+<div class="section">
+<h3>📝 輸入</h3>
+<textarea id="input" placeholder="輸入要編碼或解碼的內容..."></textarea>
+<div class="toolbar" style="margin-top:12px;margin-bottom:0;">
+<button class="btn btn-primary" onclick="doEncode()">編碼為 Base64</button>
+<button class="btn btn-primary" onclick="doDecode()">解碼 Base64</button>
+<button class="btn btn-secondary" onclick="doCopy()">複製結果</button>
+<button class="btn btn-secondary" onclick="doClear()">清空</button>
+</div>
+</div>
+<div class="section">
+<h3>📤 輸出</h3>
+<textarea id="output" readonly placeholder="結果會出現在這裡..."></textarea>
+</div>
+<div class="msg" id="msg" style="display:none;"></div>
+</div>
+<script>
+function $(id){return document.getElementById(id);}
+function showMsg(text, ok){
+  var m = $("msg");
+  m.textContent = text;
+  m.className = "msg " + (ok ? "ok" : "err");
+  m.style.display = "block";
+}
+function doEncode(){
+  try {
+    var text = $("input").value;
+    var bytes = new TextEncoder().encode(text);
+    var binary = "";
+    for (var i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+    $("output").value = btoa(binary);
+    showMsg("✅ 編碼成功", true);
+  } catch(e) { showMsg("❌ 編碼失敗：" + e.message, false); }
+}
+function doDecode(){
+  try {
+    var b64 = $("input").value.trim();
+    var binary = atob(b64);
+    var bytes = new Uint8Array(binary.length);
+    for (var i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+    $("output").value = new TextDecoder().decode(bytes);
+    showMsg("✅ 解碼成功", true);
+  } catch(e) { showMsg("❌ 解碼失敗：" + e.message, false); }
+}
+function doCopy(){
+  var out = $("output").value;
+  if (!out) { showMsg("⚠️ 沒有內容可複製", false); return; }
+  navigator.clipboard.writeText(out).then(function(){
+    showMsg("✅ 已複製", true);
+  }).catch(function(){
+    $("output").select();
+    document.execCommand("copy");
+    showMsg("✅ 已複製", true);
+  });
+}
+function doClear(){
+  $("input").value = "";
+  $("output").value = "";
+  $("msg").style.display = "none";
+}
+</script>
+</body>
+</html>

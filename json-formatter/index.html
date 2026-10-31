@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>JSON 格式化器 · 雅寶工具箱 | AHPAL.COM</title>
+<meta name="description" content="免費線上 JSON 格式化、驗證、壓縮工具，完全離線。">
+<link rel="canonical" href="https://tools.ahpal.com/json-formatter/">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.7;padding:20px;}
+.container{max-width:1200px;margin:0 auto;}
+h1{color:#D4AF37;font-size:28px;margin-bottom:8px;text-align:center;}
+.sub{color:#8B949E;text-align:center;margin-bottom:20px;}
+.toolbar{display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap;}
+.btn{padding:8px 18px;border:none;border-radius:6px;cursor:pointer;font-size:14px;font-weight:600;transition:all 0.2s;}
+.btn-primary{background:#D4AF37;color:#0D1117;}
+.btn-primary:hover{background:#b8942e;}
+.btn-secondary{background:#161B22;color:#58A6FF;border:1px solid #58A6FF;}
+.btn-secondary:hover{background:#1f2937;}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;min-height:calc(100vh - 250px);}
+.panel{background:#161B22;border:1px solid #2D303A;border-radius:8px;display:flex;flex-direction:column;overflow:hidden;}
+.panel-header{padding:8px 14px;background:#0D1117;border-bottom:1px solid #2D303A;font-size:13px;color:#8B949E;font-weight:600;}
+textarea{flex:1;padding:14px;background:#0D1117;color:#E6EDF3;border:none;font-family:Consolas,'Courier New',monospace;font-size:13px;resize:none;outline:none;line-height:1.5;}
+.output{padding:14px;background:#0D1117;color:#7EE787;font-family:Consolas,'Courier New',monospace;font-size:13px;white-space:pre-wrap;overflow:auto;flex:1;}
+.msg{padding:10px 14px;border-radius:6px;margin-top:12px;font-size:14px;}
+.msg.ok{background:rgba(63,185,80,0.1);color:#3FB950;border-left:4px solid #3FB950;}
+.msg.err{background:rgba(248,81,73,0.1);color:#F85149;border-left:4px solid #F85149;}
+@media(max-width:800px){.grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🔧 JSON 格式化器</h1>
+<p class="sub">格式化、驗證、壓縮 JSON · 完全離線</p>
+<div class="toolbar">
+<button class="btn btn-primary" onclick="doFormat()">格式化</button>
+<button class="btn btn-primary" onclick="doMinify()">壓縮</button>
+<button class="btn btn-secondary" onclick="doValidate()">驗證</button>
+<button class="btn btn-secondary" onclick="doClear()">清空</button>
+<button class="btn btn-secondary" onclick="doSample()">載入範例</button>
+</div>
+<div class="grid">
+<div class="panel">
+<div class="panel-header">輸入 JSON</div>
+<textarea id="input" placeholder="貼上 JSON 到這裡..."></textarea>
+</div>
+<div class="panel">
+<div class="panel-header">輸出</div>
+<div class="output" id="output">格式化結果會出現在這裡</div>
+</div>
+</div>
+<div class="msg" id="msg" style="display:none;"></div>
+</div>
+<script>
+function $(id){return document.getElementById(id);}
+function showMsg(text, ok){
+  var m = $("msg");
+  m.textContent = text;
+  m.className = "msg " + (ok ? "ok" : "err");
+  m.style.display = "block";
+}
+function doFormat(){
+  try {
+    var obj = JSON.parse($("input").value);
+    $("output").textContent = JSON.stringify(obj, null, 2);
+    showMsg("✅ 格式化成功", true);
+  } catch(e) { showMsg("❌ 無效 JSON：" + e.message, false); }
+}
+function doMinify(){
+  try {
+    var obj = JSON.parse($("input").value);
+    $("output").textContent = JSON.stringify(obj);
+    showMsg("✅ 壓縮成功", true);
+  } catch(e) { showMsg("❌ 無效 JSON：" + e.message, false); }
+}
+function doValidate(){
+  try {
+    JSON.parse($("input").value);
+    showMsg("✅ JSON 格式正確", true);
+  } catch(e) { showMsg("❌ 無效 JSON：" + e.message, false); }
+}
+function doClear(){
+  $("input").value = "";
+  $("output").textContent = "格式化結果會出現在這裡";
+  $("msg").style.display = "none";
+}
+function doSample(){
+  $("input").value = '{"name":"雅寶社區","version":"v2.5","users":["總工程師","test98"],"active":true,"stats":{"posts":11916,"comments":83}}';
+}
+</script>
+</body>
+</html>

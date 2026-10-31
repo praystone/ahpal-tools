@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Markdown 預覽器 · 雅寶工具箱 | AHPAL.COM</title>
+<meta name="description" content="免費線上 Markdown 即時預覽工具，完全離線。">
+<link rel="canonical" href="https://tools.ahpal.com/markdown/">
+<script src="../vendor/marked.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.7;padding:20px;}
+.container{max-width:1400px;margin:0 auto;}
+h1{color:#D4AF37;font-size:28px;margin-bottom:8px;text-align:center;}
+.sub{color:#8B949E;text-align:center;margin-bottom:20px;}
+.toolbar{display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap;justify-content:center;}
+.btn{padding:8px 18px;border:none;border-radius:6px;cursor:pointer;font-size:14px;font-weight:600;}
+.btn-secondary{background:#161B22;color:#58A6FF;border:1px solid #58A6FF;}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;min-height:calc(100vh - 250px);}
+.panel{background:#161B22;border:1px solid #2D303A;border-radius:8px;display:flex;flex-direction:column;overflow:hidden;}
+.panel-header{padding:8px 14px;background:#0D1117;border-bottom:1px solid #2D303A;font-size:13px;color:#8B949E;font-weight:600;}
+textarea{flex:1;padding:14px;background:#0D1117;color:#E6EDF3;border:none;font-family:Consolas,'Courier New',monospace;font-size:13px;resize:none;outline:none;line-height:1.6;}
+.preview{padding:20px 24px;background:#fff;color:#1a202c;overflow:auto;flex:1;font-size:15px;line-height:1.8;}
+.preview h1,.preview h2,.preview h3{color:#1a202c;margin:1em 0 0.5em;border-bottom:1px solid #e2e8f0;padding-bottom:0.3em;}
+.preview h1{font-size:1.8em;border-bottom:2px solid #1a202c;}
+.preview h2{font-size:1.5em;}
+.preview h3{font-size:1.2em;border:none;}
+.preview code{background:#f1f5f9;color:#d63384;padding:2px 6px;border-radius:3px;font-family:Consolas,monospace;font-size:0.9em;}
+.preview pre{background:#1a202c;color:#e2e8f0;padding:14px;border-radius:6px;overflow-x:auto;margin:1em 0;}
+.preview pre code{background:none;color:#e2e8f0;padding:0;}
+.preview blockquote{border-left:4px solid #D4AF37;padding:10px 14px;color:#4a5568;margin:1em 0;background:#f7fafc;border-radius:0 6px 6px 0;}
+.preview ul,.preview ol{padding-left:1.5em;margin:1em 0;}
+.preview table{border-collapse:collapse;width:100%;margin:1em 0;}
+.preview th,.preview td{border:1px solid #cbd5e0;padding:8px 12px;text-align:left;}
+.preview th{background:#f7fafc;font-weight:700;}
+.preview a{color:#005A9C;text-decoration:underline;}
+.preview img{max-width:100%;height:auto;}
+@media(max-width:800px){.grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>📝 Markdown 預覽器</h1>
+<p class="sub">即時渲染 Markdown · 完全離線</p>
+<div class="toolbar">
+<button class="btn btn-secondary" onclick="doClear()">清空</button>
+<button class="btn btn-secondary" onclick="doSample()">載入範例</button>
+</div>
+<div class="grid">
+<div class="panel">
+<div class="panel-header">Markdown 原始碼</div>
+<textarea id="input" placeholder="輸入 Markdown..."></textarea>
+</div>
+<div class="panel">
+<div class="panel-header">渲染結果</div>
+<div class="preview" id="preview"></div>
+</div>
+</div>
+</div>
+<script>
+function $(id){return document.getElementById(id);}
+function doRender(){
+  try {
+    $("preview").innerHTML = marked.parse($("input").value);
+  } catch(e) {
+    $("preview").innerHTML = '<p style="color:#F85149;">渲染失敗：' + e.message + '</p>';
+  }
+}
+function doClear(){
+  $("input").value = "";
+  $("preview").innerHTML = "";
+}
+function doSample(){
+  $("input").value = "# 雅寶社區\n\n## 頂客論壇 · 25 年歲月\n\n這是一個 **Markdown 預覽器**，支援：\n\n- 標題（H1~H6）\n- **粗體**、*斜體*\n- `行內程式碼`\n- [連結](https://www.ahpal.com)\n- 列表\n- 引用\n\n> 「先診斷，再動手。」\n\n### 程式碼區塊\n\n```js\nconsole.log(\"Hello AHPAL\");\n```\n\n### 表格\n\n| 項目 | 數值 |\n|------|------|\n| 文章 | 11,916 |\n| 會員 | 3,712 |";
+  doRender();
+}
+$("input").addEventListener("input", doRender);
+doSample();
+</script>
+</body>
+</html>
