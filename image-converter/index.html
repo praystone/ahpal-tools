@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>圖像格式轉換器 | 雅寶工具箱 AHPAL.COM</title>
+<meta name="description" content="雅寶圖像格式轉換器 — PNG、JPG、WebP 互轉，可調品質、即時預覽、一鍵下載。完全離線，零依賴。">
+<link rel="canonical" href="https://tools.ahpal.com/image-converter/">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:20px;padding-bottom:80px;}
+.container{max-width:1100px;margin:0 auto;}
+h1{color:#D4AF37;font-size:26px;margin-bottom:6px;}
+h1 .sub{color:#58A6FF;font-size:14px;font-weight:400;margin-left:8px;}
+.desc{color:#8B949E;font-size:14px;margin-bottom:24px;}
+.card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px 28px;margin-bottom:20px;}
+.card h2{color:#D4AF37;font-size:18px;margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid #2D303A;}
+.card h3{color:#58A6FF;font-size:15px;margin:16px 0 8px;}
+input[type=file]{display:block;margin:8px 0;color:#8B949E;font-size:13px;}
+input[type=file]::file-selector-button{background:#D4AF37;color:#0D1117;border:none;border-radius:6px;padding:6px 14px;cursor:pointer;font-weight:700;margin-right:10px;}
+button{background:#D4AF37;color:#0D1117;border:none;border-radius:8px;padding:10px 24px;font-size:14px;font-weight:700;cursor:pointer;margin:4px 8px 4px 0;}
+button:hover{background:#e0c04a;}
+button.secondary{background:#2D303A;color:#E6EDF3;}
+button.secondary:hover{background:#3a3f4d;}
+.opt-group{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0;}
+.opt-btn{background:#0D1117;color:#8B949E;border:1px solid #2D303A;border-radius:8px;padding:8px 16px;font-size:13px;cursor:pointer;}
+.opt-btn.active{background:#D4AF37;color:#0D1117;border-color:#D4AF37;font-weight:700;}
+.slider-row{display:flex;align-items:center;gap:12px;margin:8px 0;}
+.slider-row input[type=range]{flex:1;max-width:400px;accent-color:#D4AF37;}
+.slider-row .val{color:#D4AF37;font-weight:700;min-width:50px;text-align:right;}
+.preview-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0;}
+@media (max-width:700px){.preview-grid{grid-template-columns:1fr;}}
+.preview-item{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:16px;text-align:center;}
+.preview-item .box{background:linear-gradient(45deg,#2D303A 25%,transparent 25%,transparent 75%,#2D303A 75%),linear-gradient(45deg,#2D303A 25%,transparent 25%,transparent 75%,#2D303A 75%);background-size:12px 12px;background-position:0 0,6px 6px;border-radius:4px;padding:8px;display:inline-block;margin-bottom:8px;max-width:100%;}
+.preview-item img{max-width:100%;max-height:300px;display:block;}
+.preview-item .lbl{font-size:13px;color:#8B949E;margin-top:8px;}
+.preview-item .size{font-size:12px;color:#58A6FF;font-family:Consolas,monospace;}
+.preview-item .save{font-size:12px;color:#3FB950;font-weight:700;}
+.preview-item .bigger{font-size:12px;color:#F85149;font-weight:700;}
+.tip{background:rgba(88,166,255,0.08);border-left:4px solid #58A6FF;padding:10px 16px;border-radius:6px;font-size:13px;color:#8B949E;margin:10px 0;}
+.status-ok{color:#3FB950;font-weight:700;}
+.status-bad{color:#F85149;font-weight:700;}
+footer{position:fixed;bottom:0;left:0;right:0;background:#161B22;border-top:1px solid #D4AF37;padding:10px;text-align:center;font-size:13px;z-index:100;}
+footer a{color:#58A6FF;text-decoration:none;margin:0 8px;}
+code{background:#0D1117;color:#58A6FF;padding:2px 6px;border-radius:4px;}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🔄 圖像格式轉換器 <span class="sub">Image Converter</span></h1>
+<p class="desc">PNG、JPG、WebP 互轉，可調品質、即時預覽、一鍵下載。完全離線，零依賴。</p>
+
+<div class="card">
+<h2>1. 上傳圖片</h2>
+<p class="tip">支援 PNG、JPG、JPEG、WebP。可轉成 PNG（無損）、JPG（有損，可調品質）、WebP（現代格式，體積小）。</p>
+<input type="file" id="fileInput" accept="image/png,image/jpeg,image/webp">
+</div>
+
+<div class="card">
+<h2>2. 輸出格式與品質</h2>
+<h3>格式</h3>
+<div class="opt-group">
+<button class="opt-btn active" data-fmt="png" onclick="setFormat('png',this)">PNG（無損）</button>
+<button class="opt-btn" data-fmt="jpeg" onclick="setFormat('jpeg',this)">JPG（有損）</button>
+<button class="opt-btn" data-fmt="webp" onclick="setFormat('webp',this)">WebP（現代）</button>
+</div>
+
+<h3>品質（僅 JPG / WebP 有效）</h3>
+<div class="slider-row">
+<input type="range" id="quality" min="10" max="100" value="85" oninput="document.getElementById('qval').textContent = this.value;">
+<span class="val" id="qval">85</span>
+</div>
+
+<button onclick="convert()">🚀 轉換</button>
+<button class="secondary" onclick="clearAll()">🧹 清空</button>
+<div id="status" style="margin-top:12px;font-size:14px;"></div>
+</div>
+
+<div id="result" class="result"></div>
+</div>
+
+<footer>
+🏠 <a href="https://www.ahpal.com/">首頁</a>
+🌾 <a href="https://farm.ahpal.com/">農場</a>
+⚔️ <a href="https://pet.ahpal.com/">打怪場</a>
+📖 <a href="https://novels.ahpal.com/">小說站</a>
+🏛️ <a href="https://memories.ahpal.com/">回憶館</a>
+💬 <a href="https://bbs2.ahpal.com/">BBS2</a>
+🛠️ <a href="https://tools.ahpal.com/">工具箱</a>
+</footer>
+
+<script>
+var STATE = { fmt: 'png', quality: 85, origSize: 0, origName: '' };
+
+function setFormat(fmt, btn){
+    STATE.fmt = fmt;
+    btn.parentNode.querySelectorAll('.opt-btn').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+}
+
+function clearAll(){
+    document.getElementById('fileInput').value = '';
+    document.getElementById('result').innerHTML = '';
+    document.getElementById('status').innerHTML = '';
+    STATE = { fmt: 'png', quality: 85, origSize: 0, origName: '' };
+    document.querySelectorAll('.opt-btn').forEach(function(b){ b.classList.remove('active'); });
+    document.querySelector('.opt-btn[data-fmt="png"]').classList.add('active');
+    document.getElementById('quality').value = 85;
+    document.getElementById('qval').textContent = '85';
+}
+
+function convert(){
+    var file = document.getElementById('fileInput').files[0];
+    if (!file){
+        document.getElementById('status').innerHTML = '<span class="status-bad">請先選一張圖片</span>';
+        return;
+    }
+    STATE.origSize = file.size;
+    STATE.origName = file.name;
+    STATE.quality = parseInt(document.getElementById('quality').value);
+    document.getElementById('status').innerHTML = '⏳ 正在處理...';
+
+    var img = new Image();
+    var reader = new FileReader();
+    reader.onload = function(e){
+        img.onload = function(){
+            var canvas = document.createElement('canvas');
+            canvas.width = img.width;
+            canvas.height = img.height;
+            var ctx = canvas.getContext('2d');
+            ctx.imageSmoothingEnabled = true;
+            ctx.imageSmoothingQuality = 'high';
+
+            if (STATE.fmt === 'jpeg'){
+                ctx.fillStyle = '#ffffff';
+                ctx.fillRect(0, 0, img.width, img.height);
+            }
+
+            ctx.drawImage(img, 0, 0);
+            canvas.toBlob(function(blob){
+                if (!blob){
+                    document.getElementById('status').innerHTML = '<span class="status-bad">❌ 轉換失敗，瀏覽器不支援 ' + STATE.fmt.toUpperCase() + ' 輸出</span>';
+                    return;
+                }
+                var newName = STATE.origName.replace(/\.[^.]+$/, '') + '.' + (STATE.fmt === 'jpeg' ? 'jpg' : STATE.fmt);
+                showResult(img, blob, newName);
+            }, 'image/' + STATE.fmt, STATE.fmt === 'png' ? undefined : STATE.quality / 100);
+        };
+        img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+}
+
+function formatBytes(bytes){
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+    return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
+}
+
+function showResult(img, blob, newName){
+    var url = URL.createObjectURL(blob);
+    var origUrl = img.src;
+    var diff = blob.size - STATE.origSize;
+    var diffPct = STATE.origSize > 0 ? ((diff / STATE.origSize) * 100).toFixed(1) : '0';
+    var diffLabel = '';
+    if (diff < 0){
+        diffLabel = '<div class="save">▼ 節省 ' + formatBytes(Math.abs(diff)) + '（' + diffPct + '%）</div>';
+    } else if (diff > 0){
+        diffLabel = '<div class="bigger">▲ 增加 ' + formatBytes(diff) + '（+' + diffPct + '%）</div>';
+    }
+
+    var html = '<div class="card"><h2>3. 預覽與下載</h2>';
+    html += '<div class="preview-grid">';
+    html += '<div class="preview-item">';
+    html += '<div class="box"><img src="' + origUrl + '"></div>';
+    html += '<div class="lbl">原始圖片</div>';
+    html += '<div class="size">' + formatBytes(STATE.origSize) + '</div>';
+    html += '</div>';
+    html += '<div class="preview-item">';
+    html += '<div class="box"><img src="' + url + '"></div>';
+    html += '<div class="lbl">轉換後（' + STATE.fmt.toUpperCase() + '）</div>';
+    html += '<div class="size">' + formatBytes(blob.size) + '</div>';
+    html += diffLabel;
+    html += '</div>';
+    html += '</div>';
+    html += '<div style="margin-top:16px;">';
+    html += '<a href="' + url + '" download="' + newName + '" style="display:inline-block;background:#D4AF37;color:#0D1117;text-decoration:none;padding:10px 24px;border-radius:8px;font-weight:700;font-size:14px;">⬇️ 下載 ' + newName + '</a>';
+    html += '</div>';
+    html += '</div>';
+    document.getElementById('result').innerHTML = html;
+    document.getElementById('status').innerHTML = '<span class="status-ok">✅ 轉換完成</span>';
+}
+</script>
+</body>
+</html>
