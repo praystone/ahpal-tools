@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PNG/JPG → ICO 轉換器 | 雅寶工具箱 AHPAL.COM</title>
+<meta name="description" content="雅寶 PNG/JPG → ICO 轉換器 — 上傳任何尺寸，自動縮放成 favicon 適合尺寸（16/32/48），即時預覽、一鍵下載 .ico。完全離線，零依賴。">
+<link rel="canonical" href="https://tools.ahpal.com/png-to-ico/">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:20px;padding-bottom:80px;}
+.container{max-width:1100px;margin:0 auto;}
+h1{color:#D4AF37;font-size:26px;margin-bottom:6px;}
+h1 .sub{color:#58A6FF;font-size:14px;font-weight:400;margin-left:8px;}
+.desc{color:#8B949E;font-size:14px;margin-bottom:24px;}
+.card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px 28px;margin-bottom:20px;}
+.card h2{color:#D4AF37;font-size:18px;margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid #2D303A;}
+input[type=file]{display:block;margin:8px 0;color:#8B949E;font-size:13px;}
+input[type=file]::file-selector-button{background:#D4AF37;color:#0D1117;border:none;border-radius:6px;padding:6px 14px;cursor:pointer;font-weight:700;margin-right:10px;}
+button{background:#D4AF37;color:#0D1117;border:none;border-radius:8px;padding:10px 24px;font-size:14px;font-weight:700;cursor:pointer;margin:4px 8px 4px 0;}
+button:hover{background:#e0c04a;}
+button.secondary{background:#2D303A;color:#E6EDF3;}
+button.secondary:hover{background:#3a3f4d;}
+.preview-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin:16px 0;}
+.preview-item{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:12px;text-align:center;}
+.preview-item .box{background:#fff;border-radius:4px;padding:8px;display:inline-block;margin-bottom:8px;}
+.preview-item .lbl{font-size:12px;color:#8B949E;}
+.preview-item .size{font-size:11px;color:#58A6FF;font-family:Consolas,monospace;}
+.tip{background:rgba(88,166,255,0.08);border-left:4px solid #58A6FF;padding:10px 16px;border-radius:6px;font-size:13px;color:#8B949E;margin:10px 0;}
+.status-ok{color:#3FB950;font-weight:700;}
+.status-bad{color:#F85149;font-weight:700;}
+footer{position:fixed;bottom:0;left:0;right:0;background:#161B22;border-top:1px solid #D4AF37;padding:10px;text-align:center;font-size:13px;z-index:100;}
+footer a{color:#58A6FF;text-decoration:none;margin:0 8px;}
+code{background:#0D1117;color:#58A6FF;padding:2px 6px;border-radius:4px;}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🖼️ PNG/JPG → ICO 轉換器 <span class="sub">Favicon Generator</span></h1>
+<p class="desc">上傳任何尺寸的 PNG/JPG，自動縮放成 favicon 適合尺寸（16/32/48），即時預覽、一鍵下載 .ico。完全離線，零依賴。</p>
+
+<div class="card">
+<h2>1. 上傳圖片</h2>
+<p class="tip">支援 PNG、JPG、JPEG、WebP。任何尺寸都可以，工具會自動縮放成 16×16、32×32、48×48 三種 favicon 尺寸，打包成一個 .ico 檔。</p>
+<input type="file" id="fileInput" accept="image/png,image/jpeg,image/webp">
+<button onclick="convert()">🚀 轉換成 ICO</button>
+<button class="secondary" onclick="clearAll()">🧹 清空</button>
+<div id="status" style="margin-top:12px;font-size:14px;"></div>
+</div>
+
+<div id="result" class="result"></div>
+</div>
+
+<footer>
+🏠 <a href="https://www.ahpal.com/">首頁</a>
+🌾 <a href="https://farm.ahpal.com/">農場</a>
+⚔️ <a href="https://pet.ahpal.com/">打怪場</a>
+📖 <a href="https://novels.ahpal.com/">小說站</a>
+🏛️ <a href="https://memories.ahpal.com/">回憶館</a>
+💬 <a href="https://bbs2.ahpal.com/">BBS2</a>
+🛠️ <a href="https://tools.ahpal.com/">工具箱</a>
+</footer>
+
+<script>
+var SIZES = [16, 32, 48];
+
+function clearAll(){
+    document.getElementById('fileInput').value = '';
+    document.getElementById('result').innerHTML = '';
+    document.getElementById('status').innerHTML = '';
+}
+
+function convert(){
+    var file = document.getElementById('fileInput').files[0];
+    if (!file){
+        document.getElementById('status').innerHTML = '<span class="status-bad">請先選一張圖片</span>';
+        return;
+    }
+    document.getElementById('status').innerHTML = '⏳ 正在處理...';
+    var img = new Image();
+    var reader = new FileReader();
+    reader.onload = function(e){
+        img.onload = function(){
+            processImage(img, file.name);
+        };
+        img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+}
+
+function processImage(img, filename){
+    // 為每個尺寸畫 canvas，產 PNG bytes
+    var tasks = SIZES.map(function(size){
+        return new Promise(function(resolve){
+            var canvas = document.createElement('canvas');
+            canvas.width = size;
+            canvas.height = size;
+            var ctx = canvas.getContext('2d');
+            ctx.imageSmoothingEnabled = true;
+            ctx.imageSmoothingQuality = 'high';
+            ctx.drawImage(img, 0, 0, size, size);
+            canvas.toBlob(function(blob){
+                blob.arrayBuffer().then(function(ab){
+                    resolve({size: size, bytes: new Uint8Array(ab), dataUrl: canvas.toDataURL('image/png')});
+                });
+            }, 'image/png');
+        });
+    });
+
+    Promise.all(tasks).then(function(images){
+        var icoBytes = buildICO(images);
+        var blob = new Blob([icoBytes], {type: 'image/x-icon'});
+        var url = URL.createObjectURL(blob);
+        showResult(images, url, filename, blob.size);
+        document.getElementById('status').innerHTML = '<span class="status-ok">✅ 轉換完成（' + blob.size + ' bytes）</span>';
+    });
+}
+
+// 組 ICO 二進位
+// ICONDIR: 6 bytes (reserved=0, type=1, count=N)
+// ICONDIRENTRY: 16 bytes × N
+// 圖片資料: PNG bytes
+function buildICO(images){
+    var n = images.length;
+    var headerSize = 6 + 16 * n;
+    var totalSize = headerSize;
+    images.forEach(function(im){ totalSize += im.bytes.length; });
+
+    var buf = new ArrayBuffer(totalSize);
+    var view = new DataView(buf);
+    var offset = 0;
+
+    // ICONDIR
+    view.setUint16(0, 0, true);       // reserved
+    view.setUint16(2, 1, true);       // type = 1 (icon)
+    view.setUint16(4, n, true);       // count
+    offset = 6;
+
+    // ICONDIRENTRY × n
+    var dataOffset = headerSize;
+    images.forEach(function(im){
+        view.setUint8(offset, im.size === 256 ? 0 : im.size);  // width
+        view.setUint8(offset + 1, im.size === 256 ? 0 : im.size);  // height
+        view.setUint8(offset + 2, 0);  // color count
+        view.setUint8(offset + 3, 0);  // reserved
+        view.setUint16(offset + 4, 1, true);  // planes
+        view.setUint16(offset + 6, 32, true);  // bit count
+        view.setUint32(offset + 8, im.bytes.length, true);  // size
+        view.setUint32(offset + 12, dataOffset, true);  // offset
+        dataOffset += im.bytes.length;
+        offset += 16;
+    });
+
+    // 圖片資料
+    var arr = new Uint8Array(buf);
+    offset = headerSize;
+    images.forEach(function(im){
+        arr.set(im.bytes, offset);
+        offset += im.bytes.length;
+    });
+
+    return arr;
+}
+
+function showResult(images, url, filename, size){
+    var html = '<div class="card"><h2>2. 預覽與下載</h2>';
+    html += '<div class="preview-grid">';
+    images.forEach(function(im){
+        html += '<div class="preview-item">';
+        html += '<div class="box"><img src="' + im.dataUrl + '" width="' + im.size + '" height="' + im.size + '" style="display:block;"></div>';
+        html += '<div class="lbl">預覽</div>';
+        html += '<div class="size">' + im.size + '×' + im.size + ' (' + im.bytes.length + ' bytes)</div>';
+        html += '</div>';
+    });
+    html += '</div>';
+    html += '<p class="tip">💡 下載後，把 <code>favicon.ico</code> 放進網站根目錄，並在 <code>&lt;head&gt;</code> 加 <code>&lt;link rel="icon" href="/favicon.ico"&gt;</code>，瀏覽器就會顯示新圖示。</p>';
+    html += '<div style="margin-top:16px;">';
+    html += '<a href="' + url + '" download="favicon.ico" style="display:inline-block;background:#D4AF37;color:#0D1117;text-decoration:none;padding:10px 24px;border-radius:8px;font-weight:700;font-size:14px;">⬇️ 下載 favicon.ico（' + size + ' bytes）</a>';
+    html += '</div>';
+    html += '</div>';
+    document.getElementById('result').innerHTML = html;
+}
+</script>
+</body>
+</html>
