@@ -1,24 +1,26 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>雅寶工具箱 | AHPAL.COM</title>
-<meta name="description" content="雅寶社區 · 頂客論壇 線上工具箱。HTML 編輯器、更多工具持續新增。">
+<title>🛠️ 雅寶工具箱 | AHPAL.COM</title>
+<meta name="description" content="雅寶社區 · 頂客論壇 線上工具箱。HTML 編輯器、JSON 格式化、Base64、Markdown、檔名檢查、ICO 轉換，7 個工具一站搞定。">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://tools.ahpal.com/">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:40px 20px;}
-.container{max-width:900px;margin:0 auto;}
+.container{max-width:1000px;margin:0 auto;}
 h1{color:#D4AF37;font-size:32px;margin-bottom:12px;text-align:center;}
-.sub{color:#8B949E;text-align:center;margin-bottom:40px;}
-.tool-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;}
-.tool-card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;text-decoration:none;color:#E6EDF3;transition:all 0.2s;}
+.sub{color:#8B949E;text-align:center;margin-bottom:40px;font-size:15px;}
+.section-title{color:#58A6FF;font-size:18px;font-weight:700;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid #2D303A;}
+.tool-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;}
+.tool-card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:20px;text-decoration:none;color:#E6EDF3;transition:all 0.2s;display:flex;flex-direction:column;gap:8px;}
 .tool-card:hover{border-color:#D4AF37;transform:translateY(-2px);}
-.tool-card .icon{font-size:32px;margin-bottom:12px;}
-.tool-card .name{color:#D4AF37;font-weight:700;font-size:18px;margin-bottom:8px;}
-.tool-card .desc{color:#8B949E;font-size:14px;}
+.tool-icon{font-size:32px;}
+.tool-name{color:#D4AF37;font-weight:700;font-size:17px;}
+.tool-desc{color:#8B949E;font-size:14px;line-height:1.6;flex:1;}
+.tool-btn{color:#58A6FF;font-weight:700;font-size:14px;margin-top:8px;}
 .footer{text-align:center;margin-top:60px;color:#8B949E;font-size:13px;}
 .footer a{color:#58A6FF;text-decoration:none;}
 </style>
@@ -39,60 +41,24 @@ h1{color:#D4AF37;font-size:32px;margin-bottom:12px;text-align:center;}
 </nav>
 <div class="container">
 <h1>🛠️ 雅寶工具箱</h1>
-<p class="sub">雅寶社區 · 頂客論壇 線上工具箱</p>
+<p class="sub">雅寶社區 · 頂客論壇 線上工具箱 · 7 個工具一站搞定</p>
+<div class="section-title">📝 文字處理</div>
 <div class="tool-grid">
-<a href="/html-editor/" class="tool-card">
-<div class="icon">📝</div>
-<div class="name">視覺化 HTML 編輯器</div>
-<div class="desc">即時預覽、雙向同步、螢光筆標註、手機版模擬</div>
-</a>
-<a href="/json-formatter/" class="tool-card">
-<div class="icon">🔧</div>
-<div class="name">JSON 格式化器</div>
-<div class="desc">格式化、驗證、壓縮 JSON</div>
-</a>
-<a href="/base64/" class="tool-card">
-<div class="icon">🔐</div>
-<div class="name">Base64 編碼解碼器</div>
-<div class="desc">支援 UTF-8 中文，編碼與解碼</div>
-</a>
-<a href="/markdown/" class="tool-card">
-<div class="icon">📝</div>
-<div class="name">Markdown 預覽器</div>
-        <div class="tool-card">
-            <div class="tool-icon">🔍</div>
-            <h3>分類文章檢查器</h3>
-            <p>上傳分類 JSON 與實體檔名清單，即時檢查幽靈登記、未登記實體、關鍵字重複、檔名重複。完全離線。</p>
-            <a href="category-checker/" class="tool-btn">開啟工具 →</a>
-        </div>
-        <div class="tool-card">
-            <div class="tool-icon">📝</div>
-            <h3>文章檔名檢查器</h3>
-            <p>貼上關鍵字產出英文 kebab-case 檔名；貼上檔名檢查中文、空格、大寫、漏 .html。完全離線。</p>
-            <a href="filename-checker/" class="tool-btn">開啟工具 →</a>
-        </div>
-        <div class="tool-card" data-category="format" data-keywords="png jpg ico favicon 圖示 轉換">
-            <div class="tool-icon">🖼️</div>
-            <h3>PNG/JPG → ICO 轉換器</h3>
-            <p>上傳任何尺寸的 PNG/JPG，自動縮放成 favicon 適合尺寸（16/32/48），即時預覽、一鍵下載 .ico。</p>
-            <a href="png-to-ico/" class="tool-btn">開啟工具 →</a>
-        </div>
-
-
-
-<div class="desc">即時渲染 Markdown，支援表格、程式碼區塊</div>
-</a>
+<a href="/html-editor/" class="tool-card"><div class="tool-icon">📝</div><div class="tool-name">視覺化 HTML 編輯器</div><div class="tool-desc">即時預覽、雙向同步、螢光筆標註、手機版模擬、套用文章模板</div><div class="tool-btn">開啟工具 →</div></a>
+<a href="/markdown/" class="tool-card"><div class="tool-icon">📄</div><div class="tool-name">Markdown 預覽器</div><div class="tool-desc">即時渲染 Markdown，支援表格、程式碼區塊</div><div class="tool-btn">開啟工具 →</div></a>
+<a href="/json-formatter/" class="tool-card"><div class="tool-icon">🔧</div><div class="tool-name">JSON 格式化器</div><div class="tool-desc">格式化、驗證、壓縮 JSON，貼上即轉</div><div class="tool-btn">開啟工具 →</div></a>
 </div>
-<div class="footer">
-<p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p>
-<p><a href="https://www.ahpal.com/">回到主站</a></p>
+<div class="section-title">🛠️ 開發小工具</div>
+<div class="tool-grid">
+<a href="/filename-checker/" class="tool-card"><div class="tool-icon">📝</div><div class="tool-name">文章檔名檢查器</div><div class="tool-desc">貼上關鍵字產出英文 kebab-case 檔名；貼上檔名檢查中文、空格、大寫、漏 .html</div><div class="tool-btn">開啟工具 →</div></a>
+<a href="/category-checker/" class="tool-card"><div class="tool-icon">🔍</div><div class="tool-name">分類文章檢查器</div><div class="tool-desc">上傳分類 JSON 與實體檔名清單，即時檢查幽靈登記、未登記實體、關鍵字重複</div><div class="tool-btn">開啟工具 →</div></a>
+<a href="/base64/" class="tool-card"><div class="tool-icon">🔐</div><div class="tool-name">Base64 編碼解碼器</div><div class="tool-desc">支援 UTF-8 中文，編碼與解碼雙向轉換</div><div class="tool-btn">開啟工具 →</div></a>
 </div>
+<div class="section-title">🖼️ 圖片工具</div>
+<div class="tool-grid">
+<a href="/png-to-ico/" class="tool-card"><div class="tool-icon">🖼️</div><div class="tool-name">PNG/JPG → ICO 轉換器</div><div class="tool-desc">上傳任何尺寸的 PNG/JPG，自動縮放成 favicon 適合尺寸（16/32/48），一鍵下載 .ico</div><div class="tool-btn">開啟工具 →</div></a>
 </div>
-<div style="text-align:center;padding:24px 0 10px;border-top:1px solid #2D303A;margin-top:32px;font-size:13px;color:#8B949E;">
-  <a href="https://tools.ahpal.com/" style="color:#D4AF37;text-decoration:none;font-weight:600;">← 回工具箱</a>
-  <span style="margin:0 12px;">|</span>
-  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;">← 回主站</a>
-  <p style="margin-top:10px;color:#8B949E;">© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p>
+<div class="footer"><p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p><p><a href="https://www.ahpal.com/">← 回到主站</a></p></div>
 </div>
 </body>
 </html>
