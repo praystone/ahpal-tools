@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PNG/JPG → ICO 轉換器 | 雅寶工具箱 AHPAL.COM</title>
-<meta name="description" content="雅寶 PNG/JPG → ICO 轉換器 — 上傳任何尺寸，自動縮放成 favicon 適合尺寸（16/32/48），即時預覽、一鍵下載 .ico。完全離線，零依賴。">
+<title>PNG/JPG → ICO 轉換器 v1.1 | 雅寶工具箱 AHPAL.COM</title>
+<meta name="description" content="雅寶 PNG/JPG → ICO 轉換器 v1.1 — 上傳任何尺寸，自動縮放成 favicon 適合尺寸，支援圓角裁切、背景透明、自訂尺寸（16/32/48/180/192/512）。完全離線，零依賴。">
 <link rel="canonical" href="https://tools.ahpal.com/png-to-ico/">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -15,15 +15,22 @@ h1 .sub{color:#58A6FF;font-size:14px;font-weight:400;margin-left:8px;}
 .desc{color:#8B949E;font-size:14px;margin-bottom:24px;}
 .card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px 28px;margin-bottom:20px;}
 .card h2{color:#D4AF37;font-size:18px;margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid #2D303A;}
+.card h3{color:#58A6FF;font-size:15px;margin:16px 0 8px;}
 input[type=file]{display:block;margin:8px 0;color:#8B949E;font-size:13px;}
 input[type=file]::file-selector-button{background:#D4AF37;color:#0D1117;border:none;border-radius:6px;padding:6px 14px;cursor:pointer;font-weight:700;margin-right:10px;}
 button{background:#D4AF37;color:#0D1117;border:none;border-radius:8px;padding:10px 24px;font-size:14px;font-weight:700;cursor:pointer;margin:4px 8px 4px 0;}
 button:hover{background:#e0c04a;}
 button.secondary{background:#2D303A;color:#E6EDF3;}
 button.secondary:hover{background:#3a3f4d;}
+.opt-group{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0;}
+.opt-btn{background:#0D1117;color:#8B949E;border:1px solid #2D303A;border-radius:8px;padding:8px 16px;font-size:13px;cursor:pointer;}
+.opt-btn.active{background:#D4AF37;color:#0D1117;border-color:#D4AF37;font-weight:700;}
+.size-group{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0;}
+.size-item{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:8px 14px;font-size:13px;cursor:pointer;color:#8B949E;user-select:none;}
+.size-item.active{background:#D4AF37;color:#0D1117;border-color:#D4AF37;font-weight:700;}
 .preview-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin:16px 0;}
 .preview-item{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:12px;text-align:center;}
-.preview-item .box{background:#fff;border-radius:4px;padding:8px;display:inline-block;margin-bottom:8px;}
+.preview-item .box{background:linear-gradient(45deg,#2D303A 25%,transparent 25%,transparent 75%,#2D303A 75%),linear-gradient(45deg,#2D303A 25%,transparent 25%,transparent 75%,#2D303A 75%);background-size:12px 12px;background-position:0 0,6px 6px;border-radius:4px;padding:8px;display:inline-block;margin-bottom:8px;}
 .preview-item .lbl{font-size:12px;color:#8B949E;}
 .preview-item .size{font-size:11px;color:#58A6FF;font-family:Consolas,monospace;}
 .tip{background:rgba(88,166,255,0.08);border-left:4px solid #58A6FF;padding:10px 16px;border-radius:6px;font-size:13px;color:#8B949E;margin:10px 0;}
@@ -36,13 +43,41 @@ code{background:#0D1117;color:#58A6FF;padding:2px 6px;border-radius:4px;}
 </head>
 <body>
 <div class="container">
-<h1>🖼️ PNG/JPG → ICO 轉換器 <span class="sub">Favicon Generator</span></h1>
-<p class="desc">上傳任何尺寸的 PNG/JPG，自動縮放成 favicon 適合尺寸（16/32/48），即時預覽、一鍵下載 .ico。完全離線，零依賴。</p>
+<h1>🖼️ PNG/JPG → ICO 轉換器 <span class="sub">v1.1 · Favicon Generator</span></h1>
+<p class="desc">上傳任何尺寸的 PNG/JPG，自動縮放成 favicon 適合尺寸，支援圓角裁切、背景透明、自訂尺寸。完全離線，零依賴。</p>
 
 <div class="card">
 <h2>1. 上傳圖片</h2>
-<p class="tip">支援 PNG、JPG、JPEG、WebP。任何尺寸都可以，工具會自動縮放成 16×16、32×32、48×48 三種 favicon 尺寸，打包成一個 .ico 檔。</p>
+<p class="tip">支援 PNG、JPG、JPEG、WebP。任何尺寸都可以，工具會自動縮放。</p>
 <input type="file" id="fileInput" accept="image/png,image/jpeg,image/webp">
+</div>
+
+<div class="card">
+<h2>2. 選項</h2>
+<h3>形狀</h3>
+<div class="opt-group">
+<button class="opt-btn active" data-shape="square" onclick="setShape('square',this)">⬜ 直角方形</button>
+<button class="opt-btn" data-shape="rounded" onclick="setShape('rounded',this)">⬛ 圓角方形</button>
+<button class="opt-btn" data-shape="circle" onclick="setShape('circle',this)">⭕ 圓形</button>
+</div>
+
+<h3>背景</h3>
+<div class="opt-group">
+<button class="opt-btn active" data-bg="keep" onclick="setBg('keep',this)">保留原背景</button>
+<button class="opt-btn" data-bg="white" onclick="setBg('white',this)">填白</button>
+<button class="opt-btn" data-bg="transparent" onclick="setBg('transparent',this)">去白底透明</button>
+</div>
+
+<h3>尺寸（可多選）</h3>
+<div class="size-group" id="sizeGroup">
+<div class="size-item active" data-size="16" onclick="toggleSize(this)">16×16</div>
+<div class="size-item active" data-size="32" onclick="toggleSize(this)">32×32</div>
+<div class="size-item active" data-size="48" onclick="toggleSize(this)">48×48</div>
+<div class="size-item" data-size="180" onclick="toggleSize(this)">180×180（Apple）</div>
+<div class="size-item" data-size="192" onclick="toggleSize(this)">192×192（PWA）</div>
+<div class="size-item" data-size="512" onclick="toggleSize(this)">512×512（PWA）</div>
+</div>
+
 <button onclick="convert()">🚀 轉換成 ICO</button>
 <button class="secondary" onclick="clearAll()">🧹 清空</button>
 <div id="status" style="margin-top:12px;font-size:14px;"></div>
@@ -62,12 +97,48 @@ code{background:#0D1117;color:#58A6FF;padding:2px 6px;border-radius:4px;}
 </footer>
 
 <script>
-var SIZES = [16, 32, 48];
+var STATE = { shape: 'square', bg: 'keep', sizes: [16, 32, 48] };
+
+function setShape(shape, btn){
+    STATE.shape = shape;
+    btn.parentNode.querySelectorAll('.opt-btn').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+}
+
+function setBg(bg, btn){
+    STATE.bg = bg;
+    btn.parentNode.querySelectorAll('.opt-btn').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+}
+
+function toggleSize(el){
+    var size = parseInt(el.dataset.size);
+    var idx = STATE.sizes.indexOf(size);
+    if (idx >= 0){
+        if (STATE.sizes.length <= 1) return;
+        STATE.sizes.splice(idx, 1);
+        el.classList.remove('active');
+    } else {
+        STATE.sizes.push(size);
+        STATE.sizes.sort(function(a,b){return a-b;});
+        el.classList.add('active');
+    }
+}
 
 function clearAll(){
     document.getElementById('fileInput').value = '';
     document.getElementById('result').innerHTML = '';
     document.getElementById('status').innerHTML = '';
+    STATE.shape = 'square';
+    STATE.bg = 'keep';
+    STATE.sizes = [16, 32, 48];
+    document.querySelectorAll('.opt-btn').forEach(function(b){ b.classList.remove('active'); });
+    document.querySelectorAll('.opt-btn[data-shape="square"], .opt-btn[data-bg="keep"]').forEach(function(b){ b.classList.add('active'); });
+    document.querySelectorAll('.size-item').forEach(function(s){
+        var sz = parseInt(s.dataset.size);
+        if ([16,32,48].indexOf(sz) >= 0) s.classList.add('active');
+        else s.classList.remove('active');
+    });
 }
 
 function convert(){
@@ -80,17 +151,14 @@ function convert(){
     var img = new Image();
     var reader = new FileReader();
     reader.onload = function(e){
-        img.onload = function(){
-            processImage(img, file.name);
-        };
+        img.onload = function(){ processImage(img); };
         img.src = e.target.result;
     };
     reader.readAsDataURL(file);
 }
 
-function processImage(img, filename){
-    // 為每個尺寸畫 canvas，產 PNG bytes
-    var tasks = SIZES.map(function(size){
+function processImage(img){
+    var tasks = STATE.sizes.map(function(size){
         return new Promise(function(resolve){
             var canvas = document.createElement('canvas');
             canvas.width = size;
@@ -98,7 +166,50 @@ function processImage(img, filename){
             var ctx = canvas.getContext('2d');
             ctx.imageSmoothingEnabled = true;
             ctx.imageSmoothingQuality = 'high';
+
+            // 背景處理
+            if (STATE.bg === 'white'){
+                ctx.fillStyle = '#ffffff';
+                ctx.fillRect(0, 0, size, size);
+            }
+
+            // 形狀裁切
+            if (STATE.shape === 'circle'){
+                ctx.beginPath();
+                ctx.arc(size/2, size/2, size/2, 0, Math.PI*2);
+                ctx.closePath();
+                ctx.clip();
+            } else if (STATE.shape === 'rounded'){
+                var r = size * 0.2;
+                ctx.beginPath();
+                ctx.moveTo(r, 0);
+                ctx.lineTo(size-r, 0);
+                ctx.quadraticCurveTo(size, 0, size, r);
+                ctx.lineTo(size, size-r);
+                ctx.quadraticCurveTo(size, size, size-r, size);
+                ctx.lineTo(r, size);
+                ctx.quadraticCurveTo(0, size, 0, size-r);
+                ctx.lineTo(0, r);
+                ctx.quadraticCurveTo(0, 0, r, 0);
+                ctx.closePath();
+                ctx.clip();
+            }
+
+            // 繪圖
             ctx.drawImage(img, 0, 0, size, size);
+
+            // 去白底透明（僅在 shape=square 或 rounded 且 bg=transparent 時）
+            if (STATE.bg === 'transparent'){
+                var imageData = ctx.getImageData(0, 0, size, size);
+                var d = imageData.data;
+                for (var i = 0; i < d.length; i += 4){
+                    if (d[i] > 240 && d[i+1] > 240 && d[i+2] > 240){
+                        d[i+3] = 0;
+                    }
+                }
+                ctx.putImageData(imageData, 0, 0);
+            }
+
             canvas.toBlob(function(blob){
                 blob.arrayBuffer().then(function(ab){
                     resolve({size: size, bytes: new Uint8Array(ab), dataUrl: canvas.toDataURL('image/png')});
@@ -111,15 +222,11 @@ function processImage(img, filename){
         var icoBytes = buildICO(images);
         var blob = new Blob([icoBytes], {type: 'image/x-icon'});
         var url = URL.createObjectURL(blob);
-        showResult(images, url, filename, blob.size);
-        document.getElementById('status').innerHTML = '<span class="status-ok">✅ 轉換完成（' + blob.size + ' bytes）</span>';
+        showResult(images, url, blob.size);
+        document.getElementById('status').innerHTML = '<span class="status-ok">✅ 轉換完成（' + blob.size + ' bytes，' + images.length + ' 種尺寸）</span>';
     });
 }
 
-// 組 ICO 二進位
-// ICONDIR: 6 bytes (reserved=0, type=1, count=N)
-// ICONDIRENTRY: 16 bytes × N
-// 圖片資料: PNG bytes
 function buildICO(images){
     var n = images.length;
     var headerSize = 6 + 16 * n;
@@ -130,28 +237,25 @@ function buildICO(images){
     var view = new DataView(buf);
     var offset = 0;
 
-    // ICONDIR
-    view.setUint16(0, 0, true);       // reserved
-    view.setUint16(2, 1, true);       // type = 1 (icon)
-    view.setUint16(4, n, true);       // count
+    view.setUint16(0, 0, true);
+    view.setUint16(2, 1, true);
+    view.setUint16(4, n, true);
     offset = 6;
 
-    // ICONDIRENTRY × n
     var dataOffset = headerSize;
     images.forEach(function(im){
-        view.setUint8(offset, im.size === 256 ? 0 : im.size);  // width
-        view.setUint8(offset + 1, im.size === 256 ? 0 : im.size);  // height
-        view.setUint8(offset + 2, 0);  // color count
-        view.setUint8(offset + 3, 0);  // reserved
-        view.setUint16(offset + 4, 1, true);  // planes
-        view.setUint16(offset + 6, 32, true);  // bit count
-        view.setUint32(offset + 8, im.bytes.length, true);  // size
-        view.setUint32(offset + 12, dataOffset, true);  // offset
+        view.setUint8(offset, im.size === 256 ? 0 : im.size);
+        view.setUint8(offset + 1, im.size === 256 ? 0 : im.size);
+        view.setUint8(offset + 2, 0);
+        view.setUint8(offset + 3, 0);
+        view.setUint16(offset + 4, 1, true);
+        view.setUint16(offset + 6, 32, true);
+        view.setUint32(offset + 8, im.bytes.length, true);
+        view.setUint32(offset + 12, dataOffset, true);
         dataOffset += im.bytes.length;
         offset += 16;
     });
 
-    // 圖片資料
     var arr = new Uint8Array(buf);
     offset = headerSize;
     images.forEach(function(im){
@@ -162,18 +266,18 @@ function buildICO(images){
     return arr;
 }
 
-function showResult(images, url, filename, size){
-    var html = '<div class="card"><h2>2. 預覽與下載</h2>';
+function showResult(images, url, size){
+    var html = '<div class="card"><h2>3. 預覽與下載</h2>';
     html += '<div class="preview-grid">';
     images.forEach(function(im){
         html += '<div class="preview-item">';
-        html += '<div class="box"><img src="' + im.dataUrl + '" width="' + im.size + '" height="' + im.size + '" style="display:block;"></div>';
+        html += '<div class="box"><img src="' + im.dataUrl + '" width="' + Math.min(im.size, 64) + '" height="' + Math.min(im.size, 64) + '" style="display:block;"></div>';
         html += '<div class="lbl">預覽</div>';
-        html += '<div class="size">' + im.size + '×' + im.size + ' (' + im.bytes.length + ' bytes)</div>';
+        html += '<div class="size">' + im.size + '×' + im.size + '</div>';
         html += '</div>';
     });
     html += '</div>';
-    html += '<p class="tip">💡 下載後，把 <code>favicon.ico</code> 放進網站根目錄，並在 <code>&lt;head&gt;</code> 加 <code>&lt;link rel="icon" href="/favicon.ico"&gt;</code>，瀏覽器就會顯示新圖示。</p>';
+    html += '<p class="tip">💡 下載後，把 <code>favicon.ico</code> 放進網站根目錄，並在 <code>&lt;head&gt;</code> 加 <code>&lt;link rel="icon" href="/favicon.ico"&gt;</code>。</p>';
     html += '<div style="margin-top:16px;">';
     html += '<a href="' + url + '" download="favicon.ico" style="display:inline-block;background:#D4AF37;color:#0D1117;text-decoration:none;padding:10px 24px;border-radius:8px;font-weight:700;font-size:14px;">⬇️ 下載 favicon.ico（' + size + ' bytes）</a>';
     html += '</div>';
