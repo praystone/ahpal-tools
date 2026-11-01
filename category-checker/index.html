@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>分類文章檢查器 | 雅寶工具箱 AHPAL.COM</title>
+<meta name="description" content="雅寶分類文章檢查器 — 上傳 JSON 與檔名清單，即時檢查幽靈登記、未登記實體、關鍵字重複、檔名重複。完全離線，零依賴。">
+<link rel="canonical" href="https://tools.ahpal.com/category-checker/">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:20px;padding-bottom:80px;}
+.container{max-width:1100px;margin:0 auto;}
+h1{color:#D4AF37;font-size:26px;margin-bottom:6px;}
+h1 .sub{color:#58A6FF;font-size:14px;font-weight:400;margin-left:8px;}
+.desc{color:#8B949E;font-size:14px;margin-bottom:24px;}
+.card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px 28px;margin-bottom:20px;}
+.card h2{color:#D4AF37;font-size:18px;margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid #2D303A;}
+.card h3{color:#58A6FF;font-size:15px;margin:16px 0 8px;}
+textarea{width:100%;min-height:140px;padding:12px;background:#0D1117;color:#E6EDF3;border:1px solid #2D303A;border-radius:8px;font-family:Consolas,monospace;font-size:13px;resize:vertical;}
+textarea:focus{outline:none;border-color:#D4AF37;}
+input[type=file]{display:block;margin:8px 0;color:#8B949E;font-size:13px;}
+input[type=file]::file-selector-button{background:#D4AF37;color:#0D1117;border:none;border-radius:6px;padding:6px 14px;cursor:pointer;font-weight:700;margin-right:10px;}
+button{background:#D4AF37;color:#0D1117;border:none;border-radius:8px;padding:10px 24px;font-size:14px;font-weight:700;cursor:pointer;margin:4px 8px 4px 0;}
+button:hover{background:#e0c04a;}
+button.secondary{background:#2D303A;color:#E6EDF3;}
+button.secondary:hover{background:#3a3f4d;}
+.result{margin-top:16px;}
+.summary-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin:12px 0;}
+.summary-item{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:12px;text-align:center;}
+.summary-item .num{font-size:1.6rem;font-weight:900;color:#D4AF37;}
+.summary-item .lbl{font-size:12px;color:#8B949E;margin-top:2px;}
+.summary-item.ok .num{color:#3FB950;}
+.summary-item.warn .num{color:#F85149;}
+table{width:100%;border-collapse:collapse;font-size:13px;margin:12px 0;}
+th,td{padding:8px 10px;border:1px solid #2D303A;text-align:left;}
+th{background:rgba(212,175,55,0.12);color:#D4AF37;}
+.status-ok{color:#3FB950;font-weight:700;}
+.status-bad{color:#F85149;font-weight:700;}
+.list{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:12px;max-height:280px;overflow-y:auto;font-family:Consolas,monospace;font-size:12px;color:#C9D1D9;}
+.list div{padding:3px 0;border-bottom:1px solid #161B22;}
+.list div:last-child{border-bottom:none;}
+.tab-bar{display:flex;gap:4px;margin-bottom:16px;flex-wrap:wrap;}
+.tab-btn{background:#161B22;color:#8B949E;border:1px solid #2D303A;border-radius:8px;padding:8px 20px;font-size:14px;cursor:pointer;font-weight:700;}
+.tab-btn.active{background:#D4AF37;color:#0D1117;border-color:#D4AF37;}
+.tab-content{display:none;}
+.tab-content.active{display:block;}
+.tip{background:rgba(88,166,255,0.08);border-left:4px solid #58A6FF;padding:10px 16px;border-radius:6px;font-size:13px;color:#8B949E;margin:10px 0;}
+.err{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:10px 16px;border-radius:6px;font-size:13px;color:#F85149;margin:10px 0;display:none;}
+footer{position:fixed;bottom:0;left:0;right:0;background:#161B22;border-top:1px solid #D4AF37;padding:10px;text-align:center;font-size:13px;z-index:100;}
+footer a{color:#58A6FF;text-decoration:none;margin:0 8px;}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🔍 分類文章檢查器 <span class="sub">Category Checker</span></h1>
+<p class="desc">上傳分類 JSON 與實體檔名清單，即時檢查幽靈登記、未登記實體、關鍵字重複、檔名重複。完全離線，零依賴，不上傳任何資料到伺服器。</p>
+
+<div class="tab-bar">
+<button class="tab-btn active" onclick="switchTab('upload')">📤 上傳 JSON</button>
+<button class="tab-btn" onclick="switchTab('paste')">📋 貼上 JSON</button>
+</div>
+
+<div id="tab-upload" class="tab-content active">
+<div class="card">
+<h2>1. 分類 JSON 檔案</h2>
+<p style="color:#8B949E;font-size:13px;margin-bottom:8px;">從 <code style="background:#0D1117;color:#58A6FF;padding:2px 6px;border-radius:4px;">C:\Users\User\ahpal-static\data\articles\</code> 選一個，例如 car.json</p>
+<input type="file" id="jsonFile" accept=".json">
+<h3>2. 實體檔名清單（可選）</h3>
+<p style="color:#8B949E;font-size:13px;margin-bottom:8px;">從檔案總管複製 <code style="background:#0D1117;color:#58A6FF;padding:2px 6px;border-radius:4px;">car\*.html</code> 的檔名，一行一個。不給也能檢查幽靈與重複。</p>
+<textarea id="filesText" placeholder="car-article-001.html&#10;car-article-002.html&#10;..."></textarea>
+<button onclick="runCheck()">🚀 開始檢查</button>
+<button class="secondary" onclick="clearAll()">🧹 清空</button>
+<div id="errBox" class="err"></div>
+</div>
+</div>
+
+<div id="tab-paste" class="tab-content">
+<div class="card">
+<h2>1. 貼上分類 JSON</h2>
+<p style="color:#8B949E;font-size:13px;margin-bottom:8px;">直接貼上 car.json 全文</p>
+<textarea id="jsonText" style="min-height:200px;" placeholder='[{"keyword":"...","filename":"car/..."}, ...]'></textarea>
+<h3>2. 實體檔名清單（可選）</h3>
+<textarea id="filesText2" placeholder="car-article-001.html&#10;..."></textarea>
+<button onclick="runCheck2()">🚀 開始檢查</button>
+<button class="secondary" onclick="clearAll()">🧹 清空</button>
+<div id="errBox2" class="err"></div>
+</div>
+</div>
+
+<div id="result" class="result"></div>
+</div>
+
+<footer>
+🏠 <a href="https://www.ahpal.com/">首頁</a>
+🌾 <a href="https://farm.ahpal.com/">農場</a>
+⚔️ <a href="https://pet.ahpal.com/">打怪場</a>
+📖 <a href="https://novels.ahpal.com/">小說站</a>
+🏛️ <a href="https://memories.ahpal.com/">回憶館</a>
+💬 <a href="https://bbs2.ahpal.com/">BBS2</a>
+🛠️ <a href="https://tools.ahpal.com/">工具箱</a>
+</footer>
+
+<script>
+function switchTab(name){
+    document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active');});
+    document.querySelectorAll('.tab-content').forEach(function(c){c.classList.remove('active');});
+    if(name==='upload'){
+        document.querySelectorAll('.tab-btn')[0].classList.add('active');
+        document.getElementById('tab-upload').classList.add('active');
+    } else {
+        document.querySelectorAll('.tab-btn')[1].classList.add('active');
+        document.getElementById('tab-paste').classList.add('active');
+    }
+}
+
+function clearAll(){
+    document.getElementById('jsonText').value='';
+    document.getElementById('filesText').value='';
+    document.getElementById('filesText2').value='';
+    document.getElementById('jsonFile').value='';
+    document.getElementById('result').innerHTML='';
+    document.getElementById('errBox').style.display='none';
+    document.getElementById('errBox2').style.display='none';
+}
+
+function esc(s){
+    return String(s).replace(/[&<>"']/g, function(c){
+        return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+}
+
+function showErr(id, msg){
+    var el=document.getElementById(id);
+    el.textContent=msg;
+    el.style.display='block';
+}
+
+async function runCheck(){
+    var file=document.getElementById('jsonFile').files[0];
+    if(!file){ showErr('errBox','請先選一個 JSON 檔案'); return; }
+    document.getElementById('errBox').style.display='none';
+    var text=await file.text();
+    var filesRaw=document.getElementById('filesText').value;
+    doCheck(text, filesRaw);
+}
+
+function runCheck2(){
+    var text=document.getElementById('jsonText').value.trim();
+    if(!text){ showErr('errBox2','請先貼上 JSON 內容'); return; }
+    document.getElementById('errBox2').style.display='none';
+    var filesRaw=document.getElementById('filesText2').value;
+    doCheck(text, filesRaw);
+}
+
+function doCheck(jsonText, filesRaw){
+    var data;
+    try {
+        data=JSON.parse(jsonText);
+    } catch(e){
+        document.getElementById('result').innerHTML='<div class="card" style="border-color:#F85149;"><h2 style="color:#F85149;">❌ JSON 解析失敗</h2><div class="list">'+esc(e.message)+'</div></div>';
+        return;
+    }
+    if(!Array.isArray(data)){
+        document.getElementById('result').innerHTML='<div class="card" style="border-color:#F85149;"><h2 style="color:#F85149;">❌ JSON 不是陣列</h2><div class="list">最外層必須是 [ ... ]</div></div>';
+        return;
+    }
+
+    var jsonSet={};
+    var kwCount={};
+    var fnCount={};
+    data.forEach(function(item){
+        var fn=(item.filename||'').replace(/^[^\/]+[\/]/,'');
+        if(fn) jsonSet[fn]=item.keyword||'';
+        var kw=item.keyword||'';
+        if(kw) kwCount[kw]=(kwCount[kw]||0)+1;
+        var fullFn=item.filename||'';
+        if(fullFn) fnCount[fullFn]=(fnCount[fullFn]||0)+1;
+    });
+
+    var fileSet={};
+    var fileLines=filesRaw.split(/\r?\n/).map(function(s){return s.trim();}).filter(Boolean);
+    fileLines.forEach(function(f){ fileSet[f]=1; });
+
+    var ghosts=[];
+    var unregs=[];
+    Object.keys(jsonSet).forEach(function(fn){
+        if(!fileSet[fn]) ghosts.push(fn+'  ('+jsonSet[fn]+')');
+    });
+    if(Object.keys(fileSet).length>0){
+        Object.keys(fileSet).forEach(function(fn){
+            if(!jsonSet[fn]) unregs.push(fn);
+        });
+    }
+
+    var dupKw=[];
+    Object.keys(kwCount).forEach(function(kw){
+        if(kwCount[kw]>1) dupKw.push(kw+' ('+kwCount[kw]+'次)');
+    });
+    var dupFn=[];
+    Object.keys(fnCount).forEach(function(fn){
+        if(fnCount[fn]>1) dupFn.push(fn+' ('+fnCount[fn]+'次)');
+    });
+
+    var html='<div class="card">';
+    html+='<h2>📊 檢查結果</h2>';
+    html+='<div class="summary-grid">';
+    html+='<div class="summary-item"><div class="num">'+data.length+'</div><div class="lbl">JSON 筆數</div></div>';
+    html+='<div class="summary-item"><div class="num">'+Object.keys(fileSet).length+'</div><div class="lbl">實體檔名</div></div>';
+    html+='<div class="summary-item '+(ghosts.length>0?'warn':'ok')+'"><div class="num">'+ghosts.length+'</div><div class="lbl">幽靈登記</div></div>';
+    html+='<div class="summary-item '+(unregs.length>0?'warn':'ok')+'"><div class="num">'+unregs.length+'</div><div class="lbl">未登記</div></div>';
+    html+='<div class="summary-item '+(dupKw.length>0?'warn':'ok')+'"><div class="num">'+dupKw.length+'</div><div class="lbl">關鍵字重複</div></div>';
+    html+='<div class="summary-item '+(dupFn.length>0?'warn':'ok')+'"><div class="num">'+dupFn.length+'</div><div class="lbl">檔名重複</div></div>';
+    html+='</div>';
+
+    var overallOk=(ghosts.length===0 && unregs.length===0 && dupKw.length===0 && dupFn.length===0);
+    html+='<p style="text-align:center;font-size:18px;font-weight:700;margin:16px 0;" class="'+(overallOk?'status-ok':'status-bad')+'">'+(overallOk?'✅ 全部通過':'❌ 有問題，請看下方')+'</p>';
+
+    if(ghosts.length>0){
+        html+='<h3>⚠️ 幽靈登記（JSON 有、實體無）：'+ghosts.length+' 筆</h3><div class="list">';
+        ghosts.forEach(function(g){ html+='<div>'+esc(g)+'</div>'; });
+        html+='</div>';
+    }
+    if(unregs.length>0){
+        html+='<h3>⚠️ 未登記（實體有、JSON 無）：'+unregs.length+' 筆</h3><div class="list">';
+        unregs.forEach(function(u){ html+='<div>'+esc(u)+'</div>'; });
+        html+='</div>';
+    }
+    if(dupKw.length>0){
+        html+='<h3>⚠️ 關鍵字重複：'+dupKw.length+' 筆</h3><div class="list">';
+        dupKw.forEach(function(d){ html+='<div>'+esc(d)+'</div>'; });
+        html+='</div>';
+    }
+    if(dupFn.length>0){
+        html+='<h3>⚠️ 檔名重複：'+dupFn.length+' 筆</h3><div class="list">';
+        dupFn.forEach(function(d){ html+='<div>'+esc(d)+'</div>'; });
+        html+='</div>';
+    }
+
+    html+='<div style="margin-top:20px;"><button onclick="copyReport()">📋 複製 Markdown 報告</button></div>';
+    html+='</div>';
+
+    document.getElementById('result').innerHTML=html;
+    window._lastReport={total:data.length,files:Object.keys(fileSet).length,ghosts:ghosts,unregs:unregs,dupKw:dupKw,dupFn:dupFn,ok:overallOk};
+}
+
+function copyReport(){
+    var r=window._lastReport;
+    if(!r) return;
+    var md='# 分類文章檢查報告\n\n';
+    md+='- JSON 筆數：'+r.total+'\n';
+    md+='- 實體檔名：'+r.files+'\n';
+    md+='- 幽靈登記：'+r.ghosts.length+'\n';
+    md+='- 未登記：'+r.unregs.length+'\n';
+    md+='- 關鍵字重複：'+r.dupKw.length+'\n';
+    md+='- 檔名重複：'+r.dupFn.length+'\n';
+    md+='- 狀態：'+(r.ok?'✅ 通過':'❌ 有問題')+'\n\n';
+    if(r.ghosts.length) md+='## 幽靈登記\n'+r.ghosts.map(function(x){return '- '+x;}).join('\n')+'\n\n';
+    if(r.unregs.length) md+='## 未登記\n'+r.unregs.map(function(x){return '- '+x;}).join('\n')+'\n\n';
+    if(r.dupKw.length) md+='## 關鍵字重複\n'+r.dupKw.map(function(x){return '- '+x;}).join('\n')+'\n\n';
+    if(r.dupFn.length) md+='## 檔名重複\n'+r.dupFn.map(function(x){return '- '+x;}).join('\n')+'\n';
+    navigator.clipboard.writeText(md).then(function(){
+        alert('✅ 已複製 Markdown 報告到剪貼簿');
+    }).catch(function(){
+        prompt('複製失敗，請手動複製：', md);
+    });
+}
+</script>
+</body>
+</html>
