@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>文章檔名檢查器 | 雅寶工具箱 AHPAL.COM</title>
+<meta name="description" content="雅寶文章檔名檢查器 — 貼上關鍵字產出英文 kebab-case 檔名；貼上檔名檢查中文、空格、大寫、漏 .html。完全離線，零依賴。">
+<link rel="canonical" href="https://tools.ahpal.com/filename-checker/">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:20px;padding-bottom:80px;}
+.container{max-width:1100px;margin:0 auto;}
+h1{color:#D4AF37;font-size:26px;margin-bottom:6px;}
+h1 .sub{color:#58A6FF;font-size:14px;font-weight:400;margin-left:8px;}
+.desc{color:#8B949E;font-size:14px;margin-bottom:24px;}
+.card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px 28px;margin-bottom:20px;}
+.card h2{color:#D4AF37;font-size:18px;margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid #2D303A;}
+textarea{width:100%;min-height:160px;padding:12px;background:#0D1117;color:#E6EDF3;border:1px solid #2D303A;border-radius:8px;font-family:Consolas,monospace;font-size:13px;resize:vertical;}
+textarea:focus{outline:none;border-color:#D4AF37;}
+button{background:#D4AF37;color:#0D1117;border:none;border-radius:8px;padding:10px 24px;font-size:14px;font-weight:700;cursor:pointer;margin:4px 8px 4px 0;}
+button:hover{background:#e0c04a;}
+button.secondary{background:#2D303A;color:#E6EDF3;}
+button.secondary:hover{background:#3a3f4d;}
+.result{margin-top:16px;}
+.summary-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin:12px 0;}
+.summary-item{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:12px;text-align:center;}
+.summary-item .num{font-size:1.6rem;font-weight:900;color:#D4AF37;}
+.summary-item .lbl{font-size:12px;color:#8B949E;margin-top:2px;}
+.summary-item.ok .num{color:#3FB950;}
+.summary-item.warn .num{color:#F85149;}
+.list{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:12px;max-height:320px;overflow-y:auto;font-family:Consolas,monospace;font-size:12px;color:#C9D1D9;}
+.list div{padding:4px 0;border-bottom:1px solid #161B22;}
+.list div:last-child{border-bottom:none;}
+.status-ok{color:#3FB950;font-weight:700;}
+.status-bad{color:#F85149;font-weight:700;}
+.tab-bar{display:flex;gap:4px;margin-bottom:16px;flex-wrap:wrap;}
+.tab-btn{background:#161B22;color:#8B949E;border:1px solid #2D303A;border-radius:8px;padding:8px 20px;font-size:14px;cursor:pointer;font-weight:700;}
+.tab-btn.active{background:#D4AF37;color:#0D1117;border-color:#D4AF37;}
+.tab-content{display:none;}
+.tab-content.active{display:block;}
+.tip{background:rgba(88,166,255,0.08);border-left:4px solid #58A6FF;padding:10px 16px;border-radius:6px;font-size:13px;color:#8B949E;margin:10px 0;}
+footer{position:fixed;bottom:0;left:0;right:0;background:#161B22;border-top:1px solid #D4AF37;padding:10px;text-align:center;font-size:13px;z-index:100;}
+footer a{color:#58A6FF;text-decoration:none;margin:0 8px;}
+code{background:#0D1117;color:#58A6FF;padding:2px 6px;border-radius:4px;}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>📝 文章檔名檢查器 <span class="sub">Filename Checker</span></h1>
+<p class="desc">貼上關鍵字產出英文 kebab-case 檔名；貼上檔名檢查中文、空格、大寫、漏 <code>.html</code>。完全離線，零依賴。</p>
+
+<div class="tab-bar">
+<button class="tab-btn active" onclick="switchTab('gen')">🎯 關鍵字 → 建議檔名</button>
+<button class="tab-btn" onclick="switchTab('check')">🔍 檢查檔名格式</button>
+</div>
+
+<div id="tab-gen" class="tab-content active">
+<div class="card">
+<h2>關鍵字清單（一行一個）</h2>
+<p class="tip">貼上關鍵字，即時產出建議檔名。中文會轉成拼音式英文，特殊字元會移除。</p>
+<textarea id="kwInput" placeholder="汽車 CVT 變速箱：為什麼大腳油門只聞引擎聲卻不上速&#10;汽車煞車油吸水率：為什麼下長坡煞車突然會完全空掉&#10;..."></textarea>
+<button onclick="genNames()">🚀 產出建議檔名</button>
+<button class="secondary" onclick="clearGen()">🧹 清空</button>
+<div id="genResult" class="result"></div>
+</div>
+</div>
+
+<div id="tab-check" class="tab-content">
+<div class="card">
+<h2>檔名清單（一行一個）</h2>
+<p class="tip">貼上檔名，檢查：含中文、含空格、含大寫、漏 <code>.html</code>、含特殊字元。全部符合 = 通過。</p>
+<textarea id="fnInput" placeholder="car-cvt-transmission-slippage-acceleration.html&#10;car-brake-fluid-boiling-vapor-lock.html&#10;..."></textarea>
+<button onclick="checkNames()">🚀 檢查格式</button>
+<button class="secondary" onclick="clearCheck()">🧹 清空</button>
+<div id="checkResult" class="result"></div>
+</div>
+</div>
+</div>
+
+<footer>
+🏠 <a href="https://www.ahpal.com/">首頁</a>
+🌾 <a href="https://farm.ahpal.com/">農場</a>
+⚔️ <a href="https://pet.ahpal.com/">打怪場</a>
+📖 <a href="https://novels.ahpal.com/">小說站</a>
+🏛️ <a href="https://memories.ahpal.com/">回憶館</a>
+💬 <a href="https://bbs2.ahpal.com/">BBS2</a>
+🛠️ <a href="https://tools.ahpal.com/">工具箱</a>
+</footer>
+
+<script>
+function switchTab(name){
+    document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active');});
+    document.querySelectorAll('.tab-content').forEach(function(c){c.classList.remove('active');});
+    if(name==='gen'){
+        document.querySelectorAll('.tab-btn')[0].classList.add('active');
+        document.getElementById('tab-gen').classList.add('active');
+    } else {
+        document.querySelectorAll('.tab-btn')[1].classList.add('active');
+        document.getElementById('tab-check').classList.add('active');
+    }
+}
+
+function clearGen(){
+    document.getElementById('kwInput').value='';
+    document.getElementById('genResult').innerHTML='';
+}
+function clearCheck(){
+    document.getElementById('fnInput').value='';
+    document.getElementById('checkResult').innerHTML='';
+}
+
+function esc(s){
+    return String(s).replace(/[&<>"']/g, function(c){
+        return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+}
+
+// 中文→拼音對照（常用字，涵蓋 90% 關鍵字）
+var PINYIN = {
+    '汽':'qi','車':'che','變':'bian','速':'su','箱':'xiang','為':'wei','什':'shen','麼':'me',
+    '大':'da','腳':'jiao','油':'you','門':'men','只':'zhi','聞':'wen','引':'yin','擎':'qing',
+    '聲':'sheng','卻':'que','不':'bu','上':'shang','煞':'sha','油':'you','吸':'xi','水':'shui',
+    '率':'lv','下':'xia','長':'chang','坡':'po','突':'tu','然':'ran','會':'hui','完':'wan',
+    '全':'quan','空':'kong','掉':'diao','輪':'lun','胎':'tai','扁':'bian','平':'ping','比':'bi',
+    '圈':'quan','薄':'bao','路':'lu','感':'gan','好':'hao','但':'dan','更':'geng','容':'rong',
+    '易':'yi','爆':'bao','凹':'ao','框':'kuang','機':'ji','黏':'nian','度':'du','數':'shu',
+    '越':'yue','來':'lai','多':'duo','廠':'chang','指':'zhi','定':'ding','使':'shi','用':'yong',
+    '冷':'leng','卻':'que','液':'ye','濃':'nong','沸':'fei','點':'dian','壓':'ya','力':'li',
+    '系':'xi','統':'tong','電':'dian','瓶':'ping','壽':'shou','命':'ming','保':'bao','養':'yang',
+    '換':'huan','修':'xiu','改':'gai','裝':'zhuang','動':'dong','力':'li','升':'sheng','級':'ji',
+    '懸':'xuan','吊':'diao','避':'bi','震':'zhen','器':'qi','彈':'tan','簧':'huang','防':'fang',
+    '傾':'qing','桿':'gan','拉':'la','強':'qiang','化':'hua','霧':'wu','燈':'deng','智':'zhi',
+    '能':'neng','駕':'jia','駛':'shi','自':'zi','輔':'fu','助':'zhu','安':'an','煞':'sha',
+    '雷':'lei','達':'da','影':'ying','像':'xiang','倒':'dao','車':'che','盲':'mang','點':'dian',
+    '四':'si','傳':'chuan','四':'si','驅':'qu','前':'qian','後':'hou','差':'cha','速':'su',
+    '鎖':'suo','扭':'niu','力':'li','分':'fen','配':'pei','渦':'wo','輪':'lun','增':'zeng',
+    '壓':'ya','進':'jin','氣':'qi','排':'pai','廢':'fei','觸':'chu','媒':'mei','轉':'zhuan',
+    '化':'hua','器':'qi','考':'kao','爾':'er','噴':'pen','射':'she','缸':'gang','內':'nei',
+    '直':'zhi','點':'dian','火':'huo','銥':'yi','合':'he','金':'jin','火星':'huoxing'
+};
+
+function kwToFilename(kw){
+    // 先處理中文：逐字轉拼音
+    var result = '';
+    for (var i = 0; i < kw.length; i++){
+        var ch = kw[i];
+        if (/[一-龥]/.test(ch)){
+            result += (PINYIN[ch] || 'x') + '-';
+        } else {
+            result += ch;
+        }
+    }
+    // 移除全形冒號、標點、括號
+    result = result.replace(/[：，。、；！？（）【】《》「」『』""'']/g, '-');
+    // 轉小寫
+    result = result.toLowerCase();
+    // 非 a-z0-9- 移除
+    result = result.replace(/[^a-z0-9\-]/g, '-');
+    // 連續 - 變一個
+    result = result.replace(/-+/g, '-');
+    // 去頭尾 -
+    result = result.replace(/^-|-$/g, '');
+    // 太長截斷（80 字元）
+    if (result.length > 80) result = result.substring(0, 80).replace(/-$/, '');
+    return result + '.html';
+}
+
+function genNames(){
+    var lines = document.getElementById('kwInput').value.split(/\r?\n/).map(function(s){return s.trim();}).filter(Boolean);
+    if (lines.length === 0){
+        document.getElementById('genResult').innerHTML = '<div class="card" style="border-color:#F85149;"><p class="status-bad">請先貼上關鍵字</p></div>';
+        return;
+    }
+    var html = '<div class="card"><h2>📋 建議檔名（' + lines.length + ' 個）</h2>';
+    html += '<div class="list">';
+    var output = '';
+    lines.forEach(function(kw){
+        var fn = kwToFilename(kw);
+        output += fn + '\n';
+        html += '<div>' + esc(fn) + '  <span style="color:#8B949E;font-size:11px;">← ' + esc(kw) + '</span></div>';
+    });
+    html += '</div>';
+    html += '<div style="margin-top:16px;"><button onclick="copyGen()">📋 複製全部建議檔名</button></div>';
+    html += '</div>';
+    document.getElementById('genResult').innerHTML = html;
+    window._genOutput = output;
+}
+
+function copyGen(){
+    if (!window._genOutput) return;
+    navigator.clipboard.writeText(window._genOutput).then(function(){
+        alert('✅ 已複製 ' + window._genOutput.split('\n').filter(Boolean).length + ' 個建議檔名');
+    }).catch(function(){
+        prompt('複製失敗，請手動複製：', window._genOutput);
+    });
+}
+
+function checkNames(){
+    var lines = document.getElementById('fnInput').value.split(/\r?\n/).map(function(s){return s.trim();}).filter(Boolean);
+    if (lines.length === 0){
+        document.getElementById('checkResult').innerHTML = '<div class="card" style="border-color:#F85149;"><p class="status-bad">請先貼上檔名</p></div>';
+        return;
+    }
+    var issues = [];
+    var okCount = 0;
+    lines.forEach(function(fn, i){
+        var problems = [];
+        if (/[一-龥]/.test(fn)) problems.push('含中文');
+        if (/\s/.test(fn)) problems.push('含空格');
+        if (/[A-Z]/.test(fn)) problems.push('含大寫');
+        if (!fn.endsWith('.html')) problems.push('漏 .html');
+        if (/[^a-z0-9\.\-]/.test(fn)) problems.push('含特殊字元');
+        if (problems.length > 0){
+            issues.push({line: i+1, fn: fn, problems: problems});
+        } else {
+            okCount++;
+        }
+    });
+
+    var html = '<div class="card"><h2>📊 檢查結果</h2>';
+    html += '<div class="summary-grid">';
+    html += '<div class="summary-item"><div class="num">' + lines.length + '</div><div class="lbl">總筆數</div></div>';
+    html += '<div class="summary-item ' + (okCount === lines.length ? 'ok' : 'warn') + '"><div class="num">' + okCount + '</div><div class="lbl">通過</div></div>';
+    html += '<div class="summary-item ' + (issues.length > 0 ? 'warn' : 'ok') + '"><div class="num">' + issues.length + '</div><div class="lbl">有問題</div></div>';
+    html += '</div>';
+
+    if (issues.length === 0){
+        html += '<p class="status-ok" style="text-align:center;font-size:18px;margin:16px 0;">✅ 全部通過，檔名格式完美</p>';
+    } else {
+        html += '<h3 style="color:#58A6FF;margin:16px 0 8px;">⚠️ 有問題的檔名：' + issues.length + ' 個</h3>';
+        html += '<div class="list">';
+        issues.forEach(function(it){
+            html += '<div><span style="color:#F85149;">[第 ' + it.line + ' 行]</span> ' + esc(it.fn) + ' <span style="color:#D4AF37;">← ' + it.problems.join('、') + '</span></div>';
+        });
+        html += '</div>';
+    }
+    html += '</div>';
+    document.getElementById('checkResult').innerHTML = html;
+}
+</script>
+</body>
+</html>
