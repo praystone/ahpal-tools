@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>文章字數統計器 | 雅寶工具箱 AHPAL.COM</title>
+<meta name="description" content="雅寶文章字數統計器 — 貼上 HTML，統計純中文字數（排除標籤、CSS、JS、emoji），對照品質門檻 1200 字。完全離線，零依賴。">
+<link rel="canonical" href="https://tools.ahpal.com/word-counter/">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:20px;padding-bottom:80px;}
+.container{max-width:1100px;margin:0 auto;}
+h1{color:#D4AF37;font-size:26px;margin-bottom:6px;}
+h1 .sub{color:#58A6FF;font-size:14px;font-weight:400;margin-left:8px;}
+.desc{color:#8B949E;font-size:14px;margin-bottom:24px;}
+.card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px 28px;margin-bottom:20px;}
+.card h2{color:#D4AF37;font-size:18px;margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid #2D303A;}
+textarea{width:100%;min-height:220px;padding:12px;background:#0D1117;color:#E6EDF3;border:1px solid #2D303A;border-radius:8px;font-family:Consolas,monospace;font-size:13px;resize:vertical;}
+textarea:focus{outline:none;border-color:#D4AF37;}
+button{background:#D4AF37;color:#0D1117;border:none;border-radius:8px;padding:10px 24px;font-size:14px;font-weight:700;cursor:pointer;margin:4px 8px 4px 0;}
+button:hover{background:#e0c04a;}
+button.secondary{background:#2D303A;color:#E6EDF3;}
+button.secondary:hover{background:#3a3f4d;}
+.result{margin-top:16px;}
+.summary-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin:12px 0;}
+.summary-item{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:12px;text-align:center;}
+.summary-item .num{font-size:1.6rem;font-weight:900;color:#D4AF37;}
+.summary-item .lbl{font-size:12px;color:#8B949E;margin-top:2px;}
+.summary-item.ok .num{color:#3FB950;}
+.summary-item.warn .num{color:#F85149;}
+.status-ok{color:#3FB950;font-weight:700;font-size:18px;text-align:center;margin:16px 0;}
+.status-bad{color:#F85149;font-weight:700;font-size:18px;text-align:center;margin:16px 0;}
+.tip{background:rgba(88,166,255,0.08);border-left:4px solid #58A6FF;padding:10px 16px;border-radius:6px;font-size:13px;color:#8B949E;margin:10px 0;}
+footer{position:fixed;bottom:0;left:0;right:0;background:#161B22;border-top:1px solid #D4AF37;padding:10px;text-align:center;font-size:13px;z-index:100;}
+footer a{color:#58A6FF;text-decoration:none;margin:0 8px;}
+code{background:#0D1117;color:#58A6FF;padding:2px 6px;border-radius:4px;}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>📊 文章字數統計器 <span class="sub">Word Counter</span></h1>
+<p class="desc">貼上 HTML，統計純中文字數（排除標籤、CSS、JS、emoji），對照品質門檻 <code>1200 字</code>。完全離線，零依賴。</p>
+
+<div class="card">
+<h2>HTML 內容</h2>
+<p class="tip">直接貼上整篇 HTML，或只貼 <code>&lt;body&gt;</code> 內的內容。工具會自動移除 <code>&lt;script&gt;</code>、<code>&lt;style&gt;</code>、HTML 標籤、emoji，只算純中文字。</p>
+<textarea id="htmlInput" placeholder="&lt;h1&gt;汽車 CVT 變速箱...&lt;/h1&gt;&#10;&lt;p&gt;為什麼大腳油門...&lt;/p&gt;&#10;..."></textarea>
+<button onclick="countWords()">🚀 統計字數</button>
+<button class="secondary" onclick="clearAll()">🧹 清空</button>
+<div id="result" class="result"></div>
+</div>
+</div>
+
+<footer>
+🏠 <a href="https://www.ahpal.com/">首頁</a>
+🌾 <a href="https://farm.ahpal.com/">農場</a>
+⚔️ <a href="https://pet.ahpal.com/">打怪場</a>
+📖 <a href="https://novels.ahpal.com/">小說站</a>
+🏛️ <a href="https://memories.ahpal.com/">回憶館</a>
+💬 <a href="https://bbs2.ahpal.com/">BBS2</a>
+🛠️ <a href="https://tools.ahpal.com/">工具箱</a>
+</footer>
+
+<script>
+function clearAll(){
+    document.getElementById('htmlInput').value='';
+    document.getElementById('result').innerHTML='';
+}
+
+function countWords(){
+    var raw = document.getElementById('htmlInput').value;
+    if (!raw.trim()){
+        document.getElementById('result').innerHTML = '<div class="card" style="border-color:#F85149;"><p class="status-bad">請先貼上 HTML</p></div>';
+        return;
+    }
+
+    // 1. 移除 <script> 區塊（含內容）
+    var s = raw.replace(/<script[\s\S]*?<\/script>/gi, '');
+    // 2. 移除 <style> 區塊（含內容）
+    s = s.replace(/<style[\s\S]*?<\/style>/gi, '');
+    // 3. 移除 HTML 註解
+    s = s.replace(/<!--[\s\S]*?-->/g, '');
+    // 4. 移除所有 HTML 標籤
+    s = s.replace(/<[^>]+>/g, ' ');
+    // 5. 移除 HTML 實體（&nbsp; &amp; 等）
+    s = s.replace(/&[a-zA-Z#0-9]+;/g, ' ');
+    // 6. 移除 emoji（用 Unicode 範圍）
+    s = s.replace(/[\u{1F300}-\u{1FAFF}]/gu, '');
+    s = s.replace(/[\u{2600}-\u{27BF}]/gu, '');
+    // 7. 移除全形空白
+    s = s.replace(/[\u3000]/g, ' ');
+
+    // 統計
+    var totalChars = s.replace(/\s/g, '').length;  // 全部字元（不含空白）
+    var chineseChars = (s.match(/[\u4e00-\u9fa5]/g) || []).length;  // 純中文
+    var englishWords = (s.match(/[a-zA-Z]+/g) || []).length;  // 英文詞數
+    var digits = (s.match(/[0-9]/g) || []).length;  // 數字個數
+
+    // 對照門檻
+    var MIN_WORDS = 1200;
+    var passed = chineseChars >= MIN_WORDS;
+
+    var html = '<div class="card"><h2>📊 統計結果</h2>';
+    html += '<div class="summary-grid">';
+    html += '<div class="summary-item ' + (passed ? 'ok' : 'warn') + '"><div class="num">' + chineseChars + '</div><div class="lbl">純中文字數</div></div>';
+    html += '<div class="summary-item"><div class="num">' + totalChars + '</div><div class="lbl">總字元（不含空白）</div></div>';
+    html += '<div class="summary-item"><div class="num">' + englishWords + '</div><div class="lbl">英文詞數</div></div>';
+    html += '<div class="summary-item"><div class="num">' + digits + '</div><div class="lbl">數字個數</div></div>';
+    html += '</div>';
+
+    if (passed){
+        html += '<p class="status-ok">✅ 達標（' + chineseChars + ' / ' + MIN_WORDS + ' 字，超過 ' + (chineseChars - MIN_WORDS) + ' 字）</p>';
+    } else {
+        html += '<p class="status-bad">❌ 不足（' + chineseChars + ' / ' + MIN_WORDS + ' 字，還差 ' + (MIN_WORDS - chineseChars) + ' 字）</p>';
+    }
+
+    html += '<div class="tip">品質門檻：<code>config.py</code> 的 <code>MIN_WORDS = 1200</code>。純中文字數 = 只算 <code>[\u4e00-\u9fa5]</code> 範圍的字，不含標點、英文、數字、emoji。</div>';
+    html += '<div style="margin-top:16px;"><button onclick="copyResult()">📋 複製統計結果</button></div>';
+    html += '</div>';
+
+    document.getElementById('result').innerHTML = html;
+    window._result = {chinese: chineseChars, total: totalChars, english: englishWords, digits: digits, passed: passed, min: MIN_WORDS};
+}
+
+function copyResult(){
+    var r = window._result;
+    if (!r) return;
+    var txt = '文章字數統計\n';
+    txt += '- 純中文字數：' + r.chinese + ' 字\n';
+    txt += '- 總字元（不含空白）：' + r.total + '\n';
+    txt += '- 英文詞數：' + r.english + '\n';
+    txt += '- 數字個數：' + r.digits + '\n';
+    txt += '- 品質門檻：' + r.min + ' 字\n';
+    txt += '- 結果：' + (r.passed ? '✅ 達標' : '❌ 不足 ' + (r.min - r.chinese) + ' 字') + '\n';
+    navigator.clipboard.writeText(txt).then(function(){
+        alert('✅ 已複製統計結果到剪貼簿');
+    }).catch(function(){
+        prompt('複製失敗，請手動複製：', txt);
+    });
+}
+</script>
+</body>
+</html>
