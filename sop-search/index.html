@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>SOP 查詢器 | 雅寶工具箱 AHPAL.COM</title>
+<meta name="description" content="雅寶工作 SOP 全文搜尋。輸入關鍵字，即時找到對應章節。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/sop-search/">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:40px 20px;}
+.container{max-width:1100px;margin:0 auto;}
+h1{color:#D4AF37;font-size:28px;margin-bottom:12px;}
+.sub{color:#8B949E;margin-bottom:24px;font-size:14px;}
+.card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin-bottom:16px;}
+label{color:#8B949E;font-size:13px;display:block;margin-bottom:6px;}
+input[type=text],textarea,select{width:100%;background:#0D1117;color:#E6EDF3;border:1px solid #2D303A;border-radius:8px;padding:12px;font-size:14px;margin-bottom:12px;font-family:Consolas,monospace;}
+textarea{min-height:120px;resize:vertical;}
+button{background:#D4AF37;color:#0D1117;border:none;border-radius:8px;padding:10px 20px;font-weight:700;cursor:pointer;margin:8px 8px 8px 0;font-size:14px;}
+button:hover{background:#e6c24a;}
+button.blue{background:#58A6FF;}
+button.gray{background:#2D303A;color:#E6EDF3;}
+button.red{background:#F85149;color:#fff;}
+.result{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:12px;font-family:Consolas,monospace;font-size:13px;white-space:pre-wrap;word-break:break-all;min-height:60px;max-height:500px;overflow:auto;}
+.tip{background:rgba(63,185,80,0.08);border-left:4px solid #3FB950;padding:12px 16px;border-radius:6px;color:#C9D1D9;font-size:13px;margin-top:12px;}
+.warn{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:12px 16px;border-radius:6px;color:#C9D1D9;font-size:13px;margin-top:12px;}
+.sop-item{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:12px;margin-bottom:8px;cursor:pointer;}
+.sop-item:hover{border-color:#D4AF37;}
+.sop-item .num{color:#58A6FF;font-weight:700;font-size:13px;}
+.sop-item .title{color:#D4AF37;font-weight:700;font-size:15px;margin-top:2px;}
+.sop-item .preview{color:#8B949E;font-size:12px;margin-top:4px;}
+.footer{text-align:center;margin-top:60px;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+.tab{display:inline-block;padding:8px 16px;background:#0D1117;color:#8B949E;border:1px solid #2D303A;border-radius:8px;cursor:pointer;margin-right:6px;margin-bottom:6px;}
+.tab.active{background:#D4AF37;color:#0D1117;border-color:#D4AF37;font-weight:700;}
+</style>
+</head>
+<body>
+<nav class="ahpal-top-nav" style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;position:relative;z-index:10;">
+  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">🏠 首頁</a>
+  <a href="https://www.ahpal.com/categories.html" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">📚 全部分類</a>
+  <a href="https://www.ahpal.com/strategy/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">📌 策略文章</a>
+  <a href="https://novels.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">📖 小說站</a>
+  <a href="https://memories.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">🏛️ 回憶館</a>
+  <a href="https://bbs2.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">💬 BBS2</a>
+  <a href="https://pet.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">⚔️ 打怪場</a>
+  <a href="https://farm.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">🌾 農場</a>
+  <a href="https://tools.ahpal.com/" style="color:#0D1117;background:#D4AF37;text-decoration:none;padding:4px 10px;border-radius:6px;font-weight:700;">🛠️ 工具箱</a>
+</nav>
+<div class="container">
+<h1>📖 SOP 查詢器</h1>
+<p class="sub">雅寶工作 SOP 全文搜尋。輸入關鍵字，即時找到對應章節。</p>
+
+<div class="card">
+  <label>搜尋 SOP（中文關鍵字，例如「部署」「拋射」「備份」「教訓」）</label>
+  <input type="text" id="q" placeholder="輸入關鍵字..." oninput="search()" style="font-size:16px;">
+  <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;">
+    <span class="tab" onclick="quick('部署')">部署</span>
+    <span class="tab" onclick="quick('拋射')">拋射</span>
+    <span class="tab" onclick="quick('備份')">備份</span>
+    <span class="tab" onclick="quick('教訓')">教訓</span>
+    <span class="tab" onclick="quick('D1')">D1</span>
+    <span class="tab" onclick="quick('Worker')">Worker</span>
+    <span class="tab" onclick="quick('SOP')">SOP</span>
+  </div>
+  <div class="tip">共 <span id="total-count">載入中</span> 個章節，搜尋結果即時更新。</div>
+</div>
+
+<div id="results" class="card">
+  <div style="color:#8B949E;">載入中...</div>
+</div>
+
+<div class="footer">
+  <p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p>
+  <p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p>
+</div>
+</div>
+<script>
+var SOP_DATA = [];
+var allChapters = [];
+
+fetch('sop-data.json').then(function(r){ return r.json(); }).then(function(data){
+  SOP_DATA = data;
+  data.forEach(function(file){
+    file.chapters.forEach(function(ch){
+      allChapters.push({ file: file.file, title: ch.title, content: ch.content });
+    });
+  });
+  document.getElementById('total-count').textContent = allChapters.length;
+  search();
+}).catch(function(e){
+  document.getElementById('results').innerHTML = '<div style="color:#F85149;">載入失敗：' + e.message + '</div>';
+});
+
+function quick(kw){
+  document.getElementById('q').value = kw;
+  search();
+}
+
+function search(){
+  var q = document.getElementById('q').value.trim().toLowerCase();
+  var out = document.getElementById('results');
+  var list = allChapters;
+  if(q){
+    list = allChapters.filter(function(ch){
+      return (ch.title + ch.content).toLowerCase().indexOf(q) >= 0;
+    });
+  }
+  if(list.length === 0){
+    out.innerHTML = '<div style="color:#8B949E;">找不到符合的章節</div>';
+    return;
+  }
+  var html = '<div style="color:#58A6FF;font-weight:700;margin-bottom:12px;">找到 ' + list.length + ' 個章節</div>';
+  list.slice(0, 100).forEach(function(ch){
+    var preview = ch.content.replace(/\n/g, ' ').substring(0, 150);
+    html += '<div class="sop-item" onclick="showDetail(' + JSON.stringify(ch.title).replace(/"/g, '&quot;') + ')">' +
+      '<div class="num">' + ch.file + '</div>' +
+      '<div class="title">' + ch.title + '</div>' +
+      '<div class="preview">' + preview + '...</div>' +
+      '</div>';
+  });
+  if(list.length > 100){
+    html += '<div style="color:#8B949E;margin-top:8px;">（只顯示前 100 個）</div>';
+  }
+  out.innerHTML = html;
+}
+
+function showDetail(title){
+  var ch = allChapters.find(function(c){ return c.title === title; });
+  if(!ch) return;
+  var w = window.open('', '_blank');
+  w.document.write('<html><head><meta charset="UTF-8"><title>' + title + '</title>');
+  w.document.write('<style>body{background:#0D1117;color:#E6EDF3;font-family:-apple-system,"Microsoft JhengHei",sans-serif;padding:20px;line-height:1.8;max-width:1000px;margin:0 auto;}h1{color:#D4AF37;}pre{background:#161B22;padding:16px;border-radius:8px;white-space:pre-wrap;word-break:break-word;}</style>');
+  w.document.write('</head><body>');
+  w.document.write('<h1>' + title + '</h1>');
+  w.document.write('<p style="color:#8B949E;">來源：' + ch.file + '</p>');
+  w.document.write('<pre>' + ch.content.replace(/</g, '&lt;') + '</pre>');
+  w.document.write('</body></html>');
+}
+</script>
+</body>
+</html>

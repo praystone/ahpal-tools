@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>文章生成器入口 | 雅寶工具箱 AHPAL.COM</title>
+<meta name="description" content="填關鍵字→產出 PowerShell 陣列，直接貼進批次腳本。純前端，不執行、不上傳。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/article-gen/">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:40px 20px;}
+.container{max-width:1100px;margin:0 auto;}
+h1{color:#D4AF37;font-size:28px;margin-bottom:12px;}
+.sub{color:#8B949E;margin-bottom:24px;font-size:14px;}
+.card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin-bottom:16px;}
+label{color:#8B949E;font-size:13px;display:block;margin-bottom:6px;}
+input[type=text],textarea,select{width:100%;background:#0D1117;color:#E6EDF3;border:1px solid #2D303A;border-radius:8px;padding:12px;font-size:14px;margin-bottom:12px;font-family:Consolas,monospace;}
+textarea{min-height:120px;resize:vertical;}
+button{background:#D4AF37;color:#0D1117;border:none;border-radius:8px;padding:10px 20px;font-weight:700;cursor:pointer;margin:8px 8px 8px 0;font-size:14px;}
+button:hover{background:#e6c24a;}
+button.blue{background:#58A6FF;}
+button.gray{background:#2D303A;color:#E6EDF3;}
+button.red{background:#F85149;color:#fff;}
+.result{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:12px;font-family:Consolas,monospace;font-size:13px;white-space:pre-wrap;word-break:break-all;min-height:60px;max-height:500px;overflow:auto;}
+.tip{background:rgba(63,185,80,0.08);border-left:4px solid #3FB950;padding:12px 16px;border-radius:6px;color:#C9D1D9;font-size:13px;margin-top:12px;}
+.warn{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:12px 16px;border-radius:6px;color:#C9D1D9;font-size:13px;margin-top:12px;}
+.sop-item{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:12px;margin-bottom:8px;cursor:pointer;}
+.sop-item:hover{border-color:#D4AF37;}
+.sop-item .num{color:#58A6FF;font-weight:700;font-size:13px;}
+.sop-item .title{color:#D4AF37;font-weight:700;font-size:15px;margin-top:2px;}
+.sop-item .preview{color:#8B949E;font-size:12px;margin-top:4px;}
+.footer{text-align:center;margin-top:60px;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+.tab{display:inline-block;padding:8px 16px;background:#0D1117;color:#8B949E;border:1px solid #2D303A;border-radius:8px;cursor:pointer;margin-right:6px;margin-bottom:6px;}
+.tab.active{background:#D4AF37;color:#0D1117;border-color:#D4AF37;font-weight:700;}
+</style>
+</head>
+<body>
+<nav class="ahpal-top-nav" style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;position:relative;z-index:10;">
+  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">🏠 首頁</a>
+  <a href="https://www.ahpal.com/categories.html" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">📚 全部分類</a>
+  <a href="https://www.ahpal.com/strategy/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">📌 策略文章</a>
+  <a href="https://novels.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">📖 小說站</a>
+  <a href="https://memories.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">🏛️ 回憶館</a>
+  <a href="https://bbs2.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">💬 BBS2</a>
+  <a href="https://pet.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">⚔️ 打怪場</a>
+  <a href="https://farm.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">🌾 農場</a>
+  <a href="https://tools.ahpal.com/" style="color:#0D1117;background:#D4AF37;text-decoration:none;padding:4px 10px;border-radius:6px;font-weight:700;">🛠️ 工具箱</a>
+</nav>
+<div class="container">
+<h1>📝 文章生成器入口</h1>
+<p class="sub">填關鍵字 → 產出 PowerShell 陣列，直接貼進批次腳本。純前端，不執行、不上傳。</p>
+
+<div class="card">
+  <label>分類（決定目錄）</label>
+  <select id="category">
+    <option value="history">📜 歷史腦洞</option>
+    <option value="tech">💻 3C 科技教學</option>
+    <option value="game">🎮 遊戲攻略</option>
+    <option value="life">🏠 生活小常識</option>
+    <option value="review">📊 軟體評測</option>
+    <option value="philosophy">🌟 人生哲理</option>
+    <option value="trend">🤖 AI 趨勢</option>
+    <option value="music">🎵 影音創作</option>
+    <option value="nature">🌳 動植物生態</option>
+    <option value="car">🚗 汽機車DIY</option>
+    <option value="travel">🧳 旅遊攻略</option>
+    <option value="food">🍜 美食探索</option>
+  </select>
+  <label>標題（一行一題，B 風格：自然、有故事、有畫面）</label>
+  <textarea id="titles" placeholder="那個永遠亮著的綠燈，某天變灰了&#10;公會會長退坑那天，大家在線上拍了張照&#10;那間網咖的鍵盤，空白鍵是壞的" style="min-height:200px;"></textarea>
+  <div>
+    <button onclick="generate()">🚀 產出 PowerShell 陣列</button>
+    <button class="blue" onclick="copyResult()">📋 複製結果</button>
+    <button class="gray" onclick="clearAll()">🧹 清空</button>
+  </div>
+  <div class="tip">💡 貼上標題後按「產出」，會自動產生 PowerShell 陣列格式，直接貼進 <code>titles\{分類}-00X.txt</code> 或批次腳本。</div>
+</div>
+
+<div class="card">
+  <label>產出結果</label>
+  <div class="result" id="output">（按「產出」後，結果會出現在這裡）</div>
+</div>
+
+<div class="footer">
+  <p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p>
+  <p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p>
+</div>
+</div>
+<script>
+function slugify(s){
+  return s.toLowerCase().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '') || 'article';
+}
+function generate(){
+  var cat = document.getElementById('category').value;
+  var titles = document.getElementById('titles').value.split('\n').map(function(t){return t.trim();}).filter(function(t){return t;});
+  if(titles.length === 0){ alert('請至少輸入一行標題'); return; }
+  var lines = [];
+  titles.forEach(function(t, i){
+    var fn = slugify(t);
+    lines.push(t + '|' + fn + '.html');
+  });
+  document.getElementById('output').textContent = lines.join('\n');
+}
+function copyResult(){
+  var t = document.getElementById('output').textContent;
+  if(!t || t.indexOf('（按') === 0){ alert('請先產出結果'); return; }
+  navigator.clipboard.writeText(t);
+  alert('已複製 ' + t.split('\n').length + ' 行');
+}
+function clearAll(){
+  document.getElementById('titles').value = '';
+  document.getElementById('output').textContent = '（按「產出」後，結果會出現在這裡）';
+}
+</script>
+</body>
+</html>
