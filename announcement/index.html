@@ -50,6 +50,87 @@ button.red{background:#F85149;color:#fff;}
 </nav>
 <div class="container">
 <h1>📢 公告欄發布器</h1>
+
+<div class="card" id="current-announcements">
+  <h2 style="color:#D4AF37;font-size:20px;margin:0 0 16px;padding-bottom:8px;border-bottom:2px solid #2D303A;">📋 目前公布欄上的公告</h2>
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px;">
+    <div style="color:#8B949E;font-size:13px;">即時讀取 <code>GET /api/announcements</code>（公開端點，零風險）</div>
+    <button onclick="loadAnnouncements()" style="background:#58A6FF;color:#0D1117;border:none;border-radius:8px;padding:8px 16px;font-weight:700;cursor:pointer;font-size:13px;">🔄 重新整理</button>
+  </div>
+  <div id="announcement-list" style="min-height:80px;">
+    <div style="color:#8B949E;text-align:center;padding:20px;">載入中...</div>
+  </div>
+</div>
+<style>
+.anno-item{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:14px 18px;margin-bottom:10px;}
+.anno-item:last-child{margin-bottom:0;}
+.anno-item .anno-title{color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:6px;}
+.anno-item .anno-content{color:#E6EDF3;font-size:14px;line-height:1.8;white-space:pre-wrap;word-break:break-word;}
+.anno-item .anno-time{color:#8B949E;font-size:12px;margin-top:8px;font-family:Consolas,monospace;}
+.anno-empty{color:#8B949E;text-align:center;padding:20px;font-size:14px;}
+</style>
+<script>
+(function(){
+  var API = "https://ahpal-announcements-api.praystone.workers.dev/api/announcements";
+  function esc(s){
+    return String(s).replace(/[&<>"']/g, function(c){
+      return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c];
+    });
+  }
+  function toRelTime(utcStr){
+    if(!utcStr) return "";
+    try{
+      var d = new Date(utcStr.replace(" ", "T") + "Z");
+      if(isNaN(d.getTime())) return utcStr;
+      var diff = Math.floor((Date.now() - d.getTime()) / 1000);
+      if(diff < 60) return "剛剛";
+      if(diff < 3600) return Math.floor(diff/60) + " 分鐘前";
+      if(diff < 86400) return Math.floor(diff/3600) + " 小時前";
+      if(diff < 86400*7) return Math.floor(diff/86400) + " 天前";
+      var y = d.getFullYear(), m = String(d.getMonth()+1).padStart(2,"0"), dd = String(d.getDate()).padStart(2,"0");
+      return y + "-" + m + "-" + dd;
+    }catch(e){ return utcStr; }
+  }
+  window.loadAnnouncements = function(){
+    var el = document.getElementById("announcement-list");
+    if(!el) return;
+    el.innerHTML = '<div style="color:#8B949E;text-align:center;padding:20px;">載入中...</div>';
+    fetch(API)
+      .then(function(r){ return r.json(); })
+      .then(function(d){
+        if(!d.success){
+          el.innerHTML = '<div class="anno-empty" style="color:#F85149;">讀取失敗：' + esc(d.error || "未知錯誤") + '</div>';
+          return;
+        }
+        var list = d.announcements || [];
+        if(list.length === 0){
+          el.innerHTML = '<div class="anno-empty">目前沒有公告。</div>';
+          return;
+        }
+        var html = "";
+        for(var i=0;i<list.length;i++){
+          var a = list[i];
+          html += '<div class="anno-item">';
+          html += '<div class="anno-title">' + esc(a.title || "(無標題)") + '</div>';
+          html += '<div class="anno-content">' + esc(a.content || "") + '</div>';
+          html += '<div class="anno-time">🕐 ' + toRelTime(a.created_at) + '（' + esc(a.created_at || "") + '）</div>';
+          html += '</div>';
+        }
+        el.innerHTML = html;
+      })
+      .catch(function(e){
+        el.innerHTML = '<div class="anno-empty" style="color:#F85149;">連線失敗：' + esc(e.message) + '</div>';
+      });
+  };
+  // 頁面載入時自動讀取
+  if(document.readyState === "loading"){
+    document.addEventListener("DOMContentLoaded", loadAnnouncements);
+  } else {
+    loadAnnouncements();
+  }
+})();
+</script>
+
 <p class="sub">產生公告發布的 PowerShell 指令，唯讀預覽，不實際發送。複製指令到終端機執行。</p>
 
 <div class="card">
