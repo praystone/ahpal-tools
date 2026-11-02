@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tools.ahpal.com/sitemap.xml

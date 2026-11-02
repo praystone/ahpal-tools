@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Unix 時間戳轉換器 | 雅寶工具箱 AHPAL.COM</title>
+<meta name="description" content="Unix 時間戳 ↔ 日期時間互轉，支援秒/毫秒、本地時區、UTC。完全離線。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/timestamp/">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:40px 20px;}
+.container{max-width:1000px;margin:0 auto;}
+h1{color:#D4AF37;font-size:28px;margin-bottom:12px;}
+.sub{color:#8B949E;margin-bottom:24px;font-size:14px;}
+.card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin-bottom:16px;}
+textarea,input[type=text]{width:100%;background:#0D1117;color:#E6EDF3;border:1px solid #2D303A;border-radius:8px;padding:12px;font-family:Consolas,monospace;font-size:14px;}
+textarea{min-height:160px;resize:vertical;}
+button{background:#D4AF37;color:#0D1117;border:none;border-radius:8px;padding:10px 20px;font-weight:700;cursor:pointer;margin:8px 8px 8px 0;font-size:14px;}
+button:hover{background:#e6c24a;}
+button.blue{background:#58A6FF;color:#0D1117;}
+button.gray{background:#2D303A;color:#E6EDF3;}
+.result{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:12px;font-family:Consolas,monospace;font-size:13px;white-space:pre-wrap;word-break:break-all;min-height:60px;}
+.footer{text-align:center;margin-top:60px;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+</style>
+</head>
+<body>
+<nav class="ahpal-top-nav" style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;position:relative;z-index:10;">
+  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">🏠 首頁</a>
+  <a href="https://www.ahpal.com/categories.html" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">📚 全部分類</a>
+  <a href="https://www.ahpal.com/strategy/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">📌 策略文章</a>
+  <a href="https://novels.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">📖 小說站</a>
+  <a href="https://memories.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">🏛️ 回憶館</a>
+  <a href="https://bbs2.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">💬 BBS2</a>
+  <a href="https://pet.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">⚔️ 打怪場</a>
+  <a href="https://farm.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">🌾 農場</a>
+  <a href="https://tools.ahpal.com/" style="color:#0D1117;background:#D4AF37;text-decoration:none;padding:4px 10px;border-radius:6px;font-weight:700;">🛠️ 工具箱</a>
+</nav>
+<div class="container">
+<h1>⏱️ Unix 時間戳轉換器</h1>
+<p class="sub">Unix 時間戳 ↔ 日期時間互轉，支援秒/毫秒、本地時區、UTC</p>
+
+<div class="card">
+  <label style="color:#8B949E;font-size:13px;">輸入時間戳（秒或毫秒）或日期字串</label>
+  <input type="text" id="input" placeholder="例：1730592000 或 2026-11-02T18:00:00 或 2026-11-02 18:00:00" style="margin-top:8px;">
+  <div>
+    <button onclick="doConvert()">🚀 轉換</button>
+    <button class="blue" onclick="doNow()">⏰ 現在</button>
+    <button class="gray" onclick="doClear()">🧹 清空</button>
+  </div>
+  <div class="result" id="output">（結果會出現在這裡）</div>
+</div>
+
+<div class="footer">
+  <p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p>
+  <p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p>
+</div>
+</div>
+<script>
+function pad(n){return String(n).padStart(2,'0');}
+function fmtLocal(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())+' '+pad(d.getHours())+':'+pad(d.getMinutes())+':'+pad(d.getSeconds());}
+function fmtUtc(d){return d.getUTCFullYear()+'-'+pad(d.getUTCMonth()+1)+'-'+pad(d.getUTCDate())+' '+pad(d.getUTCHours())+':'+pad(d.getUTCMinutes())+':'+pad(d.getUTCSeconds())+' UTC';}
+function doConvert(){
+  var v = document.getElementById('input').value.trim();
+  var out = document.getElementById('output');
+  if(!v){ out.textContent = '請輸入時間戳或日期'; return; }
+  var lines = [];
+  if(/^\d+$/.test(v)){
+    var n = parseInt(v, 10);
+    var ms = (v.length >= 13) ? n : n * 1000;
+    var d = new Date(ms);
+    if(isNaN(d.getTime())){ out.textContent = '無法解析'; return; }
+    lines.push('原始：' + v);
+    lines.push('本地：' + fmtLocal(d));
+    lines.push('UTC ：' + fmtUtc(d));
+    lines.push('秒  ：' + Math.floor(ms/1000));
+    lines.push('毫秒：' + ms);
+    lines.push('ISO ：' + d.toISOString());
+  } else {
+    var d2 = new Date(v.replace(' ', 'T'));
+    if(isNaN(d2.getTime())){ out.textContent = '無法解析'; return; }
+    var ms2 = d2.getTime();
+    lines.push('原始：' + v);
+    lines.push('本地：' + fmtLocal(d2));
+    lines.push('UTC ：' + fmtUtc(d2));
+    lines.push('秒  ：' + Math.floor(ms2/1000));
+    lines.push('毫秒：' + ms2);
+    lines.push('ISO ：' + d2.toISOString());
+  }
+  out.textContent = lines.join('\n');
+}
+function doNow(){
+  var ms = Date.now();
+  document.getElementById('input').value = Math.floor(ms/1000);
+  doConvert();
+}
+function doClear(){ document.getElementById('input').value=''; document.getElementById('output').textContent='（結果會出現在這裡）'; }
+</script>
+</body>
+</html>
