@@ -23,6 +23,14 @@ button.gray{background:#2D303A;color:#E6EDF3;}
 .result{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:12px;font-family:Consolas,monospace;font-size:13px;white-space:pre-wrap;word-break:break-all;min-height:60px;}
 .footer{text-align:center;margin-top:60px;color:#8B949E;font-size:13px;}
 .footer a{color:#58A6FF;text-decoration:none;}
+
+.world-clock{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-bottom:24px;}
+.clock-card{background:#161B22;border:1px solid #2D303A;border-radius:10px;padding:12px 14px;text-align:center;transition:all 0.2s;}
+.clock-card:hover{border-color:#D4AF37;}
+.clock-card .city{color:#8B949E;font-size:12px;margin-bottom:4px;}
+.clock-card .time{color:#D4AF37;font-size:20px;font-weight:700;font-family:Consolas,monospace;letter-spacing:1px;}
+.clock-card .date{color:#58A6FF;font-size:11px;margin-top:2px;}
+.clock-card .offset{color:#6E7681;font-size:10px;margin-top:2px;}
 </style>
 </head>
 <body>
@@ -38,6 +46,61 @@ button.gray{background:#2D303A;color:#E6EDF3;}
   <a href="https://tools.ahpal.com/" style="color:#0D1117;background:#D4AF37;text-decoration:none;padding:4px 10px;border-radius:6px;font-weight:700;">🛠️ 工具箱</a>
 </nav>
 <div class="container">
+<div style="text-align:center;margin-bottom:12px;">
+  <h2 style="color:#58A6FF;font-size:18px;font-weight:700;margin:0;">🌍 世界時鐘</h2>
+  <p style="color:#8B949E;font-size:13px;margin:4px 0 0;">12 個主要時區即時時間，每秒更新</p>
+</div>
+<div class="world-clock" id="world-clock"></div>
+<script>
+(function(){
+  var ZONES = [
+    {name:"台北 / 北京", tz:"Asia/Taipei"},
+    {name:"東京", tz:"Asia/Tokyo"},
+    {name:"首爾", tz:"Asia/Seoul"},
+    {name:"新加坡", tz:"Asia/Singapore"},
+    {name:"雪梨", tz:"Australia/Sydney"},
+    {name:"杜拜", tz:"Asia/Dubai"},
+    {name:"倫敦", tz:"Europe/London"},
+    {name:"巴黎", tz:"Europe/Paris"},
+    {name:"紐約", tz:"America/New_York"},
+    {name:"洛杉磯", tz:"America/Los_Angeles"},
+    {name:"芝加哥", tz:"America/Chicago"},
+    {name:"UTC", tz:"UTC"}
+  ];
+  function pad(n){return String(n).padStart(2,"0");}
+  function render(){
+    var el = document.getElementById("world-clock");
+    if(!el) return;
+    var now = new Date();
+    var html = "";
+    for(var i=0;i<ZONES.length;i++){
+      var z = ZONES[i];
+      try{
+        var parts = new Intl.DateTimeFormat("en-US",{
+          timeZone: z.tz, hour12:false,
+          year:"numeric",month:"2-digit",day:"2-digit",
+          hour:"2-digit",minute:"2-digit",second:"2-digit"
+        }).formatToParts(now);
+        var o = {};
+        for(var j=0;j<parts.length;j++){ if(parts[j].type!=="literal") o[parts[j].type]=parts[j].value; }
+        var timeStr = o.hour + ":" + o.minute + ":" + o.second;
+        var dateStr = o.year + "-" + o.month + "-" + o.day;
+        var off = new Intl.DateTimeFormat("en-US",{timeZone: z.tz, timeZoneName:"shortOffset"}).formatToParts(now).filter(function(p){return p.type==="timeZoneName";})[0];
+        var offStr = off ? off.value : "";
+        html += "<div class=\"clock-card\">" +
+          "<div class=\"city\">" + z.name + "</div>" +
+          "<div class=\"time\">" + timeStr + "</div>" +
+          "<div class=\"date\">" + dateStr + "</div>" +
+          "<div class=\"offset\">" + offStr + "</div>" +
+          "</div>";
+      }catch(e){}
+    }
+    el.innerHTML = html;
+  }
+  render();
+  setInterval(render, 1000);
+})();
+</script>
 <h1>⏱️ Unix 時間戳轉換器</h1>
 <p class="sub">Unix 時間戳 ↔ 日期時間互轉，支援秒/毫秒、本地時區、UTC</p>
 
@@ -50,6 +113,10 @@ button.gray{background:#2D303A;color:#E6EDF3;}
     <button class="gray" onclick="doClear()">🧹 清空</button>
   </div>
   <div class="result" id="output">（結果會出現在這裡）</div>
+<div id="zone-compare" style="margin-top:16px;display:none;">
+  <h3 style="color:#58A6FF;font-size:15px;margin-bottom:8px;">🌍 這個時間在各時區</h3>
+  <div class="world-clock" id="zone-clock"></div>
+</div>
 </div>
 
 <div class="footer">
@@ -69,6 +136,7 @@ function doConvert(){
   if(/^\d+$/.test(v)){
     var n = parseInt(v, 10);
     var ms = (v.length >= 13) ? n : n * 1000;
+    window.__lastMs = ms;
     var d = new Date(ms);
     if(isNaN(d.getTime())){ out.textContent = '無法解析'; return; }
     lines.push('原始：' + v);
@@ -81,6 +149,7 @@ function doConvert(){
     var d2 = new Date(v.replace(' ', 'T'));
     if(isNaN(d2.getTime())){ out.textContent = '無法解析'; return; }
     var ms2 = d2.getTime();
+    window.__lastMs = ms2;
     lines.push('原始：' + v);
     lines.push('本地：' + fmtLocal(d2));
     lines.push('UTC ：' + fmtUtc(d2));
