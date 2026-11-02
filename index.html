@@ -45,13 +45,47 @@ h1{color:#D4AF37;font-size:32px;margin-bottom:12px;text-align:center;}
 
 <div style="max-width:560px;margin:0 auto 24px;">
   <input type="text" id="tool-search" placeholder="🔍 搜尋工具（輸入名稱或關鍵字）..." oninput="filterTools()" style="width:100%;background:#161B22;color:#E6EDF3;border:1px solid #2D303A;border-radius:12px;padding:14px 20px;font-size:15px;outline:none;">
+
+<div id="category-tags" style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:16px;">
+  <button class="cat-tag active" data-cat="all" onclick="filterCat('all', this)">全部</button>
+  <button class="cat-tag" data-cat="text" onclick="filterCat('text', this)">📝 文字處理</button>
+  <button class="cat-tag" data-cat="dev" onclick="filterCat('dev', this)">🛠️ 開發工具</button>
+  <button class="cat-tag" data-cat="ahpal" onclick="filterCat('ahpal', this)">🦞 雅寶專屬</button>
+  <button class="cat-tag" data-cat="image" onclick="filterCat('image', this)">🖼️ 圖片工具</button>
+</div>
+<style>
+.cat-tag{background:#161B22;color:#8B949E;border:1px solid #2D303A;border-radius:20px;padding:8px 18px;font-size:14px;font-weight:700;cursor:pointer;transition:all 0.2s;}
+.cat-tag:hover{border-color:#D4AF37;color:#D4AF37;}
+.cat-tag.active{background:#D4AF37;color:#0D1117;border-color:#D4AF37;}
+</style>
+<script>
+var currentCat = 'all';
+var toolCatMap = {
+  'html-editor':'text','markdown':'text','json-formatter':'text',
+  'filename-checker':'dev','category-checker':'dev','base64':'dev',
+  'url-encoder':'dev','timestamp':'dev','email-to-image':'dev',
+  'sop-search':'ahpal','article-gen':'ahpal','json-checker':'ahpal','announcement':'ahpal',
+  'png-to-ico':'image','image-converter':'image'
+};
+function filterCat(cat, el){
+  currentCat = cat;
+  document.querySelectorAll('.cat-tag').forEach(function(t){t.classList.remove('active');});
+  el.classList.add('active');
+  filterTools();
+}
+</script>
 </div>
 <script>
 function filterTools(){
   var q = document.getElementById('tool-search').value.toLowerCase().trim();
   document.querySelectorAll('.tool-card').forEach(function(c){
     var t = c.textContent.toLowerCase();
-    c.style.display = (!q || t.indexOf(q) >= 0) ? '' : 'none';
+    var href = c.getAttribute('href') || '';
+    var slug = href.replace(/^\//, '').replace(/\/$/, '');
+    var cat = toolCatMap[slug] || '';
+    var catOk = (currentCat === 'all') || (cat === currentCat);
+    var qOk = (!q || t.indexOf(q) >= 0);
+    c.style.display = (catOk && qOk) ? '' : 'none';
   });
 }
 </script>
