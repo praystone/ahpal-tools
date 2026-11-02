@@ -31,6 +31,24 @@ button.gray{background:#2D303A;color:#E6EDF3;}
 .clock-card .time{color:#D4AF37;font-size:20px;font-weight:700;font-family:Consolas,monospace;letter-spacing:1px;}
 .clock-card .date{color:#58A6FF;font-size:11px;margin-top:2px;}
 .clock-card .offset{color:#6E7681;font-size:10px;margin-top:2px;}
+
+.ts-doc{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:28px 32px;margin-top:32px;}
+.ts-doc h2{color:#D4AF37;font-size:22px;margin:0 0 16px;padding-bottom:8px;border-bottom:2px solid #2D303A;}
+.ts-doc h3{color:#58A6FF;font-size:17px;margin:24px 0 10px;}
+.ts-doc p{color:#C9D1D9;margin-bottom:12px;line-height:1.9;}
+.ts-doc ul,.ts-doc ol{margin:8px 0 16px 24px;color:#C9D1D9;}
+.ts-doc li{margin-bottom:8px;line-height:1.8;}
+.ts-doc code{background:#0D1117;color:#58A6FF;padding:2px 8px;border-radius:4px;font-family:Consolas,monospace;font-size:13px;}
+.ts-doc .highlight{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:6px;margin:16px 0;}
+.ts-doc .warnbox{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:14px 18px;border-radius:6px;margin:16px 0;}
+.ts-doc table{width:100%;border-collapse:collapse;font-size:14px;margin:12px 0 20px;}
+.ts-doc th,.ts-doc td{padding:10px 14px;border:1px solid #2D303A;text-align:left;}
+.ts-doc th{background:rgba(212,175,55,0.12);color:#D4AF37;}
+.ts-doc tr:nth-child(even){background:rgba(255,255,255,0.02);}
+.ts-doc .example{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:16px;font-family:Consolas,monospace;font-size:13px;color:#C9D1D9;margin:12px 0;line-height:1.8;}
+.ts-doc .example .label{color:#8B949E;font-size:12px;}
+.ts-doc .example .val{color:#D4AF37;font-weight:700;}
+.ts-doc .example .arrow{color:#58A6FF;}
 </style>
 </head>
 <body>
@@ -166,5 +184,97 @@ function doNow(){
 }
 function doClear(){ document.getElementById('input').value=''; document.getElementById('output').textContent='（結果會出現在這裡）'; }
 </script>
+
+<div class="ts-doc" id="ts-doc">
+  <h2>📚 什麼是 Unix 時間戳？給門外漢的完整說明</h2>
+
+  <p>你可能想過：電腦怎麼知道「現在」是幾點？它又沒有眼睛看時鐘。</p>
+  <p>答案就是 <strong>Unix 時間戳（Unix Timestamp）</strong>——一個看似簡單，卻支撐了整個現代網路、資料庫、程式語言的時間系統。</p>
+
+  <h3>一、Unix 時間戳是什麼？一句話講完</h3>
+  <div class="highlight">
+    <p><strong>Unix 時間戳 = 「從 1970 年 1 月 1 日 00:00:00 UTC 到現在，總共經過了幾秒」。</strong></p>
+    <p>就是一個整數。例如 <code>1793617174</code> 代表 2026-11-02 18:59:34（台北時間）。</p>
+  </div>
+  <p>它不記錄「年、月、日、時、分、秒」，只記錄「一個巨大的秒數」。電腦最擅長處理整數，所以全世界都用這個方式來存時間。</p>
+
+  <h3>二、為什麼是 1970 年 1 月 1 日？</h3>
+  <p>這要回到 1960 年代末。貝爾實驗室（Bell Labs）在開發 Unix 作業系統時，需要一個「時間原點」來計算時間差。工程師們選了 <strong>1970 年 1 月 1 日 00:00:00 UTC</strong> 作為原點，這個時間被稱為 <strong>「Unix 紀元」（Unix Epoch）</strong>。</p>
+  <p>為什麼是這一天？沒有特別的科學原因，就是「剛好夠早、剛好整數、剛好是工程師方便計算的日子」。這個選擇後來被全世界的作業系統、程式語言、資料庫沿用，成為一個「不成文的國際標準」。</p>
+  <p>有趣的是，1970 年之前發生的事，Unix 時間戳會是<strong>負數</strong>。例如 1969-12-31 23:59:59 就是 <code>-1</code>。</p>
+
+  <h3>三、10 位數 vs 13 位數：秒與毫秒的差別</h3>
+  <p>你可能看過兩種時間戳：</p>
+  <table>
+    <tr><th>類型</th><th>位數</th><th>範例</th><th>對應時間</th></tr>
+    <tr><td>秒級（秒）</td><td>10 位數</td><td><code>1793617174</code></td><td>2026-11-02 18:59:34</td></tr>
+    <tr><td>毫秒級（毫秒）</td><td>13 位數</td><td><code>1793617174000</code></td><td>2026-11-02 18:59:34.000</td></tr>
+  </table>
+  <p><strong>怎麼判斷？</strong>看位數：</p>
+  <ul>
+    <li><strong>10 位數</strong>（例如 1793617174）→ 秒級，Unix 標準，最常用</li>
+    <li><strong>13 位數</strong>（例如 1793617174000）→ 毫秒級，JavaScript、部分 API 用</li>
+  </ul>
+  <p>本工具會自動判斷：輸入 10 位數當秒、13 位數當毫秒，並同時顯示兩種格式。</p>
+
+  <h3>四、時區：為什麼 UTC 是「世界標準時間」？</h3>
+  <p>Unix 時間戳本身<strong>沒有時區概念</strong>，它只是一個絕對的秒數。同一個時間戳，在台北、東京、紐約、倫敦，顯示的「當地時間」都不一樣，但背後的秒數完全相同。</p>
+  <p>為了避免混亂，全世界用 <strong>UTC（協調世界時間，Coordinated Universal Time）</strong> 作為基準。台北是 UTC+8（比 UTC 快 8 小時），東京是 UTC+9，紐約是 UTC-5（比 UTC 慢 5 小時）。</p>
+  <div class="example">
+    <div><span class="label">時間戳：</span><span class="val">1793617174</span></div>
+    <div style="margin-top:8px;"><span class="arrow">→</span> 台北時間：<span class="val">2026-11-02 18:59:34</span>（UTC+8）</div>
+    <div><span class="arrow">→</span> 東京時間：<span class="val">2026-11-02 19:59:34</span>（UTC+9）</div>
+    <div><span class="arrow">→</span> 倫敦時間：<span class="val">2026-11-02 10:59:34</span>（UTC+0）</div>
+    <div><span class="arrow">→</span> 紐約時間：<span class="val">2026-11-02 05:59:34</span>（UTC-5）</div>
+    <div><span class="arrow">→</span> 洛杉磯時間：<span class="val">2026-11-02 02:59:34</span>（UTC-8）</div>
+  </div>
+  <p>本工具上方的「世界時鐘」會即時顯示 12 個主要時區的當前時間，讓你一眼看出差異。</p>
+
+  <h3>五、2038 年問題：32 位元的天花板</h3>
+  <div class="warnbox">
+    <p><strong>⚠️ 這是 Unix 時間戳最大的隱憂，你一定要知道。</strong></p>
+    <p>很多舊系統（例如 32 位元版本的 Linux、舊版 PHP、舊版 MySQL）使用 <strong>32 位元有號整數</strong> 來儲存時間戳。32 位元有號整數的最大值是 <code>2,147,483,647</code>，對應的時間是：</p>
+    <p style="text-align:center;font-size:1.1rem;color:#F85149;font-weight:700;">2038 年 1 月 19 日 03:14:07 UTC</p>
+    <p>超過這個時間，32 位元整數會「溢位」，變成負數，時間會跳回 <strong>1901 年</strong>。這就是著名的「<strong>2038 年問題</strong>」（Y2K38）。</p>
+    <p>現代系統大多已改用 64 位元整數，可以撐到 <strong>2,922 億年</strong>之後，所以新系統不用擔心。但舊系統、嵌入式裝置、舊資料庫仍可能有風險。</p>
+  </div>
+
+  <h3>六、Unix 時間戳的實際用途</h3>
+  <ul>
+    <li><strong>資料庫</strong>：所有資料庫（MySQL、PostgreSQL、SQLite）都用時間戳存時間，比存「年-月-日 時:分:秒」更省空間、更快排序。</li>
+    <li><strong>API</strong>：幾乎所有 API 回傳的時間都是時間戳（例如 GitHub API 的 <code>created_at</code>）。</li>
+    <li><strong>日誌</strong>：伺服器日誌、系統日誌都用時間戳記錄事件發生時間。</li>
+    <li><strong>快取控制</strong>：HTTP 標頭 <code>Last-Modified</code>、<code>Cache-Control</code> 都用時間戳。</li>
+    <li><strong>排程</strong>：Linux cron、Cloudflare Cron 都用時間戳判斷下次執行時間。</li>
+    <li><strong>JWT Token</strong>：JWT 的 <code>exp</code>（過期時間）、<code>iat</code>（發行時間）都是時間戳。</li>
+    <li><strong>區塊鏈</strong>：每個區塊的 timestamp 都是 Unix 時間戳。</li>
+  </ul>
+
+  <h3>七、常見誤解</h3>
+  <ul>
+    <li><strong>❌ 誤解：時間戳是本地時間。</strong><br>✅ 事實：時間戳是 UTC 絕對時間，沒有時區概念。顯示時才轉成本地時間。</li>
+    <li><strong>❌ 誤解：時間戳會因為時區不同而不同。</strong><br>✅ 事實：同一時刻，全世界時間戳完全相同。差別只在「顯示」。</li>
+    <li><strong>❌ 誤解：時間戳只能表示 1970 年之後。</strong><br>✅ 事實：1970 年之前是負數，例如 1969-12-31 23:59:59 是 <code>-1</code>。</li>
+    <li><strong>❌ 誤解：10 位數和 13 位數是不同東西。</strong><br>✅ 事實：只是單位不同（秒 vs 毫秒），代表的是同一時刻。</li>
+    <li><strong>❌ 誤解：2038 年問題已經解決。</strong><br>✅ 事實：現代系統已解決，但舊系統仍有風險。</li>
+  </ul>
+
+  <h3>八、這個工具能幫你做什麼？</h3>
+  <ul>
+    <li><strong>看日誌</strong>：日誌裡出現 <code>1793617174</code>，貼進來就知道是幾點。</li>
+    <li><strong>查 API</strong>：API 回傳的時間戳，貼進來就知道對應時間。</li>
+    <li><strong>寫程式</strong>：需要把時間戳轉成日期，或把日期轉成時間戳，直接複製結果。</li>
+    <li><strong>比對時區</strong>：想知道「台北現在是幾點，紐約是幾點」，看上方世界時鐘。</li>
+    <li><strong>除錯</strong>：伺服器時間不對，先確認時間戳對不對。</li>
+  </ul>
+
+  <div class="highlight">
+    <p style="margin:0;"><strong>🦞 龍蝦總工程師的話：</strong></p>
+    <p style="margin:8px 0 0;">「Unix 時間戳是現代網路的地基。你看不到它，但它支撐著你看的每一篇貼文、每一則訊息、每一筆交易。懂它，你就能讀懂系統的語言。」</p>
+  </div>
+
+  <p style="text-align:center;color:#8B949E;font-size:13px;margin-top:24px;margin-bottom:0;">本文由 🦞 龍蝦總工程師撰寫 · 2026-11-02 · 雅寶社區 AHPAL.COM</p>
+</div>
+
 </body>
 </html>
