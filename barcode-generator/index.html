@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>條碼產生器（CODE128、EAN-13、UPC-A、CODE39） | 雅寶工具箱 AHPAL.COM</title>
+<meta name="description" content="條碼產生器：產生 CODE128、EAN-13、UPC-A、CODE39 條碼，可下載 PNG。純前端、完全離線、不上傳。附完整教學與常見問題。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/barcode-generator/">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "條碼產生器", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}, "description": "產生 CODE128、EAN-13、UPC-A、CODE39 條碼，可下載 PNG/SVG。純前端、完全離線。", "url": "https://tools.ahpal.com/barcode-generator/"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "工具箱", "item": "https://tools.ahpal.com/"}, {"@type": "ListItem", "position": 2, "name": "條碼產生器", "item": "https://tools.ahpal.com/barcode-generator/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "條碼產生器是什麼？", "acceptedAnswer": {"@type": "Answer", "text": "條碼產生器是把「數字或文字」轉成「條碼圖片」的工具。支援 CODE128、EAN-13、UPC-A、CODE39。"}}, {"@type": "Question", "name": "支援哪些條碼格式？", "acceptedAnswer": {"@type": "Answer", "text": "支援 CODE128（通用）、EAN-13（國際商品碼）、UPC-A（美加商品碼）、CODE39（工業用）。"}}, {"@type": "Question", "name": "這個工具會上傳我的資料嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不會。所有產生都在你的瀏覽器完成，不上傳任何資料。"}}, {"@type": "Question", "name": "條碼可以下載嗎？", "acceptedAnswer": {"@type": "Answer", "text": "可以。一鍵下載 PNG 或 SVG。"}}, {"@type": "Question", "name": "條碼印出來刷不到怎麼辦？", "acceptedAnswer": {"@type": "Answer", "text": "可能原因：條碼太小、對比度不足、印表機解析度太低。建議條碼寬度至少 2 公分，黑白對比。"}}]}]}</script>
+<style>*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:40px 20px;}
+.container{max-width:1000px;margin:0 auto;}
+h1{color:#D4AF37;font-size:28px;margin-bottom:12px;}
+.sub{color:#8B949E;margin-bottom:24px;font-size:14px;}
+.card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin-bottom:16px;}
+label{color:#8B949E;font-size:13px;display:block;margin-bottom:6px;}
+input,select,textarea{width:100%;background:#0D1117;color:#E6EDF3;border:1px solid #2D303A;border-radius:8px;padding:12px;font-size:14px;margin-bottom:12px;font-family:inherit;}
+button{background:#D4AF37;color:#0D1117;border:none;border-radius:8px;padding:10px 20px;font-weight:700;cursor:pointer;margin:8px 8px 8px 0;font-size:14px;}
+button:hover{background:#e6c24a;}
+button.blue{background:#58A6FF;}
+.result{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:16px;font-size:15px;min-height:60px;}
+.tip{background:rgba(63,185,80,0.08);border-left:4px solid #3FB950;padding:12px 16px;border-radius:6px;color:#C9D1D9;font-size:13px;margin-top:12px;}
+.warn{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:12px 16px;border-radius:6px;color:#C9D1D9;font-size:13px;margin-top:12px;}
+.footer{text-align:center;margin-top:60px;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:600px){.row{grid-template-columns:1fr;}}
+.breadcrumb{font-size:13px;color:#8B949E;margin-bottom:16px;}
+.breadcrumb a{color:#58A6FF;text-decoration:none;}
+.doc-section{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:28px 32px;margin-top:32px;}
+.doc-section h2{color:#D4AF37;font-size:22px;margin:24px 0 16px;padding-bottom:8px;border-bottom:2px solid #2D303A;}
+.doc-section h2:first-child{margin-top:0;}
+.doc-section h3{color:#58A6FF;font-size:17px;margin:24px 0 10px;}
+.doc-section p{color:#C9D1D9;margin-bottom:12px;line-height:1.9;}
+.doc-section ul,.doc-section ol{margin:8px 0 16px 24px;color:#C9D1D9;}
+.doc-section li{margin-bottom:8px;line-height:1.8;}
+.doc-section code{background:#0D1117;color:#58A6FF;padding:2px 8px;border-radius:4px;font-family:Consolas,monospace;font-size:13px;}
+.doc-section .highlight{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:6px;margin:16px 0;}
+.doc-section table{width:100%;border-collapse:collapse;font-size:14px;margin:12px 0 20px;}
+.doc-section th,.doc-section td{padding:10px 14px;border:1px solid #2D303A;text-align:left;}
+.doc-section th{background:rgba(212,175,55,0.12);color:#D4AF37;}
+.doc-section tr:nth-child(even){background:rgba(255,255,255,0.02);}
+.faq-item{border-bottom:1px solid #2D303A;padding:14px 0;}
+.faq-item:last-child{border-bottom:none;}
+.faq-q{color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;}
+.faq-a{color:#C9D1D9;font-size:14px;line-height:1.9;}
+#barcode{text-align:center;padding:20px;background:#fff;border-radius:8px;}</style>
+</head>
+<body>
+<div class="container">
+<nav style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;">
+  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏠 首頁</a>
+  <a href="https://www.ahpal.com/categories.html" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📚 全部分類</a>
+  <a href="https://www.ahpal.com/strategy/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📌 策略文章</a>
+  <a href="https://novels.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📖 小說站</a>
+  <a href="https://memories.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏛️ 回憶館</a>
+  <a href="https://bbs2.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">💬 BBS2</a>
+  <a href="https://pet.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">⚔️ 打怪場</a>
+  <a href="https://farm.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🌾 農場</a>
+  <a href="https://tools.ahpal.com/" style="color:#0D1117;background:#D4AF37;text-decoration:none;padding:4px 10px;font-weight:700;">🛠️ 工具箱</a>
+</nav>
+<div class="breadcrumb"><a href="https://tools.ahpal.com/">🛠️ 工具箱</a> › 條碼產生器</div>
+<article>
+<h1>📊 條碼產生器</h1>
+<p class="sub">產生 CODE128、EAN-13、UPC-A、CODE39 條碼，可下載 PNG。純前端、完全離線。</p>
+<div class="card">
+  <label>條碼內容</label>
+  <input type="text" id="data" value="4712345678901" oninput="gen()">
+  <div class="row">
+    <div><label>條碼格式</label>
+      <select id="format" onchange="gen()">
+        <option value="CODE128">CODE128（通用）</option>
+        <option value="EAN13" selected>EAN-13（國際商品碼）</option>
+        <option value="UPC">UPC-A（美加商品碼）</option>
+        <option value="CODE39">CODE39（工業用）</option>
+      </select>
+    </div>
+    <div><label>寬度（px）</label><input type="number" id="width" value="2" min="1" max="5" step="0.5" oninput="gen()"></div>
+  </div>
+  <div class="row">
+    <div><label>高度（px）</label><input type="number" id="height" value="80" min="30" max="200" oninput="gen()"></div>
+    <div><label>顯示文字</label><select id="showText" onchange="gen()"><option value="true" selected>顯示</option><option value="false">隱藏</option></select></div>
+  </div>
+  <button onclick="gen()">🔄 產生條碼</button>
+  <button class="blue" onclick="downloadPNG()">⬇️ 下載 PNG</button>
+  <div class="tip">✅ 完全離線：所有產生都在你的瀏覽器完成，不上傳任何資料。</div>
+</div>
+<div class="card"><label>條碼預覽</label><div id="barcode"><svg id="svg"></svg></div></div>
+<div class="doc-section">
+<h2>📚 條碼產生器是什麼？給門外漢的完整說明</h2>
+<p>你要貼商品標籤，但不會做條碼；你要做會員卡，但不知道用哪種條碼。這就是「條碼產生器」。這篇文章一次講清楚。</p>
+<h3>一、一句話講完</h3>
+<div class="highlight"><p><strong>條碼產生器 = 把「數字或文字」轉成「條碼圖片」。</strong></p><p>支援 CODE128、EAN-13、UPC-A、CODE39。</p></div>
+<h3>二、四種常見條碼</h3>
+<table><tr><th>格式</th><th>位數</th><th>用途</th></tr>
+<tr><td>CODE128</td><td>不限</td><td>通用（物流、資產）</td></tr>
+<tr><td>EAN-13</td><td>13 位</td><td>國際商品碼（台灣、歐洲）</td></tr>
+<tr><td>UPC-A</td><td>12 位</td><td>美加商品碼</td></tr>
+<tr><td>CODE39</td><td>不限</td><td>工業用（汽車零件、電子）</td></tr></table>
+<h3>三、條碼怎麼運作？</h3>
+<p>條碼是「黑白線條」的組合，黑色代表「1」、白色代表「0」。掃描器用雷射讀取線條寬度，解碼成數字或文字。</p>
+<h3>四、EAN-13 商品碼結構</h3>
+<div class="example">
+<div>4712345678901</div>
+<div>471：台灣（國家碼）</div>
+<div>2345：廠商碼</div>
+<div>67890：商品碼</div>
+<div>1：檢查碼</div>
+</div>
+<h3>五、怎麼用？</h3>
+<ol>
+<li>輸入條碼內容（例如商品編號）</li>
+<li>選格式（EAN-13、CODE128）</li>
+<li>調寬度、高度、是否顯示文字</li>
+<li>按「產生條碼」</li>
+<li>下載 PNG</li>
+</ol>
+<h3>六、常見誤解</h3>
+<ul>
+<li><strong>❌ 誤解：條碼可以隨便填。</strong><br>✅ 事實：EAN-13 有檢查碼，填錯會產生無效條碼。</li>
+<li><strong>❌ 誤解：條碼越大越好。</strong><br>✅ 事實：條碼太小刷不到，太大浪費空間，建議寬度 2 公分以上。</li>
+<li><strong>❌ 誤解：條碼可以彩色。</strong><br>✅ 事實：條碼必須黑白，彩色會影響掃描。</li>
+<li><strong>❌ 誤解：條碼只能用數字。</strong><br>✅ 事實：CODE128、CODE39 可以含英文字母。</li>
+<li><strong>❌ 誤解：條碼產生器會上傳。</strong><br>✅ 事實：本工具純前端，不上傳。</li>
+</ul>
+<h3>七、這個工具能幫你做什麼？</h3>
+<ul><li><strong>產生條碼</strong>：4 種格式</li><li><strong>可調樣式</strong>：寬度、高度、顯示文字</li><li><strong>下載 PNG</strong>：一鍵下載</li><li><strong>完全離線</strong>：不上傳任何資料</li></ul>
+<h3>八、常見問題（FAQ）</h3>
+<div class="doc-section"><h2>❓ 常見問題（FAQ）</h2><div class="faq-item"><div class="faq-q">條碼產生器是什麼？</div><div class="faq-a">條碼產生器是把「數字或文字」轉成「條碼圖片」的工具。支援 CODE128、EAN-13、UPC-A、CODE39。</div></div><div class="faq-item"><div class="faq-q">支援哪些條碼格式？</div><div class="faq-a">支援 CODE128（通用）、EAN-13（國際商品碼）、UPC-A（美加商品碼）、CODE39（工業用）。</div></div><div class="faq-item"><div class="faq-q">這個工具會上傳我的資料嗎？</div><div class="faq-a">不會。所有產生都在你的瀏覽器完成，不上傳任何資料。</div></div><div class="faq-item"><div class="faq-q">條碼可以下載嗎？</div><div class="faq-a">可以。一鍵下載 PNG 或 SVG。</div></div><div class="faq-item"><div class="faq-q">條碼印出來刷不到怎麼辦？</div><div class="faq-a">可能原因：條碼太小、對比度不足、印表機解析度太低。建議條碼寬度至少 2 公分，黑白對比。</div></div></div>
+<p style="text-align:center;color:#8B949E;font-size:13px;margin-top:24px;"><time datetime="2026-11-03">最後更新：2026-11-03</time></p>
+</article>
+<div class="footer">
+  <p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p>
+  <p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script>
+<script>
+function gen() {
+  var data = document.getElementById("data").value.trim();
+  var format = document.getElementById("format").value;
+  var width = parseFloat(document.getElementById("width").value) || 2;
+  var height = parseFloat(document.getElementById("height").value) || 80;
+  var showText = document.getElementById("showText").value === "true";
+  var svg = document.getElementById("svg");
+  if (!data) { svg.innerHTML = '<p style="color:#F85149;">請輸入條碼內容</p>'; return; }
+  try {
+    JsBarcode(svg, data, {
+      format: format,
+      width: width,
+      height: height,
+      displayValue: showText,
+      margin: 10,
+      background: "#ffffff",
+      lineColor: "#000000"
+    });
+  } catch(e) {
+    svg.innerHTML = '<p style="color:#F85149;">產生失敗：' + e.message + '</p>';
+  }
+}
+function downloadPNG() {
+  var svg = document.getElementById("svg");
+  if (!svg.querySelector("rect") && !svg.querySelector("g")) { alert("請先產生條碼"); return; }
+  var svgData = new XMLSerializer().serializeToString(svg);
+  var canvas = document.createElement("canvas");
+  var bbox = svg.getBBox();
+  canvas.width = bbox.width + 40;
+  canvas.height = bbox.height + 40;
+  var ctx = canvas.getContext("2d");
+  ctx.fillStyle = "#ffffff";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  var img = new Image();
+  img.onload = function() {
+    ctx.drawImage(img, 20, 20);
+    var a = document.createElement("a");
+    a.download = "barcode-" + Date.now() + ".png";
+    a.href = canvas.toDataURL("image/png");
+    a.click();
+  };
+  img.src = "data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(svgData)));
+}
+window.addEventListener("load", gen);
+</script>
+</body>
+</html>
