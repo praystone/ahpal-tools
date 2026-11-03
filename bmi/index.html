@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>BMI 計算器（身體質量指數） | 雅寶工具箱 AHPAL.COM</title>
+<meta name="description" content="BMI 計算器：輸入身高、體重，算出 BMI、判斷範圍、顯示健康體重範圍。純前端、完全離線。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/bmi/">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:40px 20px;}
+.container{max-width:1000px;margin:0 auto;}
+h1{color:#D4AF37;font-size:28px;margin-bottom:12px;}
+.sub{color:#8B949E;margin-bottom:24px;font-size:14px;}
+.card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin-bottom:16px;}
+label{color:#8B949E;font-size:13px;display:block;margin-bottom:6px;}
+input[type=text],input[type=number],select,textarea{width:100%;background:#0D1117;color:#E6EDF3;border:1px solid #2D303A;border-radius:8px;padding:12px;font-size:14px;margin-bottom:12px;}
+button{background:#D4AF37;color:#0D1117;border:none;border-radius:8px;padding:10px 20px;font-weight:700;cursor:pointer;margin:8px 8px 8px 0;font-size:14px;}
+button:hover{background:#e6c24a;}
+button.blue{background:#58A6FF;}
+button.gray{background:#2D303A;color:#E6EDF3;}
+.result{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:16px;font-size:15px;min-height:60px;}
+.result .big{font-size:28px;font-weight:700;color:#D4AF37;text-align:center;padding:12px 0;}
+.result .label{color:#8B949E;font-size:13px;}
+.result .val{color:#E6EDF3;font-weight:700;}
+.tip{background:rgba(63,185,80,0.08);border-left:4px solid #3FB950;padding:12px 16px;border-radius:6px;color:#C9D1D9;font-size:13px;margin-top:12px;}
+.warn{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:12px 16px;border-radius:6px;color:#C9D1D9;font-size:13px;margin-top:12px;}
+.footer{text-align:center;margin-top:60px;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:600px){.row{grid-template-columns:1fr;}}
+
+.doc-section{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:28px 32px;margin-top:32px;}
+.doc-section h2{color:#D4AF37;font-size:22px;margin:0 0 16px;padding-bottom:8px;border-bottom:2px solid #2D303A;}
+.doc-section h3{color:#58A6FF;font-size:17px;margin:24px 0 10px;}
+.doc-section p{color:#C9D1D9;margin-bottom:12px;line-height:1.9;}
+.doc-section ul,.doc-section ol{margin:8px 0 16px 24px;color:#C9D1D9;}
+.doc-section li{margin-bottom:8px;line-height:1.8;}
+.doc-section code{background:#0D1117;color:#58A6FF;padding:2px 8px;border-radius:4px;font-family:Consolas,monospace;font-size:13px;}
+.doc-section .highlight{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:6px;margin:16px 0;}
+.doc-section .warnbox{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:14px 18px;border-radius:6px;margin:16px 0;}
+.doc-section table{width:100%;border-collapse:collapse;font-size:14px;margin:12px 0 20px;}
+.doc-section th,.doc-section td{padding:10px 14px;border:1px solid #2D303A;text-align:left;}
+.doc-section th{background:rgba(212,175,55,0.12);color:#D4AF37;}
+.doc-section tr:nth-child(even){background:rgba(255,255,255,0.02);}
+.doc-section .example{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:16px;font-family:Consolas,monospace;font-size:13px;color:#C9D1D9;margin:12px 0;line-height:1.8;}
+.doc-section .example .label{color:#8B949E;font-size:12px;}
+.doc-section .example .val{color:#D4AF37;font-weight:700;}
+.doc-section .example .arrow{color:#58A6FF;}
+
+</style>
+</head>
+<body>
+<nav class="ahpal-top-nav" style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;position:relative;z-index:10;">
+  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">🏠 首頁</a>
+  <a href="https://www.ahpal.com/categories.html" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">📚 全部分類</a>
+  <a href="https://www.ahpal.com/strategy/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">📌 策略文章</a>
+  <a href="https://novels.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">📖 小說站</a>
+  <a href="https://memories.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">🏛️ 回憶館</a>
+  <a href="https://bbs2.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">💬 BBS2</a>
+  <a href="https://pet.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">⚔️ 打怪場</a>
+  <a href="https://farm.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">🌾 農場</a>
+  <a href="https://tools.ahpal.com/" style="color:#0D1117;background:#D4AF37;text-decoration:none;padding:4px 10px;border-radius:6px;font-weight:700;">🛠️ 工具箱</a>
+</nav>
+<div class="container">
+<h1>⚖️ BMI 計算器</h1>
+<p class="sub">輸入身高、體重，算出 BMI、判斷範圍、顯示健康體重範圍。</p>
+
+<div class="card">
+  <div class="row">
+    <div>
+      <label>身高（公分）</label>
+      <input type="number" id="height" value="170" min="50" max="250" step="0.1" oninput="calc()">
+    </div>
+    <div>
+      <label>體重（公斤）</label>
+      <input type="number" id="weight" value="65" min="20" max="300" step="0.1" oninput="calc()">
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <label>計算結果</label>
+  <div class="result" id="result">（輸入身高、體重後自動計算）</div>
+</div>
+
+
+<div class="doc-section" id="bmi-doc">
+  <h2>📚 BMI 是什麼？給門外漢的完整說明</h2>
+
+  <p>你去健康檢查，報告上有一個「BMI」，數字是 22.5，你可能會想：「22.5 是什麼意思？這樣健康嗎？」這篇文章一次講清楚。</p>
+
+  <h3>一、一句話講完</h3>
+  <div class="highlight">
+    <p><strong>BMI = 身體質量指數（Body Mass Index）= 體重（公斤）÷ 身高（公尺）的平方。</strong></p>
+    <p>例如：體重 70 公斤、身高 1.75 公尺，BMI = 70 ÷ (1.75 × 1.75) = 22.86。</p>
+  </div>
+
+  <h3>二、BMI 的由來</h3>
+  <p>BMI 是 1832 年由比利時數學家 Adolphe Quetelet 提出的。他研究「人的體重與身高之間的關係」，發現「體重 ÷ 身高平方」是一個穩定的指標。</p>
+  <p>1972 年，美國生理學家 Ancel Keys 正式把它命名為「BMI」，從此成為全球通用的「肥胖指標」。</p>
+
+  <h3>三、BMI 的標準（台灣 vs 世界）</h3>
+  <table>
+    <tr><th>BMI 範圍</th><th>台灣標準</th><th>世界衛生組織（WHO）</th></tr>
+    <tr><td>&lt; 18.5</td><td>過輕</td><td>過輕</td></tr>
+    <tr><td>18.5 ~ 24</td><td>正常</td><td>正常</td></tr>
+    <tr><td>24 ~ 27</td><td>過重</td><td>正常</td></tr>
+    <tr><td>27 ~ 30</td><td>輕度肥胖</td><td>過重</td></tr>
+    <tr><td>30 ~ 35</td><td>中度肥胖</td><td>肥胖</td></tr>
+    <tr><td>&gt; 35</td><td>重度肥胖</td><td>重度肥胖</td></tr>
+  </table>
+  <p>台灣的標準比 WHO 嚴格（因為亞洲人體型較小，同樣 BMI 的體脂肪較高）。</p>
+
+  <h3>四、BMI 怎麼算？</h3>
+  <div class="example">
+    <div><span class="label">體重：</span><span class="val">70 公斤</span></div>
+    <div><span class="label">身高：</span><span class="val">1.75 公尺</span></div>
+    <div><span class="label">BMI = </span><span class="val">70 ÷ (1.75 × 1.75) = 22.86</span></div>
+    <div><span class="label">結果：</span><span class="val">正常（18.5 ~ 24）</span></div>
+  </div>
+
+  <h3>五、BMI 的 3 個限制</h3>
+  <div class="warnbox">
+    <p><strong>限制 1：BMI 不區分肌肉與脂肪</strong></p>
+    <p>肌肉比脂肪重，健美選手的 BMI 可能超過 30，但體脂肪很低。BMI 高不等於「胖」。</p>
+    <p><strong>限制 2：BMI 不區分脂肪分布</strong></p>
+    <p>「蘋果型肥胖」（脂肪集中在腹部）比「梨型肥胖」（脂肪集中在臀部）危險，但 BMI 看不出來。</p>
+    <p><strong>限制 3：BMI 不適合兒童、孕婦、老人</strong></p>
+    <p>兒童要用「兒童 BMI 百分位」，孕婦要用「孕期體重增加指引」，老人要用「肌少症指標」。</p>
+  </div>
+
+  <h3>六、BMI 的實際用途</h3>
+  <ul>
+    <li><strong>健康檢查</strong>：醫院、診所用 BMI 篩檢肥胖</li>
+    <li><strong>保險</strong>：保險公司用 BMI 評估健康風險</li>
+    <li><strong>健身</strong>：健身教練用 BMI 追蹤學員進度</li>
+    <li><strong>公共衛生</strong>：政府用 BMI 統計國民肥胖率</li>
+  </ul>
+
+  <h3>七、常見誤解</h3>
+  <ul>
+    <li><strong>❌ 誤解：BMI 高就是胖。</strong><br>✅ 事實：BMI 不區分肌肉與脂肪，健美選手 BMI 可能超標。</li>
+    <li><strong>❌ 誤解：BMI 正常就是健康。</strong><br>✅ 事實：BMI 正常但體脂肪高（「瘦胖子」）也不健康。</li>
+    <li><strong>❌ 誤解：BMI 適用所有人。</strong><br>✅ 事實：兒童、孕婦、老人要用不同的指標。</li>
+    <li><strong>❌ 誤解：BMI 越低越好。</strong><br>✅ 事實：BMI 低於 18.5 是「過輕」，也不健康。</li>
+    <li><strong>❌ 誤解：BMI 是世界統一的。</strong><br>✅ 事實：台灣標準比 WHO 嚴格。</li>
+  </ul>
+
+  <h3>八、這個工具能幫你做什麼？</h3>
+  <ul>
+    <li><strong>計算 BMI</strong>：輸入身高、體重，算出 BMI</li>
+    <li><strong>判斷範圍</strong>：告訴你是「過輕、正常、過重、肥胖」</li>
+    <li><strong>顯示健康體重範圍</strong>：告訴你「以你的身高，健康體重應該是多少」</li>
+    <li><strong>完全離線</strong>：不上傳任何資料</li>
+  </ul>
+
+  <div class="highlight">
+    <p style="margin:0;"><strong>🦞 龍蝦總工程師的話：</strong></p>
+    <p style="margin:8px 0 0;">「BMI 是一個『粗略指標』，不是『絕對真理』。它適合『大規模篩檢』，不適合『個人診斷』。懂它的限制，才不會被它綁架。」</p>
+  </div>
+
+  <p style="text-align:center;color:#8B949E;font-size:13px;margin-top:24px;margin-bottom:0;">本文由 🦞 龍蝦總工程師撰寫 · 2026-11-03 · 雅寶社區 AHPAL.COM</p>
+</div>
+
+
+<div class="footer">
+  <p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p>
+  <p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p>
+</div>
+</div>
+<script>
+function calc() {
+  var h = parseFloat(document.getElementById('height').value) / 100;
+  var w = parseFloat(document.getElementById('weight').value);
+  if (!h || !w || h <= 0) {
+    document.getElementById('result').textContent = '請輸入有效的身高、體重';
+    return;
+  }
+  var bmi = w / (h * h);
+  var bmiRounded = bmi.toFixed(1);
+  var category, color, advice;
+  if (bmi < 18.5) {
+    category = '過輕'; color = '#58A6FF';
+    advice = '建議增加營養攝取，均衡飲食，適度運動。';
+  } else if (bmi < 24) {
+    category = '正常'; color = '#3FB950';
+    advice = '維持目前的飲食與運動習慣，繼續保持！';
+  } else if (bmi < 27) {
+    category = '過重'; color = '#D4AF37';
+    advice = '建議控制飲食、增加運動，減少高熱量食物。';
+  } else if (bmi < 30) {
+    category = '輕度肥胖'; color = '#F0883E';
+    advice = '建議諮詢醫師或營養師，制定減重計畫。';
+  } else if (bmi < 35) {
+    category = '中度肥胖'; color = '#F85149';
+    advice = '建議諮詢醫師，注意心血管疾病風險。';
+  } else {
+    category = '重度肥胖'; color = '#8B0000';
+    advice = '建議立即諮詢醫師，進行專業治療。';
+  }
+  var healthyMin = 18.5 * h * h;
+  var healthyMax = 24 * h * h;
+  var html = '<div style="text-align:center;"><div class="label">你的 BMI</div><div class="big" style="color:' + color + ';">' + bmiRounded + '</div><div style="font-size:18px;font-weight:700;color:' + color + ';margin-top:8px;">' + category + '</div></div>';
+  html += '<div style="margin-top:16px;padding:12px;background:#0D1117;border-radius:8px;font-size:14px;line-height:1.8;">';
+  html += '<div><strong style="color:#58A6FF;">健康體重範圍：</strong>' + healthyMin.toFixed(1) + ' ~ ' + healthyMax.toFixed(1) + ' 公斤</div>';
+  html += '<div style="margin-top:8px;"><strong style="color:#58A6FF;">建議：</strong>' + advice + '</div>';
+  html += '</div>';
+  html += '<div class="tip" style="margin-top:16px;">⚠️ BMI 是「粗略指標」，不區分肌肉與脂肪。運動員、孕婦、兒童、老人請用其他指標。</div>';
+  document.getElementById('result').innerHTML = html;
+}
+calc();
+</script>
+</body>
+</html>

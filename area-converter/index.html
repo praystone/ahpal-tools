@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>坪數換算器（坪 ↔ 平方公尺 ↔ 平方英尺） | 雅寶工具箱 AHPAL.COM</title>
+<meta name="description" content="坪數換算：坪、平方公尺、平方英尺、甲、公頃互相換算。純前端、即時計算、完全離線。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/area-converter/">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:40px 20px;}
+.container{max-width:1000px;margin:0 auto;}
+h1{color:#D4AF37;font-size:28px;margin-bottom:12px;}
+.sub{color:#8B949E;margin-bottom:24px;font-size:14px;}
+.card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin-bottom:16px;}
+label{color:#8B949E;font-size:13px;display:block;margin-bottom:6px;}
+input[type=text],input[type=number],select,textarea{width:100%;background:#0D1117;color:#E6EDF3;border:1px solid #2D303A;border-radius:8px;padding:12px;font-size:14px;margin-bottom:12px;}
+button{background:#D4AF37;color:#0D1117;border:none;border-radius:8px;padding:10px 20px;font-weight:700;cursor:pointer;margin:8px 8px 8px 0;font-size:14px;}
+button:hover{background:#e6c24a;}
+button.blue{background:#58A6FF;}
+button.gray{background:#2D303A;color:#E6EDF3;}
+.result{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:16px;font-size:15px;min-height:60px;}
+.result .big{font-size:28px;font-weight:700;color:#D4AF37;text-align:center;padding:12px 0;}
+.result .label{color:#8B949E;font-size:13px;}
+.result .val{color:#E6EDF3;font-weight:700;}
+.tip{background:rgba(63,185,80,0.08);border-left:4px solid #3FB950;padding:12px 16px;border-radius:6px;color:#C9D1D9;font-size:13px;margin-top:12px;}
+.warn{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:12px 16px;border-radius:6px;color:#C9D1D9;font-size:13px;margin-top:12px;}
+.footer{text-align:center;margin-top:60px;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:600px){.row{grid-template-columns:1fr;}}
+
+.doc-section{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:28px 32px;margin-top:32px;}
+.doc-section h2{color:#D4AF37;font-size:22px;margin:0 0 16px;padding-bottom:8px;border-bottom:2px solid #2D303A;}
+.doc-section h3{color:#58A6FF;font-size:17px;margin:24px 0 10px;}
+.doc-section p{color:#C9D1D9;margin-bottom:12px;line-height:1.9;}
+.doc-section ul,.doc-section ol{margin:8px 0 16px 24px;color:#C9D1D9;}
+.doc-section li{margin-bottom:8px;line-height:1.8;}
+.doc-section code{background:#0D1117;color:#58A6FF;padding:2px 8px;border-radius:4px;font-family:Consolas,monospace;font-size:13px;}
+.doc-section .highlight{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:6px;margin:16px 0;}
+.doc-section .warnbox{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:14px 18px;border-radius:6px;margin:16px 0;}
+.doc-section table{width:100%;border-collapse:collapse;font-size:14px;margin:12px 0 20px;}
+.doc-section th,.doc-section td{padding:10px 14px;border:1px solid #2D303A;text-align:left;}
+.doc-section th{background:rgba(212,175,55,0.12);color:#D4AF37;}
+.doc-section tr:nth-child(even){background:rgba(255,255,255,0.02);}
+.doc-section .example{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:16px;font-family:Consolas,monospace;font-size:13px;color:#C9D1D9;margin:12px 0;line-height:1.8;}
+.doc-section .example .label{color:#8B949E;font-size:12px;}
+.doc-section .example .val{color:#D4AF37;font-weight:700;}
+.doc-section .example .arrow{color:#58A6FF;}
+
+</style>
+</head>
+<body>
+<nav class="ahpal-top-nav" style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;position:relative;z-index:10;">
+  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">🏠 首頁</a>
+  <a href="https://www.ahpal.com/categories.html" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">📚 全部分類</a>
+  <a href="https://www.ahpal.com/strategy/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">📌 策略文章</a>
+  <a href="https://novels.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">📖 小說站</a>
+  <a href="https://memories.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">🏛️ 回憶館</a>
+  <a href="https://bbs2.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">💬 BBS2</a>
+  <a href="https://pet.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">⚔️ 打怪場</a>
+  <a href="https://farm.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">🌾 農場</a>
+  <a href="https://tools.ahpal.com/" style="color:#0D1117;background:#D4AF37;text-decoration:none;padding:4px 10px;border-radius:6px;font-weight:700;">🛠️ 工具箱</a>
+</nav>
+<div class="container">
+<h1>📐 坪數換算器</h1>
+<p class="sub">坪、平方公尺、平方英尺、甲、公頃互相換算，即時計算、完全離線。</p>
+
+<div class="card">
+  <label>輸入數值</label>
+  <input type="number" id="val" value="30" min="0" step="0.01" oninput="convert()">
+  <label>單位</label>
+  <select id="unit" onchange="convert()">
+    <option value="ping">坪</option>
+    <option value="m2">平方公尺（m²）</option>
+    <option value="ft2">平方英尺（ft²）</option>
+    <option value="jia">甲</option>
+    <option value="ha">公頃（ha）</option>
+  </select>
+</div>
+
+<div class="card">
+  <label>換算結果</label>
+  <div class="result" id="result">（輸入數值後自動換算）</div>
+</div>
+
+
+<div class="doc-section" id="area-doc">
+  <h2>📚 坪數換算是什麼？給門外漢的完整說明</h2>
+
+  <p>你在台灣看房子，房仲說「這間 30 坪」，你可能會想：「30 坪到底是多大？」這篇文章一次講清楚。</p>
+
+  <h3>一、一句話講完</h3>
+  <div class="highlight">
+    <p><strong>1 坪 = 3.3058 平方公尺（約 3.3 平方公尺）。</strong></p>
+    <p>坪是台灣、日本常用的面積單位，不是國際標準單位（國際標準是平方公尺）。</p>
+  </div>
+
+  <h3>二、坪的由來</h3>
+  <p>「坪」源自日本，是日本傳統的面積單位。日治時期傳入台灣，沿用至今。</p>
+  <p>1 坪的定義是「兩塊榻榻米的大小」。日本榻榻米標準尺寸是 1.82 公尺 × 0.91 公尺，兩塊就是 3.3058 平方公尺，這就是 1 坪。</p>
+
+  <h3>三、常見面積單位換算表</h3>
+  <table>
+    <tr><th>單位</th><th>等於幾平方公尺</th><th>等於幾坪</th></tr>
+    <tr><td>1 平方公尺（m²）</td><td>1</td><td>0.3025</td></tr>
+    <tr><td>1 坪</td><td>3.3058</td><td>1</td></tr>
+    <tr><td>1 平方英尺（ft²）</td><td>0.0929</td><td>0.0281</td></tr>
+    <tr><td>1 甲</td><td>2934</td><td>887.5</td></tr>
+    <tr><td>1 公頃（ha）</td><td>10000</td><td>3025</td></tr>
+  </table>
+
+  <h3>四、怎麼快速換算？</h3>
+  <p><strong>坪 → 平方公尺</strong>：坪數 × 3.3058</p>
+  <p><strong>平方公尺 → 坪</strong>：平方公尺 ÷ 3.3058（或 × 0.3025）</p>
+  <div class="example">
+    <div><span class="label">30 坪 = </span><span class="val">30 × 3.3058 = 99.17 平方公尺</span></div>
+    <div><span class="label">100 平方公尺 = </span><span class="val">100 × 0.3025 = 30.25 坪</span></div>
+  </div>
+
+  <h3>五、台灣常見的「坪」用法</h3>
+  <ul>
+    <li><strong>房屋</strong>：30 坪公寓、50 坪透天</li>
+    <li><strong>土地</strong>：100 坪農地、500 坪建地</li>
+    <li><strong>停車位</strong>：約 3~4 坪</li>
+    <li><strong>辦公室</strong>：每人約 2~3 坪</li>
+  </ul>
+
+  <h3>六、常見誤解</h3>
+  <ul>
+    <li><strong>❌ 誤解：坪是國際標準單位。</strong><br>✅ 事實：坪是台灣、日本常用單位，國際標準是平方公尺。</li>
+    <li><strong>❌ 誤解：1 坪 = 3 平方公尺。</strong><br>✅ 事實：1 坪 = 3.3058 平方公尺，不是整數。</li>
+    <li><strong>❌ 誤解：坪數越大，房子越大。</strong><br>✅ 事實：坪數是「總面積」，實際空間要看「公設比」（公設比越高，實際空間越小）。</li>
+    <li><strong>❌ 誤解：1 甲 = 100 坪。</strong><br>✅ 事實：1 甲 = 2934 坪（約 887.5 坪）。</li>
+    <li><strong>❌ 誤解：坪只能用在房屋。</strong><br>✅ 事實：坪可以用在土地、農地、建地。</li>
+  </ul>
+
+  <h3>七、這個工具能幫你做什麼？</h3>
+  <ul>
+    <li><strong>坪 → 平方公尺</strong>：輸入坪數，算出平方公尺</li>
+    <li><strong>平方公尺 → 坪</strong>：輸入平方公尺，算出坪數</li>
+    <li><strong>坪 → 平方英尺</strong>：輸入坪數，算出平方英尺</li>
+    <li><strong>多單位同時換算</strong>：一次算出多種單位</li>
+  </ul>
+
+  <div class="highlight">
+    <p style="margin:0;"><strong>🦞 龍蝦總工程師的話：</strong></p>
+    <p style="margin:8px 0 0;">「坪不是國際單位，但它是台灣人最熟悉的單位。懂換算，你就不會被『30 坪』騙了。」</p>
+  </div>
+
+  <p style="text-align:center;color:#8B949E;font-size:13px;margin-top:24px;margin-bottom:0;">本文由 🦞 龍蝦總工程師撰寫 · 2026-11-03 · 雅寶社區 AHPAL.COM</p>
+</div>
+
+
+<div class="footer">
+  <p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p>
+  <p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p>
+</div>
+</div>
+<script>
+var RATES = {
+  ping: 3.3058,
+  m2: 1,
+  ft2: 0.092903,
+  jia: 2934,
+  ha: 10000
+};
+var NAMES = {
+  ping: '坪',
+  m2: '平方公尺',
+  ft2: '平方英尺',
+  jia: '甲',
+  ha: '公頃'
+};
+
+function convert() {
+  var val = parseFloat(document.getElementById('val').value) || 0;
+  var unit = document.getElementById('unit').value;
+  var m2 = val * RATES[unit];
+  var html = '<div style="text-align:center;"><div class="big">' + val + ' ' + NAMES[unit] + '</div><div class="label">等於</div></div>';
+  html += '<table style="width:100%;border-collapse:collapse;margin-top:12px;">';
+  for (var u in RATES) {
+    var v = m2 / RATES[u];
+    html += '<tr style="border-bottom:1px solid #2D303A;"><td style="padding:8px;color:#8B949E;">' + NAMES[u] + '</td><td style="padding:8px;text-align:right;color:#D4AF37;font-weight:700;">' + v.toFixed(4) + '</td></tr>';
+  }
+  html += '</table>';
+  document.getElementById('result').innerHTML = html;
+}
+convert();
+</script>
+</body>
+</html>

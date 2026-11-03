@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>QR Code 產生器（純前端、不上傳） | 雅寶工具箱 AHPAL.COM</title>
+<meta name="description" content="QR Code 產生器：輸入文字或網址，即時產生 QR Code，可下載 PNG。純前端、完全離線、不上傳。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/qrcode/">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:40px 20px;}
+.container{max-width:1000px;margin:0 auto;}
+h1{color:#D4AF37;font-size:28px;margin-bottom:12px;}
+.sub{color:#8B949E;margin-bottom:24px;font-size:14px;}
+.card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin-bottom:16px;}
+label{color:#8B949E;font-size:13px;display:block;margin-bottom:6px;}
+input[type=text],input[type=number],select,textarea{width:100%;background:#0D1117;color:#E6EDF3;border:1px solid #2D303A;border-radius:8px;padding:12px;font-size:14px;margin-bottom:12px;}
+button{background:#D4AF37;color:#0D1117;border:none;border-radius:8px;padding:10px 20px;font-weight:700;cursor:pointer;margin:8px 8px 8px 0;font-size:14px;}
+button:hover{background:#e6c24a;}
+button.blue{background:#58A6FF;}
+button.gray{background:#2D303A;color:#E6EDF3;}
+.result{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:16px;font-size:15px;min-height:60px;}
+.result .big{font-size:28px;font-weight:700;color:#D4AF37;text-align:center;padding:12px 0;}
+.result .label{color:#8B949E;font-size:13px;}
+.result .val{color:#E6EDF3;font-weight:700;}
+.tip{background:rgba(63,185,80,0.08);border-left:4px solid #3FB950;padding:12px 16px;border-radius:6px;color:#C9D1D9;font-size:13px;margin-top:12px;}
+.warn{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:12px 16px;border-radius:6px;color:#C9D1D9;font-size:13px;margin-top:12px;}
+.footer{text-align:center;margin-top:60px;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:600px){.row{grid-template-columns:1fr;}}
+
+.doc-section{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:28px 32px;margin-top:32px;}
+.doc-section h2{color:#D4AF37;font-size:22px;margin:0 0 16px;padding-bottom:8px;border-bottom:2px solid #2D303A;}
+.doc-section h3{color:#58A6FF;font-size:17px;margin:24px 0 10px;}
+.doc-section p{color:#C9D1D9;margin-bottom:12px;line-height:1.9;}
+.doc-section ul,.doc-section ol{margin:8px 0 16px 24px;color:#C9D1D9;}
+.doc-section li{margin-bottom:8px;line-height:1.8;}
+.doc-section code{background:#0D1117;color:#58A6FF;padding:2px 8px;border-radius:4px;font-family:Consolas,monospace;font-size:13px;}
+.doc-section .highlight{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:6px;margin:16px 0;}
+.doc-section .warnbox{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:14px 18px;border-radius:6px;margin:16px 0;}
+.doc-section table{width:100%;border-collapse:collapse;font-size:14px;margin:12px 0 20px;}
+.doc-section th,.doc-section td{padding:10px 14px;border:1px solid #2D303A;text-align:left;}
+.doc-section th{background:rgba(212,175,55,0.12);color:#D4AF37;}
+.doc-section tr:nth-child(even){background:rgba(255,255,255,0.02);}
+.doc-section .example{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:16px;font-family:Consolas,monospace;font-size:13px;color:#C9D1D9;margin:12px 0;line-height:1.8;}
+.doc-section .example .label{color:#8B949E;font-size:12px;}
+.doc-section .example .val{color:#D4AF37;font-weight:700;}
+.doc-section .example .arrow{color:#58A6FF;}
+
+#qrcode { display:flex; justify-content:center; padding:20px; background:#fff; border-radius:12px; margin:12px 0; }
+</style>
+</head>
+<body>
+<nav class="ahpal-top-nav" style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;position:relative;z-index:10;">
+  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">🏠 首頁</a>
+  <a href="https://www.ahpal.com/categories.html" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">📚 全部分類</a>
+  <a href="https://www.ahpal.com/strategy/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">📌 策略文章</a>
+  <a href="https://novels.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">📖 小說站</a>
+  <a href="https://memories.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">🏛️ 回憶館</a>
+  <a href="https://bbs2.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">💬 BBS2</a>
+  <a href="https://pet.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">⚔️ 打怪場</a>
+  <a href="https://farm.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">🌾 農場</a>
+  <a href="https://tools.ahpal.com/" style="color:#0D1117;background:#D4AF37;text-decoration:none;padding:4px 10px;border-radius:6px;font-weight:700;">🛠️ 工具箱</a>
+</nav>
+<div class="container">
+<h1>📱 QR Code 產生器</h1>
+<p class="sub">輸入文字或網址，即時產生 QR Code，可下載 PNG。純前端、完全離線、不上傳。</p>
+
+<div class="card">
+  <label>輸入文字或網址</label>
+  <input type="text" id="text" value="https://www.ahpal.com/" placeholder="輸入文字或網址..." oninput="gen()">
+  <label>容錯等級</label>
+  <select id="level" onchange="gen()">
+    <option value="L">L（7%，小尺寸）</option>
+    <option value="M" selected>M（15%，一般，預設）</option>
+    <option value="Q">Q（25%，工業）</option>
+    <option value="H">H（30%，戶外）</option>
+  </select>
+  <div>
+    <button onclick="gen()">🚀 產生 QR Code</button>
+    <button class="blue" onclick="download()">⬇️ 下載 PNG</button>
+  </div>
+  <div class="tip">✅ 完全離線：所有產生都在你的瀏覽器完成，不會上傳任何資料。</div>
+</div>
+
+<div class="card">
+  <label>QR Code</label>
+  <div id="qrcode"></div>
+  <div id="status" style="text-align:center;color:#8B949E;font-size:13px;"></div>
+</div>
+
+
+<div class="doc-section" id="qr-doc">
+  <h2>📚 QR Code 是什麼？給門外漢的完整說明</h2>
+
+  <p>你掃過 QR Code 嗎？那個黑白方塊，藏著一個網址、一段文字，甚至一張名片。這篇文章一次講清楚。</p>
+
+  <h3>一、一句話講完</h3>
+  <div class="highlight">
+    <p><strong>QR Code = Quick Response Code（快速響應碼）= 一種「二維條碼」，能儲存比條碼更多資料。</strong></p>
+    <p>它 1994 年由日本 Denso Wave 公司發明，原本是為了追蹤汽車零件。</p>
+  </div>
+
+  <h3>二、為什麼叫「二維」條碼？</h3>
+  <p>傳統條碼（一維條碼）只有「橫向」資料，只能存 20 個數字。QR Code 是「二維」的，橫向 + 縱向都有資料，能存 7,089 個數字或 4,296 個英文字元。</p>
+
+  <h3>三、QR Code 的 3 個定位點</h3>
+  <p>你注意過 QR Code 角落有 3 個「回」字型方塊嗎？那是「定位點」，讓掃描器知道「這是 QR Code、方向是什麼」。</p>
+  <ul>
+    <li><strong>左上角</strong>：定位點</li>
+    <li><strong>右上角</strong>：定位點</li>
+    <li><strong>左下角</strong>：定位點</li>
+  </ul>
+  <p>3 個定位點讓掃描器「無論正反、旋轉、傾斜」都能正確讀取。</p>
+
+  <h3>四、QR Code 的「容錯機制」</h3>
+  <p>QR Code 有 4 種容錯等級（L、M、Q、H），代表「即使部分損壞，仍能讀取」的能力。</p>
+  <table>
+    <tr><th>等級</th><th>容錯率</th><th>適用情境</th></tr>
+    <tr><td>L（Low）</td><td>7%</td><td>乾淨環境、小尺寸</td></tr>
+    <tr><td>M（Medium）</td><td>15%</td><td>一般環境（預設）</td></tr>
+    <tr><td>Q（Quartile）</td><td>25%</td><td>工業環境、易損壞</td></tr>
+    <tr><td>H（High）</td><td>30%</td><td>戶外、易磨損</td></tr>
+  </table>
+  <p>容錯率越高，QR Code 越「密」，但越「耐損」。例如 H 等級的 QR Code，即使被遮住 30%，還是能讀取。</p>
+
+  <h3>五、QR Code 的實際用途</h3>
+  <ul>
+    <li><strong>網址</strong>：掃了直接開網站</li>
+    <li><strong>名片</strong>：掃了直接加聯絡人</li>
+    <li><strong>Wi-Fi</strong>：掃了自動連 Wi-Fi</li>
+    <li><strong>付款</strong>：掃了直接付款（LINE Pay、街口）</li>
+    <li><strong>實名制</strong>：掃了填資料（疫情期間常用）</li>
+    <li><strong>菜單</strong>：掃了看菜單（餐廳常用）</li>
+  </ul>
+
+  <h3>六、QR Code 的 3 個限制</h3>
+  <div class="warnbox">
+    <p><strong>限制 1：容量有限</strong></p>
+    <p>QR Code 最多存 7,089 個數字或 4,296 個英文字元。要存大檔案（如影片），不行。</p>
+    <p><strong>限制 2：尺寸有限</strong></p>
+    <p>QR Code 太小（如小於 1 公分），掃描器讀不到。太大（如大於 1 公尺），也難掃。</p>
+    <p><strong>限制 3：安全風險</strong></p>
+    <p>QR Code 可能被貼上惡意網址。掃描前要看清楚「掃了會去哪裡」。</p>
+  </div>
+
+  <h3>七、常見誤解</h3>
+  <ul>
+    <li><strong>❌ 誤解：QR Code 只能用來開網址。</strong><br>✅ 事實：QR Code 能存文字、網址、名片、Wi-Fi、付款資訊。</li>
+    <li><strong>❌ 誤解：QR Code 容量無限。</strong><br>✅ 事實：最多 7,089 個數字或 4,296 個英文字元。</li>
+    <li><strong>❌ 誤解：QR Code 損壞就不能讀。</strong><br>✅ 事實：有容錯機制，損壞 30% 仍可讀。</li>
+    <li><strong>❌ 誤解：QR Code 一定安全。</strong><br>✅ 事實：可能被貼上惡意網址，掃描前要確認。</li>
+    <li><strong>❌ 誤解：QR Code 只能黑白。</strong><br>✅ 事實：可以彩色，但對比度要夠。</li>
+  </ul>
+
+  <h3>八、這個工具能幫你做什麼？</h3>
+  <ul>
+    <li><strong>產生 QR Code</strong>：輸入文字或網址，即時產生 QR Code</li>
+    <li><strong>下載 PNG</strong>：一鍵下載 QR Code 圖片</li>
+    <li><strong>調整容錯等級</strong>：可選 L、M、Q、H</li>
+    <li><strong>完全離線</strong>：不上傳任何資料</li>
+  </ul>
+
+  <div class="highlight">
+    <p style="margin:0;"><strong>🦞 龍蝦總工程師的話：</strong></p>
+    <p style="margin:8px 0 0;">「QR Code 是『實體與數位的橋樑』。它讓一張紙、一個招牌、一個螢幕，都能連到網路。懂它，你就不會看到黑白方塊就發呆。」</p>
+  </div>
+
+  <p style="text-align:center;color:#8B949E;font-size:13px;margin-top:24px;margin-bottom:0;">本文由 🦞 龍蝦總工程師撰寫 · 2026-11-03 · 雅寶社區 AHPAL.COM</p>
+</div>
+
+
+<div class="footer">
+  <p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p>
+  <p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+<script>
+var currentDataUrl = null;
+
+function gen() {
+  var text = document.getElementById('text').value;
+  var level = document.getElementById('level').value;
+  if (!text) {
+    document.getElementById('qrcode').innerHTML = '';
+    document.getElementById('status').textContent = '請輸入文字或網址';
+    return;
+  }
+  var canvas = document.createElement('canvas');
+  QRCode.toCanvas(canvas, text, {
+    width: 300,
+    margin: 2,
+    errorCorrectionLevel: level,
+    color: { dark: '#0D1117', light: '#FFFFFF' }
+  }, function(err) {
+    if (err) {
+      document.getElementById('status').textContent = '產生失敗：' + err.message;
+      return;
+    }
+    document.getElementById('qrcode').innerHTML = '';
+    document.getElementById('qrcode').appendChild(canvas);
+    currentDataUrl = canvas.toDataURL('image/png');
+    document.getElementById('status').textContent = '✅ 已產生（' + text.length + ' 字元，容錯 ' + level + '）';
+  });
+}
+
+function download() {
+  if (!currentDataUrl) { alert('請先產生 QR Code'); return; }
+  var a = document.createElement('a');
+  a.download = 'qrcode.png';
+  a.href = currentDataUrl;
+  a.click();
+}
+
+gen();
+</script>
+</body>
+</html>
