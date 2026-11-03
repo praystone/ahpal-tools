@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>台灣彩券對獎 · 免費線上工具 | 雅寶工具箱</title>
+<meta name="description" content="貼彩券號碼，示範對獎。給想整理彩券號碼的人使用。純前端、不上傳。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/taiwan-lottery/">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8637791667872348" crossorigin="anonymous"></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "台灣彩券對獎", "description": "貼彩券號碼，示範對獎。給想整理彩券號碼的人使用。純前端、不上傳。", "url": "https://tools.ahpal.com/taiwan-lottery/", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "這會對真實開獎號碼嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不會。這是示範用，開獎號碼是假設的。實際請依台彩公告。"}}, {"@type": "Question", "name": "彩券格式？", "acceptedAnswer": {"@type": "Answer", "text": "一行一筆，例如 01,02,03,04,05,06。"}}, {"@type": "Question", "name": "大樂透和威力彩差在哪？", "acceptedAnswer": {"@type": "Answer", "text": "大樂透 6 個號碼 + 特別號，威力彩 6 個號碼 + 第二區 1 個號碼。"}}, {"@type": "Question", "name": "中幾個才有獎？", "acceptedAnswer": {"@type": "Answer", "text": "大樂透對中 3 個以上有獎，威力彩對中 3 個以上有獎（依當期公告）。"}}, {"@type": "Question", "name": "資料會上傳嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不會，全部在瀏覽器。"}}, {"@type": "Question", "name": "可以存檔嗎？", "acceptedAnswer": {"@type": "Answer", "text": "目前不存檔，建議對完截圖。"}}, {"@type": "Question", "name": "什麼時候開獎？", "acceptedAnswer": {"@type": "Answer", "text": "大樂透每週二、五，威力彩每週一、四。"}}, {"@type": "Question", "name": "中獎怎麼領？", "acceptedAnswer": {"@type": "Answer", "text": "5000 元以下超商領，以上到中信銀。"}}, {"@type": "Question", "name": "可以列印嗎？", "acceptedAnswer": {"@type": "Answer", "text": "可以，按瀏覽器列印。"}}, {"@type": "Question", "name": "有必中法嗎？", "acceptedAnswer": {"@type": "Answer", "text": "沒有。彩券是機率，沒有必中法。"}}]}</script>
+<style>*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:20px;}
+.container{max-width:900px;margin:0 auto;}
+h1{color:#D4AF37;font-size:30px;margin:16px 0 8px;text-align:center;}
+.sub{color:#8B949E;font-size:15px;text-align:center;margin-bottom:24px;}
+.card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin-bottom:20px;}
+label{display:block;color:#C9D1D9;font-size:14px;margin:10px 0 4px;}
+input,textarea,select{width:100%;padding:12px;background:#0D1117;border:1px solid #2D303A;border-radius:8px;color:#E6EDF3;font-size:16px;font-family:inherit;}
+button{padding:12px 28px;background:#D4AF37;color:#0D1117;border:none;border-radius:10px;font-size:16px;font-weight:700;cursor:pointer;margin:8px 6px 0 0;}
+button:hover{opacity:0.85;}
+.result{background:#0D1117;border:1px solid #D4AF37;border-radius:8px;padding:16px;margin-top:16px;font-size:15px;line-height:1.9;white-space:pre-wrap;word-break:break-word;}
+.faq{margin-top:12px;}
+.faq h3{color:#58A6FF;font-size:16px;margin:16px 0 6px;}
+.faq p{color:#C9D1D9;font-size:14px;}
+.tip{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:8px;margin:16px 0;font-size:14px;color:#C9D1D9;}
+.knowledge{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin:20px 0;}
+.knowledge h2{color:#D4AF37;font-size:20px;margin:0 0 12px;}
+.knowledge h3{color:#58A6FF;font-size:16px;margin:18px 0 8px;}
+.knowledge p{color:#C9D1D9;font-size:15px;line-height:1.9;margin-bottom:10px;}
+.misconception{background:rgba(248,81,73,0.06);border-left:4px solid #F85149;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+.misconception strong{color:#F85149;}
+.when-to-use{background:rgba(63,185,80,0.06);border-left:4px solid #3FB950;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+.footer{text-align:center;margin-top:48px;padding-top:20px;border-top:1px solid #2D303A;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+@media print{.ahpal-top-nav,button,.tip{display:none!important;}body{background:#fff;color:#000;}.card{border:1px solid #999;}}</style>
+</head>
+<body>
+<div class="container">
+<nav class="ahpal-top-nav" style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;">
+  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏠 首頁</a>
+  <a href="https://www.ahpal.com/categories.html" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📚 全部分類</a>
+  <a href="https://www.ahpal.com/strategy/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📌 策略文章</a>
+  <a href="https://pet.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">⚔️ 打怪場</a>
+  <a href="https://farm.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🌾 農場</a>
+  <a href="https://tools.ahpal.com/" style="color:#0D1117;background:#D4AF37;text-decoration:none;padding:4px 10px;font-weight:700;">🛠️ 工具箱</a>
+</nav>
+<nav class="breadcrumb" aria-label="breadcrumb" style="font-size:13px;color:#8B949E;margin-bottom:12px;"><a href="https://tools.ahpal.com/" style="color:#58A6FF;text-decoration:none;">工具箱</a> › 台灣彩券對獎</nav>
+<article>
+<h1>台灣彩券對獎</h1>
+<p class="sub">貼彩券號碼，示範對獎。給想整理彩券號碼的人使用。純前端、不上傳。</p>
+<div class="card">
+<label>貼彩券號碼（一行一筆，例如：01,02,03,04,05,06）</label>
+<textarea id="nums" rows="6" placeholder="01,02,03,04,05,06
+07,08,09,10,11,12">01,02,03,04,05,06
+07,08,09,10,11,12</textarea>
+<button onclick="check()">對獎（示範用）</button>
+<div class="result" id="out"></div>
+<p style="color:#8B949E;font-size:13px;margin-top:12px;">⚠️ 示範對獎，實際開獎號碼請依台彩公告。</p>
+</div>
+<div class="tip">🔒 這個工具<strong>純前端、完全離線、不上傳</strong>。你的資料只留在你的瀏覽器，不會傳到任何伺服器。</div>
+<div class="knowledge">
+<h2>📖 台灣彩券對獎背後的知識</h2>
+<p>台灣彩券由「台灣彩券公司」發行，目前主要有大樂透、威力彩、今彩539、雙贏彩等。大樂透是「6 個號碼 + 特別號」，威力彩是「6 個號碼 + 第二區 1 個號碼」。開獎號碼由機器搖出，每期獨立，沒有「規律」可循。</p>
+<p>很多人以為「某些號碼比較容易開」，其實每期都是獨立事件，過去開過的號碼不影響未來。彩券的本質是「機率遊戲」，買彩券要量力而為，不要當投資。</p>
+<h3>⚠️ 常見誤解</h3>
+<div class="misconception"><strong>❌「某些號碼比較容易開」</strong> → 錯。每期獨立，過去不影響未來。</div>
+<div class="misconception"><strong>❌「連續買同一組號碼比較容易中」</strong> → 錯。每期機率一樣，不會累積。</div>
+<div class="misconception"><strong>❌「有必中法」</strong> → 沒有。彩券是機率，沒有必中法。</div>
+<div class="misconception"><strong>❌「這個工具會對真實號碼」</strong> → 不會。這是示範，實際請依台彩公告。</div>
+<div class="misconception"><strong>❌「買越多越容易中」</strong> → 機率會增加，但期望值仍是負的。量力而為。</div>
+<h3>🩺 使用時機與注意事項</h3>
+<div class="when-to-use"><strong>✅ 適合：</strong>想整理彩券號碼的人、想了解彩券規則的人。<br><strong>⚠️ 注意：</strong>這是示範工具，開獎號碼是假設的。實際對獎請到台彩官網或使用官方 App。彩券要量力而為，不要當投資。</div>
+<h3>❓ 更多常見問題</h3>
+<h3>大樂透怎麼玩？</h3><p>選 6 個號碼（1-49），對中 3 個以上有獎。每週二、五開獎。</p>
+<h3>威力彩怎麼玩？</h3><p>第一區選 6 個號碼（1-38），第二區選 1 個號碼（1-8）。每週一、四開獎。</p>
+<h3>今彩539怎麼玩？</h3><p>選 5 個號碼（1-39），對中 2 個以上有獎。每天開獎。</p>
+<h3>中獎要扣稅嗎？</h3><p>5000 元以上扣 20% 所得稅。</p>
+<h3>彩券可以捐贈嗎？</h3><p>可以，捐給社福團體。</p>
+</div>
+<div class="faq"><h2 style="color:#D4AF37;font-size:20px;margin:24px 0 12px;">常見問題</h2><h3>這會對真實開獎號碼嗎？</h3><p>不會。這是示範用，開獎號碼是假設的。實際請依台彩公告。</p><h3>彩券格式？</h3><p>一行一筆，例如 01,02,03,04,05,06。</p><h3>大樂透和威力彩差在哪？</h3><p>大樂透 6 個號碼 + 特別號，威力彩 6 個號碼 + 第二區 1 個號碼。</p><h3>中幾個才有獎？</h3><p>大樂透對中 3 個以上有獎，威力彩對中 3 個以上有獎（依當期公告）。</p><h3>資料會上傳嗎？</h3><p>不會，全部在瀏覽器。</p><h3>可以存檔嗎？</h3><p>目前不存檔，建議對完截圖。</p><h3>什麼時候開獎？</h3><p>大樂透每週二、五，威力彩每週一、四。</p><h3>中獎怎麼領？</h3><p>5000 元以下超商領，以上到中信銀。</p><h3>可以列印嗎？</h3><p>可以，按瀏覽器列印。</p><h3>有必中法嗎？</h3><p>沒有。彩券是機率，沒有必中法。</p></div>
+</article>
+<div class="footer"><p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p><p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p></div>
+</div>
+<script>
+function check(){
+  var lines=document.getElementById("nums").value.split("\n").filter(function(x){return x.trim();});
+  // 示範用開獎號碼（非真實）
+  var win=["01","05","12","23","34","45"];
+  var h="<p style='color:#D4AF37;'>示範開獎號碼："+win.join(", ")+"</p>";
+  h+="<table style='width:100%;border-collapse:collapse;font-size:15px;margin-top:12px;'><tr style='color:#D4AF37;'><th style='border:1px solid #2D303A;padding:8px;'>你的號碼</th><th style='border:1px solid #2D303A;padding:8px;'>對中</th></tr>";
+  for(var i=0;i<lines.length;i++){
+    var my=lines[i].split(/[,，\s]+/).filter(function(x){return x;});
+    var hit=0;
+    for(var j=0;j<my.length;j++){
+      if(win.indexOf(my[j].padStart(2,"0"))>=0) hit++;
+    }
+    var color=hit>=3?"#3FB950":(hit>0?"#D4AF37":"#8B949E");
+    h+="<tr><td style='border:1px solid #2D303A;padding:8px;'>"+my.join(", ")+"</td><td style='border:1px solid #2D303A;padding:8px;text-align:center;color:"+color+";font-weight:900;'>"+hit+" 個</td></tr>";
+  }
+  h+="</table>";
+  h+="<p style='font-size:13px;color:#8B949E;margin-top:12px;'>⚠️ 示範號碼，非真實開獎。實際請依台彩公告。</p>";
+  document.getElementById("out").innerHTML=h;
+}
+</script>
+</body>
+</html>
