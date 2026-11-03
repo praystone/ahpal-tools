@@ -26,7 +26,18 @@ button:hover{opacity:0.85;}
 .tip{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:8px;margin:16px 0;font-size:14px;color:#C9D1D9;}
 .footer{text-align:center;margin-top:48px;padding-top:20px;border-top:1px solid #2D303A;color:#8B949E;font-size:13px;}
 .footer a{color:#58A6FF;text-decoration:none;}
-@media print{.ahpal-top-nav,button,.tip{display:none!important;}body{background:#fff;color:#000;}.card{border:1px solid #999;}}</style>
+@media print{.ahpal-top-nav,button,.tip{display:none!important;}body{background:#fff;color:#000;}.card{border:1px solid #999;}}
+.knowledge{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin:20px 0;}
+.knowledge h2{color:#D4AF37;font-size:20px;margin:0 0 12px;}
+.knowledge h3{color:#58A6FF;font-size:16px;margin:18px 0 8px;}
+.knowledge p{color:#C9D1D9;font-size:15px;line-height:1.9;margin-bottom:10px;}
+.knowledge ul{margin:8px 0 12px 20px;color:#C9D1D9;font-size:15px;line-height:1.9;}
+.knowledge li{margin-bottom:6px;}
+.misconception{background:rgba(248,81,73,0.06);border-left:4px solid #F85149;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+.misconception strong{color:#F85149;}
+.when-to-use{background:rgba(63,185,80,0.06);border-left:4px solid #3FB950;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+
+</style>
 </head>
 <body>
 <div class="container">
@@ -55,6 +66,26 @@ button:hover{opacity:0.85;}
 </div>
 <div class="tip">🔒 這個工具<strong>純前端、完全離線、不上傳</strong>。你的資料只留在你的瀏覽器，不會傳到任何伺服器。</div>
 <div class="faq"><h2 style="color:#D4AF37;font-size:20px;margin:24px 0 12px;">常見問題</h2><h3>格式怎麼寫？</h3><p>一行一筆，藥名,時間。例如「血壓藥,08:00」。用半形逗號。</p><h3>可以列印嗎？</h3><p>可以，按「列印貼冰箱」，會自動隱藏按鈕，只印表格。</p><h3>資料會上傳嗎？</h3><p>不會，全部在你瀏覽器。</p><h3>可以存檔嗎？</h3><p>目前不存檔，重新整理會清空。建議產生後直接列印。</p><h3>時間格式？</h3><p>24 小時制，例如 08:00、21:30。</p></div>
+
+<div class="knowledge">
+<h2>📖 吃藥提醒表背後的知識</h2>
+<p>高血壓、糖尿病等慢性病，藥物在體內的濃度需要<strong>穩定</strong>才能發揮效果。自行停藥或漏吃，可能導致血壓/血糖波動，增加中風、視網膜病變、腎病變的風險[citation:7]。許多長輩會因為「今天血壓正常，就不想吃藥」或「覺得副作用多」而自行停藥，這樣反而可能導致病情惡化[citation:7]。家屬可以協助準備一週的藥盒，或在手機設定提醒，幫助長輩按時服藥[citation:7]。</p>
+<h3>⚠️ 常見誤解</h3>
+<div class="misconception"><strong>❌「今天血壓正常，可以不吃藥」</strong> → 血壓正常是因為藥物在作用，停藥會反彈，甚至更高。</div>
+<div class="misconception"><strong>❌「保健食品可以取代藥物」</strong> → 保健食品是輔助，不能取代醫囑。有些保健食品還會與藥物交互作用。</div>
+<div class="misconception"><strong>❌「忘記吃，下次吃兩倍」</strong> → 除非醫生指示，否則不要加倍，可能導致藥物過量或副作用。</div>
+<div class="misconception"><strong>❌「藥吃久了會傷腎」</strong> → 不吃藥控制三高，反而更傷腎。按時服藥才是保護腎臟。</div>
+<div class="misconception"><strong>❌「長輩記性差，提醒也沒用」</strong> → 視覺化大字提醒表貼在冰箱或電話旁，比口頭提醒有效[citation:7]。</div>
+<h3>🩺 使用時機與注意事項</h3>
+<div class="when-to-use"><strong>✅ 適合：</strong>家中長輩、慢性病患者、多重用藥者、術後服藥。<br><strong>⚠️ 注意：</strong>提醒表是輔助，不能取代醫囑。如果長輩反覆忘記吃藥或自行停藥，請帶去給醫生評估，可能需要簡化用藥或調整方案。不要自行更改藥物或劑量。</div>
+<h3>❓ 更多常見問題</h3>
+<h3>可以列印嗎？</h3><p>可以，按「列印貼冰箱」，會自動隱藏按鈕和導航，只印表格。</p>
+<h3>可以存檔嗎？</h3><p>目前不存檔，建議產生後直接列印，或截圖保存。</p>
+<h3>時間格式要怎麼寫？</h3><p>24 小時制，例如 08:00、21:30。用半形逗號分隔藥名和時間。</p>
+<h3>可以加註「飯前/飯後」嗎？</h3><p>可以寫在藥名裡，例如「血壓藥(飯後),08:00」。</p>
+<h3>如果長輩忘記吃，怎麼辦？</h3><p>請依照藥袋上的指示，或諮詢藥師。不要自行加倍。</p>
+</div>
+
 </article>
 <div class="footer"><p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p><p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p></div>
 </div>

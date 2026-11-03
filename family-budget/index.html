@@ -26,7 +26,18 @@ button:hover{opacity:0.85;}
 .tip{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:8px;margin:16px 0;font-size:14px;color:#C9D1D9;}
 .footer{text-align:center;margin-top:48px;padding-top:20px;border-top:1px solid #2D303A;color:#8B949E;font-size:13px;}
 .footer a{color:#58A6FF;text-decoration:none;}
-@media print{.ahpal-top-nav,button,.tip{display:none!important;}body{background:#fff;color:#000;}.card{border:1px solid #999;}}</style>
+@media print{.ahpal-top-nav,button,.tip{display:none!important;}body{background:#fff;color:#000;}.card{border:1px solid #999;}}
+.knowledge{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin:20px 0;}
+.knowledge h2{color:#D4AF37;font-size:20px;margin:0 0 12px;}
+.knowledge h3{color:#58A6FF;font-size:16px;margin:18px 0 8px;}
+.knowledge p{color:#C9D1D9;font-size:15px;line-height:1.9;margin-bottom:10px;}
+.knowledge ul{margin:8px 0 12px 20px;color:#C9D1D9;font-size:15px;line-height:1.9;}
+.knowledge li{margin-bottom:6px;}
+.misconception{background:rgba(248,81,73,0.06);border-left:4px solid #F85149;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+.misconception strong{color:#F85149;}
+.when-to-use{background:rgba(63,185,80,0.06);border-left:4px solid #3FB950;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+
+</style>
 </head>
 <body>
 <div class="container">
@@ -55,6 +66,26 @@ button:hover{opacity:0.85;}
 </div>
 <div class="tip">🔒 這個工具<strong>純前端、完全離線、不上傳</strong>。你的資料只留在你的瀏覽器，不會傳到任何伺服器。</div>
 <div class="faq"><h2 style="color:#D4AF37;font-size:20px;margin:24px 0 12px;">常見問題</h2><h3>格式怎麼寫？</h3><p>一行一筆：日期,分類,金額,備註。例如「2026-11-03,食物,350,晚餐」。</p><h3>資料會上傳嗎？</h3><p>不會，全部在你瀏覽器，離線也能用。</p><h3>可以存檔嗎？</h3><p>目前不存檔，建議用完自己複製保存，或列印。</p><h3>可以做月結嗎？</h3><p>可以，把當月資料貼進來，按「計算」就會分類統計。</p><h3>支援多幣別嗎？</h3><p>目前只算數字，幣別請自行統一。</p></div>
+
+<div class="knowledge">
+<h2>📖 家庭記帳背後的知識</h2>
+<p>記帳不是為了「省錢」而已，是為了<strong>「看清楚錢去哪裡」</strong>。很多家庭月底覺得「錢怎麼不見了」，其實是沒有分類。把開銷分成「食物、交通、娛樂、房租、醫療、教育」等類別，一個月後看佔比，就會發現「原來娛樂花這麼多」或「醫療比想像中高」。知道之後，才能做調整。小店老闆也可以用：進貨、水電、人事、雜支分開記，才知道真正賺多少。</p>
+<h3>⚠️ 常見誤解</h3>
+<div class="misconception"><strong>❌「記帳就是不能花錢」</strong> → 記帳是「有意識地花」，不是「不花」。知道錢去哪，才能花在真正重要的事上。</div>
+<div class="misconception"><strong>❌「賺太少不用記」</strong> → 賺越少越要記，因為每一塊錢都重要。記了才知道哪裡可以省。</div>
+<div class="misconception"><strong>❌「記了也不會變有錢」</strong> → 記帳不會直接變有錢，但會讓你「不再糊塗花錢」。長期下來差很多。</div>
+<div class="misconception"><strong>❌「用 App 比較方便」</strong> → App 要註冊、要上傳、有隱私風險。這個工具純前端、不上傳、離線可用。</div>
+<div class="misconception"><strong>❌「一個月記一次就好」</strong> → 一個月記一次會忘。每天花 1 分鐘記，比月底回想 1 小時輕鬆。</div>
+<h3>🩺 使用時機與注意事項</h3>
+<div class="when-to-use"><strong>✅ 適合：</strong>家庭主婦/主夫、小店老闆、想了解開銷結構的人、準備存錢或還債的人。<br><strong>⚠️ 注意：</strong>這個工具不連結銀行帳戶，資料只在你瀏覽器。建議每天或每週固定時間記，養成習慣比「記得很細」重要。</div>
+<h3>❓ 更多常見問題</h3>
+<h3>格式怎麼寫？</h3><p>一行一筆：日期,分類,金額,備註。例如「2026-11-03,食物,350,晚餐」。</p>
+<h3>可以列印嗎？</h3><p>可以，按「列印月結」，會印出分類統計和佔比。</p>
+<h3>資料會上傳嗎？</h3><p>不會，全部在你瀏覽器，離線也能用。</p>
+<h3>可以做年度統計嗎？</h3><p>把一年資料貼進來，按「計算」就會分類統計。但資料量大時瀏覽器可能變慢。</p>
+<h3>支援多幣別嗎？</h3><p>目前只算數字，幣別請自行統一。</p>
+</div>
+
 </article>
 <div class="footer"><p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p><p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p></div>
 </div>

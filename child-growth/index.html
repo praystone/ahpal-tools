@@ -26,7 +26,18 @@ button:hover{opacity:0.85;}
 .tip{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:8px;margin:16px 0;font-size:14px;color:#C9D1D9;}
 .footer{text-align:center;margin-top:48px;padding-top:20px;border-top:1px solid #2D303A;color:#8B949E;font-size:13px;}
 .footer a{color:#58A6FF;text-decoration:none;}
-@media print{.ahpal-top-nav,button,.tip{display:none!important;}body{background:#fff;color:#000;}.card{border:1px solid #999;}}</style>
+@media print{.ahpal-top-nav,button,.tip{display:none!important;}body{background:#fff;color:#000;}.card{border:1px solid #999;}}
+.knowledge{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin:20px 0;}
+.knowledge h2{color:#D4AF37;font-size:20px;margin:0 0 12px;}
+.knowledge h3{color:#58A6FF;font-size:16px;margin:18px 0 8px;}
+.knowledge p{color:#C9D1D9;font-size:15px;line-height:1.9;margin-bottom:10px;}
+.knowledge ul{margin:8px 0 12px 20px;color:#C9D1D9;font-size:15px;line-height:1.9;}
+.knowledge li{margin-bottom:6px;}
+.misconception{background:rgba(248,81,73,0.06);border-left:4px solid #F85149;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+.misconception strong{color:#F85149;}
+.when-to-use{background:rgba(63,185,80,0.06);border-left:4px solid #3FB950;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+
+</style>
 </head>
 <body>
 <div class="container">
@@ -54,6 +65,26 @@ button:hover{opacity:0.85;}
 </div>
 <div class="tip">🔒 這個工具<strong>純前端、完全離線、不上傳</strong>。你的資料只留在你的瀏覽器，不會傳到任何伺服器。</div>
 <div class="faq"><h2 style="color:#D4AF37;font-size:20px;margin:24px 0 12px;">常見問題</h2><h3>怎麼用？</h3><p>先填生日，再把每次測量的日期、身高、體重貼進來，按「計算」就會算出月齡。</p><h3>會判斷正常嗎？</h3><p>不會。這個工具只整理數據，判斷請交給小兒科醫生。</p><h3>資料會上傳嗎？</h3><p>不會，全部在你瀏覽器。</p><h3>可以畫曲線嗎？</h3><p>目前只列成表格，曲線圖未來可加。</p><h3>月齡怎麼算？</h3><p>用測量日減生日，換算成月（除以 30.44 天）。</p></div>
+
+<div class="knowledge">
+<h2>📖 小孩成長曲線背後的知識</h2>
+<p>家長最常問：「我的孩子這樣正常嗎？」與其憑感覺，不如<strong>記錄下來、看趨勢</strong>。身高、體重、頭圍的成長曲線，是兒科醫生判斷「有沒有跟上」的重要依據。但要注意：<strong>每個孩子有自己的成長節奏</strong>，曲線的「百分位」不是「分數」，P50 不代表「剛好」，P15 也不代表「不及格」。看趨勢比看單點重要：如果一直沿著同一條百分位走，通常沒問題；如果突然掉超過兩條線，才需要擔心。</p>
+<h3>⚠️ 常見誤解</h3>
+<div class="misconception"><strong>❌「P50 才是正常，P15 就是太矮」</strong> → 百分位是「在 100 個同年齡小孩中的排名」，P15 代表贏過 15 個人，不是「不及格」。只要沿著自己的曲線走，通常正常。</div>
+<div class="misconception"><strong>❌「多吃就會長高」</strong> → 營養是基礎，但過度餵食可能導致肥胖，反而影響生長。均衡飲食、充足睡眠、適當運動才是關鍵。</div>
+<div class="misconception"><strong>❌「這個工具會判斷正常異常」</strong> → 不會。它只整理數據、算月齡。判斷請交給小兒科醫生。</div>
+<div class="misconception"><strong>❌「量一次就知道」</strong> → 單次測量誤差大（尤其身高，早晚差 1~2 公分）。建議固定時間（早上）、固定方式量，看長期趨勢。</div>
+<div class="misconception"><strong>❌「成長曲線只有身高體重」</strong> → 還有頭圍（嬰兒期）、BMI、發展里程碑。這個工具目前只整理身高體重。</div>
+<h3>🩺 使用時機與注意事項</h3>
+<div class="when-to-use"><strong>✅ 適合：</strong>家長記錄孩子成長、回診前整理數據、幼兒園/學校健康檢查後追蹤。<br><strong>⚠️ 注意：</strong>這個工具不提供醫療建議。如果孩子生長曲線掉超過兩條線、或出現食慾差、活動力下降，請就醫。早產兒的矯正年齡算法不同，請諮詢醫生。</div>
+<h3>❓ 更多常見問題</h3>
+<h3>怎麼用？</h3><p>先填生日，再把每次測量的日期、身高、體重貼進來，按「計算」就會算出月齡。</p>
+<h3>月齡怎麼算？</h3><p>用測量日減生日，換算成月（除以 30.44 天）。這是估算，精確月齡請用日期計算。</p>
+<h3>資料會上傳嗎？</h3><p>不會，全部在你瀏覽器。</p>
+<h3>可以畫曲線圖嗎？</h3><p>目前只列成表格，曲線圖未來可加。你也可以把表格貼到 Excel 畫圖。</p>
+<h3>早產兒怎麼算？</h3><p>早產兒通常用「矯正年齡」到 2 歲，請諮詢醫生。這個工具用實際生日，沒有矯正功能。</p>
+</div>
+
 </article>
 <div class="footer"><p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p><p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p></div>
 </div>

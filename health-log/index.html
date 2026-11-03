@@ -26,7 +26,18 @@ button:hover{opacity:0.85;}
 .tip{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:8px;margin:16px 0;font-size:14px;color:#C9D1D9;}
 .footer{text-align:center;margin-top:48px;padding-top:20px;border-top:1px solid #2D303A;color:#8B949E;font-size:13px;}
 .footer a{color:#58A6FF;text-decoration:none;}
-@media print{.ahpal-top-nav,button,.tip{display:none!important;}body{background:#fff;color:#000;}.card{border:1px solid #999;}}</style>
+@media print{.ahpal-top-nav,button,.tip{display:none!important;}body{background:#fff;color:#000;}.card{border:1px solid #999;}}
+.knowledge{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin:20px 0;}
+.knowledge h2{color:#D4AF37;font-size:20px;margin:0 0 12px;}
+.knowledge h3{color:#58A6FF;font-size:16px;margin:18px 0 8px;}
+.knowledge p{color:#C9D1D9;font-size:15px;line-height:1.9;margin-bottom:10px;}
+.knowledge ul{margin:8px 0 12px 20px;color:#C9D1D9;font-size:15px;line-height:1.9;}
+.knowledge li{margin-bottom:6px;}
+.misconception{background:rgba(248,81,73,0.06);border-left:4px solid #F85149;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+.misconception strong{color:#F85149;}
+.when-to-use{background:rgba(63,185,80,0.06);border-left:4px solid #3FB950;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+
+</style>
 </head>
 <body>
 <div class="container">
@@ -53,6 +64,26 @@ button:hover{opacity:0.85;}
 </div>
 <div class="tip">🔒 這個工具<strong>純前端、完全離線、不上傳</strong>。你的資料只留在你的瀏覽器，不會傳到任何伺服器。</div>
 <div class="faq"><h2 style="color:#D4AF37;font-size:20px;margin:24px 0 12px;">常見問題</h2><h3>格式怎麼寫？</h3><p>一行一筆：日期,收縮壓,舒張壓,血糖。血糖可省略。例如「2026-11-03,120,80,95」。</p><h3>會幫我判斷正常嗎？</h3><p>不會。這個工具只算平均值和列表，判斷請交給醫生。</p><h3>可以列印嗎？</h3><p>可以，按「列印給醫生看」，會印出平均值和明細表。</p><h3>資料會上傳嗎？</h3><p>不會，全部在你瀏覽器。</p><h3>可以存檔嗎？</h3><p>目前不存檔，建議產生後列印或自行複製保存。</p></div>
+
+<div class="knowledge">
+<h2>📖 血壓血糖記錄背後的知識</h2>
+<p>血壓、血糖、體重等數據，建議<strong>固定測量並記錄</strong>下來。當數值明顯偏高或偏低，或出現胸悶、呼吸困難、突然頭暈跌倒等症狀，就要及時就醫。很多急性惡化，其實在日常監測中早已有跡可循[citation:7]。高齡醫學專家也提醒，三高管理不是「數字愈低愈好」，過度嚴格控制反而可能增加低血壓、低血糖及跌倒風險[citation:14]。記錄的目的是「給醫生看趨勢」，不是「自己當醫生」。</p>
+<h3>⚠️ 常見誤解</h3>
+<div class="misconception"><strong>❌「血壓量一次正常就代表正常」</strong> → 血壓會波動，單次正常不代表整天正常。建議固定時間量，記錄趨勢。</div>
+<div class="misconception"><strong>❌「血糖愈低愈好」</strong> → 低血糖比高血糖更危險，可能昏迷。控制目標要由醫生依年齡、共病訂定[citation:14]。</div>
+<div class="misconception"><strong>❌「記錄只是給自己看」</strong> → 回診時給醫生看趨勢，醫生才能調藥。只說「最近還好啦」醫生很難判斷。</div>
+<div class="misconception"><strong>❌「量完不用寫，我記得」</strong> → 人會忘記，尤其長輩。寫下來或輸入工具，回診才不會漏。</div>
+<div class="misconception"><strong>❌「這個工具會幫我判斷正常異常」</strong> → 不會。它只算平均值和列表，判斷請交給醫生。</div>
+<h3>🩺 使用時機與注意事項</h3>
+<div class="when-to-use"><strong>✅ 適合：</strong>高血壓、糖尿病、高血脂患者、銀髮族、回診前整理數據。<br><strong>⚠️ 注意：</strong>這個工具不提供醫療建議。數值異常請就醫。記錄時註明「量測時間」（早上/晚上、飯前/飯後），醫生判讀更準確。</div>
+<h3>❓ 更多常見問題</h3>
+<h3>格式怎麼寫？</h3><p>一行一筆：日期,收縮壓,舒張壓,血糖。血糖可省略。例如「2026-11-03,120,80,95」。</p>
+<h3>可以列印嗎？</h3><p>可以，按「列印給醫生看」，會印出平均值和明細表。</p>
+<h3>資料會上傳嗎？</h3><p>不會，全部在你瀏覽器，離線也能用。</p>
+<h3>可以記錄體重嗎？</h3><p>目前只記錄血壓血糖，體重記錄未來可加。</p>
+<h3>幾天內的資料算「最近」？</h3><p>醫生通常看 1~2 週的趨勢，建議至少記錄一週再回診。</p>
+</div>
+
 </article>
 <div class="footer"><p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p><p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p></div>
 </div>

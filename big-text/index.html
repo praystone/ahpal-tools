@@ -26,7 +26,18 @@ button:hover{opacity:0.85;}
 .tip{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:8px;margin:16px 0;font-size:14px;color:#C9D1D9;}
 .footer{text-align:center;margin-top:48px;padding-top:20px;border-top:1px solid #2D303A;color:#8B949E;font-size:13px;}
 .footer a{color:#58A6FF;text-decoration:none;}
-@media print{.ahpal-top-nav,button,.tip{display:none!important;}body{background:#fff;color:#000;}.card{border:1px solid #999;}}</style>
+@media print{.ahpal-top-nav,button,.tip{display:none!important;}body{background:#fff;color:#000;}.card{border:1px solid #999;}}
+.knowledge{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin:20px 0;}
+.knowledge h2{color:#D4AF37;font-size:20px;margin:0 0 12px;}
+.knowledge h3{color:#58A6FF;font-size:16px;margin:18px 0 8px;}
+.knowledge p{color:#C9D1D9;font-size:15px;line-height:1.9;margin-bottom:10px;}
+.knowledge ul{margin:8px 0 12px 20px;color:#C9D1D9;font-size:15px;line-height:1.9;}
+.knowledge li{margin-bottom:6px;}
+.misconception{background:rgba(248,81,73,0.06);border-left:4px solid #F85149;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+.misconception strong{color:#F85149;}
+.when-to-use{background:rgba(63,185,80,0.06);border-left:4px solid #3FB950;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+
+</style>
 </head>
 <body>
 <div class="container">
@@ -53,6 +64,26 @@ button:hover{opacity:0.85;}
 </div>
 <div class="tip">🔒 這個工具<strong>純前端、完全離線、不上傳</strong>。你的資料只留在你的瀏覽器，不會傳到任何伺服器。</div>
 <div class="faq"><h2 style="color:#D4AF37;font-size:20px;margin:24px 0 12px;">常見問題</h2><h3>大字報怎麼用？</h3><p>在上面輸入文字，選字級，按「全螢幕顯示」，字就會變超大。可以按「列印」印出來。</p><h3>為什麼要大字報？</h3><p>給長輩看、給店員看、給距離遠的人看。不用調手機字體，直接全螢幕。</p><h3>資料會上傳嗎？</h3><p>不會。全部在瀏覽器處理，離線也能用。</p><h3>可以列印嗎？</h3><p>可以，按「列印」會自動隱藏按鈕和導航，只印文字。</p><h3>字最大可以多大？</h3><p>目前 180px，若要更大可以自行調整瀏覽器縮放。</p></div>
+
+<div class="knowledge">
+<h2>📖 大字報背後的知識</h2>
+<p>大字報不是「把字變大」這麼簡單。它的核心是<strong>「降低溝通門檻」</strong>。在台灣，許多長輩有老花、白內障，或只是不習慣調手機字體。與其教他們調設定，不如直接給他們一個「輸入就變大」的工具。店員、藥師、櫃檯人員也能用：客人聽不清楚，直接把文字打在螢幕上，比手畫腳少了，溝通就順了。</p>
+<h3>⚠️ 常見誤解</h3>
+<div class="misconception"><strong>❌「字變大就好，不用管排版」</strong> → 大字報如果字太大超出螢幕，反而要滑動，失去「一眼看懂」的意義。選字級要配合螢幕大小。</div>
+<div class="misconception"><strong>❌「只有老人需要」</strong> → 吵雜環境（夜市、工地、演唱會）、語言不通（新住民、外國旅客）、聽障朋友，都需要視覺化溝通。</div>
+<div class="misconception"><strong>❌「螢幕亮度調最亮就清楚」</strong> → 太亮反而刺眼，室內用中等亮度、對比色（白底黑字或黑底白字）最清楚。</div>
+<div class="misconception"><strong>❌「手機字體調大就好」</strong> → 手機系統字體調大，有些 App 不會跟著變，而且最大也有限。大字報是「全螢幕」放大。</div>
+<div class="misconception"><strong>❌「列印出來就好，不用螢幕」</strong> → 即時溝通（點餐、問路、購物）需要螢幕，列印是「事前準備」用的。</div>
+<h3>🩺 使用時機與注意事項</h3>
+<div class="when-to-use"><strong>✅ 適合：</strong>跟長輩溝通、店員與客人對話、吵雜環境、語言不通、視障朋友輔助。<br><strong>⚠️ 注意：</strong>不要用來取代醫療溝通（病情、用藥請還是口頭確認）；不要輸入敏感個資在公用裝置上。</div>
+<h3>❓ 更多常見問題</h3>
+<h3>大字報可以離線用嗎？</h3><p>可以，全部在瀏覽器處理，斷網也能用。</p>
+<h3>可以改變顏色嗎？</h3><p>目前是黑底白字，未來可加「白底黑字」選項給不同需求。</p>
+<h3>字最大可以多大？</h3><p>目前 180px，若要更大可以縮放瀏覽器（Ctrl + 加號）。</p>
+<h3>可以用在平板上嗎？</h3><p>可以，平板螢幕更大，效果更好。</p>
+<h3>資料會存在哪裡？</h3><p>不會存在任何地方，重新整理就清空。這是隱私設計。</p>
+</div>
+
 </article>
 <div class="footer"><p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p><p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p></div>
 </div>

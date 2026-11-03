@@ -26,7 +26,18 @@ button:hover{opacity:0.85;}
 .tip{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:8px;margin:16px 0;font-size:14px;color:#C9D1D9;}
 .footer{text-align:center;margin-top:48px;padding-top:20px;border-top:1px solid #2D303A;color:#8B949E;font-size:13px;}
 .footer a{color:#58A6FF;text-decoration:none;}
-@media print{.ahpal-top-nav,button,.tip{display:none!important;}body{background:#fff;color:#000;}.card{border:1px solid #999;}}</style>
+@media print{.ahpal-top-nav,button,.tip{display:none!important;}body{background:#fff;color:#000;}.card{border:1px solid #999;}}
+.knowledge{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin:20px 0;}
+.knowledge h2{color:#D4AF37;font-size:20px;margin:0 0 12px;}
+.knowledge h3{color:#58A6FF;font-size:16px;margin:18px 0 8px;}
+.knowledge p{color:#C9D1D9;font-size:15px;line-height:1.9;margin-bottom:10px;}
+.knowledge ul{margin:8px 0 12px 20px;color:#C9D1D9;font-size:15px;line-height:1.9;}
+.knowledge li{margin-bottom:6px;}
+.misconception{background:rgba(248,81,73,0.06);border-left:4px solid #F85149;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+.misconception strong{color:#F85149;}
+.when-to-use{background:rgba(63,185,80,0.06);border-left:4px solid #3FB950;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+
+</style>
 </head>
 <body>
 <div class="container">
@@ -54,6 +65,26 @@ button:hover{opacity:0.85;}
 </div>
 <div class="tip">🔒 這個工具<strong>純前端、完全離線、不上傳</strong>。你的資料只留在你的瀏覽器，不會傳到任何伺服器。</div>
 <div class="faq"><h2 style="color:#D4AF37;font-size:20px;margin:24px 0 12px;">常見問題</h2><h3>格式怎麼寫？</h3><p>一行一筆：食材,購買日,保存天數。例如「牛奶,2026-11-01,7」。</p><h3>會提醒我嗎？</h3><p>不會主動提醒，但會把快過期的排在最上面，用顏色標示。</p><h3>資料會上傳嗎？</h3><p>不會，全部在你瀏覽器。</p><h3>可以存檔嗎？</h3><p>目前不存檔，建議需要時重新輸入或自行複製保存。</p><h3>保存天數怎麼算？</h3><p>冷藏、冷凍、常溫不同，請依實際情況填。</p></div>
+
+<div class="knowledge">
+<h2>📖 食材保存期限背後的知識</h2>
+<p>冰箱不是「保險箱」。很多食材放進去就忘了，等到發現時已經過期。這個工具幫你把「到期日」算出來、排序，快過期的排最上面，用顏色標示。但要注意：<strong>保存期限是「參考」，不是「絕對」</strong>。冷藏、冷凍、常溫的保存天數不同；開封後通常更短。與其完全相信數字，不如「看、聞、摸」——顏色變了、味道變了、質地變了，就算沒過期也不要吃。</p>
+<h3>⚠️ 常見誤解</h3>
+<div class="misconception"><strong>❌「放冰箱就不會壞」</strong> → 冰箱只能減緩細菌生長，不能停止。有些菌（如李斯特菌）在低溫下仍能生長。</div>
+<div class="misconception"><strong>❌「過期一天就不能吃」</strong> → 保存期限是「最佳賞味」或「安全邊界」，過期一天不一定壞，但風險增加。高風險食材（生肉、海鮮、蛋）過期就丟。</div>
+<div class="misconception"><strong>❌「冷凍可以放一輩子」</strong> → 冷凍可以放很久，但品質會下降（口感、營養）。建議 3~6 個月內吃完。</div>
+<div class="misconception"><strong>❌「看起來沒壞就可以吃」</strong> → 有些細菌（如金黃色葡萄球菌）產生的毒素，加熱也無法破壞，聞起來正常也可能食物中毒。</div>
+<div class="misconception"><strong>❌「這個工具會提醒我」</strong> → 不會主動提醒，它只是「幫你算、幫你排」。要提醒請自己設手機鬧鐘。</div>
+<h3>🩺 使用時機與注意事項</h3>
+<div class="when-to-use"><strong>✅ 適合：</strong>家庭採買後整理、冰箱庫存管理、減少食物浪費、小店食材管理。<br><strong>⚠️ 注意：</strong>保存天數請依實際情況填（冷藏/冷凍/常溫不同）。開封後通常更短。高風險食材（生肉、海鮮、蛋、乳製品）過期就丟，不要冒險。</div>
+<h3>❓ 更多常見問題</h3>
+<h3>格式怎麼寫？</h3><p>一行一筆：食材,購買日,保存天數。例如「牛奶,2026-11-01,7」。</p>
+<h3>保存天數怎麼查？</h3><p>包裝上通常有標示。沒有的話，可以查衛福部食藥署的「食品保存期限參考表」。</p>
+<h3>資料會上傳嗎？</h3><p>不會，全部在你瀏覽器。</p>
+<h3>可以列印嗎？</h3><p>可以，按瀏覽器列印（Ctrl+P），會印出表格。</p>
+<h3>可以記錄「開封日」嗎？</h3><p>可以，把開封日當購買日，保存天數填「開封後可放天數」。</p>
+</div>
+
 </article>
 <div class="footer"><p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p><p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p></div>
 </div>
