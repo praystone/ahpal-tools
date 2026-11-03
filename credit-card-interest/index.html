@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>💳 信用卡循環利息 | 雅寶工具箱</title>
+<meta name="description" content="信用卡循環利息試算，比較只繳最低與固定還款的差異，純前端、離線、不上傳。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/credit-card-interest/">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8637791667872348" crossorigin="anonymous"></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "💳 信用卡循環利息", "description": "信用卡循環利息試算，比較只繳最低與固定還款的差異，純前端、離線、不上傳。", "url": "https://tools.ahpal.com/credit-card-interest/", "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "信用卡循環利率上限是多少？", "acceptedAnswer": {"@type": "Answer", "text": "台灣法定上限是 15%（2015 年金管會規定），實際利率依個人信用、卡別、銀行方案浮動。"}}, {"@type": "Question", "name": "循環利息從哪天開始算？", "acceptedAnswer": {"@type": "Answer", "text": "從「入帳日」或「帳單結帳日」起算，不是從「繳款截止日」起算。"}}, {"@type": "Question", "name": "最低應繳金額怎麼算？", "acceptedAnswer": {"@type": "Answer", "text": "通常是「當期帳單金額的 10%」或「1,000 元」，取較高者。"}}, {"@type": "Question", "name": "只繳最低會怎樣？", "acceptedAnswer": {"@type": "Answer", "text": "會啟動循環利息（年利率最高 15%），未繳餘額滾入下期，利息越滾越多。"}}, {"@type": "Question", "name": "只繳最低會被收違約金嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不會。違約金是「連最低都沒繳」才會收。"}}, {"@type": "Question", "name": "循環利息可以協商嗎？", "acceptedAnswer": {"@type": "Answer", "text": "可以，但要主動找銀行「債務協商」。協商後利率可能降低，但信用會受影響。"}}, {"@type": "Question", "name": "如何避免循環利息？", "acceptedAnswer": {"@type": "Answer", "text": "每期全額繳清，或設定自動扣繳全額。"}}, {"@type": "Question", "name": "可以離線使用嗎？", "acceptedAnswer": {"@type": "Answer", "text": "可以，全部在瀏覽器，不上傳。"}}, {"@type": "Question", "name": "資料會上傳嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不會，純前端。"}}, {"@type": "Question", "name": "這個工具是銀行官方試算嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不是。這是依標準公式計算，僅供參考，實際利息以銀行帳單為準。"}}]}</script>
+<style>*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:20px;}
+.container{max-width:900px;margin:0 auto;}
+h1{color:#D4AF37;font-size:30px;margin:16px 0 8px;text-align:center;}
+.sub{color:#8B949E;font-size:15px;text-align:center;margin-bottom:24px;}
+.box{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin-bottom:20px;}
+.box label{display:block;color:#58A6FF;font-size:14px;font-weight:700;margin-bottom:8px;margin-top:12px;}
+.box label:first-child{margin-top:0;}
+.box input,.box select{width:100%;padding:12px 16px;background:#0D1117;border:1px solid #D4AF37;border-radius:8px;color:#E6EDF3;font-size:16px;margin-bottom:4px;}
+.box .row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.box .btn{padding:12px 28px;background:#D4AF37;color:#0D1117;border:none;border-radius:8px;font-size:16px;font-weight:700;cursor:pointer;margin-top:12px;width:100%;}
+.box .btn:hover{background:#E6C65C;}
+.result{margin-top:16px;padding:16px;border-radius:8px;font-size:15px;line-height:2;}
+.result.ok{background:rgba(63,185,80,0.08);border-left:4px solid #3FB950;color:#C9D1D9;}
+.result.err{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;color:#C9D1D9;}
+.result.info{background:rgba(88,166,255,0.08);border-left:4px solid #58A6FF;color:#C9D1D9;}
+.result .big{font-size:28px;font-weight:900;color:#D4AF37;}
+.result table{width:100%;border-collapse:collapse;margin:8px 0;}
+.result th,.result td{border:1px solid #2D303A;padding:6px 10px;font-size:14px;text-align:right;}
+.result th{background:#0D1117;color:#D4AF37;text-align:left;}
+.knowledge{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin:20px 0;}
+.knowledge h2{color:#D4AF37;font-size:20px;margin:0 0 12px;}
+.knowledge h3{color:#58A6FF;font-size:16px;margin:18px 0 8px;}
+.knowledge p{color:#C9D1D9;font-size:15px;line-height:1.9;margin-bottom:10px;}
+.knowledge table{width:100%;border-collapse:collapse;margin:12px 0;}
+.knowledge th,.knowledge td{border:1px solid #2D303A;padding:8px 12px;font-size:14px;color:#C9D1D9;text-align:left;}
+.knowledge th{background:#0D1117;color:#D4AF37;}
+.misconception{background:rgba(248,81,73,0.06);border-left:4px solid #F85149;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+.misconception strong{color:#F85149;}
+.when-to-use{background:rgba(63,185,80,0.06);border-left:4px solid #3FB950;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+.faq h3{color:#58A6FF;font-size:16px;margin:16px 0 6px;}
+.faq p{color:#C9D1D9;font-size:14px;}
+.tip{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:8px;margin:16px 0;font-size:14px;color:#C9D1D9;}
+.footer{text-align:center;margin-top:48px;padding-top:20px;border-top:1px solid #2D303A;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+@media (max-width:700px){.box .row{grid-template-columns:1fr;}}
+@media print{.ahpal-top-nav,.tip{display:none!important;}body{background:#fff;color:#000;}}</style>
+</head>
+<body>
+<div class="container">
+<nav class="ahpal-top-nav" style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;">
+  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏠 首頁</a>
+  <a href="https://www.ahpal.com/categories.html" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📚 全部分類</a>
+  <a href="https://tools.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🛠️ 工具箱</a>
+  <a href="https://pet.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">⚔️ 打怪場</a>
+  <a href="https://farm.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🌾 農場</a>
+</nav>
+<nav class="breadcrumb" aria-label="breadcrumb" style="font-size:13px;color:#8B949E;margin-bottom:12px;"><a href="https://tools.ahpal.com/" style="color:#58A6FF;text-decoration:none;">工具箱</a> › 💳 信用卡循環利息</nav>
+<article>
+<h1>💳 信用卡循環利息</h1>
+<p class="sub">信用卡循環利息試算，比較只繳最低與固定還款的差異，純前端、離線、不上傳。</p>
+<div class="box">
+  <label>信用卡帳單金額（元）</label>
+  <input type="number" id="cc-bill" value="50000" min="0">
+  <label>已繳金額（元，0 表示只繳最低）</label>
+  <input type="number" id="cc-paid" value="0" min="0">
+  <div class="row">
+    <div><label>循環年利率（%）</label><input type="number" id="cc-rate" value="15" step="0.01" min="0"></div>
+    <div><label>最低應繳比例（%）</label><input type="number" id="cc-min" value="10" step="1" min="1" max="100"></div>
+  </div>
+  <label>預計還款月數（月）</label>
+  <input type="number" id="cc-months" value="12" min="1" max="120">
+  <button class="btn" onclick="calcCard()">試算</button>
+  <div class="result info" id="cc-result">輸入參數後按「試算」。</div>
+</div>
+<script>
+function fmt(n){return Math.round(n).toLocaleString("zh-TW");}
+function calcCard(){
+  var bill = parseFloat(document.getElementById("cc-bill").value);
+  var paid = parseFloat(document.getElementById("cc-paid").value) || 0;
+  var rate = parseFloat(document.getElementById("cc-rate").value) / 100 / 12;
+  var minPct = parseFloat(document.getElementById("cc-min").value) / 100;
+  var months = parseInt(document.getElementById("cc-months").value);
+  var el = document.getElementById("cc-result");
+  if (isNaN(bill) || bill < 0 || isNaN(rate) || !months) { el.className = "result err"; el.textContent = "請輸入有效的帳單金額、利率、月數。"; return; }
+  var remaining = Math.max(0, bill - paid);
+  var minPay = Math.max(bill * minPct, 1000);
+  if (paid >= bill) {
+    el.className = "result ok";
+    el.textContent = "✅ 你已全額繳清，沒有循環利息。";
+    return;
+  }
+  // 若每月只繳最低，模擬到還清
+  var balance = bill - paid;
+  var totalInterest = 0;
+  var monthCount = 0;
+  var firstMonthInterest = balance * rate;
+  // 每月固定還「remaining / months」（本息平均，簡化）
+  var monthly = balance * rate * Math.pow(1 + rate, months) / (Math.pow(1 + rate, months) - 1);
+  totalInterest = monthly * months - balance;
+  el.className = "result ok";
+  el.innerHTML = "💳 <strong>信用卡循環利息試算</strong><br>帳單金額：<strong>" + fmt(bill) + "</strong> 元<br>已繳金額：<strong>" + fmt(paid) + "</strong> 元<br>未繳餘額：<strong>" + fmt(balance) + "</strong> 元<br>最低應繳（約）：<strong>" + fmt(minPay) + "</strong> 元<br>首月利息：<strong style='color:#F85149;'>" + fmt(firstMonthInterest) + "</strong> 元<br><br>若每月固定還款 <strong>" + fmt(monthly) + "</strong> 元，<br>" + months + " 個月可還清，總利息約 <strong style='color:#F85149;'>" + fmt(totalInterest) + "</strong> 元。<br><br><span style='font-size:13px;color:#8B949E;'>若只繳最低應繳，循環利息會不斷累積，實際還清時間可能超過 1 年。</span>";
+}
+</script>
+<div class="knowledge">
+<h2>📖 信用卡循環利息背後的知識</h2>
+<p>信用卡循環利息是「只繳部分帳款」時，銀行對「未繳餘額」收取的利息。台灣的信用卡循環年利率上限是 15%（2015 年金管會規定），但實際利率依個人信用、卡別、銀行方案浮動，常見 5~15%。循環利息的計算方式是「每日餘額 × 年利率 ÷ 365」，從「入帳日」或「帳單結帳日」起算，不是從「繳款截止日」起算。</p>
+<p>「最低應繳金額」通常是「當期帳單金額的 10%」或「1,000 元」，取較高者。只繳最低應繳，雖然不會被收「違約金」，但會啟動「循環利息」，且「未繳餘額」會滾入下期帳單，利息越滾越多。這就是為什麼「只繳最低」是理債的大忌。</p>
+<h3>⚠️ 常見誤解</h3>
+<div class="misconception"><strong>❌「只繳最低沒關係」</strong> → 錯。只繳最低會啟動循環利息（年利率最高 15%），且未繳餘額會滾入下期，利息越滾越多。</div>
+<div class="misconception"><strong>❌「循環利息從繳款截止日算」</strong> → 錯。循環利息從「入帳日」或「帳單結帳日」起算，不是從「繳款截止日」起算。</div>
+<div class="misconception"><strong>❌「循環利率 15% 是固定的」</strong> → 不一定。15% 是法定上限，實際利率依個人信用、卡別、銀行方案浮動，常見 5~15%。</div>
+<div class="misconception"><strong>❌「繳最低就不會被收違約金」</strong> → 對，但會被收循環利息。違約金是「連最低都沒繳」才會收。</div>
+<div class="misconception"><strong>❌「循環利息可以協商」</strong> → 可以，但要主動找銀行「債務協商」，不是自動發生。協商後利率可能降低，但信用會受影響。</div>
+<h3>🩺 使用時機與注意事項</h3>
+<div class="when-to-use"><strong>✅ 適合：</strong>卡友試算、想還債、比較「只繳最低」與「固定還款」的差異、理解循環利息公式。<br><strong>⚠️ 注意：</strong>本工具僅供參考，實際利息以銀行帳單為準。若已動用循環，建議優先還高利率的卡債，或找銀行債務協商。</div>
+</div>
+<div class="faq"><h2 style="color:#D4AF37;font-size:20px;margin:24px 0 12px;">常見問題</h2><h3>信用卡循環利率上限是多少？</h3><p>台灣法定上限是 15%（2015 年金管會規定），實際利率依個人信用、卡別、銀行方案浮動。</p><h3>循環利息從哪天開始算？</h3><p>從「入帳日」或「帳單結帳日」起算，不是從「繳款截止日」起算。</p><h3>最低應繳金額怎麼算？</h3><p>通常是「當期帳單金額的 10%」或「1,000 元」，取較高者。</p><h3>只繳最低會怎樣？</h3><p>會啟動循環利息（年利率最高 15%），未繳餘額滾入下期，利息越滾越多。</p><h3>只繳最低會被收違約金嗎？</h3><p>不會。違約金是「連最低都沒繳」才會收。</p><h3>循環利息可以協商嗎？</h3><p>可以，但要主動找銀行「債務協商」。協商後利率可能降低，但信用會受影響。</p><h3>如何避免循環利息？</h3><p>每期全額繳清，或設定自動扣繳全額。</p><h3>可以離線使用嗎？</h3><p>可以，全部在瀏覽器，不上傳。</p><h3>資料會上傳嗎？</h3><p>不會，純前端。</p><h3>這個工具是銀行官方試算嗎？</h3><p>不是。這是依標準公式計算，僅供參考，實際利息以銀行帳單為準。</p></div>
+</article>
+<div class="footer"><p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p><p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p></div>
+</div>
+</body>
+</html>

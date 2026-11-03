@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>🚗 車貸試算 | 雅寶工具箱</title>
+<meta name="description" content="車貸每月應繳、總利息試算，含頭期款與期數，純前端、離線、不上傳。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/car-loan-calculator/">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8637791667872348" crossorigin="anonymous"></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "🚗 車貸試算", "description": "車貸每月應繳、總利息試算，含頭期款與期數，純前端、離線、不上傳。", "url": "https://tools.ahpal.com/car-loan-calculator/", "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "車貸利率大概多少？", "acceptedAnswer": {"@type": "Answer", "text": "新車約 2~4%，中古車約 5~15%，實際依個人信用、貸款成數、期數浮動。"}}, {"@type": "Question", "name": "頭期款要準備多少？", "acceptedAnswer": {"@type": "Answer", "text": "常見是車價的 10~30%，頭期款越高、貸款金額越低、總利息越少。"}}, {"@type": "Question", "name": "車貸可以貸幾期？", "acceptedAnswer": {"@type": "Answer", "text": "常見 36、48、60、72 期，最長可到 84 或 120 期。"}}, {"@type": "Question", "name": "零利率車貸是真的嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不是。零利率是把利息算進車價，或收手續費，不是真的不用利息。"}}, {"@type": "Question", "name": "月利率和年利率差在哪？", "acceptedAnswer": {"@type": "Answer", "text": "月利率 = 年利率 ÷ 12。月利率看起來較低，是行銷話術，要看 APR 才準。"}}, {"@type": "Question", "name": "提前還款會罰錢嗎？", "acceptedAnswer": {"@type": "Answer", "text": "要看合約。通常綁約 1~3 年，提前清償有違約金。"}}, {"@type": "Question", "name": "中古車貸款利率為什麼比較高？", "acceptedAnswer": {"@type": "Answer", "text": "因為中古車折舊快、擔保品價值低，銀行風險較高，所以利率較高。"}}, {"@type": "Question", "name": "可以離線使用嗎？", "acceptedAnswer": {"@type": "Answer", "text": "可以，全部在瀏覽器，不上傳。"}}, {"@type": "Question", "name": "資料會上傳嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不會，純前端。"}}, {"@type": "Question", "name": "這個工具是銀行官方試算嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不是。這是依標準公式計算，僅供參考，實際核貸以銀行或融資公司核定為準。"}}]}</script>
+<style>*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:20px;}
+.container{max-width:900px;margin:0 auto;}
+h1{color:#D4AF37;font-size:30px;margin:16px 0 8px;text-align:center;}
+.sub{color:#8B949E;font-size:15px;text-align:center;margin-bottom:24px;}
+.box{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin-bottom:20px;}
+.box label{display:block;color:#58A6FF;font-size:14px;font-weight:700;margin-bottom:8px;margin-top:12px;}
+.box label:first-child{margin-top:0;}
+.box input,.box select{width:100%;padding:12px 16px;background:#0D1117;border:1px solid #D4AF37;border-radius:8px;color:#E6EDF3;font-size:16px;margin-bottom:4px;}
+.box .row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.box .btn{padding:12px 28px;background:#D4AF37;color:#0D1117;border:none;border-radius:8px;font-size:16px;font-weight:700;cursor:pointer;margin-top:12px;width:100%;}
+.box .btn:hover{background:#E6C65C;}
+.result{margin-top:16px;padding:16px;border-radius:8px;font-size:15px;line-height:2;}
+.result.ok{background:rgba(63,185,80,0.08);border-left:4px solid #3FB950;color:#C9D1D9;}
+.result.err{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;color:#C9D1D9;}
+.result.info{background:rgba(88,166,255,0.08);border-left:4px solid #58A6FF;color:#C9D1D9;}
+.result .big{font-size:28px;font-weight:900;color:#D4AF37;}
+.result table{width:100%;border-collapse:collapse;margin:8px 0;}
+.result th,.result td{border:1px solid #2D303A;padding:6px 10px;font-size:14px;text-align:right;}
+.result th{background:#0D1117;color:#D4AF37;text-align:left;}
+.knowledge{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin:20px 0;}
+.knowledge h2{color:#D4AF37;font-size:20px;margin:0 0 12px;}
+.knowledge h3{color:#58A6FF;font-size:16px;margin:18px 0 8px;}
+.knowledge p{color:#C9D1D9;font-size:15px;line-height:1.9;margin-bottom:10px;}
+.knowledge table{width:100%;border-collapse:collapse;margin:12px 0;}
+.knowledge th,.knowledge td{border:1px solid #2D303A;padding:8px 12px;font-size:14px;color:#C9D1D9;text-align:left;}
+.knowledge th{background:#0D1117;color:#D4AF37;}
+.misconception{background:rgba(248,81,73,0.06);border-left:4px solid #F85149;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+.misconception strong{color:#F85149;}
+.when-to-use{background:rgba(63,185,80,0.06);border-left:4px solid #3FB950;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+.faq h3{color:#58A6FF;font-size:16px;margin:16px 0 6px;}
+.faq p{color:#C9D1D9;font-size:14px;}
+.tip{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:8px;margin:16px 0;font-size:14px;color:#C9D1D9;}
+.footer{text-align:center;margin-top:48px;padding-top:20px;border-top:1px solid #2D303A;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+@media (max-width:700px){.box .row{grid-template-columns:1fr;}}
+@media print{.ahpal-top-nav,.tip{display:none!important;}body{background:#fff;color:#000;}}</style>
+</head>
+<body>
+<div class="container">
+<nav class="ahpal-top-nav" style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;">
+  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏠 首頁</a>
+  <a href="https://www.ahpal.com/categories.html" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📚 全部分類</a>
+  <a href="https://tools.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🛠️ 工具箱</a>
+  <a href="https://pet.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">⚔️ 打怪場</a>
+  <a href="https://farm.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🌾 農場</a>
+</nav>
+<nav class="breadcrumb" aria-label="breadcrumb" style="font-size:13px;color:#8B949E;margin-bottom:12px;"><a href="https://tools.ahpal.com/" style="color:#58A6FF;text-decoration:none;">工具箱</a> › 🚗 車貸試算</nav>
+<article>
+<h1>🚗 車貸試算</h1>
+<p class="sub">車貸每月應繳、總利息試算，含頭期款與期數，純前端、離線、不上傳。</p>
+<div class="box">
+  <label>車價（萬元）</label>
+  <input type="number" id="cl-price" value="80" min="1">
+  <label>頭期款（萬元）</label>
+  <input type="number" id="cl-down" value="16" min="0">
+  <div class="row">
+    <div><label>貸款期數（月）</label><input type="number" id="cl-months" value="60" min="1" max="120"></div>
+    <div><label>年利率（%）</label><input type="number" id="cl-rate" value="3.5" step="0.01" min="0"></div>
+  </div>
+  <button class="btn" onclick="calcCarLoan()">試算</button>
+  <div class="result info" id="cl-result">輸入參數後按「試算」。</div>
+</div>
+<script>
+function fmt(n){return Math.round(n).toLocaleString("zh-TW");}
+function calcCarLoan(){
+  var price = parseFloat(document.getElementById("cl-price").value) * 10000;
+  var down = parseFloat(document.getElementById("cl-down").value) * 10000;
+  var months = parseInt(document.getElementById("cl-months").value);
+  var rate = parseFloat(document.getElementById("cl-rate").value) / 100 / 12;
+  var el = document.getElementById("cl-result");
+  if (!price || isNaN(down) || !months || isNaN(rate)) { el.className = "result err"; el.textContent = "請輸入有效的車價、頭期款、期數、利率。"; return; }
+  if (down >= price) { el.className = "result err"; el.textContent = "頭期款不能大於等於車價。"; return; }
+  var P = price - down;
+  var monthly = P * rate * Math.pow(1 + rate, months) / (Math.pow(1 + rate, months) - 1);
+  var total = monthly * months;
+  var interest = total - P;
+  el.className = "result ok";
+  el.innerHTML = "🚗 <strong>車貸試算結果</strong><br>車價：<strong>" + fmt(price) + "</strong> 元<br>頭期款：<strong>" + fmt(down) + "</strong> 元（" + Math.round(down/price*100) + "%）<br>貸款金額：<strong>" + fmt(P) + "</strong> 元<br>每月應繳：<span class='big'>" + fmt(monthly) + "</span> 元<br>總還款：<strong>" + fmt(total) + "</strong> 元<br>總利息：<strong style='color:#F85149;'>" + fmt(interest) + "</strong> 元<br><span style='font-size:13px;color:#8B949E;'>" + months + " 期（" + (months/12).toFixed(1) + " 年），年利率 " + (rate*12*100).toFixed(2) + "%</span>";
+}
+</script>
+<div class="knowledge">
+<h2>📖 車貸背後的知識</h2>
+<p>車貸是買車時向銀行或車商配合的融資公司借的貸款。常見的車貸分兩種：<strong>新車貸款</strong>（利率較低，約 2~4%）與<strong>中古車貸款</strong>（利率較高，約 5~15%）。車貸的「頭期款」通常是車價的 10~30%，頭期款越高、貸款金額越低、總利息越少。</p>
+<p>車貸的還款方式多為「本息平均攤還」（每月固定金額），期數常見 36、48、60、72 期。要注意的是，車貸的「利率」有兩種寫法：<strong>「年利率」</strong>（真實利率）與<strong>「月利率」</strong>（年利率 ÷ 12，看起來較低，但實際一樣）。還有所謂「零利率」車貸，其實是把利息算進車價，不是真的不用利息。</p>
+<h3>⚠️ 常見誤解</h3>
+<div class="misconception"><strong>❌「零利率車貸不用利息」</strong> → 錯。零利率是把利息算進車價，或收「手續費」，不是真的不用利息。</div>
+<div class="misconception"><strong>❌「月利率 × 12 = 年利率」</strong> → 對，但「月利率」看起來較低，是行銷話術。看「總費用年百分率（APR）」才準。</div>
+<div class="misconception"><strong>❌「車貸利率都一樣」</strong> → 錯。新車、中古車、個人信用、貸款成數、期數都會影響利率。</div>
+<div class="misconception"><strong>❌「頭期款越低越好」</strong> → 不一定。頭期款越低、貸款金額越高、總利息越多。要看你的現金流。</div>
+<div class="misconception"><strong>❌「提前還款一定划算」</strong> → 不一定。要看合約有沒有「提前清償違約金」，通常綁約 1~3 年。</div>
+<h3>🩺 使用時機與注意事項</h3>
+<div class="when-to-use"><strong>✅ 適合：</strong>買車前試算、比較新車/中古車貸款、與業務報價對照。<br><strong>⚠️ 注意：</strong>本工具僅供參考，實際核貸以銀行或融資公司核定為準。利率、手續費、違約金、綁約條件都要看合約。</div>
+</div>
+<div class="faq"><h2 style="color:#D4AF37;font-size:20px;margin:24px 0 12px;">常見問題</h2><h3>車貸利率大概多少？</h3><p>新車約 2~4%，中古車約 5~15%，實際依個人信用、貸款成數、期數浮動。</p><h3>頭期款要準備多少？</h3><p>常見是車價的 10~30%，頭期款越高、貸款金額越低、總利息越少。</p><h3>車貸可以貸幾期？</h3><p>常見 36、48、60、72 期，最長可到 84 或 120 期。</p><h3>零利率車貸是真的嗎？</h3><p>不是。零利率是把利息算進車價，或收手續費，不是真的不用利息。</p><h3>月利率和年利率差在哪？</h3><p>月利率 = 年利率 ÷ 12。月利率看起來較低，是行銷話術，要看 APR 才準。</p><h3>提前還款會罰錢嗎？</h3><p>要看合約。通常綁約 1~3 年，提前清償有違約金。</p><h3>中古車貸款利率為什麼比較高？</h3><p>因為中古車折舊快、擔保品價值低，銀行風險較高，所以利率較高。</p><h3>可以離線使用嗎？</h3><p>可以，全部在瀏覽器，不上傳。</p><h3>資料會上傳嗎？</h3><p>不會，純前端。</p><h3>這個工具是銀行官方試算嗎？</h3><p>不是。這是依標準公式計算，僅供參考，實際核貸以銀行或融資公司核定為準。</p></div>
+</article>
+<div class="footer"><p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p><p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p></div>
+</div>
+</body>
+</html>
