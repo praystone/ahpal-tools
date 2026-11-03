@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>聖經中英對照 · 啟示錄第 1 章（和合本 + ESV）| 雅寶工具箱</title>
+<meta name="description" content="啟示錄第 1 章和合本與 ESV 中英對照，附背景知識、常見誤解、10 題 FAQ。純前端、離線、不上傳。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/bible-revelation1/">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8637791667872348" crossorigin="anonymous"></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "聖經中英對照 · 啟示錄第 1 章", "description": "啟示錄第 1 章和合本與 ESV 中英對照，附背景知識與常見問題。", "url": "https://tools.ahpal.com/bible-revelation1/", "applicationCategory": "EducationalApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "啟示錄第 1 章有幾節？", "acceptedAnswer": {"@type": "Answer", "text": "20 節。分為三部分：問候（1-8 節）、異象（9-17 節）、基督自我啟示（17-20 節）。"}}, {"@type": "Question", "name": "和合本和 ESV 有什麼不同？", "acceptedAnswer": {"@type": "Answer", "text": "和合本是 1919 年出版的中文譯本，ESV 是 2001 年出版的英文標準版。兩個都忠於原文。"}}, {"@type": "Question", "name": "可以離線使用嗎？", "acceptedAnswer": {"@type": "Answer", "text": "可以，全部在瀏覽器，不上傳。"}}, {"@type": "Question", "name": "資料會上傳嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不會，純前端。"}}, {"@type": "Question", "name": "可以列印嗎？", "acceptedAnswer": {"@type": "Answer", "text": "可以，按瀏覽器列印。"}}, {"@type": "Question", "name": "適合誰用？", "acceptedAnswer": {"@type": "Answer", "text": "基督徒、想學英文的人、想理解啟示錄的人、想研究末世論的人。"}}, {"@type": "Question", "name": "有聲音朗讀嗎？", "acceptedAnswer": {"@type": "Answer", "text": "目前沒有，未來可加。"}}, {"@type": "Question", "name": "可以分享嗎？", "acceptedAnswer": {"@type": "Answer", "text": "可以，複製網址分享。"}}, {"@type": "Question", "name": "ESV 版權怎麼算？", "acceptedAnswer": {"@type": "Answer", "text": "ESV 版權屬 Crossway，非商業使用免費，需標示版權。"}}, {"@type": "Question", "name": "下一章什麼時候做？", "acceptedAnswer": {"@type": "Answer", "text": "啟示錄第 2 章、撒迦利亞書第 2 章，逐步擴充。"}}]}</script>
+<style>*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.9;padding:20px;}
+.container{max-width:1000px;margin:0 auto;}
+h1{color:#D4AF37;font-size:30px;margin:16px 0 8px;text-align:center;}
+.sub{color:#8B949E;font-size:15px;text-align:center;margin-bottom:24px;}
+.verse-card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:20px 24px;margin-bottom:16px;display:grid;grid-template-columns:1fr 1fr;gap:24px;position:relative;}
+.verse-card::after{content:"";position:absolute;left:50%;top:16px;bottom:16px;width:1px;background:linear-gradient(to bottom,transparent,#D4AF37,transparent);}
+.verse-num{position:absolute;top:-10px;left:20px;background:#0D1117;color:#D4AF37;font-size:12px;font-weight:700;padding:2px 10px;border:1px solid #D4AF37;border-radius:10px;font-family:Consolas,monospace;}
+.zh{color:#E6EDF3;font-size:16px;line-height:2;}
+.en{color:#58A6FF;font-size:15px;line-height:2;font-style:italic;}
+.header-box{background:linear-gradient(135deg,rgba(212,175,55,0.08),rgba(88,166,255,0.05));border:1px solid #D4AF37;border-radius:12px;padding:24px;margin-bottom:24px;text-align:center;}
+.header-box h2{color:#D4AF37;font-size:22px;margin-bottom:8px;}
+.header-box .ver{color:#8B949E;font-size:13px;}
+.tip{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:8px;margin:16px 0;font-size:14px;color:#C9D1D9;}
+.knowledge{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin:20px 0;}
+.knowledge h2{color:#D4AF37;font-size:20px;margin:0 0 12px;}
+.knowledge h3{color:#58A6FF;font-size:16px;margin:18px 0 8px;}
+.knowledge p{color:#C9D1D9;font-size:15px;line-height:1.9;margin-bottom:10px;}
+.misconception{background:rgba(248,81,73,0.06);border-left:4px solid #F85149;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+.misconception strong{color:#F85149;}
+.when-to-use{background:rgba(63,185,80,0.06);border-left:4px solid #3FB950;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+.faq h3{color:#58A6FF;font-size:16px;margin:16px 0 6px;}
+.faq p{color:#C9D1D9;font-size:14px;}
+.footer{text-align:center;margin-top:48px;padding-top:20px;border-top:1px solid #2D303A;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+@media (max-width:700px){.verse-card{grid-template-columns:1fr;}.verse-card::after{display:none;}}
+@media print{.ahpal-top-nav,.tip{display:none!important;}body{background:#fff;color:#000;}.verse-card{border:1px solid #999;}}</style>
+</head>
+<body>
+<div class="container">
+<nav class="ahpal-top-nav" style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;">
+  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏠 首頁</a>
+  <a href="https://www.ahpal.com/categories.html" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📚 全部分類</a>
+  <a href="https://tools.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🛠️ 工具箱</a>
+  <a href="https://tools.ahpal.com/bible-psalm23/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📖 詩篇 23</a>
+  <a href="https://tools.ahpal.com/bible-zechariah1/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📖 撒迦利亞 1</a>
+  <a href="https://pet.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">⚔️ 打怪場</a>
+</nav>
+<nav class="breadcrumb" aria-label="breadcrumb" style="font-size:13px;color:#8B949E;margin-bottom:12px;"><a href="https://tools.ahpal.com/" style="color:#58A6FF;text-decoration:none;">工具箱</a> › 聖經中英對照 · 啟示錄第 1 章</nav>
+<article>
+<h1>📖 啟示錄第 1 章</h1>
+<p class="sub">和合本 + ESV 中英對照 · 使徒約翰</p>
+
+<div class="header-box">
+  <h2>我是阿拉法，我是俄梅戛</h2>
+  <div class="ver">和合本（Chinese Union Version）· ESV（English Standard Version）</div>
+</div>
+
+<div class="verse-card">
+  <span class="verse-num">1</span>
+  <div class="zh">耶穌基督的啟示，就是神賜給他，叫他將必要快成的事指示他的眾僕人。他就差遣使者曉諭他的僕人約翰。</div>
+  <div class="en">The revelation of Jesus Christ, which God gave him to show to his servants the things that must soon take place. He made it known by sending his angel to his servant John,</div>
+</div><div class="verse-card">
+  <span class="verse-num">2</span>
+  <div class="zh">約翰便將神的道和耶穌基督的見證，凡自己所看見的都證明出來。</div>
+  <div class="en">who bore witness to the word of God and to the testimony of Jesus Christ, even to all that he saw.</div>
+</div><div class="verse-card">
+  <span class="verse-num">3</span>
+  <div class="zh">念這書上預言的和那些聽見又遵守其中所記載的，都是有福的，因為日期近了。</div>
+  <div class="en">Blessed is the one who reads aloud the words of this prophecy, and blessed are those who hear, and who keep what is written in it, for the time is near.</div>
+</div><div class="verse-card">
+  <span class="verse-num">4</span>
+  <div class="zh">約翰寫信給亞細亞的七個教會。但願從那昔在、今在、以後永在的神，和他寶座前的七靈，</div>
+  <div class="en">John to the seven churches that are in Asia: Grace to you and peace from him who is and who was and who is to come, and from the seven spirits who are before his throne,</div>
+</div><div class="verse-card">
+  <span class="verse-num">5</span>
+  <div class="zh">並那誠實作見證的、從死裡首先復活、為世上君王元首的耶穌基督，有恩惠、平安歸與你們！他愛我們，用自己的血使我們脫離罪惡，</div>
+  <div class="en">and from Jesus Christ the faithful witness, the firstborn of the dead, and the ruler of kings on earth. To him who loves us and has freed us from our sins by his blood</div>
+</div><div class="verse-card">
+  <span class="verse-num">6</span>
+  <div class="zh">又使我們成為國民，作他父神的祭司。但願榮耀、權能歸給他，直到永永遠遠。阿們！</div>
+  <div class="en">and made us a kingdom, priests to his God and Father, to him be glory and dominion forever and ever. Amen.</div>
+</div><div class="verse-card">
+  <span class="verse-num">7</span>
+  <div class="zh">看哪，他駕雲降臨！眾目要看見他，連刺他的人也要看見他；地上的萬族都要因他哀哭。這話是真實的。阿們！</div>
+  <div class="en">Behold, he is coming with the clouds, and every eye will see him, even those who pierced him, and all tribes of the earth will wail on account of him. Even so. Amen.</div>
+</div><div class="verse-card">
+  <span class="verse-num">8</span>
+  <div class="zh">主神說：我是阿拉法，我是俄梅戛，是昔在、今在、以後永在的全能者。</div>
+  <div class="en">I am the Alpha and the Omega, says the Lord God, who is and who was and who is to come, the Almighty.</div>
+</div><div class="verse-card">
+  <span class="verse-num">9</span>
+  <div class="zh">我約翰就是你們的弟兄，和你們在耶穌的患難、國度、忍耐裡一同有分，為神的道，並為給耶穌作的見證，曾在那名叫拔摩的海島上。</div>
+  <div class="en">I, John, your brother and partner in the tribulation and the kingdom and the patient endurance that are in Jesus, was on the island called Patmos on account of the word of God and the testimony of Jesus.</div>
+</div><div class="verse-card">
+  <span class="verse-num">10</span>
+  <div class="zh">當主日，我被聖靈感動，聽見在我後面有大聲音如吹號，說：</div>
+  <div class="en">I was in the Spirit on the Lord's day, and I heard behind me a loud voice like a trumpet</div>
+</div><div class="verse-card">
+  <span class="verse-num">11</span>
+  <div class="zh">你所看見的當寫在書上，達與以弗所、士每拿、別迦摩、推雅推喇、撒狄、非拉鐵非、老底嘉那七個教會。</div>
+  <div class="en">saying, Write what you see in a book and send it to the seven churches, to Ephesus and to Smyrna and to Pergamum and to Thyatira and to Sardis and to Philadelphia and to Laodicea.</div>
+</div><div class="verse-card">
+  <span class="verse-num">12</span>
+  <div class="zh">我轉過身來，要看是誰發聲與我說話；既轉過來，就看見七個金燈臺。</div>
+  <div class="en">Then I turned to see the voice that was speaking to me, and on turning I saw seven golden lampstands,</div>
+</div><div class="verse-card">
+  <span class="verse-num">13</span>
+  <div class="zh">燈臺中間有一位好像人子，身穿長衣，直垂到腳，胸間束著金帶。</div>
+  <div class="en">and in the midst of the lampstands one like a son of man, clothed with a long robe and with a golden sash around his chest.</div>
+</div><div class="verse-card">
+  <span class="verse-num">14</span>
+  <div class="zh">他的頭與髮皆白，如白羊毛，如雪；眼目如同火焰；</div>
+  <div class="en">The hairs of his head were white, like white wool, like snow. His eyes were like a flame of fire,</div>
+</div><div class="verse-card">
+  <span class="verse-num">15</span>
+  <div class="zh">腳好像在爐中鍛鍊光明的銅；聲音如同眾水的聲音。</div>
+  <div class="en">his feet were like burnished bronze, refined in a furnace, and his voice was like the roar of many waters.</div>
+</div><div class="verse-card">
+  <span class="verse-num">16</span>
+  <div class="zh">他右手拿著七星，從他口中出來一把兩刃的利劍；面貌如同烈日放光。</div>
+  <div class="en">In his right hand he held seven stars, from his mouth came a sharp two-edged sword, and his face was like the sun shining in full strength.</div>
+</div><div class="verse-card">
+  <span class="verse-num">17</span>
+  <div class="zh">我一看見，就仆倒在他腳前，像死了一樣。他用右手按著我，說：不要懼怕！我是首先的，我是末後的，</div>
+  <div class="en">When I saw him, I fell at his feet as though dead. But he laid his right hand on me, saying, Fear not, I am the first and the last,</div>
+</div><div class="verse-card">
+  <span class="verse-num">18</span>
+  <div class="zh">又是那存活的；我曾死過，現在又活了，直活到永永遠遠；並且拿著死亡和陰間的鑰匙。</div>
+  <div class="en">and the living one. I died, and behold I am alive forevermore, and I have the keys of Death and Hades.</div>
+</div><div class="verse-card">
+  <span class="verse-num">19</span>
+  <div class="zh">所以你要把所看見的，和現在的事，並將來必成的事，都寫出來。</div>
+  <div class="en">Write therefore the things that you have seen, those that are and those that are to take place after this.</div>
+</div><div class="verse-card">
+  <span class="verse-num">20</span>
+  <div class="zh">論到你所看見、在我右手中的七星和七個金燈臺的奧祕，那七星就是七個教會的使者，七燈臺就是七個教會。</div>
+  <div class="en">As for the mystery of the seven stars that you saw in my right hand, and the seven golden lampstands, the seven stars are the angels of the seven churches, and the seven lampstands are the seven churches.</div>
+</div>
+
+<div class="tip">🔒 這個工具<strong>純前端、完全離線、不上傳</strong>。你的資料只留在你的瀏覽器。ESV 經文版權屬 Crossway，僅供個人閱讀使用。</div>
+
+<div class="knowledge">
+<h2>📖 啟示錄第 1 章背後的知識</h2>
+<p>啟示錄是新約最後一卷，作者是使徒約翰。約翰在晚年被放逐到拔摩島（Patmos），在那裡看見異象，寫下這卷書。第 1 章是整卷書的「序言」與「第一個異象」，包含三個重點：約翰的問候（1-8 節）、約翰在拔摩島的異象（9-17 節）、基督的自我啟示（17-20 節）。</p>
+<p>啟示錄的文體是「啟示文學」（apocalyptic literature），充滿象徵、數字、異象。它不是「密碼書」，而是「鼓勵書」——寫給當時受羅馬帝國逼迫的七個教會，鼓勵他們在苦難中堅守信仰，因為基督已經得勝。</p>
+<h3>⚠️ 常見誤解</h3>
+<div class="misconception"><strong>❌「啟示錄是密碼，只有專家能解」</strong> → 不是。啟示錄是「鼓勵書」，用象徵語言傳達「基督得勝」的信息。數字（七、十二）多是象徵，不是密碼。</div>
+<div class="misconception"><strong>❌「啟示錄只講末日」</strong> → 不只是末日，也講「現在」——當時七個教會的處境，以及基督對教會的看顧。</div>
+<div class="misconception"><strong>❌「七個教會是虛構的」</strong> → 不是。以弗所、士每拿、別迦摩、推雅推喇、撒狄、非拉鐵非、老底嘉，都是當時亞細亞真實的教會。</div>
+<div class="misconception"><strong>❌「約翰是啟示錄的作者？還是別人？」</strong> → 傳統認為是使徒約翰。雖然有學者爭論，但教會傳統與內文都指向約翰。</div>
+<div class="misconception"><strong>❌「和合本和 ESV 意思不同」</strong> → 意思相同，只是翻譯語言不同。和合本是中文，ESV 是英文標準版，都忠於原文。</div>
+<h3>🩺 使用時機與注意事項</h3>
+<div class="when-to-use"><strong>✅ 適合：</strong>個人靈修、小組讀經、想學英文聖經的人、想理解啟示錄的人、想研究末世論的人。<br><strong>⚠️ 注意：</strong>這個工具是「經文對照」，不是「解經書」。啟示錄的解釋請諮詢牧者或讀正統解經書。ESV 版權屬 Crossway，僅供個人閱讀使用。</div>
+<h3>❓ 更多常見問題</h3>
+<h3>啟示錄的作者是誰？</h3><p>傳統認為是使徒約翰，寫於拔摩島，約主後 95 年。</p>
+<h3>七個教會在哪裡？</h3><p>在亞細亞（今土耳其西部）：以弗所、士每拿、別迦摩、推雅推喇、撒狄、非拉鐵非、老底嘉。</p>
+<h3>「阿拉法」和「俄梅戛」是什麼？</h3><p>希臘文第一個字母（Α）和最後一個字母（Ω），代表「起初」和「末後」。</p>
+<h3>「七個金燈臺」代表什麼？</h3><p>七個教會（第 20 節說明）。燈臺代表「見證」，教會是世上的光。</p>
+<h3>這章與撒迦利亞書有關嗎？</h3><p>有。撒迦利亞書第 4 章有「金燈臺」異象，啟示錄引用這個意象。</p>
+</div>
+<div class="faq"><h2 style="color:#D4AF37;font-size:20px;margin:24px 0 12px;">常見問題</h2><h3>啟示錄第 1 章有幾節？</h3><p>20 節。分為三部分：問候（1-8 節）、異象（9-17 節）、基督自我啟示（17-20 節）。</p><h3>和合本和 ESV 有什麼不同？</h3><p>和合本是 1919 年出版的中文譯本，ESV 是 2001 年出版的英文標準版。兩個都忠於原文。</p><h3>可以離線使用嗎？</h3><p>可以，全部在瀏覽器，不上傳。</p><h3>資料會上傳嗎？</h3><p>不會，純前端。</p><h3>可以列印嗎？</h3><p>可以，按瀏覽器列印。</p><h3>適合誰用？</h3><p>基督徒、想學英文的人、想理解啟示錄的人、想研究末世論的人。</p><h3>有聲音朗讀嗎？</h3><p>目前沒有，未來可加。</p><h3>可以分享嗎？</h3><p>可以，複製網址分享。</p><h3>ESV 版權怎麼算？</h3><p>ESV 版權屬 Crossway，非商業使用免費，需標示版權。</p><h3>下一章什麼時候做？</h3><p>啟示錄第 2 章、撒迦利亞書第 2 章，逐步擴充。</p></div>
+</article>
+<div class="footer"><p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p><p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p></div>
+</div>
+</body>
+</html>
