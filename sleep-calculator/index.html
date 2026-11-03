@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>睡眠計算器 | 雅寶工具箱 AHPAL.COM</title>
+<meta name="description" content="基於 90 分鐘睡眠週期，算出最佳入睡時間或起床時間。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/sleep-calculator/">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "睡眠計算器", "applicationCategory": "HealthApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}, "description": "基於 90 分鐘睡眠週期，算出最佳入睡時間或起床時間。純前端、完全離線。", "url": "https://tools.ahpal.com/sleep-calculator/"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "工具箱", "item": "https://tools.ahpal.com/"}, {"@type": "ListItem", "position": 2, "name": "睡眠計算器", "item": "https://tools.ahpal.com/sleep-calculator/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "睡眠計算器是什麼？", "acceptedAnswer": {"@type": "Answer", "text": "睡眠計算器是算出「最佳入睡時間」或「最佳起床時間」的工具。它基於 90 分鐘睡眠週期。"}}, {"@type": "Question", "name": "為什麼是 90 分鐘？", "acceptedAnswer": {"@type": "Answer", "text": "因為人類的睡眠週期約 90 分鐘（淺睡→深睡→REM）。在週期結束時醒來，最清醒。"}}, {"@type": "Question", "name": "要睡幾個週期？", "acceptedAnswer": {"@type": "Answer", "text": "建議 5 個週期（7.5 小時）或 6 個週期（9 小時）。4 個週期（6 小時）是最低限度。"}}, {"@type": "Question", "name": "入睡需要多久？", "acceptedAnswer": {"@type": "Answer", "text": "一般人需要 15 分鐘入睡。本工具已加入 15 分鐘緩衝。"}}, {"@type": "Question", "name": "這個工具會上傳我的資料嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不會。所有計算都在你的瀏覽器完成，不上傳任何資料。"}}]}]}</script>
+<style>*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:40px 20px;}
+.container{max-width:1000px;margin:0 auto;}
+h1{color:#D4AF37;font-size:28px;margin-bottom:12px;}
+.sub{color:#8B949E;margin-bottom:24px;font-size:14px;}
+.card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin-bottom:16px;}
+label{color:#8B949E;font-size:13px;display:block;margin-bottom:6px;}
+input,select,textarea{width:100%;background:#0D1117;color:#E6EDF3;border:1px solid #2D303A;border-radius:8px;padding:12px;font-size:14px;margin-bottom:12px;font-family:inherit;}
+button{background:#D4AF37;color:#0D1117;border:none;border-radius:8px;padding:10px 20px;font-weight:700;cursor:pointer;margin:8px 8px 8px 0;font-size:14px;}
+button:hover{background:#e6c24a;}
+button.blue{background:#58A6FF;}
+.result{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:16px;font-size:15px;min-height:60px;}
+.result .big{font-size:28px;font-weight:700;color:#D4AF37;text-align:center;padding:12px 0;}
+.tip{background:rgba(63,185,80,0.08);border-left:4px solid #3FB950;padding:12px 16px;border-radius:6px;color:#C9D1D9;font-size:13px;margin-top:12px;}
+.warn{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:12px 16px;border-radius:6px;color:#C9D1D9;font-size:13px;margin-top:12px;}
+.footer{text-align:center;margin-top:60px;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:600px){.row{grid-template-columns:1fr;}}
+.breadcrumb{font-size:13px;color:#8B949E;margin-bottom:16px;}
+.breadcrumb a{color:#58A6FF;text-decoration:none;}
+.doc-section{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:28px 32px;margin-top:32px;}
+.doc-section h2{color:#D4AF37;font-size:22px;margin:24px 0 16px;padding-bottom:8px;border-bottom:2px solid #2D303A;}
+.doc-section h2:first-child{margin-top:0;}
+.doc-section h3{color:#58A6FF;font-size:17px;margin:24px 0 10px;}
+.doc-section p{color:#C9D1D9;margin-bottom:12px;line-height:1.9;}
+.doc-section ul,.doc-section ol{margin:8px 0 16px 24px;color:#C9D1D9;}
+.doc-section li{margin-bottom:8px;line-height:1.8;}
+.doc-section code{background:#0D1117;color:#58A6FF;padding:2px 8px;border-radius:4px;font-family:Consolas,monospace;font-size:13px;}
+.doc-section .highlight{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:6px;margin:16px 0;}
+.doc-section .warnbox{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:14px 18px;border-radius:6px;margin:16px 0;}
+.doc-section table{width:100%;border-collapse:collapse;font-size:14px;margin:12px 0 20px;}
+.doc-section th,.doc-section td{padding:10px 14px;border:1px solid #2D303A;text-align:left;}
+.doc-section th{background:rgba(212,175,55,0.12);color:#D4AF37;}
+.doc-section tr:nth-child(even){background:rgba(255,255,255,0.02);}
+.doc-section .example{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:16px;font-family:Consolas,monospace;font-size:13px;color:#C9D1D9;margin:12px 0;line-height:1.8;}
+.faq-item{border-bottom:1px solid #2D303A;padding:14px 0;}
+.faq-item:last-child{border-bottom:none;}
+.faq-q{color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;}
+.faq-a{color:#C9D1D9;font-size:14px;line-height:1.9;}</style>
+</head>
+<body>
+<div class="container">
+<nav style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;">
+  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏠 首頁</a>
+  <a href="https://www.ahpal.com/categories.html" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📚 全部分類</a>
+  <a href="https://www.ahpal.com/strategy/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📌 策略文章</a>
+  <a href="https://novels.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📖 小說站</a>
+  <a href="https://memories.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏛️ 回憶館</a>
+  <a href="https://bbs2.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">💬 BBS2</a>
+  <a href="https://pet.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">⚔️ 打怪場</a>
+  <a href="https://farm.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🌾 農場</a>
+  <a href="https://tools.ahpal.com/" style="color:#0D1117;background:#D4AF37;text-decoration:none;padding:4px 10px;font-weight:700;">🛠️ 工具箱</a>
+</nav>
+<div class="breadcrumb"><a href="https://tools.ahpal.com/">🛠️ 工具箱</a> › 睡眠計算器</div>
+<article>
+<h1>🌙 睡眠計算器</h1>
+<p class="sub">基於 90 分鐘睡眠週期，算出最佳入睡時間或起床時間。</p>
+<div class="card">
+  <div class="row">
+    <div><label>我要幾點起床？</label><input type="time" id="wakeTime" value="07:00" onchange="calc()"></div>
+    <div><label>我要幾點睡覺？</label><input type="time" id="sleepTime" value="23:00" onchange="calc()"></div>
+  </div>
+  <button onclick="calc()">🌙 計算</button>
+</div>
+<div class="card"><label>計算結果</label><div class="result" id="result"></div></div>
+<div class="doc-section">
+<h2>📚 睡眠計算器是什麼？給門外漢的完整說明</h2>
+<p>你每天設鬧鐘，但起床總是昏沉。不是睡不夠，是「醒在錯的時間」。這篇文章一次講清楚「90 分鐘睡眠週期」。</p>
+<h3>一、一句話講完</h3>
+<div class="highlight"><p><strong>睡眠計算器 = 算出「最佳入睡時間」或「最佳起床時間」。</strong></p><p>它基於 90 分鐘睡眠週期，讓你在「淺睡期」醒來，最清醒。</p></div>
+<h3>二、睡眠週期是什麼？</h3>
+<p>人類睡眠不是「一條直線」，是「波浪」。每個波浪約 90 分鐘，分為：</p>
+<ul>
+<li><strong>淺睡</strong>（N1、N2）：剛入睡，容易被吵醒。</li>
+<li><strong>深睡</strong>（N3）：修復身體，最難叫醒。</li>
+<li><strong>REM</strong>：做夢，記憶鞏固。</li>
+</ul>
+<p>在「淺睡期」醒來，最清醒；在「深睡期」被叫醒，最昏沉（睡眠慣性）。</p>
+<h3>三、要睡幾個週期？</h3>
+<table><tr><th>週期數</th><th>時數</th><th>適合</th></tr>
+<tr><td>4 個</td><td>6 小時</td><td>最低限度</td></tr>
+<tr><td>5 個</td><td>7.5 小時</td><td>大多數人</td></tr>
+<tr><td>6 個</td><td>9 小時</td><td>青少年、運動員</td></tr></table>
+<h3>四、怎麼用？</h3>
+<div class="example">
+<div>我要 07:00 起床</div>
+<div>建議入睡：21:45（6 週期）、23:15（5 週期）、00:45（4 週期）</div>
+<div>（已加入 15 分鐘入睡緩衝）</div>
+</div>
+<h3>五、除了週期，還要什麼？</h3>
+<ul>
+<li><strong>固定時間</strong>：每天同一時間睡、同一時間醒。</li>
+<li><strong>睡前不滑手機</strong>：藍光抑制褪黑激素。</li>
+<li><strong>房間要暗、要涼</strong>：18~22°C 最好睡。</li>
+<li><strong>不喝咖啡因</strong>：下午 2 點後不喝咖啡。</li>
+</ul>
+<h3>六、常見誤解</h3>
+<ul>
+<li><strong>❌ 誤解：睡越久越好。</strong><br>✅ 事實：睡太久（>9 小時）也傷身，重點是「品質」。</li>
+<li><strong>❌ 誤解：週末補眠就好。</strong><br>✅ 事實：補眠會打亂生理時鐘，越補越累。</li>
+<li><strong>❌ 誤解：喝酒助眠。</strong><br>✅ 事實：酒精會破壞 REM，睡得更淺。</li>
+<li><strong>❌ 誤解：睡不著就躺著。</strong><br>✅ 事實：躺超過 20 分鐘睡不著，應起身做別的事。</li>
+<li><strong>❌ 誤解：每個人需要 8 小時。</strong><br>✅ 事實：有人 6 小時就夠，有人要 9 小時，因人而異。</li>
+</ul>
+<h3>七、這個工具能幫你做什麼？</h3>
+<ul><li><strong>算出最佳入睡時間</strong>：輸入起床時間，算出 4/5/6 週期的入睡時間</li><li><strong>算出最佳起床時間</strong>：輸入入睡時間，算出 4/5/6 週期的起床時間</li><li><strong>完全離線</strong>：不上傳任何資料</li></ul>
+<h3>八、常見問題（FAQ）</h3>
+<div class="doc-section"><h2>❓ 常見問題（FAQ）</h2><div class="faq-item"><div class="faq-q">睡眠計算器是什麼？</div><div class="faq-a">睡眠計算器是算出「最佳入睡時間」或「最佳起床時間」的工具。它基於 90 分鐘睡眠週期。</div></div><div class="faq-item"><div class="faq-q">為什麼是 90 分鐘？</div><div class="faq-a">因為人類的睡眠週期約 90 分鐘（淺睡→深睡→REM）。在週期結束時醒來，最清醒。</div></div><div class="faq-item"><div class="faq-q">要睡幾個週期？</div><div class="faq-a">建議 5 個週期（7.5 小時）或 6 個週期（9 小時）。4 個週期（6 小時）是最低限度。</div></div><div class="faq-item"><div class="faq-q">入睡需要多久？</div><div class="faq-a">一般人需要 15 分鐘入睡。本工具已加入 15 分鐘緩衝。</div></div><div class="faq-item"><div class="faq-q">這個工具會上傳我的資料嗎？</div><div class="faq-a">不會。所有計算都在你的瀏覽器完成，不上傳任何資料。</div></div></div>
+<p style="text-align:center;color:#8B949E;font-size:13px;margin-top:24px;"><time datetime="2026-11-03">最後更新：2026-11-03</time></p>
+</article>
+<div class="footer">
+  <p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p>
+  <p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p>
+</div>
+</div>
+<script>
+function fmt(h, m) {
+  return String(h).padStart(2,"0") + ":" + String(m).padStart(2,"0");
+}
+function addMinutes(t, min) {
+  var parts = t.split(":");
+  var total = parseInt(parts[0]) * 60 + parseInt(parts[1]) + min;
+  total = ((total % 1440) + 1440) % 1440;
+  return fmt(Math.floor(total / 60), total % 60);
+}
+function calc() {
+  var wake = document.getElementById("wakeTime").value || "07:00";
+  var sleep = document.getElementById("sleepTime").value || "23:00";
+  var html = '<div style="margin-bottom:16px;"><div style="color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;">🌅 若你要 ' + wake + ' 起床，建議入睡時間：</div>';
+  var cycles = [6, 5, 4];
+  cycles.forEach(function(c) {
+    var bed = addMinutes(wake, -(c * 90 + 15));
+    var label = c + " 個週期（" + (c * 1.5) + " 小時）";
+    html += '<div style="padding:6px 0;border-bottom:1px solid #2D303A;"><span style="color:#58A6FF;font-weight:700;font-size:18px;">' + bed + '</span> <span style="color:#8B949E;font-size:13px;">— ' + label + '</span></div>';
+  });
+  html += '</div>';
+  html += '<div><div style="color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;">🌙 若你 ' + sleep + ' 入睡，建議起床時間：</div>';
+  cycles.forEach(function(c) {
+    var wakeT = addMinutes(sleep, c * 90 + 15);
+    var label = c + " 個週期（" + (c * 1.5) + " 小時）";
+    html += '<div style="padding:6px 0;border-bottom:1px solid #2D303A;"><span style="color:#3FB950;font-weight:700;font-size:18px;">' + wakeT + '</span> <span style="color:#8B949E;font-size:13px;">— ' + label + '</span></div>';
+  });
+  html += '</div>';
+  html += '<div class="warn" style="margin-top:12px;">⚠️ 已加入 15 分鐘入睡緩衝。實際入睡時間因人而異。</div>';
+  document.getElementById("result").innerHTML = html;
+}
+calc();
+</script>
+</body>
+</html>

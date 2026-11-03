@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>羅馬數字轉換器 | 雅寶工具箱 AHPAL.COM</title>
+<meta name="description" content="阿拉伯數字 ↔ 羅馬數字互相轉換，即時計算、完全離線。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/roman-numeral/">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "羅馬數字轉換器", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}, "description": "阿拉伯數字 ↔ 羅馬數字互相轉換，即時計算、完全離線。", "url": "https://tools.ahpal.com/roman-numeral/"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "工具箱", "item": "https://tools.ahpal.com/"}, {"@type": "ListItem", "position": 2, "name": "羅馬數字轉換器", "item": "https://tools.ahpal.com/roman-numeral/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "羅馬數字轉換器是什麼？", "acceptedAnswer": {"@type": "Answer", "text": "羅馬數字轉換器是把「阿拉伯數字」與「羅馬數字」互相轉換的工具。"}}, {"@type": "Question", "name": "羅馬數字有哪些？", "acceptedAnswer": {"@type": "Answer", "text": "I=1、V=5、X=10、L=50、C=100、D=500、M=1000。"}}, {"@type": "Question", "name": "羅馬數字怎麼讀？", "acceptedAnswer": {"@type": "Answer", "text": "大寫在左是「減」，在右是「加」。例如 IV = 5−1 = 4，VI = 5+1 = 6。"}}, {"@type": "Question", "name": "羅馬數字最大是多少？", "acceptedAnswer": {"@type": "Answer", "text": "理論上無限，但標準羅馬數字最大是 3999（MMMCMXCIX）。超過 3999 通常加橫線表示「乘以 1000」。"}}, {"@type": "Question", "name": "這個工具會上傳我的資料嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不會。所有轉換都在你的瀏覽器完成，不上傳任何資料。"}}]}]}</script>
+<style>*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:40px 20px;}
+.container{max-width:1000px;margin:0 auto;}
+h1{color:#D4AF37;font-size:28px;margin-bottom:12px;}
+.sub{color:#8B949E;margin-bottom:24px;font-size:14px;}
+.card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin-bottom:16px;}
+label{color:#8B949E;font-size:13px;display:block;margin-bottom:6px;}
+input,select,textarea{width:100%;background:#0D1117;color:#E6EDF3;border:1px solid #2D303A;border-radius:8px;padding:12px;font-size:14px;margin-bottom:12px;font-family:inherit;}
+button{background:#D4AF37;color:#0D1117;border:none;border-radius:8px;padding:10px 20px;font-weight:700;cursor:pointer;margin:8px 8px 8px 0;font-size:14px;}
+button:hover{background:#e6c24a;}
+button.blue{background:#58A6FF;}
+.result{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:16px;font-size:15px;min-height:60px;}
+.result .big{font-size:28px;font-weight:700;color:#D4AF37;text-align:center;padding:12px 0;}
+.tip{background:rgba(63,185,80,0.08);border-left:4px solid #3FB950;padding:12px 16px;border-radius:6px;color:#C9D1D9;font-size:13px;margin-top:12px;}
+.warn{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:12px 16px;border-radius:6px;color:#C9D1D9;font-size:13px;margin-top:12px;}
+.footer{text-align:center;margin-top:60px;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:600px){.row{grid-template-columns:1fr;}}
+.breadcrumb{font-size:13px;color:#8B949E;margin-bottom:16px;}
+.breadcrumb a{color:#58A6FF;text-decoration:none;}
+.doc-section{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:28px 32px;margin-top:32px;}
+.doc-section h2{color:#D4AF37;font-size:22px;margin:24px 0 16px;padding-bottom:8px;border-bottom:2px solid #2D303A;}
+.doc-section h2:first-child{margin-top:0;}
+.doc-section h3{color:#58A6FF;font-size:17px;margin:24px 0 10px;}
+.doc-section p{color:#C9D1D9;margin-bottom:12px;line-height:1.9;}
+.doc-section ul,.doc-section ol{margin:8px 0 16px 24px;color:#C9D1D9;}
+.doc-section li{margin-bottom:8px;line-height:1.8;}
+.doc-section code{background:#0D1117;color:#58A6FF;padding:2px 8px;border-radius:4px;font-family:Consolas,monospace;font-size:13px;}
+.doc-section .highlight{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:6px;margin:16px 0;}
+.doc-section .warnbox{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:14px 18px;border-radius:6px;margin:16px 0;}
+.doc-section table{width:100%;border-collapse:collapse;font-size:14px;margin:12px 0 20px;}
+.doc-section th,.doc-section td{padding:10px 14px;border:1px solid #2D303A;text-align:left;}
+.doc-section th{background:rgba(212,175,55,0.12);color:#D4AF37;}
+.doc-section tr:nth-child(even){background:rgba(255,255,255,0.02);}
+.doc-section .example{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:16px;font-family:Consolas,monospace;font-size:13px;color:#C9D1D9;margin:12px 0;line-height:1.8;}
+.faq-item{border-bottom:1px solid #2D303A;padding:14px 0;}
+.faq-item:last-child{border-bottom:none;}
+.faq-q{color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;}
+.faq-a{color:#C9D1D9;font-size:14px;line-height:1.9;}</style>
+</head>
+<body>
+<div class="container">
+<nav style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;">
+  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏠 首頁</a>
+  <a href="https://www.ahpal.com/categories.html" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📚 全部分類</a>
+  <a href="https://www.ahpal.com/strategy/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📌 策略文章</a>
+  <a href="https://novels.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📖 小說站</a>
+  <a href="https://memories.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏛️ 回憶館</a>
+  <a href="https://bbs2.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">💬 BBS2</a>
+  <a href="https://pet.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">⚔️ 打怪場</a>
+  <a href="https://farm.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🌾 農場</a>
+  <a href="https://tools.ahpal.com/" style="color:#0D1117;background:#D4AF37;text-decoration:none;padding:4px 10px;font-weight:700;">🛠️ 工具箱</a>
+</nav>
+<div class="breadcrumb"><a href="https://tools.ahpal.com/">🛠️ 工具箱</a> › 羅馬數字轉換器</div>
+<article>
+<h1>🏛️ 羅馬數字轉換器</h1>
+<p class="sub">阿拉伯數字 ↔ 羅馬數字互相轉換，即時計算、完全離線。</p>
+<div class="card">
+  <label>輸入數字</label>
+  <input type="text" id="input" value="2026" oninput="convert()" placeholder="輸入數字或羅馬數字...">
+  <button onclick="convert()">🔄 轉換</button>
+</div>
+<div class="card"><label>轉換結果</label><div class="result" id="result"></div></div>
+<div class="doc-section">
+<h2>📚 羅馬數字是什麼？給門外漢的完整說明</h2>
+<p>你在看電影版權年份，看到「MMXXVI」；你在看時鐘，看到「XII」；你在看歷史課本，看到「西元前 44 年（XLIV BC）」。這些都是「羅馬數字」。這篇文章一次講清楚。</p>
+<h3>一、一句話講完</h3>
+<div class="highlight"><p><strong>羅馬數字 = 古羅馬人用的數字系統，用 7 個字母表示。</strong></p><p>I=1、V=5、X=10、L=50、C=100、D=500、M=1000。</p></div>
+<h3>二、7 個基本符號</h3>
+<table><tr><th>符號</th><th>值</th><th>記憶法</th></tr>
+<tr><td>I</td><td>1</td><td>一根手指</td></tr>
+<tr><td>V</td><td>5</td><td>一隻手（五根手指）</td></tr>
+<tr><td>X</td><td>10</td><td>兩隻手交叉</td></tr>
+<tr><td>L</td><td>50</td><td>半個 C</td></tr>
+<tr><td>C</td><td>100</td><td>Centum（拉丁文「百」）</td></tr>
+<tr><td>D</td><td>500</td><td>半個 M</td></tr>
+<tr><td>M</td><td>1000</td><td>Mille（拉丁文「千」）</td></tr></table>
+<h3>三、加減規則</h3>
+<ul>
+<li><strong>大在左、小在右 → 加</strong>：VI = 5+1 = 6、XV = 10+5 = 15</li>
+<li><strong>小在左、大在右 → 減</strong>：IV = 5−1 = 4、IX = 10−1 = 9</li>
+<li><strong>同符號最多連寫 3 次</strong>：III = 3、XXX = 30，但 4 不寫 IIII，寫 IV</li>
+</ul>
+<h3>四、常見例子</h3>
+<div class="example">
+<div>1 = I</div><div>4 = IV</div><div>5 = V</div><div>9 = IX</div><div>10 = X</div>
+<div>40 = XL</div><div>50 = L</div><div>90 = XC</div><div>100 = C</div>
+<div>400 = CD</div><div>500 = D</div><div>900 = CM</div><div>1000 = M</div>
+<div>2026 = MMXXVI</div>
+</div>
+<h3>五、羅馬數字用在哪？</h3>
+<ul>
+<li><strong>時鐘</strong>：I~XII</li>
+<li><strong>電影版權年份</strong>：MMXXVI（2026）</li>
+<li><strong>書籍章節</strong>：Chapter I、Chapter II</li>
+<li><strong>教宗、君主名號</strong>：John Paul II、Elizabeth II</li>
+<li><strong>奧運屆數</strong>：Games of the XXXIII Olympiad</li>
+</ul>
+<h3>六、常見誤解</h3>
+<ul>
+<li><strong>❌ 誤解：4 寫 IIII。</strong><br>✅ 事實：標準寫法是 IV（5−1）。</li>
+<li><strong>❌ 誤解：羅馬數字沒有 0。</strong><br>✅ 事實：羅馬數字確實沒有 0，這是它的缺點。</li>
+<li><strong>❌ 誤解：羅馬數字可以無限大。</strong><br>✅ 事實：標準最大 3999（MMMCMXCIX），超過要加橫線。</li>
+<li><strong>❌ 誤解：羅馬數字很簡單。</strong><br>✅ 事實：加減規則容易搞混（IV=4、VI=6）。</li>
+<li><strong>❌ 誤解：羅馬數字已淘汰。</strong><br>✅ 事實：時鐘、版權、章節、教宗名號仍在使用。</li>
+</ul>
+<h3>七、這個工具能幫你做什麼？</h3>
+<ul><li><strong>阿拉伯 → 羅馬</strong>：輸入 2026，算出 MMXXVI</li><li><strong>羅馬 → 阿拉伯</strong>：輸入 MMXXVI，算出 2026</li><li><strong>完全離線</strong>：不上傳任何資料</li></ul>
+<h3>八、常見問題（FAQ）</h3>
+<div class="doc-section"><h2>❓ 常見問題（FAQ）</h2><div class="faq-item"><div class="faq-q">羅馬數字轉換器是什麼？</div><div class="faq-a">羅馬數字轉換器是把「阿拉伯數字」與「羅馬數字」互相轉換的工具。</div></div><div class="faq-item"><div class="faq-q">羅馬數字有哪些？</div><div class="faq-a">I=1、V=5、X=10、L=50、C=100、D=500、M=1000。</div></div><div class="faq-item"><div class="faq-q">羅馬數字怎麼讀？</div><div class="faq-a">大寫在左是「減」，在右是「加」。例如 IV = 5−1 = 4，VI = 5+1 = 6。</div></div><div class="faq-item"><div class="faq-q">羅馬數字最大是多少？</div><div class="faq-a">理論上無限，但標準羅馬數字最大是 3999（MMMCMXCIX）。超過 3999 通常加橫線表示「乘以 1000」。</div></div><div class="faq-item"><div class="faq-q">這個工具會上傳我的資料嗎？</div><div class="faq-a">不會。所有轉換都在你的瀏覽器完成，不上傳任何資料。</div></div></div>
+<p style="text-align:center;color:#8B949E;font-size:13px;margin-top:24px;"><time datetime="2026-11-03">最後更新：2026-11-03</time></p>
+</article>
+<div class="footer">
+  <p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p>
+  <p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p>
+</div>
+</div>
+<script>
+var MAP = [[1000,"M"],[900,"CM"],[500,"D"],[400,"CD"],[100,"C"],[90,"XC"],[50,"L"],[40,"XL"],[10,"X"],[9,"IX"],[5,"V"],[4,"IV"],[1,"I"]];
+function toRoman(n) {
+  if (n < 1 || n > 3999) return null;
+  var r = "";
+  MAP.forEach(function(p) { while (n >= p[0]) { r += p[1]; n -= p[0]; } });
+  return r;
+}
+function fromRoman(s) {
+  s = s.toUpperCase().replace(/[^IVXLCDM]/g, "");
+  if (!s) return null;
+  var vals = {I:1,V:5,X:10,L:50,C:100,D:500,M:1000};
+  var total = 0;
+  for (var i = 0; i < s.length; i++) {
+    var v = vals[s[i]], next = vals[s[i+1]];
+    if (next && v < next) total -= v; else total += v;
+  }
+  return total;
+}
+function convert() {
+  var input = document.getElementById("input").value.trim().toUpperCase();
+  var result = document.getElementById("result");
+  if (!input) { result.innerHTML = '<p style="color:#8B949E;">請輸入數字</p>'; return; }
+  if (/^[0-9]+$/.test(input)) {
+    var num = parseInt(input);
+    var roman = toRoman(num);
+    if (!roman) { result.innerHTML = '<p style="color:#F85149;">數字必須在 1~3999 之間</p>'; return; }
+    result.innerHTML = '<div class="big">' + num + ' = ' + roman + '</div>';
+  } else if (/^[IVXLCDM]+$/.test(input)) {
+    var arabic = fromRoman(input);
+    result.innerHTML = '<div class="big">' + input + ' = ' + arabic + '</div>';
+  } else {
+    result.innerHTML = '<p style="color:#F85149;">請輸入阿拉伯數字或羅馬數字</p>';
+  }
+}
+convert();
+</script>
+</body>
+</html>

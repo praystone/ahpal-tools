@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>匯率換算器 | 雅寶工具箱 AHPAL.COM</title>
+<meta name="description" content="手動輸入匯率，換算多國貨幣。純前端、完全離線。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/currency-converter/">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "匯率換算器", "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}, "description": "手動輸入匯率，換算多國貨幣。純前端、完全離線。", "url": "https://tools.ahpal.com/currency-converter/"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "工具箱", "item": "https://tools.ahpal.com/"}, {"@type": "ListItem", "position": 2, "name": "匯率換算器", "item": "https://tools.ahpal.com/currency-converter/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "匯率換算器是什麼？", "acceptedAnswer": {"@type": "Answer", "text": "匯率換算器是換算「不同貨幣」的工具。手動輸入匯率，即可換算多國貨幣。"}}, {"@type": "Question", "name": "為什麼不用即時匯率？", "acceptedAnswer": {"@type": "Answer", "text": "因為即時匯率需要 API，且各銀行匯率不同（現鈔、即期、刷卡）。手動輸入你查到的匯率，最準。"}}, {"@type": "Question", "name": "匯率怎麼查？", "acceptedAnswer": {"@type": "Answer", "text": "查台灣銀行、玉山銀行、國泰世華的「牌告匯率」，或 Google「USD to TWD」。"}}, {"@type": "Question", "name": "現鈔匯率和即期匯率差在哪？", "acceptedAnswer": {"@type": "Answer", "text": "現鈔匯率是「拿現金換」，匯率較差；即期匯率是「帳戶轉帳」，匯率較好。"}}, {"@type": "Question", "name": "這個工具會上傳我的資料嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不會。所有換算都在你的瀏覽器完成，不上傳任何資料。"}}]}]}</script>
+<style>*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:40px 20px;}
+.container{max-width:1000px;margin:0 auto;}
+h1{color:#D4AF37;font-size:28px;margin-bottom:12px;}
+.sub{color:#8B949E;margin-bottom:24px;font-size:14px;}
+.card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin-bottom:16px;}
+label{color:#8B949E;font-size:13px;display:block;margin-bottom:6px;}
+input,select,textarea{width:100%;background:#0D1117;color:#E6EDF3;border:1px solid #2D303A;border-radius:8px;padding:12px;font-size:14px;margin-bottom:12px;font-family:inherit;}
+button{background:#D4AF37;color:#0D1117;border:none;border-radius:8px;padding:10px 20px;font-weight:700;cursor:pointer;margin:8px 8px 8px 0;font-size:14px;}
+button:hover{background:#e6c24a;}
+button.blue{background:#58A6FF;}
+.result{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:16px;font-size:15px;min-height:60px;}
+.result .big{font-size:28px;font-weight:700;color:#D4AF37;text-align:center;padding:12px 0;}
+.tip{background:rgba(63,185,80,0.08);border-left:4px solid #3FB950;padding:12px 16px;border-radius:6px;color:#C9D1D9;font-size:13px;margin-top:12px;}
+.warn{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:12px 16px;border-radius:6px;color:#C9D1D9;font-size:13px;margin-top:12px;}
+.footer{text-align:center;margin-top:60px;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:600px){.row{grid-template-columns:1fr;}}
+.breadcrumb{font-size:13px;color:#8B949E;margin-bottom:16px;}
+.breadcrumb a{color:#58A6FF;text-decoration:none;}
+.doc-section{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:28px 32px;margin-top:32px;}
+.doc-section h2{color:#D4AF37;font-size:22px;margin:24px 0 16px;padding-bottom:8px;border-bottom:2px solid #2D303A;}
+.doc-section h2:first-child{margin-top:0;}
+.doc-section h3{color:#58A6FF;font-size:17px;margin:24px 0 10px;}
+.doc-section p{color:#C9D1D9;margin-bottom:12px;line-height:1.9;}
+.doc-section ul,.doc-section ol{margin:8px 0 16px 24px;color:#C9D1D9;}
+.doc-section li{margin-bottom:8px;line-height:1.8;}
+.doc-section code{background:#0D1117;color:#58A6FF;padding:2px 8px;border-radius:4px;font-family:Consolas,monospace;font-size:13px;}
+.doc-section .highlight{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:6px;margin:16px 0;}
+.doc-section .warnbox{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:14px 18px;border-radius:6px;margin:16px 0;}
+.doc-section table{width:100%;border-collapse:collapse;font-size:14px;margin:12px 0 20px;}
+.doc-section th,.doc-section td{padding:10px 14px;border:1px solid #2D303A;text-align:left;}
+.doc-section th{background:rgba(212,175,55,0.12);color:#D4AF37;}
+.doc-section tr:nth-child(even){background:rgba(255,255,255,0.02);}
+.doc-section .example{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:16px;font-family:Consolas,monospace;font-size:13px;color:#C9D1D9;margin:12px 0;line-height:1.8;}
+.faq-item{border-bottom:1px solid #2D303A;padding:14px 0;}
+.faq-item:last-child{border-bottom:none;}
+.faq-q{color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;}
+.faq-a{color:#C9D1D9;font-size:14px;line-height:1.9;}</style>
+</head>
+<body>
+<div class="container">
+<nav style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;">
+  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏠 首頁</a>
+  <a href="https://www.ahpal.com/categories.html" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📚 全部分類</a>
+  <a href="https://www.ahpal.com/strategy/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📌 策略文章</a>
+  <a href="https://novels.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📖 小說站</a>
+  <a href="https://memories.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏛️ 回憶館</a>
+  <a href="https://bbs2.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">💬 BBS2</a>
+  <a href="https://pet.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">⚔️ 打怪場</a>
+  <a href="https://farm.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🌾 農場</a>
+  <a href="https://tools.ahpal.com/" style="color:#0D1117;background:#D4AF37;text-decoration:none;padding:4px 10px;font-weight:700;">🛠️ 工具箱</a>
+</nav>
+<div class="breadcrumb"><a href="https://tools.ahpal.com/">🛠️ 工具箱</a> › 匯率換算器</div>
+<article>
+<h1>💱 匯率換算器</h1>
+<p class="sub">手動輸入匯率，換算多國貨幣。純前端、完全離線。</p>
+<div class="card">
+  <div class="row">
+    <div><label>金額</label><input type="number" id="amount" value="100" step="any" oninput="convert()"></div>
+    <div><label>從貨幣</label><select id="from" onchange="convert()"><option value="TWD">TWD 新台幣</option><option value="USD">USD 美元</option><option value="JPY">JPY 日圓</option><option value="EUR">EUR 歐元</option><option value="CNY">CNY 人民幣</option><option value="HKD">HKD 港幣</option><option value="GBP">GBP 英鎊</option><option value="KRW">KRW 韓元</option></select></div>
+  </div>
+  <div class="row">
+    <div><label>到貨幣</label><select id="to" onchange="convert()"><option value="USD">USD 美元</option><option value="TWD">TWD 新台幣</option><option value="JPY">JPY 日圓</option><option value="EUR">EUR 歐元</option><option value="CNY">CNY 人民幣</option><option value="HKD">HKD 港幣</option><option value="GBP">GBP 英鎊</option><option value="KRW">KRW 韓元</option></select></div>
+    <div><label>匯率（1 從貨幣 = ? 到貨幣）</label><input type="number" id="rate" value="0.031" step="0.000001" oninput="convert()"></div>
+  </div>
+  <div class="tip">💡 匯率請自行查詢（台銀、玉山、Google），填入後即時換算。</div>
+</div>
+<div class="card"><label>換算結果</label><div class="result" id="result"></div></div>
+<div class="doc-section">
+<h2>📚 匯率換算器是什麼？給門外漢的完整說明</h2>
+<p>你要去日本玩，換日圓；你要買美國網站的东西，看美元；你要匯款給大陸朋友，算人民幣。這些都需要「匯率換算」。這篇文章一次講清楚。</p>
+<h3>一、一句話講完</h3>
+<div class="highlight"><p><strong>匯率換算器 = 把「一種貨幣」換成「另一種貨幣」的工具。</strong></p><p>本工具用「手動輸入匯率」，因為各銀行匯率不同，手動輸入最準。</p></div>
+<h3>二、匯率是什麼？</h3>
+<p>匯率是「兩種貨幣的交換比例」。例如「1 美元 = 31.5 新台幣」，就是 USD/TWD = 31.5。</p>
+<h3>三、為什麼不用即時匯率？</h3>
+<ul>
+<li><strong>各銀行匯率不同</strong>：台銀、玉山、國泰的匯率都不一樣。</li>
+<li><strong>現鈔 vs 即期</strong>：現鈔匯率較差，即期匯率較好。</li>
+<li><strong>手續費</strong>：換匯有手續費，即時匯率不包含。</li>
+<li><strong>API 限制</strong>：免費 API 有次數限制，不穩定。</li>
+</ul>
+<h3>四、常見貨幣代號</h3>
+<table><tr><th>代號</th><th>貨幣</th><th>國家</th></tr>
+<tr><td>TWD</td><td>新台幣</td><td>台灣</td></tr>
+<tr><td>USD</td><td>美元</td><td>美國</td></tr>
+<tr><td>JPY</td><td>日圓</td><td>日本</td></tr>
+<tr><td>EUR</td><td>歐元</td><td>歐盟</td></tr>
+<tr><td>CNY</td><td>人民幣</td><td>中國</td></tr>
+<tr><td>HKD</td><td>港幣</td><td>香港</td></tr>
+<tr><td>GBP</td><td>英鎊</td><td>英國</td></tr>
+<tr><td>KRW</td><td>韓元</td><td>韓國</td></tr></table>
+<h3>五、怎麼查匯率？</h3>
+<ul>
+<li><strong>台灣銀行</strong>：https://rate.bot.com.tw/</li>
+<li><strong>玉山銀行</strong>：https://www.esunbank.com/</li>
+<li><strong>Google</strong>：搜尋「USD to TWD」</li>
+<li><strong>出國換匯</strong>：看「現金賣出」匯率</li>
+</ul>
+<h3>六、常見誤解</h3>
+<ul>
+<li><strong>❌ 誤解：匯率是固定的。</strong><br>✅ 事實：匯率每天變動，甚至每分鐘變動。</li>
+<li><strong>❌ 誤解：各銀行匯率一樣。</strong><br>✅ 事實：各銀行匯率不同，差距可達 1~2%。</li>
+<li><strong>❌ 誤解：現鈔和即期匯率一樣。</strong><br>✅ 事實：現鈔匯率較差（銀行要承擔保管成本）。</li>
+<li><strong>❌ 誤解：換匯不用手續費。</strong><br>✅ 事實：換匯有手續費，通常藏在匯率裡。</li>
+<li><strong>❌ 誤解：即時匯率最準。</strong><br>✅ 事實：即時匯率是「中間價」，實際換匯會加減碼。</li>
+</ul>
+<h3>七、這個工具能幫你做什麼？</h3>
+<ul><li><strong>8 種貨幣</strong>：TWD、USD、JPY、EUR、CNY、HKD、GBP、KRW</li><li><strong>手動輸入匯率</strong>：最準、最彈性</li><li><strong>即時換算</strong>：輸入即算</li><li><strong>完全離線</strong>：不上傳任何資料</li></ul>
+<h3>八、常見問題（FAQ）</h3>
+<div class="doc-section"><h2>❓ 常見問題（FAQ）</h2><div class="faq-item"><div class="faq-q">匯率換算器是什麼？</div><div class="faq-a">匯率換算器是換算「不同貨幣」的工具。手動輸入匯率，即可換算多國貨幣。</div></div><div class="faq-item"><div class="faq-q">為什麼不用即時匯率？</div><div class="faq-a">因為即時匯率需要 API，且各銀行匯率不同（現鈔、即期、刷卡）。手動輸入你查到的匯率，最準。</div></div><div class="faq-item"><div class="faq-q">匯率怎麼查？</div><div class="faq-a">查台灣銀行、玉山銀行、國泰世華的「牌告匯率」，或 Google「USD to TWD」。</div></div><div class="faq-item"><div class="faq-q">現鈔匯率和即期匯率差在哪？</div><div class="faq-a">現鈔匯率是「拿現金換」，匯率較差；即期匯率是「帳戶轉帳」，匯率較好。</div></div><div class="faq-item"><div class="faq-q">這個工具會上傳我的資料嗎？</div><div class="faq-a">不會。所有換算都在你的瀏覽器完成，不上傳任何資料。</div></div></div>
+<p style="text-align:center;color:#8B949E;font-size:13px;margin-top:24px;"><time datetime="2026-11-03">最後更新：2026-11-03</time></p>
+</article>
+<div class="footer">
+  <p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p>
+  <p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p>
+</div>
+</div>
+<script>
+function convert() {
+  var amt = parseFloat(document.getElementById("amount").value) || 0;
+  var rate = parseFloat(document.getElementById("rate").value) || 0;
+  var from = document.getElementById("from").value;
+  var to = document.getElementById("to").value;
+  var result = amt * rate;
+  document.getElementById("result").innerHTML = '<div class="big">' + amt.toLocaleString() + ' ' + from + ' = ' + result.toLocaleString(undefined, {maximumFractionDigits:2}) + ' ' + to + '</div><p style="text-align:center;color:#8B949E;margin-top:8px;font-size:13px;">匯率：1 ' + from + ' = ' + rate + ' ' + to + '</p>';
+}
+convert();
+</script>
+</body>
+</html>
