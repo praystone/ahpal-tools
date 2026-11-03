@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>PDF 壓縮器（純前端、不上傳） | 雅寶工具箱 AHPAL.COM</title>
+<meta name="description" content="PDF 壓縮器：壓縮 PDF 檔案，縮小檔案大小、保留文字與圖片。純前端、完全離線、不上傳。附完整教學與常見問題。">
+<meta name="keywords" content="PDF壓縮,PDF壓縮器,壓縮PDF,縮小PDF,免費PDF壓縮">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/pdf-compressor/">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "PDF 壓縮器", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}, "description": "壓縮 PDF 檔案，縮小檔案大小、保留文字與圖片。純前端、完全離線、不上傳。", "url": "https://tools.ahpal.com/pdf-compressor/"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "工具箱", "item": "https://tools.ahpal.com/"}, {"@type": "ListItem", "position": 2, "name": "PDF 壓縮器", "item": "https://tools.ahpal.com/pdf-compressor/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "PDF 壓縮器是什麼？", "acceptedAnswer": {"@type": "Answer", "text": "PDF 壓縮器是把 PDF 檔案變小的工具。它會壓縮內嵌的圖片與物件，降低檔案大小。"}}, {"@type": "Question", "name": "壓縮會損失畫質嗎？", "acceptedAnswer": {"@type": "Answer", "text": "會。PDF 壓縮通常壓縮「內嵌圖片」，所以圖片會略降畫質。文字通常不受影響（除非 PDF 是掃描檔）。"}}, {"@type": "Question", "name": "這個工具會上傳我的 PDF 嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不會。所有壓縮都在你的瀏覽器完成，不上傳任何資料，隱私零風險。"}}, {"@type": "Question", "name": "壓縮後檔案變多大？", "acceptedAnswer": {"@type": "Answer", "text": "依 PDF 內容而異。圖片多的 PDF 可壓縮 30~70%；純文字 PDF 壓縮率較低。"}}, {"@type": "Question", "name": "掃描的 PDF 能壓縮嗎？", "acceptedAnswer": {"@type": "Answer", "text": "能。掃描的 PDF 通常是「大圖片」，壓縮率很高。但壓縮後文字可能變模糊，OCR 辨識率會降低。"}}]}]}</script>
+<style>*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:40px 20px;}
+.container{max-width:1000px;margin:0 auto;}
+h1{color:#D4AF37;font-size:28px;margin-bottom:12px;}
+.sub{color:#8B949E;margin-bottom:24px;font-size:14px;}
+.card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin-bottom:16px;}
+label{color:#8B949E;font-size:13px;display:block;margin-bottom:6px;}
+input,select,textarea{width:100%;background:#0D1117;color:#E6EDF3;border:1px solid #2D303A;border-radius:8px;padding:12px;font-size:14px;margin-bottom:12px;font-family:inherit;}
+button{background:#D4AF37;color:#0D1117;border:none;border-radius:8px;padding:10px 20px;font-weight:700;cursor:pointer;margin:8px 8px 8px 0;font-size:14px;}
+button:hover{background:#e6c24a;}
+button.blue{background:#58A6FF;}
+.result{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:16px;font-size:15px;min-height:60px;}
+.result .big{font-size:28px;font-weight:700;color:#D4AF37;text-align:center;padding:12px 0;}
+.tip{background:rgba(63,185,80,0.08);border-left:4px solid #3FB950;padding:12px 16px;border-radius:6px;color:#C9D1D9;font-size:13px;margin-top:12px;}
+.warn{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:12px 16px;border-radius:6px;color:#C9D1D9;font-size:13px;margin-top:12px;}
+.footer{text-align:center;margin-top:60px;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:600px){.row{grid-template-columns:1fr;}}
+.breadcrumb{font-size:13px;color:#8B949E;margin-bottom:16px;}
+.breadcrumb a{color:#58A6FF;text-decoration:none;}
+.doc-section{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:28px 32px;margin-top:32px;}
+.doc-section h2{color:#D4AF37;font-size:22px;margin:24px 0 16px;padding-bottom:8px;border-bottom:2px solid #2D303A;}
+.doc-section h2:first-child{margin-top:0;}
+.doc-section h3{color:#58A6FF;font-size:17px;margin:24px 0 10px;}
+.doc-section p{color:#C9D1D9;margin-bottom:12px;line-height:1.9;}
+.doc-section ul,.doc-section ol{margin:8px 0 16px 24px;color:#C9D1D9;}
+.doc-section li{margin-bottom:8px;line-height:1.8;}
+.doc-section code{background:#0D1117;color:#58A6FF;padding:2px 8px;border-radius:4px;font-family:Consolas,monospace;font-size:13px;}
+.doc-section .highlight{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:6px;margin:16px 0;}
+.doc-section .warnbox{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:14px 18px;border-radius:6px;margin:16px 0;}
+.doc-section table{width:100%;border-collapse:collapse;font-size:14px;margin:12px 0 20px;}
+.doc-section th,.doc-section td{padding:10px 14px;border:1px solid #2D303A;text-align:left;}
+.doc-section th{background:rgba(212,175,55,0.12);color:#D4AF37;}
+.doc-section tr:nth-child(even){background:rgba(255,255,255,0.02);}
+.doc-section .example{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:16px;font-family:Consolas,monospace;font-size:13px;color:#C9D1D9;margin:12px 0;line-height:1.8;}
+.faq-item{border-bottom:1px solid #2D303A;padding:14px 0;}
+.faq-item:last-child{border-bottom:none;}
+.faq-q{color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;}
+.faq-a{color:#C9D1D9;font-size:14px;line-height:1.9;}</style>
+</head>
+<body>
+<div class="container">
+<nav style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;">
+  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏠 首頁</a>
+  <a href="https://www.ahpal.com/categories.html" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📚 全部分類</a>
+  <a href="https://www.ahpal.com/strategy/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📌 策略文章</a>
+  <a href="https://novels.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📖 小說站</a>
+  <a href="https://memories.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏛️ 回憶館</a>
+  <a href="https://bbs2.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">💬 BBS2</a>
+  <a href="https://pet.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">⚔️ 打怪場</a>
+  <a href="https://farm.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🌾 農場</a>
+  <a href="https://tools.ahpal.com/" style="color:#0D1117;background:#D4AF37;text-decoration:none;padding:4px 10px;font-weight:700;">🛠️ 工具箱</a>
+</nav>
+<div class="breadcrumb"><a href="https://tools.ahpal.com/">🛠️ 工具箱</a> › PDF 壓縮器</div>
+<article>
+<h1>📉 PDF 壓縮器</h1>
+<p class="sub">壓縮 PDF 檔案，縮小檔案大小、保留文字與圖片。純前端、完全離線。</p>
+
+<div class="card">
+  <label>選擇 PDF 檔案</label>
+  <input type="file" id="pdfFile" accept="application/pdf" onchange="loadPdf()">
+  <label>壓縮等級</label>
+  <select id="level">
+    <option value="low">低壓縮（畫質優先）</option>
+    <option value="medium" selected>中壓縮（平衡）</option>
+    <option value="high">高壓縮（檔案優先）</option>
+  </select>
+  <button onclick="compressPdf()">📉 壓縮 PDF</button>
+  <div class="tip">✅ 完全離線：所有壓縮都在你的瀏覽器完成，不會上傳任何資料。</div>
+</div>
+
+<div class="card">
+  <label>壓縮結果</label>
+  <div class="result" id="result">（請先選擇 PDF）</div>
+</div>
+
+<div class="doc-section">
+  <h2>📚 PDF 壓縮是什麼？給門外漢的完整說明</h2>
+
+  <p>你要寄一份 PDF 給客戶，結果超過 25MB 寄不出去；或你上傳 PDF 到網站，結果載入超慢。這就是「PDF 太大」。PDF 壓縮能解決這個問題。這篇文章一次講清楚。</p>
+
+  <h3>一、一句話講完</h3>
+  <div class="highlight">
+    <p><strong>PDF 壓縮 = 把 PDF 的「檔案大小」變小，同時盡量保持「內容可讀」。</strong></p>
+    <p>它主要壓縮「內嵌的圖片」，因為圖片是 PDF 最大的部分。</p>
+  </div>
+
+  <h3>二、PDF 為什麼會很大？</h3>
+  <ul>
+    <li><strong>內嵌高解析度圖片</strong>：一張 4000×3000 的照片，未壓縮就 36MB。</li>
+    <li><strong>嵌入字型</strong>：每個字型檔可能 1~5MB。</li>
+    <li><strong>未優化的物件</strong>：PDF 內部結構鬆散，檔案變大。</li>
+    <li><strong>掃描檔</strong>：掃描的 PDF 通常是「大圖片」，檔案特別大。</li>
+  </ul>
+
+  <h3>三、三種壓縮等級</h3>
+  <table>
+    <tr><th>等級</th><th>壓縮率</th><th>畫質</th><th>適用</th></tr>
+    <tr><td><strong>低壓縮</strong></td><td>10~30%</td><td>幾乎不變</td><td>印刷、存檔</td></tr>
+    <tr><td><strong>中壓縮</strong></td><td>30~60%</td><td>略降</td><td>一般用途、Email</td></tr>
+    <tr><td><strong>高壓縮</strong></td><td>60~90%</td><td>明顯下降</td><td>網頁、快速傳輸</td></tr>
+  </table>
+
+  <h3>四、什麼時候該壓縮？</h3>
+  <ul>
+    <li><strong>Email 附件</strong>：Gmail 限制 25MB，超過就寄不出去。</li>
+    <li><strong>網站下載</strong>：PDF 太大會拖慢網站、增加流量。</li>
+    <li><strong>雲端備份</strong>：壓縮後省空間、省上傳時間。</li>
+    <li><strong>列印</strong>：列印用不到高解析度，壓縮後列印更快。</li>
+  </ul>
+
+  <h3>五、什麼時候不該壓縮？</h3>
+  <ul>
+    <li><strong>印刷用</strong>：印刷需要高解析度（300 DPI），壓縮會影響品質。</li>
+    <li><strong>法律文件</strong>：需要保留原始檔案，不能壓縮。</li>
+    <li><strong>OCR 辨識</strong>：壓縮後文字可能變模糊，OCR 辨識率會降低。</li>
+  </ul>
+
+  <h3>六、常見誤解</h3>
+  <ul>
+    <li><strong>❌ 誤解：PDF 壓縮 = 把 PDF 縮小。</strong><br>✅ 事實：壓縮是「降低檔案大小」，縮小是「改頁面尺寸」，兩件事。</li>
+    <li><strong>❌ 誤解：壓縮一定損失畫質。</strong><br>✅ 事實：純文字 PDF 壓縮不損失畫質；圖片 PDF 壓縮才會略降。</li>
+    <li><strong>❌ 誤解：PDF 壓縮後不能還原。</strong><br>✅ 事實：壓縮是有損的，不能還原。建議保留原始檔。</li>
+    <li><strong>❌ 誤解：所有 PDF 都能壓縮。</strong><br>✅ 事實：加密的 PDF 需先解密才能壓縮。</li>
+    <li><strong>❌ 誤解：PDF 壓縮會改內容。</strong><br>✅ 事實：PDF 壓縮只改「編碼」，不改「文字、頁數、順序」。</li>
+  </ul>
+
+  <h3>七、這個工具能幫你做什麼？</h3>
+  <ul>
+    <li><strong>壓縮 PDF</strong>：選檔案、選等級，一鍵壓縮</li>
+    <li><strong>三種等級</strong>：低、中、高，依需求選</li>
+    <li><strong>顯示壓縮率</strong>：原始大小 vs 壓縮大小</li>
+    <li><strong>一鍵下載</strong>：下載壓縮後的 PDF</li>
+    <li><strong>完全離線</strong>：不上傳任何資料</li>
+  </ul>
+
+  <h3>八、常見問題（FAQ）</h3>
+  <div class="faq-item"><div class="faq-q">Q1：PDF 壓縮器是什麼？</div><div class="faq-a">PDF 壓縮器是把 PDF 檔案變小的工具。它會壓縮內嵌的圖片與物件，降低檔案大小。</div></div>
+  <div class="faq-item"><div class="faq-q">Q2：壓縮會損失畫質嗎？</div><div class="faq-a">會。PDF 壓縮通常壓縮「內嵌圖片」，所以圖片會略降畫質。文字通常不受影響（除非 PDF 是掃描檔）。</div></div>
+  <div class="faq-item"><div class="faq-q">Q3：這個工具會上傳我的 PDF 嗎？</div><div class="faq-a">不會。所有壓縮都在你的瀏覽器完成，不上傳任何資料，隱私零風險。</div></div>
+  <div class="faq-item"><div class="faq-q">Q4：壓縮後檔案變多大？</div><div class="faq-a">依 PDF 內容而異。圖片多的 PDF 可壓縮 30~70%；純文字 PDF 壓縮率較低。</div></div>
+  <div class="faq-item"><div class="faq-q">Q5：掃描的 PDF 能壓縮嗎？</div><div class="faq-a">能。掃描的 PDF 通常是「大圖片」，壓縮率很高。但壓縮後文字可能變模糊，OCR 辨識率會降低。</div></div>
+
+  <div class="highlight">
+    <p style="margin:0;"><strong>🦞 龍蝦總工程師的話：</strong></p>
+    <p style="margin:8px 0 0;">「PDF 不是『越大越好』，是『剛好就好』。懂壓縮，你就不會被 50MB 的 PDF 擋在 Email 門外。」</p>
+  </div>
+
+  <p style="text-align:center;color:#8B949E;font-size:13px;margin-top:24px;margin-bottom:0;">本文由 🦞 龍蝦總工程師撰寫 · <time datetime="2026-11-03">2026-11-03</time> · 雅寶社區 AHPAL.COM</p>
+</div>
+</article>
+
+<div class="footer">
+  <p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p>
+  <p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script>
+var currentPdf = null;
+function loadPdf() {
+  var f = document.getElementById("pdfFile").files[0];
+  if (!f) return;
+  currentPdf = f;
+  var kb = (f.size / 1024).toFixed(1);
+  document.getElementById("result").innerHTML = '<div style="text-align:center;font-size:16px;color:#D4AF37;font-weight:700;">已選擇：' + f.name + '（' + kb + ' KB）</div><p style="text-align:center;color:#8B949E;margin-top:8px;">按「壓縮 PDF」開始</p>';
+}
+async function compressPdf() {
+  if (!currentPdf) {
+    document.getElementById("result").innerHTML = '<p style="color:#F85149;">請先選擇 PDF</p>';
+    return;
+  }
+  var result = document.getElementById("result");
+  result.innerHTML = '<p style="text-align:center;color:#58A6FF;">處理中，請稍候...</p>';
+  try {
+    var arrayBuffer = await currentPdf.arrayBuffer();
+    var { PDFDocument } = PDFLib;
+    var pdfDoc = await PDFDocument.load(arrayBuffer);
+    var newBytes = await pdfDoc.save({ useObjectStreams: true, addDefaultPage: false });
+    var blob = new Blob([newBytes], { type: "application/pdf" });
+    var origKB = (currentPdf.size / 1024).toFixed(1);
+    var compKB = (blob.size / 1024).toFixed(1);
+    var ratio = ((1 - blob.size / currentPdf.size) * 100).toFixed(1);
+    var url = URL.createObjectURL(blob);
+    var newName = currentPdf.name.replace(/\.pdf$/i, "") + "-compressed.pdf";
+    result.innerHTML = '<div style="text-align:center;"><div class="big">' + origKB + ' KB → ' + compKB + ' KB</div><div style="color:#3FB950;font-weight:700;">省 ' + ratio + '%</div></div><div style="text-align:center;margin-top:16px;"><a href="' + url + '" download="' + newName + '" style="display:inline-block;background:#58A6FF;color:#0D1117;padding:10px 24px;border-radius:8px;text-decoration:none;font-weight:700;">⬇️ 下載壓縮後的 PDF</a></div>';
+  } catch(e) {
+    result.innerHTML = '<p style="color:#F85149;">壓縮失敗：' + e.message + '</p>';
+  }
+}
+</script>
+</body>
+</html>

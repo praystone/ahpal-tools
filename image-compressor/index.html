@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>圖片壓縮器（PNG/JPG/WebP，可調品質） | 雅寶工具箱 AHPAL.COM</title>
+<meta name="description" content="圖片壓縮器：壓縮 PNG、JPG、WebP 圖片，可調品質、即時預覽、一鍵下載。純前端、完全離線、不上傳。附完整教學與常見問題。">
+<meta name="keywords" content="圖片壓縮,圖片壓縮器,PNG壓縮,JPG壓縮,WebP壓縮,線上壓縮,免費壓縮">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/image-compressor/">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "圖片壓縮器", "applicationCategory": "MultimediaApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}, "description": "壓縮 PNG、JPG、WebP 圖片，可調品質、即時預覽、一鍵下載。純前端、完全離線。", "url": "https://tools.ahpal.com/image-compressor/"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "工具箱", "item": "https://tools.ahpal.com/"}, {"@type": "ListItem", "position": 2, "name": "圖片壓縮器", "item": "https://tools.ahpal.com/image-compressor/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "圖片壓縮器是什麼？", "acceptedAnswer": {"@type": "Answer", "text": "圖片壓縮器是把圖片檔案變小的工具。它會重新編碼圖片，降低檔案大小，加快網站載入速度。"}}, {"@type": "Question", "name": "壓縮會損失畫質嗎？", "acceptedAnswer": {"@type": "Answer", "text": "會。有損壓縮（JPG、WebP 有損模式）會損失畫質，但可調品質。無損壓縮（PNG）不損失畫質，但壓縮率較低。"}}, {"@type": "Question", "name": "這個工具會上傳我的圖片嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不會。所有壓縮都在你的瀏覽器完成，不上傳任何資料，完全離線。"}}, {"@type": "Question", "name": "壓縮後檔案變多大？", "acceptedAnswer": {"@type": "Answer", "text": "依圖片內容與品質設定而異。一般可壓縮 30~70%。品質越低，檔案越小，但畫質越差。"}}, {"@type": "Question", "name": "什麼時候該壓縮圖片？", "acceptedAnswer": {"@type": "Answer", "text": "網站圖片、部落格文章、社群媒體發文前，都建議壓縮。網頁圖片建議控制在 200KB 以下，載入更快，SEO 加分。"}}]}]}</script>
+<style>*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:40px 20px;}
+.container{max-width:1000px;margin:0 auto;}
+h1{color:#D4AF37;font-size:28px;margin-bottom:12px;}
+.sub{color:#8B949E;margin-bottom:24px;font-size:14px;}
+.card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin-bottom:16px;}
+label{color:#8B949E;font-size:13px;display:block;margin-bottom:6px;}
+input,select,textarea{width:100%;background:#0D1117;color:#E6EDF3;border:1px solid #2D303A;border-radius:8px;padding:12px;font-size:14px;margin-bottom:12px;font-family:inherit;}
+button{background:#D4AF37;color:#0D1117;border:none;border-radius:8px;padding:10px 20px;font-weight:700;cursor:pointer;margin:8px 8px 8px 0;font-size:14px;}
+button:hover{background:#e6c24a;}
+button.blue{background:#58A6FF;}
+.result{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:16px;font-size:15px;min-height:60px;}
+.result .big{font-size:28px;font-weight:700;color:#D4AF37;text-align:center;padding:12px 0;}
+.tip{background:rgba(63,185,80,0.08);border-left:4px solid #3FB950;padding:12px 16px;border-radius:6px;color:#C9D1D9;font-size:13px;margin-top:12px;}
+.warn{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:12px 16px;border-radius:6px;color:#C9D1D9;font-size:13px;margin-top:12px;}
+.footer{text-align:center;margin-top:60px;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:600px){.row{grid-template-columns:1fr;}}
+.breadcrumb{font-size:13px;color:#8B949E;margin-bottom:16px;}
+.breadcrumb a{color:#58A6FF;text-decoration:none;}
+.doc-section{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:28px 32px;margin-top:32px;}
+.doc-section h2{color:#D4AF37;font-size:22px;margin:24px 0 16px;padding-bottom:8px;border-bottom:2px solid #2D303A;}
+.doc-section h2:first-child{margin-top:0;}
+.doc-section h3{color:#58A6FF;font-size:17px;margin:24px 0 10px;}
+.doc-section p{color:#C9D1D9;margin-bottom:12px;line-height:1.9;}
+.doc-section ul,.doc-section ol{margin:8px 0 16px 24px;color:#C9D1D9;}
+.doc-section li{margin-bottom:8px;line-height:1.8;}
+.doc-section code{background:#0D1117;color:#58A6FF;padding:2px 8px;border-radius:4px;font-family:Consolas,monospace;font-size:13px;}
+.doc-section .highlight{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:6px;margin:16px 0;}
+.doc-section .warnbox{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:14px 18px;border-radius:6px;margin:16px 0;}
+.doc-section table{width:100%;border-collapse:collapse;font-size:14px;margin:12px 0 20px;}
+.doc-section th,.doc-section td{padding:10px 14px;border:1px solid #2D303A;text-align:left;}
+.doc-section th{background:rgba(212,175,55,0.12);color:#D4AF37;}
+.doc-section tr:nth-child(even){background:rgba(255,255,255,0.02);}
+.doc-section .example{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:16px;font-family:Consolas,monospace;font-size:13px;color:#C9D1D9;margin:12px 0;line-height:1.8;}
+.faq-item{border-bottom:1px solid #2D303A;padding:14px 0;}
+.faq-item:last-child{border-bottom:none;}
+.faq-q{color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;}
+.faq-a{color:#C9D1D9;font-size:14px;line-height:1.9;}</style>
+</head>
+<body>
+<div class="container">
+<nav style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;">
+  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏠 首頁</a>
+  <a href="https://www.ahpal.com/categories.html" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📚 全部分類</a>
+  <a href="https://www.ahpal.com/strategy/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📌 策略文章</a>
+  <a href="https://novels.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📖 小說站</a>
+  <a href="https://memories.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏛️ 回憶館</a>
+  <a href="https://bbs2.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">💬 BBS2</a>
+  <a href="https://pet.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">⚔️ 打怪場</a>
+  <a href="https://farm.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🌾 農場</a>
+  <a href="https://tools.ahpal.com/" style="color:#0D1117;background:#D4AF37;text-decoration:none;padding:4px 10px;font-weight:700;">🛠️ 工具箱</a>
+</nav>
+<div class="breadcrumb"><a href="https://tools.ahpal.com/">🛠️ 工具箱</a> › 圖片壓縮器</div>
+<article>
+<h1>🗜️ 圖片壓縮器</h1>
+<p class="sub">壓縮 PNG、JPG、WebP 圖片，可調品質、即時預覽、一鍵下載。純前端、完全離線。</p>
+
+<div class="card">
+  <label>選擇圖片（可多選）</label>
+  <input type="file" id="files" accept="image/*" multiple onchange="loadFiles()">
+  <label>壓縮品質（0.1 = 最低品質，1.0 = 最高品質）</label>
+  <input type="range" id="quality" min="0.1" max="1.0" step="0.05" value="0.8" oninput="updateQuality()">
+  <div style="text-align:center;color:#D4AF37;font-weight:700;font-size:18px;" id="qualityLabel">0.80</div>
+  <label>輸出格式</label>
+  <select id="format" onchange="compressAll()">
+    <option value="image/jpeg">JPG（有損，檔案小）</option>
+    <option value="image/webp">WebP（有損，檔案更小）</option>
+    <option value="image/png">PNG（無損，檔案較大）</option>
+  </select>
+  <button onclick="compressAll()">🗜️ 壓縮全部</button>
+  <div class="tip">✅ 完全離線：所有壓縮都在你的瀏覽器完成，不會上傳任何資料。</div>
+</div>
+
+<div class="card">
+  <label>壓縮結果</label>
+  <div id="results"></div>
+</div>
+
+<div class="doc-section">
+  <h2>📚 圖片壓縮是什麼？給門外漢的完整說明</h2>
+
+  <p>你上傳一張照片到網站，結果載入超慢；或你寄 Email 附照片，結果超過 25MB 寄不出去。這就是「圖片太大」。圖片壓縮能解決這個問題。這篇文章一次講清楚。</p>
+
+  <h3>一、一句話講完</h3>
+  <div class="highlight">
+    <p><strong>圖片壓縮 = 把圖片的「檔案大小」變小，同時盡量保持「看起來一樣」。</strong></p>
+    <p>它不是「把圖片縮小」（縮小是改尺寸），而是「把圖片的編碼效率提高」。</p>
+  </div>
+
+  <h3>二、兩種壓縮方式</h3>
+  <table>
+    <tr><th>方式</th><th>原理</th><th>畫質</th><th>壓縮率</th><th>適用</th></tr>
+    <tr><td><strong>無損壓縮</strong></td><td>移除重複資料，不改像素</td><td>100% 不變</td><td>較低（10~30%）</td><td>PNG、圖示、截圖</td></tr>
+    <tr><td><strong>有損壓縮</strong></td><td>移除人眼不易察覺的細節</td><td>略降</td><td>較高（50~90%）</td><td>JPG、WebP、照片</td></tr>
+  </table>
+
+  <h3>三、三種常見格式</h3>
+  <table>
+    <tr><th>格式</th><th>壓縮</th><th>透明</th><th>適用</th></tr>
+    <tr><td><strong>PNG</strong></td><td>無損</td><td>✅ 支援</td><td>圖示、截圖、需要透明的圖</td></tr>
+    <tr><td><strong>JPG</strong></td><td>有損</td><td>❌ 不支援</td><td>照片、不需要透明的圖</td></tr>
+    <tr><td><strong>WebP</strong></td><td>有損/無損</td><td>✅ 支援</td><td>網站圖片（比 JPG 小 25~35%）</td></tr>
+  </table>
+
+  <h3>四、品質怎麼調？</h3>
+  <div class="example">
+    <div>品質 1.0：最高畫質，檔案最大</div>
+    <div>品質 0.8：畫質幾乎不變，檔案小 40~60%（推薦）</div>
+    <div>品質 0.5：畫質略降，檔案小 70~80%</div>
+    <div>品質 0.1：畫質明顯下降，檔案最小</div>
+  </div>
+
+  <h3>五、什麼時候該壓縮？</h3>
+  <ul>
+    <li><strong>網站圖片</strong>：建議控制在 200KB 以下，載入更快，SEO 加分。</li>
+    <li><strong>Email 附件</strong>：建議控制在 5MB 以下，避免寄不出去。</li>
+    <li><strong>社群媒體</strong>：平台會自動壓縮，但先壓縮可避免畫質被壓爛。</li>
+    <li><strong>備份照片</strong>：不建議壓縮，保留原始檔。</li>
+  </ul>
+
+  <h3>六、常見誤解</h3>
+  <ul>
+    <li><strong>❌ 誤解：壓縮 = 縮小尺寸。</strong><br>✅ 事實：壓縮是「降低檔案大小」，縮小是「改像素尺寸」，兩件事。</li>
+    <li><strong>❌ 誤解：壓縮一定損失畫質。</strong><br>✅ 事實：無損壓縮（PNG）不損失畫質，但有損壓縮（JPG）會。</li>
+    <li><strong>❌ 誤解：WebP 一定比 JPG 好。</strong><br>✅ 事實：WebP 檔案更小，但舊瀏覽器（IE）不支援。</li>
+    <li><strong>❌ 誤解：壓縮越多次越好。</strong><br>✅ 事實：有損壓縮每壓一次就損失一次畫質，不要重複壓縮。</li>
+    <li><strong>❌ 誤解：圖片越小越好。</strong><br>✅ 事實：太小會模糊，要在「檔案大小」與「畫質」之間平衡。</li>
+  </ul>
+
+  <h3>七、這個工具能幫你做什麼？</h3>
+  <ul>
+    <li><strong>壓縮多張圖片</strong>：一次選多張，批次壓縮</li>
+    <li><strong>調整品質</strong>：0.1~1.0，即時看檔案大小</li>
+    <li><strong>轉換格式</strong>：PNG、JPG、WebP 互轉</li>
+    <li><strong>即時預覽</strong>：壓縮前後對比</li>
+    <li><strong>一鍵下載</strong>：下載壓縮後的圖片</li>
+    <li><strong>完全離線</strong>：不上傳任何資料</li>
+  </ul>
+
+  <h3>八、常見問題（FAQ）</h3>
+  <div class="faq-item"><div class="faq-q">Q1：圖片壓縮器是什麼？</div><div class="faq-a">圖片壓縮器是把圖片檔案變小的工具。它會重新編碼圖片，降低檔案大小，加快網站載入速度。</div></div>
+  <div class="faq-item"><div class="faq-q">Q2：壓縮會損失畫質嗎？</div><div class="faq-a">會。有損壓縮（JPG、WebP 有損模式）會損失畫質，但可調品質。無損壓縮（PNG）不損失畫質，但壓縮率較低。</div></div>
+  <div class="faq-item"><div class="faq-q">Q3：這個工具會上傳我的圖片嗎？</div><div class="faq-a">不會。所有壓縮都在你的瀏覽器完成，不上傳任何資料，完全離線。</div></div>
+  <div class="faq-item"><div class="faq-q">Q4：壓縮後檔案變多大？</div><div class="faq-a">依圖片內容與品質設定而異。一般可壓縮 30~70%。品質越低，檔案越小，但畫質越差。</div></div>
+  <div class="faq-item"><div class="faq-q">Q5：什麼時候該壓縮圖片？</div><div class="faq-a">網站圖片、部落格文章、社群媒體發文前，都建議壓縮。網頁圖片建議控制在 200KB 以下，載入更快，SEO 加分。</div></div>
+
+  <div class="highlight">
+    <p style="margin:0;"><strong>🦞 龍蝦總工程師的話：</strong></p>
+    <p style="margin:8px 0 0;">「圖片不是『越大越好』，是『剛好就好』。懂壓縮，你就不會被 10MB 的照片拖慢網站。」</p>
+  </div>
+
+  <p style="text-align:center;color:#8B949E;font-size:13px;margin-top:24px;margin-bottom:0;">本文由 🦞 龍蝦總工程師撰寫 · <time datetime="2026-11-03">2026-11-03</time> · 雅寶社區 AHPAL.COM</p>
+</div>
+</article>
+
+<div class="footer">
+  <p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p>
+  <p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p>
+</div>
+</div>
+<script>
+var currentFiles = [];
+function loadFiles() {
+  currentFiles = Array.from(document.getElementById("files").files);
+  document.getElementById("results").innerHTML = '<p style="color:#8B949E;">已選擇 ' + currentFiles.length + ' 張圖片，按「壓縮全部」開始。</p>';
+}
+function updateQuality() {
+  document.getElementById("qualityLabel").textContent = parseFloat(document.getElementById("quality").value).toFixed(2);
+}
+function compressAll() {
+  if (currentFiles.length === 0) {
+    document.getElementById("results").innerHTML = '<p style="color:#F85149;">請先選擇圖片</p>';
+    return;
+  }
+  var quality = parseFloat(document.getElementById("quality").value);
+  var format = document.getElementById("format").value;
+  var results = document.getElementById("results");
+  results.innerHTML = '';
+  var totalOriginal = 0, totalCompressed = 0, done = 0;
+  currentFiles.forEach(function(file, idx) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      var img = new Image();
+      img.onload = function() {
+        var canvas = document.createElement("canvas");
+        canvas.width = img.width;
+        canvas.height = img.height;
+        var ctx = canvas.getContext("2d");
+        if (format === "image/jpeg") {
+          ctx.fillStyle = "#FFFFFF";
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+        ctx.drawImage(img, 0, 0);
+        canvas.toBlob(function(blob) {
+          var origKB = (file.size / 1024).toFixed(1);
+          var compKB = (blob.size / 1024).toFixed(1);
+          var ratio = ((1 - blob.size / file.size) * 100).toFixed(1);
+          totalOriginal += file.size;
+          totalCompressed += blob.size;
+          done++;
+          var url = URL.createObjectURL(blob);
+          var ext = format === "image/jpeg" ? "jpg" : (format === "image/webp" ? "webp" : "png");
+          var newName = file.name.replace(/\.[^.]+$/, "") + "." + ext;
+          var card = document.createElement("div");
+          card.style.cssText = "background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:12px;margin-bottom:8px;";
+          card.innerHTML = '<div style="color:#D4AF37;font-weight:700;margin-bottom:4px;">' + file.name + '</div>' +
+            '<div style="font-size:13px;color:#8B949E;margin-bottom:8px;">原始：' + origKB + ' KB → 壓縮：<span style="color:#3FB950;font-weight:700;">' + compKB + ' KB</span>（省 ' + ratio + '%）</div>' +
+            '<a href="' + url + '" download="' + newName + '" style="display:inline-block;background:#58A6FF;color:#0D1117;padding:6px 14px;border-radius:6px;text-decoration:none;font-weight:700;font-size:13px;">⬇️ 下載</a>';
+          results.appendChild(card);
+          if (done === currentFiles.length) {
+            var totalRatio = ((1 - totalCompressed / totalOriginal) * 100).toFixed(1);
+            var summary = document.createElement("div");
+            summary.style.cssText = "background:rgba(63,185,80,0.1);border-left:4px solid #3FB950;padding:12px 16px;border-radius:6px;margin-top:12px;color:#C9D1D9;font-size:14px;";
+            summary.innerHTML = '<strong>✅ 全部完成：</strong>共 ' + currentFiles.length + ' 張，原始 ' + (totalOriginal/1024).toFixed(1) + ' KB → 壓縮 ' + (totalCompressed/1024).toFixed(1) + ' KB，共省 ' + totalRatio + '%';
+            results.appendChild(summary);
+          }
+        }, format, quality);
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>密碼產生器（高強度隨機、可調長度） | 雅寶工具箱 AHPAL.COM</title>
+<meta name="description" content="密碼產生器：產生高強度隨機密碼，可調長度、字元類型、排除易混淆字元。純前端、完全離線、不上傳。附完整教學與常見問題。">
+<meta name="keywords" content="密碼產生器,隨機密碼,高強度密碼,安全密碼,密碼生成">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/password-generator/">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "密碼產生器", "applicationCategory": "SecurityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}, "description": "產生高強度隨機密碼，可調長度、字元類型、排除易混淆字元。純前端、完全離線。", "url": "https://tools.ahpal.com/password-generator/"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "工具箱", "item": "https://tools.ahpal.com/"}, {"@type": "ListItem", "position": 2, "name": "密碼產生器", "item": "https://tools.ahpal.com/password-generator/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "密碼產生器是什麼？", "acceptedAnswer": {"@type": "Answer", "text": "密碼產生器是產生「高強度隨機密碼」的工具。它用瀏覽器的加密隨機數（crypto.getRandomValues）產生，不是可預測的偽隨機數。"}}, {"@type": "Question", "name": "密碼要多長才安全？", "acceptedAnswer": {"@type": "Answer", "text": "一般帳號建議 12~16 字元；重要帳號（銀行、Email）建議 16~20 字元。長度比複雜度更重要。"}}, {"@type": "Question", "name": "這個工具會上傳我的密碼嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不會。所有產生都在你的瀏覽器完成，不上傳任何資料，完全離線。密碼只存在你的瀏覽器記憶體。"}}, {"@type": "Question", "name": "什麼是「排除易混淆字元」？", "acceptedAnswer": {"@type": "Answer", "text": "易混淆字元是「0 vs O」「1 vs l vs I」這種看起來很像的字元。排除後，密碼更容易手動輸入。"}}, {"@type": "Question", "name": "產生的密碼要存哪裡？", "acceptedAnswer": {"@type": "Answer", "text": "建議用密碼管理器（Bitwarden、1Password、KeePass）。不要存在瀏覽器、不要寫在紙上、不要用同一個密碼。"}}]}]}</script>
+<style>*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:40px 20px;}
+.container{max-width:1000px;margin:0 auto;}
+h1{color:#D4AF37;font-size:28px;margin-bottom:12px;}
+.sub{color:#8B949E;margin-bottom:24px;font-size:14px;}
+.card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin-bottom:16px;}
+label{color:#8B949E;font-size:13px;display:block;margin-bottom:6px;}
+input,select,textarea{width:100%;background:#0D1117;color:#E6EDF3;border:1px solid #2D303A;border-radius:8px;padding:12px;font-size:14px;margin-bottom:12px;font-family:inherit;}
+button{background:#D4AF37;color:#0D1117;border:none;border-radius:8px;padding:10px 20px;font-weight:700;cursor:pointer;margin:8px 8px 8px 0;font-size:14px;}
+button:hover{background:#e6c24a;}
+button.blue{background:#58A6FF;}
+.result{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:16px;font-size:15px;min-height:60px;}
+.result .big{font-size:28px;font-weight:700;color:#D4AF37;text-align:center;padding:12px 0;}
+.tip{background:rgba(63,185,80,0.08);border-left:4px solid #3FB950;padding:12px 16px;border-radius:6px;color:#C9D1D9;font-size:13px;margin-top:12px;}
+.warn{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:12px 16px;border-radius:6px;color:#C9D1D9;font-size:13px;margin-top:12px;}
+.footer{text-align:center;margin-top:60px;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:600px){.row{grid-template-columns:1fr;}}
+.breadcrumb{font-size:13px;color:#8B949E;margin-bottom:16px;}
+.breadcrumb a{color:#58A6FF;text-decoration:none;}
+.doc-section{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:28px 32px;margin-top:32px;}
+.doc-section h2{color:#D4AF37;font-size:22px;margin:24px 0 16px;padding-bottom:8px;border-bottom:2px solid #2D303A;}
+.doc-section h2:first-child{margin-top:0;}
+.doc-section h3{color:#58A6FF;font-size:17px;margin:24px 0 10px;}
+.doc-section p{color:#C9D1D9;margin-bottom:12px;line-height:1.9;}
+.doc-section ul,.doc-section ol{margin:8px 0 16px 24px;color:#C9D1D9;}
+.doc-section li{margin-bottom:8px;line-height:1.8;}
+.doc-section code{background:#0D1117;color:#58A6FF;padding:2px 8px;border-radius:4px;font-family:Consolas,monospace;font-size:13px;}
+.doc-section .highlight{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:6px;margin:16px 0;}
+.doc-section .warnbox{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:14px 18px;border-radius:6px;margin:16px 0;}
+.doc-section table{width:100%;border-collapse:collapse;font-size:14px;margin:12px 0 20px;}
+.doc-section th,.doc-section td{padding:10px 14px;border:1px solid #2D303A;text-align:left;}
+.doc-section th{background:rgba(212,175,55,0.12);color:#D4AF37;}
+.doc-section tr:nth-child(even){background:rgba(255,255,255,0.02);}
+.doc-section .example{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:16px;font-family:Consolas,monospace;font-size:13px;color:#C9D1D9;margin:12px 0;line-height:1.8;}
+.faq-item{border-bottom:1px solid #2D303A;padding:14px 0;}
+.faq-item:last-child{border-bottom:none;}
+.faq-q{color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;}
+.faq-a{color:#C9D1D9;font-size:14px;line-height:1.9;}</style>
+</head>
+<body>
+<div class="container">
+<nav style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;">
+  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏠 首頁</a>
+  <a href="https://www.ahpal.com/categories.html" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📚 全部分類</a>
+  <a href="https://www.ahpal.com/strategy/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📌 策略文章</a>
+  <a href="https://novels.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📖 小說站</a>
+  <a href="https://memories.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏛️ 回憶館</a>
+  <a href="https://bbs2.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">💬 BBS2</a>
+  <a href="https://pet.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">⚔️ 打怪場</a>
+  <a href="https://farm.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🌾 農場</a>
+  <a href="https://tools.ahpal.com/" style="color:#0D1117;background:#D4AF37;text-decoration:none;padding:4px 10px;font-weight:700;">🛠️ 工具箱</a>
+</nav>
+<div class="breadcrumb"><a href="https://tools.ahpal.com/">🛠️ 工具箱</a> › 密碼產生器</div>
+<article>
+<h1>🔑 密碼產生器</h1>
+<p class="sub">產生高強度隨機密碼，可調長度、字元類型、排除易混淆字元。純前端、完全離線。</p>
+
+<div class="card">
+  <div class="row">
+    <div>
+      <label>密碼長度</label>
+      <input type="number" id="length" value="16" min="4" max="128" step="1" oninput="updateLen()">
+      <div style="text-align:center;color:#D4AF37;font-weight:700;font-size:18px;" id="lenLabel">16 字元</div>
+    </div>
+    <div>
+      <label>選項</label>
+      <div style="margin-top:8px;">
+        <label style="display:inline-block;margin-right:12px;"><input type="checkbox" id="upper" checked style="width:auto;"> 大寫 (A-Z)</label><br>
+        <label style="display:inline-block;margin-right:12px;"><input type="checkbox" id="lower" checked style="width:auto;"> 小寫 (a-z)</label><br>
+        <label style="display:inline-block;margin-right:12px;"><input type="checkbox" id="digit" checked style="width:auto;"> 數字 (0-9)</label><br>
+        <label style="display:inline-block;margin-right:12px;"><input type="checkbox" id="symbol" checked style="width:auto;"> 符號 (!@#$%...)</label><br>
+        <label style="display:inline-block;"><input type="checkbox" id="noAmbiguous" style="width:auto;"> 排除易混淆 (0O1lI)</label>
+      </div>
+    </div>
+  </div>
+  <button onclick="generate()">🎲 產生密碼</button>
+  <button class="blue" onclick="copyPwd()">📋 複製</button>
+  <div class="tip">✅ 完全離線：所有產生都在你的瀏覽器完成，不會上傳任何資料。使用 `crypto.getRandomValues` 加密隨機數。</div>
+</div>
+
+<div class="card">
+  <label>產生的密碼</label>
+  <div class="result" id="result" style="font-family:Consolas,monospace;font-size:20px;word-break:break-all;text-align:center;padding:20px;">（按「產生密碼」）</div>
+  <div style="text-align:center;margin-top:8px;color:#8B949E;font-size:13px;" id="strength"></div>
+</div>
+
+<div class="doc-section">
+  <h2>📚 密碼產生器是什麼？給門外漢的完整說明</h2>
+
+  <p>你的密碼是不是「生日 + 123」？是不是「所有網站都用同一組」？是不是「寫在便條紙上」？這些都是資安風險。密碼產生器能幫你產生「高強度、不重複」的密碼。這篇文章一次講清楚。</p>
+
+  <h3>一、一句話講完</h3>
+  <div class="highlight">
+    <p><strong>密碼產生器 = 產生「高強度隨機密碼」的工具。</strong></p>
+    <p>它用瀏覽器的加密隨機數（`crypto.getRandomValues`）產生，不是可預測的偽隨機數。</p>
+  </div>
+
+  <h3>二、什麼是「高強度密碼」？</h3>
+  <ul>
+    <li><strong>長度夠長</strong>：至少 12 字元，重要帳號 16 字元以上。</li>
+    <li><strong>字元混合</strong>：大小寫、數字、符號混合。</li>
+    <li><strong>隨機</strong>：不是「生日、電話、名字」等可猜測的組合。</li>
+    <li><strong>不重複</strong>：每個網站用不同密碼。</li>
+  </ul>
+
+  <h3>三、長度 vs 複雜度（哪個重要？）</h3>
+  <table>
+    <tr><th>密碼</th><th>長度</th><th>破解時間</th></tr>
+    <tr><td>12345678</td><td>8</td><td>瞬間</td></tr>
+    <tr><td>password</td><td>8</td><td>瞬間</td></tr>
+    <tr><td>Abc123!@</td><td>8</td><td>幾小時</td></tr>
+    <tr><td>Tr0ub4dor&3</td><td>11</td><td>幾天</td></tr>
+    <tr><td>correct-horse-battery-staple</td><td>28</td><td>幾兆年</td></tr>
+    <tr><td>Xk9#mP2$vL8@qR5!</td><td>16</td><td>幾兆年</td></tr>
+  </table>
+  <p><strong>結論：長度比複雜度更重要。</strong> 16 字元的隨機密碼，比 8 字元的複雜密碼安全得多。</p>
+
+  <h3>四、什麼是「易混淆字元」？</h3>
+  <p>易混淆字元是「看起來很像」的字元：</p>
+  <ul>
+    <li><code>0</code>（數字零）vs <code>O</code>（大寫歐）</li>
+    <li><code>1</code>（數字一）vs <code>l</code>（小寫 L）vs <code>I</code>（大寫 I）</li>
+    <li><code>5</code>（數字五）vs <code>S</code>（大寫 S）</li>
+    <li><code>2</code>（數字二）vs <code>Z</code>（大寫 Z）</li>
+  </ul>
+  <p>排除後，密碼更容易「手動輸入」，減少打錯的機率。</p>
+
+  <h3>五、密碼要存哪裡？</h3>
+  <ul>
+    <li><strong>✅ 密碼管理器</strong>：Bitwarden（免費）、1Password、KeePass。</li>
+    <li><strong>✅ 紙本（實體保險箱）</strong>：如果不用管理器，可寫在紙上鎖進保險箱。</li>
+    <li><strong>❌ 瀏覽器</strong>：Chrome、Edge 的密碼管理器「可被惡意程式讀取」。</li>
+    <li><strong>❌ 便條紙</strong>：貼在螢幕上，任何人看到都能用。</li>
+    <li><strong>❌ 同一個密碼</strong>：一個網站被駭，全部網站都淪陷。</li>
+  </ul>
+
+  <h3>六、常見誤解</h3>
+  <ul>
+    <li><strong>❌ 誤解：密碼越複雜越安全。</strong><br>✅ 事實：長度比複雜度更重要。16 字元隨機密碼 > 8 字元複雜密碼。</li>
+    <li><strong>❌ 誤解：密碼可以重複使用。</strong><br>✅ 事實：一個網站被駭，全部網站都淪陷（撞庫攻擊）。</li>
+    <li><strong>❌ 誤解：密碼管理器不安全。</strong><br>✅ 事實：密碼管理器（Bitwarden、1Password）比「記在腦中」「寫在紙上」安全得多。</li>
+    <li><strong>❌ 誤解：定期換密碼更好。</strong><br>✅ 事實：NIST 建議「不要定期換密碼」，除非懷疑被駭。頻繁換密碼會讓人用「弱密碼 + 流水號」。</li>
+    <li><strong>❌ 誤解：密碼產生器會偷密碼。</strong><br>✅ 事實：本工具完全離線，不上傳任何資料。密碼只存在你的瀏覽器記憶體。</li>
+  </ul>
+
+  <h3>七、這個工具能幫你做什麼？</h3>
+  <ul>
+    <li><strong>產生高強度密碼</strong>：4~128 字元，加密隨機數</li>
+    <li><strong>選擇字元類型</strong>：大寫、小寫、數字、符號</li>
+    <li><strong>排除易混淆字元</strong>：0O1lI，方便手動輸入</li>
+    <li><strong>顯示密碼強度</strong>：依長度與字元類型評估</li>
+    <li><strong>一鍵複製</strong>：複製到剪貼簿</li>
+    <li><strong>完全離線</strong>：不上傳任何資料</li>
+  </ul>
+
+  <h3>八、常見問題（FAQ）</h3>
+  <div class="faq-item"><div class="faq-q">Q1：密碼產生器是什麼？</div><div class="faq-a">密碼產生器是產生「高強度隨機密碼」的工具。它用瀏覽器的加密隨機數（crypto.getRandomValues）產生，不是可預測的偽隨機數。</div></div>
+  <div class="faq-item"><div class="faq-q">Q2：密碼要多長才安全？</div><div class="faq-a">一般帳號建議 12~16 字元；重要帳號（銀行、Email）建議 16~20 字元。長度比複雜度更重要。</div></div>
+  <div class="faq-item"><div class="faq-q">Q3：這個工具會上傳我的密碼嗎？</div><div class="faq-a">不會。所有產生都在你的瀏覽器完成，不上傳任何資料，完全離線。密碼只存在你的瀏覽器記憶體。</div></div>
+  <div class="faq-item"><div class="faq-q">Q4：什麼是「排除易混淆字元」？</div><div class="faq-a">易混淆字元是「0 vs O」「1 vs l vs I」這種看起來很像的字元。排除後，密碼更容易手動輸入。</div></div>
+  <div class="faq-item"><div class="faq-q">Q5：產生的密碼要存哪裡？</div><div class="faq-a">建議用密碼管理器（Bitwarden、1Password、KeePass）。不要存在瀏覽器、不要寫在紙上、不要用同一個密碼。</div></div>
+
+  <div class="highlight">
+    <p style="margin:0;"><strong>🦞 龍蝦總工程師的話：</strong></p>
+    <p style="margin:8px 0 0;">「密碼不是『記得住』就好，是『猜不到』才好。懂密碼，你就不會被『123456』害慘。」</p>
+  </div>
+
+  <p style="text-align:center;color:#8B949E;font-size:13px;margin-top:24px;margin-bottom:0;">本文由 🦞 龍蝦總工程師撰寫 · <time datetime="2026-11-03">2026-11-03</time> · 雅寶社區 AHPAL.COM</p>
+</div>
+</article>
+
+<div class="footer">
+  <p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p>
+  <p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p>
+</div>
+</div>
+<script>
+function updateLen() {
+  document.getElementById("lenLabel").textContent = document.getElementById("length").value + " 字元";
+}
+function generate() {
+  var len = parseInt(document.getElementById("length").value) || 16;
+  var useUpper = document.getElementById("upper").checked;
+  var useLower = document.getElementById("lower").checked;
+  var useDigit = document.getElementById("digit").checked;
+  var useSymbol = document.getElementById("symbol").checked;
+  var noAmbiguous = document.getElementById("noAmbiguous").checked;
+  var upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  var lower = "abcdefghijklmnopqrstuvwxyz";
+  var digit = "0123456789";
+  var symbol = "!@#$%^&*()_+-=[]{}|;:,.<>?";
+  if (noAmbiguous) {
+    upper = upper.replace(/[OI]/g, "");
+    lower = lower.replace(/[l]/g, "");
+    digit = digit.replace(/[01]/g, "");
+    symbol = symbol.replace(/[|]/g, "");
+  }
+  var chars = "";
+  if (useUpper) chars += upper;
+  if (useLower) chars += lower;
+  if (useDigit) chars += digit;
+  if (useSymbol) chars += symbol;
+  if (!chars) {
+    document.getElementById("result").textContent = "請至少選擇一種字元類型";
+    document.getElementById("strength").textContent = "";
+    return;
+  }
+  var arr = new Uint32Array(len);
+  crypto.getRandomValues(arr);
+  var pwd = "";
+  for (var i = 0; i < len; i++) {
+    pwd += chars.charAt(arr[i] % chars.length);
+  }
+  document.getElementById("result").textContent = pwd;
+  // 強度評估
+  var entropy = len * Math.log2(chars.length);
+  var strength = "";
+  var color = "#8B949E";
+  if (entropy < 40) { strength = "弱"; color = "#F85149"; }
+  else if (entropy < 60) { strength = "中"; color = "#D4AF37"; }
+  else if (entropy < 80) { strength = "強"; color = "#3FB950"; }
+  else { strength = "非常強"; color = "#3FB950"; }
+  document.getElementById("strength").innerHTML = '強度：<span style="color:' + color + ';font-weight:700;">' + strength + '</span>（熵 ' + entropy.toFixed(1) + ' bits）';
+}
+function copyPwd() {
+  var t = document.getElementById("result").textContent;
+  if (!t || t.indexOf("按") >= 0) return;
+  navigator.clipboard.writeText(t).then(function() {
+    alert("已複製密碼！");
+  });
+}
+generate();
+</script>
+</body>
+</html>
