@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>聖經中英對照 · 詩篇第 1 篇（和合本 + ESV）| 雅寶工具箱</title>
+<meta name="description" content="詩篇第 1 篇和合本與 ESV 中英對照，附背景知識、常見誤解、10 題 FAQ。純前端、離線、不上傳。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/bible-psalm1/">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8637791667872348" crossorigin="anonymous"></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "聖經中英對照 · 詩篇第 1 篇", "description": "詩篇第 1 篇和合本與 ESV 中英對照，附背景知識與常見問題。", "url": "https://tools.ahpal.com/bible-psalm1/", "applicationCategory": "EducationalApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "詩篇第 1 篇有幾節？", "acceptedAnswer": {"@type": "Answer", "text": "6 節。1~3 節講義人，4~6 節講惡人。"}}, {"@type": "Question", "name": "作者是誰？", "acceptedAnswer": {"@type": "Answer", "text": "沒有署名，傳統上認為是大衛或所羅門。"}}, {"@type": "Question", "name": "「晝夜思想」是什麼意思？", "acceptedAnswer": {"@type": "Answer", "text": "原文是 hagah，意思是「默念、咀嚼、低聲吟誦」，不是單純的思考。"}}, {"@type": "Question", "name": "「糠秕」是什麼？", "acceptedAnswer": {"@type": "Answer", "text": "穀物去殼後的碎屑，沒有重量、沒有根，風一吹就散。"}}, {"@type": "Question", "name": "為什麼詩篇 1 篇放在最前面？", "acceptedAnswer": {"@type": "Answer", "text": "因為它是序言，為整卷詩篇定調：義人有福、惡人滅亡。"}}, {"@type": "Question", "name": "義人會受苦嗎？", "acceptedAnswer": {"@type": "Answer", "text": "會。第 1 篇是原則，不是保證。詩篇中義人受苦的例子很多（如詩篇 73 篇）。"}}, {"@type": "Question", "name": "和合本和 ESV 有什麼不同？", "acceptedAnswer": {"@type": "Answer", "text": "和合本是 1919 年出版的中文譯本，ESV 是 2001 年出版的英文標準版。兩個都忠於原文。"}}, {"@type": "Question", "name": "可以離線使用嗎？", "acceptedAnswer": {"@type": "Answer", "text": "可以，全部在瀏覽器，不上傳。"}}, {"@type": "Question", "name": "ESV 版權怎麼算？", "acceptedAnswer": {"@type": "Answer", "text": "ESV 版權屬 Crossway，非商業使用免費，需標示版權。"}}, {"@type": "Question", "name": "下一批要做哪幾篇？", "acceptedAnswer": {"@type": "Answer", "text": "詩篇 100 篇、詩篇 117 篇（這輪）、詩篇 121 篇、詩篇 23 篇（已做），逐步擴充。"}}]}</script>
+<style>*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.9;padding:20px;}
+.container{max-width:1000px;margin:0 auto;}
+h1{color:#D4AF37;font-size:30px;margin:16px 0 8px;text-align:center;}
+.sub{color:#8B949E;font-size:15px;text-align:center;margin-bottom:24px;}
+.verse-card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:20px 24px;margin-bottom:16px;display:grid;grid-template-columns:1fr 1fr;gap:24px;position:relative;}
+.verse-card::after{content:"";position:absolute;left:50%;top:16px;bottom:16px;width:1px;background:linear-gradient(to bottom,transparent,#D4AF37,transparent);}
+.verse-num{position:absolute;top:-10px;left:20px;background:#0D1117;color:#D4AF37;font-size:12px;font-weight:700;padding:2px 10px;border:1px solid #D4AF37;border-radius:10px;font-family:Consolas,monospace;}
+.zh{color:#E6EDF3;font-size:16px;line-height:2;}
+.en{color:#58A6FF;font-size:15px;line-height:2;font-style:italic;}
+.header-box{background:linear-gradient(135deg,rgba(212,175,55,0.08),rgba(88,166,255,0.05));border:1px solid #D4AF37;border-radius:12px;padding:24px;margin-bottom:24px;text-align:center;}
+.header-box h2{color:#D4AF37;font-size:22px;margin-bottom:8px;}
+.header-box .ver{color:#8B949E;font-size:13px;}
+.tip{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:8px;margin:16px 0;font-size:14px;color:#C9D1D9;}
+.knowledge{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin:20px 0;}
+.knowledge h2{color:#D4AF37;font-size:20px;margin:0 0 12px;}
+.knowledge h3{color:#58A6FF;font-size:16px;margin:18px 0 8px;}
+.knowledge p{color:#C9D1D9;font-size:15px;line-height:1.9;margin-bottom:10px;}
+.misconception{background:rgba(248,81,73,0.06);border-left:4px solid #F85149;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+.misconception strong{color:#F85149;}
+.when-to-use{background:rgba(63,185,80,0.06);border-left:4px solid #3FB950;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+.faq h3{color:#58A6FF;font-size:16px;margin:16px 0 6px;}
+.faq p{color:#C9D1D9;font-size:14px;}
+.footer{text-align:center;margin-top:48px;padding-top:20px;border-top:1px solid #2D303A;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+@media (max-width:700px){.verse-card{grid-template-columns:1fr;}.verse-card::after{display:none;}}
+@media print{.ahpal-top-nav,.tip{display:none!important;}body{background:#fff;color:#000;}.verse-card{border:1px solid #999;}}</style>
+</head>
+<body>
+<div class="container">
+<nav class="ahpal-top-nav" style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;">
+  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏠 首頁</a>
+  <a href="https://www.ahpal.com/categories.html" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📚 全部分類</a>
+  <a href="https://tools.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🛠️ 工具箱</a>
+  <a href="https://tools.ahpal.com/bible-index/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📖 聖經目錄</a>
+  <a href="https://tools.ahpal.com/bible-psalm-index/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📖 詩篇 150 篇</a>
+  <a href="https://tools.ahpal.com/bible-genesis1/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📖 創世記 1</a>
+  <a href="https://pet.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">⚔️ 打怪場</a>
+</nav>
+<nav class="breadcrumb" aria-label="breadcrumb" style="font-size:13px;color:#8B949E;margin-bottom:12px;"><a href="https://tools.ahpal.com/" style="color:#58A6FF;text-decoration:none;">工具箱</a> › <a href="https://tools.ahpal.com/bible-index/" style="color:#58A6FF;text-decoration:none;">聖經目錄</a> › <a href="https://tools.ahpal.com/bible-psalm-index/" style="color:#58A6FF;text-decoration:none;">詩篇</a> › 第 1 篇</nav>
+<article>
+<h1>📖 詩篇第 1 篇</h1>
+<p class="sub">6 節 · 詩篇的序言 · 義人與惡人的對比</p>
+
+<div class="header-box">
+  <h2>不從惡人的計謀，不站罪人的道路</h2>
+  <div class="ver">和合本（Chinese Union Version）· ESV（English Standard Version）</div>
+</div>
+
+<div class="verse-card">
+  <span class="verse-num">1</span>
+  <div class="zh">不從惡人的計謀，不站罪人的道路，不坐褻慢人的座位，</div>
+  <div class="en">Blessed is the man who walks not in the counsel of the wicked, nor stands in the way of sinners, nor sits in the seat of scoffers;</div>
+</div><div class="verse-card">
+  <span class="verse-num">2</span>
+  <div class="zh">惟喜愛耶和華的律法，晝夜思想，這人便為有福！</div>
+  <div class="en">but his delight is in the law of the Lord, and on his law he meditates day and night.</div>
+</div><div class="verse-card">
+  <span class="verse-num">3</span>
+  <div class="zh">他要像一棵樹栽在溪水旁，按時候結果子，葉子也不枯乾。凡他所做的盡都順利。</div>
+  <div class="en">He is like a tree planted by streams of water that yields its fruit in its season, and its leaf does not wither. In all that he does, he prospers.</div>
+</div><div class="verse-card">
+  <span class="verse-num">4</span>
+  <div class="zh">惡人並不是這樣，乃像糠秕被風吹散。</div>
+  <div class="en">The wicked are not so, but are like chaff that the wind drives away.</div>
+</div><div class="verse-card">
+  <span class="verse-num">5</span>
+  <div class="zh">因此，當審判的時候，惡人必站立不住；罪人在義人的會中也是如此。</div>
+  <div class="en">Therefore the wicked will not stand in the judgment, nor sinners in the congregation of the righteous;</div>
+</div><div class="verse-card">
+  <span class="verse-num">6</span>
+  <div class="zh">因為耶和華知道義人的道路；惡人的道路卻必滅亡。</div>
+  <div class="en">for the Lord knows the way of the righteous, but the way of the wicked will perish.</div>
+</div>
+
+<div class="tip">🔒 這個工具<strong>純前端、完全離線、不上傳</strong>。你的資料只留在你的瀏覽器。ESV 經文版權屬 Crossway，僅供個人閱讀使用。</div>
+
+<div class="knowledge">
+<h2>📖 詩篇第 1 篇背後的知識</h2>
+<p>詩篇第 1 篇是整卷詩篇的「序言」，也是「智慧詩」的代表。它用「義人」與「惡人」的對比，為整卷詩篇定調：義人像「栽在溪水旁的樹」，按時結果、葉子不枯乾；惡人像「糠秕被風吹散」，站立不住。這一篇沒有作者署名，傳統上認為是大衛或所羅門所作。</p>
+<p>第 1 篇的結構很工整：1~3 節講「義人的道路」（不從、不站、不坐 → 喜愛律法、晝夜思想 → 像樹栽溪水旁），4~6 節講「惡人的結局」（像糠秕被風吹散 → 審判站立不住 → 道路必滅亡）。這種「正反對比」是希伯來智慧文學的典型手法。</p>
+<h3>⚠️ 常見誤解</h3>
+<div class="misconception"><strong>❌「詩篇 1 篇是大衛寫的」</strong> → 不一定。第 1 篇沒有作者署名，傳統上認為是大衛或所羅門，但無法確定。</div>
+<div class="misconception"><strong>❌「義人不會受苦」</strong> → 錯。第 1 篇講「義人的道路有福」，但詩篇中義人受苦的例子很多（如詩篇 73 篇），第 1 篇是「原則」，不是「保證」。></div>
+<div class="misconception"><strong>❌「晝夜思想律法是律法主義」</strong> → 錯。這裡的「思想」是「默想、咀嚼」，是「喜愛」的表現，不是「靠行為得救」。</div>
+<div class="misconception"><strong>❌「糠秕被風吹散只是比喻」</strong> → 不只是比喻。糠秕是「沒有重量、沒有根」的東西，代表惡人的生命「沒有根基、站立不住」。</div>
+<div class="misconception"><strong>❌「詩篇 1 篇和 23 篇沒關係」</strong> → 有關。第 1 篇是「序言」，第 23 篇是「牧者詩」，兩篇都講「義人的道路」，只是一個用「樹」比喻，一個用「羊」比喻。</div>
+<h3>🩺 使用時機與注意事項</h3>
+<div class="when-to-use"><strong>✅ 適合：</strong>個人靈修、小組讀經、想學英文聖經的人、想認識詩篇結構的人。<br><strong>⚠️ 注意：</strong>這一篇是「原則」，不是「保證」。義人仍會受苦，但最終有神看顧。ESV 版權屬 Crossway，僅供個人閱讀使用。</div>
+<h3>❓ 更多常見問題</h3>
+<h3>詩篇第 1 篇有幾節？</h3><p>6 節。1~3 節講義人，4~6 節講惡人。</p>
+<h3>「晝夜思想」是什麼意思？</h3><p>「思想」原文是「הָגָה」（hagah），意思是「默念、咀嚼、低聲吟誦」，不是「思考」。</p>
+<h3>「糠秕」是什麼？</h3><p>糠秕是穀物去殼後的碎屑，沒有重量、沒有根，風一吹就散。代表惡人的生命沒有根基。</p>
+<h3>為什麼詩篇 1 篇放在最前面？</h3><p>因為它是「序言」，為整卷詩篇定調：義人有福、惡人滅亡。讀者讀完整卷詩篇，會不斷回到這個主題。</p>
+<h3>這一篇和耶穌有關嗎？</h3><p>有關。耶穌在登山寶訓（馬太福音 5 章）的「八福」，就是「義人有福」的延伸。</p>
+</div>
+<div class="faq"><h2 style="color:#D4AF37;font-size:20px;margin:24px 0 12px;">常見問題</h2><h3>詩篇第 1 篇有幾節？</h3><p>6 節。1~3 節講義人，4~6 節講惡人。</p><h3>作者是誰？</h3><p>沒有署名，傳統上認為是大衛或所羅門。</p><h3>「晝夜思想」是什麼意思？</h3><p>原文是 hagah，意思是「默念、咀嚼、低聲吟誦」，不是單純的思考。</p><h3>「糠秕」是什麼？</h3><p>穀物去殼後的碎屑，沒有重量、沒有根，風一吹就散。</p><h3>為什麼詩篇 1 篇放在最前面？</h3><p>因為它是序言，為整卷詩篇定調：義人有福、惡人滅亡。</p><h3>義人會受苦嗎？</h3><p>會。第 1 篇是原則，不是保證。詩篇中義人受苦的例子很多（如詩篇 73 篇）。</p><h3>和合本和 ESV 有什麼不同？</h3><p>和合本是 1919 年出版的中文譯本，ESV 是 2001 年出版的英文標準版。兩個都忠於原文。</p><h3>可以離線使用嗎？</h3><p>可以，全部在瀏覽器，不上傳。</p><h3>ESV 版權怎麼算？</h3><p>ESV 版權屬 Crossway，非商業使用免費，需標示版權。</p><h3>下一批要做哪幾篇？</h3><p>詩篇 100 篇、詩篇 117 篇（這輪）、詩篇 121 篇、詩篇 23 篇（已做），逐步擴充。</p></div>
+</article>
+<div class="footer"><p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p><p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>聖經中英對照 · 詩篇第 100 篇（和合本 + ESV）| 雅寶工具箱</title>
+<meta name="description" content="詩篇第 100 篇和合本與 ESV 中英對照，附背景知識、常見誤解、10 題 FAQ。純前端、離線、不上傳。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/bible-psalm100/">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8637791667872348" crossorigin="anonymous"></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "聖經中英對照 · 詩篇第 100 篇", "description": "詩篇第 100 篇和合本與 ESV 中英對照，附背景知識與常見問題。", "url": "https://tools.ahpal.com/bible-psalm100/", "applicationCategory": "EducationalApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "詩篇第 100 篇有幾節？", "acceptedAnswer": {"@type": "Answer", "text": "5 節。1~2 節呼籲讚美，3 節讚美的理由，4~5 節讚美的方式。"}}, {"@type": "Question", "name": "作者是誰？", "acceptedAnswer": {"@type": "Answer", "text": "沒有署名，傳統上認為是大衛。"}}, {"@type": "Question", "name": "「歡呼」是什麼意思？", "acceptedAnswer": {"@type": "Answer", "text": "原文是 ranan，意思是「發出喜樂的聲音」，可以是歌唱、歡呼、樂器聲。"}}, {"@type": "Question", "name": "「草場的羊」是什麼意思？", "acceptedAnswer": {"@type": "Answer", "text": "羊代表「被牧養、被保護、被引導」，是聖經中「神與人關係」的核心意象。"}}, {"@type": "Question", "name": "這一篇常用在哪裡？", "acceptedAnswer": {"@type": "Answer", "text": "教會禮拜的「宣召」或「奉獻」。"}}, {"@type": "Question", "name": "這一篇和詩篇 23 篇有關嗎？", "acceptedAnswer": {"@type": "Answer", "text": "有關。100 篇講「我們是祂草場的羊」，23 篇講「耶和華是我的牧者」。"}}, {"@type": "Question", "name": "和合本和 ESV 有什麼不同？", "acceptedAnswer": {"@type": "Answer", "text": "和合本是 1919 年出版的中文譯本，ESV 是 2001 年出版的英文標準版。兩個都忠於原文。"}}, {"@type": "Question", "name": "可以離線使用嗎？", "acceptedAnswer": {"@type": "Answer", "text": "可以，全部在瀏覽器，不上傳。"}}, {"@type": "Question", "name": "ESV 版權怎麼算？", "acceptedAnswer": {"@type": "Answer", "text": "ESV 版權屬 Crossway，非商業使用免費，需標示版權。"}}, {"@type": "Question", "name": "下一批要做哪幾篇？", "acceptedAnswer": {"@type": "Answer", "text": "詩篇 117 篇（這輪）、詩篇 121 篇、詩篇 51 篇，逐步擴充。"}}]}</script>
+<style>*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.9;padding:20px;}
+.container{max-width:1000px;margin:0 auto;}
+h1{color:#D4AF37;font-size:30px;margin:16px 0 8px;text-align:center;}
+.sub{color:#8B949E;font-size:15px;text-align:center;margin-bottom:24px;}
+.verse-card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:20px 24px;margin-bottom:16px;display:grid;grid-template-columns:1fr 1fr;gap:24px;position:relative;}
+.verse-card::after{content:"";position:absolute;left:50%;top:16px;bottom:16px;width:1px;background:linear-gradient(to bottom,transparent,#D4AF37,transparent);}
+.verse-num{position:absolute;top:-10px;left:20px;background:#0D1117;color:#D4AF37;font-size:12px;font-weight:700;padding:2px 10px;border:1px solid #D4AF37;border-radius:10px;font-family:Consolas,monospace;}
+.zh{color:#E6EDF3;font-size:16px;line-height:2;}
+.en{color:#58A6FF;font-size:15px;line-height:2;font-style:italic;}
+.header-box{background:linear-gradient(135deg,rgba(212,175,55,0.08),rgba(88,166,255,0.05));border:1px solid #D4AF37;border-radius:12px;padding:24px;margin-bottom:24px;text-align:center;}
+.header-box h2{color:#D4AF37;font-size:22px;margin-bottom:8px;}
+.header-box .ver{color:#8B949E;font-size:13px;}
+.tip{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:8px;margin:16px 0;font-size:14px;color:#C9D1D9;}
+.knowledge{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin:20px 0;}
+.knowledge h2{color:#D4AF37;font-size:20px;margin:0 0 12px;}
+.knowledge h3{color:#58A6FF;font-size:16px;margin:18px 0 8px;}
+.knowledge p{color:#C9D1D9;font-size:15px;line-height:1.9;margin-bottom:10px;}
+.misconception{background:rgba(248,81,73,0.06);border-left:4px solid #F85149;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+.misconception strong{color:#F85149;}
+.when-to-use{background:rgba(63,185,80,0.06);border-left:4px solid #3FB950;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+.faq h3{color:#58A6FF;font-size:16px;margin:16px 0 6px;}
+.faq p{color:#C9D1D9;font-size:14px;}
+.footer{text-align:center;margin-top:48px;padding-top:20px;border-top:1px solid #2D303A;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+@media (max-width:700px){.verse-card{grid-template-columns:1fr;}.verse-card::after{display:none;}}
+@media print{.ahpal-top-nav,.tip{display:none!important;}body{background:#fff;color:#000;}.verse-card{border:1px solid #999;}}</style>
+</head>
+<body>
+<div class="container">
+<nav class="ahpal-top-nav" style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;">
+  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏠 首頁</a>
+  <a href="https://www.ahpal.com/categories.html" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📚 全部分類</a>
+  <a href="https://tools.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🛠️ 工具箱</a>
+  <a href="https://tools.ahpal.com/bible-index/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📖 聖經目錄</a>
+  <a href="https://tools.ahpal.com/bible-psalm-index/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📖 詩篇 150 篇</a>
+  <a href="https://tools.ahpal.com/bible-genesis1/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📖 創世記 1</a>
+  <a href="https://pet.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">⚔️ 打怪場</a>
+</nav>
+<nav class="breadcrumb" aria-label="breadcrumb" style="font-size:13px;color:#8B949E;margin-bottom:12px;"><a href="https://tools.ahpal.com/" style="color:#58A6FF;text-decoration:none;">工具箱</a> › <a href="https://tools.ahpal.com/bible-index/" style="color:#58A6FF;text-decoration:none;">聖經目錄</a> › <a href="https://tools.ahpal.com/bible-psalm-index/" style="color:#58A6FF;text-decoration:none;">詩篇</a> › 第 100 篇</nav>
+<article>
+<h1>📖 詩篇第 100 篇</h1>
+<p class="sub">5 節 · 讚美詩 · 進殿詩</p>
+
+<div class="header-box">
+  <h2>普天下當向耶和華歡呼</h2>
+  <div class="ver">和合本（Chinese Union Version）· ESV（English Standard Version）</div>
+</div>
+
+<div class="verse-card">
+  <span class="verse-num">1</span>
+  <div class="zh">普天下當向耶和華歡呼！</div>
+  <div class="en">Make a joyful noise to the Lord, all the earth!</div>
+</div><div class="verse-card">
+  <span class="verse-num">2</span>
+  <div class="zh">你們當樂意事奉耶和華，當來向他歌唱！</div>
+  <div class="en">Serve the Lord with gladness! Come into his presence with singing!</div>
+</div><div class="verse-card">
+  <span class="verse-num">3</span>
+  <div class="zh">你們當曉得耶和華是神！我們是他造的，也是屬他的；我們是他的民，也是他草場的羊。</div>
+  <div class="en">Know that the Lord, he is God! It is he who made us, and we are his; we are his people, and the sheep of his pasture.</div>
+</div><div class="verse-card">
+  <span class="verse-num">4</span>
+  <div class="zh">當稱謝進入他的門；當讚美進入他的院。當感謝他，稱頌他的名！</div>
+  <div class="en">Enter his gates with thanksgiving, and his courts with praise! Give thanks to him; bless his name!</div>
+</div><div class="verse-card">
+  <span class="verse-num">5</span>
+  <div class="zh">因為耶和華本為善。他的慈愛存到永遠；他的信實直到萬代。</div>
+  <div class="en">For the Lord is good; his steadfast love endures forever, and his faithfulness to all generations.</div>
+</div>
+
+<div class="tip">🔒 這個工具<strong>純前端、完全離線、不上傳</strong>。你的資料只留在你的瀏覽器。ESV 經文版權屬 Crossway，僅供個人閱讀使用。</div>
+
+<div class="knowledge">
+<h2>📖 詩篇第 100 篇背後的知識</h2>
+<p>詩篇第 100 篇是「讚美詩」的代表，也是全世界最常被引用的詩篇之一。全篇只有 5 節，主題是「普天下當向耶和華歡呼」。這一篇沒有作者署名，傳統上認為是大衛所作，用於聖殿敬拜時的「進殿詩」。</p>
+<p>第 100 篇的結構很簡單：1~2 節「呼籲讚美」（歡呼、事奉、歌唱），3 節「讚美的理由」（耶和華是神、我們是祂造的），4~5 節「讚美的方式」（稱謝、讚美、感謝、稱頌）。這一篇常用於教會禮拜的「宣召」或「奉獻」，因為它簡短、易背、充滿喜樂。</p>
+<h3>⚠️ 常見誤解</h3>
+<div class="misconception"><strong>❌「詩篇 100 篇是大衛寫的」</strong> → 不一定。沒有署名，傳統上認為是大衛，但無法確定。</div>
+<div class="misconception"><strong>❌「歡呼就是大聲叫」</strong> → 不完全是。「歡呼」原文是「רָנַן」（ranan），意思是「發出喜樂的聲音」，可以是歌唱、歡呼、樂器聲。</div>
+<div class="misconception"><strong>❌「我們是祂草場的羊只是比喻」</strong> → 不只是比喻。羊代表「被牧養、被保護、被引導」，是聖經中「神與人關係」的核心意象。</div>
+<div class="misconception"><strong>❌「讚美只是一種情緒」</strong> → 錯。讚美是「認識神的屬性」後的自然回應，第 5 節講「耶和華本為善、慈愛存到永遠、信實直到萬代」，這是讚美的「理由」。</div>
+<div class="misconception"><strong>❌「詩篇 100 篇和 23 篇沒關係」</strong> → 有關。100 篇講「我們是祂草場的羊」，23 篇講「耶和華是我的牧者」，兩篇都用「羊與牧者」比喻神與人的關係。</div>
+<h3>🩺 使用時機與注意事項</h3>
+<div class="when-to-use"><strong>✅ 適合：</strong>個人靈修、教會宣召、小組讚美、想學英文聖經的人。<br><strong>⚠️ 注意：</strong>這一篇是「讚美詩」，不是「教義問答」。重點是「認識神、讚美神」，不是「解釋神學」。ESV 版權屬 Crossway，僅供個人閱讀使用。</div>
+<h3>❓ 更多常見問題</h3>
+<h3>詩篇第 100 篇有幾節？</h3><p>5 節。1~2 節呼籲讚美，3 節讚美的理由，4~5 節讚美的方式。</p>
+<h3>「歡呼」是什麼意思？</h3><p>原文是 ranan，意思是「發出喜樂的聲音」，可以是歌唱、歡呼、樂器聲。</p>
+<h3>「草場的羊」是什麼意思？</h3><p>羊代表「被牧養、被保護、被引導」，是聖經中「神與人關係」的核心意象。</p>
+<h3>這一篇常用在哪裡？</h3><p>教會禮拜的「宣召」或「奉獻」，因為它簡短、易背、充滿喜樂。</p>
+<h3>這一篇和詩篇 23 篇有關嗎？</h3><p>有關。100 篇講「我們是祂草場的羊」，23 篇講「耶和華是我的牧者」，兩篇都用「羊與牧者」比喻。</p>
+</div>
+<div class="faq"><h2 style="color:#D4AF37;font-size:20px;margin:24px 0 12px;">常見問題</h2><h3>詩篇第 100 篇有幾節？</h3><p>5 節。1~2 節呼籲讚美，3 節讚美的理由，4~5 節讚美的方式。</p><h3>作者是誰？</h3><p>沒有署名，傳統上認為是大衛。</p><h3>「歡呼」是什麼意思？</h3><p>原文是 ranan，意思是「發出喜樂的聲音」，可以是歌唱、歡呼、樂器聲。</p><h3>「草場的羊」是什麼意思？</h3><p>羊代表「被牧養、被保護、被引導」，是聖經中「神與人關係」的核心意象。</p><h3>這一篇常用在哪裡？</h3><p>教會禮拜的「宣召」或「奉獻」。</p><h3>這一篇和詩篇 23 篇有關嗎？</h3><p>有關。100 篇講「我們是祂草場的羊」，23 篇講「耶和華是我的牧者」。</p><h3>和合本和 ESV 有什麼不同？</h3><p>和合本是 1919 年出版的中文譯本，ESV 是 2001 年出版的英文標準版。兩個都忠於原文。</p><h3>可以離線使用嗎？</h3><p>可以，全部在瀏覽器，不上傳。</p><h3>ESV 版權怎麼算？</h3><p>ESV 版權屬 Crossway，非商業使用免費，需標示版權。</p><h3>下一批要做哪幾篇？</h3><p>詩篇 117 篇（這輪）、詩篇 121 篇、詩篇 51 篇，逐步擴充。</p></div>
+</article>
+<div class="footer"><p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p><p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p></div>
+</div>
+</body>
+</html>
