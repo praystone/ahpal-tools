@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>二維碼掃描器 | 雅寶工具箱 AHPAL.COM</title>
+<meta name="description" content="把 QR Code 圖片解碼成文字或網址，純前端、完全離線。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/qr-scanner/">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "二維碼掃描器", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}, "description": "把 QR Code 圖片解碼成文字或網址，純前端、完全離線。", "url": "https://tools.ahpal.com/qr-scanner/"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "工具箱", "item": "https://tools.ahpal.com/"}, {"@type": "ListItem", "position": 2, "name": "二維碼掃描器", "item": "https://tools.ahpal.com/qr-scanner/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "二維碼掃描器是什麼？", "acceptedAnswer": {"@type": "Answer", "text": "二維碼掃描器是把「QR Code 圖片」解碼成「文字或網址」的工具。"}}, {"@type": "Question", "name": "支援哪些圖片格式？", "acceptedAnswer": {"@type": "Answer", "text": "支援 PNG、JPG、WebP、GIF（依瀏覽器支援）。"}}, {"@type": "Question", "name": "這個工具會上傳我的圖片嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不會。所有解碼都在你的瀏覽器完成，不上傳任何資料。"}}, {"@type": "Question", "name": "為什麼掃不出來？", "acceptedAnswer": {"@type": "Answer", "text": "可能原因：圖片模糊、QR Code 太小、對比度不足、QR Code 損壞。"}}, {"@type": "Question", "name": "支援多個 QR Code 嗎？", "acceptedAnswer": {"@type": "Answer", "text": "一次解碼一個，若圖片有多個 QR Code，只會解出第一個。"}}]}]}</script>
+<style>*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:40px 20px;}
+.container{max-width:1000px;margin:0 auto;}
+h1{color:#D4AF37;font-size:28px;margin-bottom:12px;}
+.sub{color:#8B949E;margin-bottom:24px;font-size:14px;}
+.card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin-bottom:16px;}
+label{color:#8B949E;font-size:13px;display:block;margin-bottom:6px;}
+input,select,textarea{width:100%;background:#0D1117;color:#E6EDF3;border:1px solid #2D303A;border-radius:8px;padding:12px;font-size:14px;margin-bottom:12px;font-family:inherit;}
+button{background:#D4AF37;color:#0D1117;border:none;border-radius:8px;padding:10px 20px;font-weight:700;cursor:pointer;margin:8px 8px 8px 0;font-size:14px;}
+button:hover{background:#e6c24a;}
+button.blue{background:#58A6FF;}
+.result{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:16px;font-size:15px;min-height:60px;}
+.result .big{font-size:28px;font-weight:700;color:#D4AF37;text-align:center;padding:12px 0;}
+.tip{background:rgba(63,185,80,0.08);border-left:4px solid #3FB950;padding:12px 16px;border-radius:6px;color:#C9D1D9;font-size:13px;margin-top:12px;}
+.warn{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:12px 16px;border-radius:6px;color:#C9D1D9;font-size:13px;margin-top:12px;}
+.footer{text-align:center;margin-top:60px;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:600px){.row{grid-template-columns:1fr;}}
+.breadcrumb{font-size:13px;color:#8B949E;margin-bottom:16px;}
+.breadcrumb a{color:#58A6FF;text-decoration:none;}
+.doc-section{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:28px 32px;margin-top:32px;}
+.doc-section h2{color:#D4AF37;font-size:22px;margin:24px 0 16px;padding-bottom:8px;border-bottom:2px solid #2D303A;}
+.doc-section h2:first-child{margin-top:0;}
+.doc-section h3{color:#58A6FF;font-size:17px;margin:24px 0 10px;}
+.doc-section p{color:#C9D1D9;margin-bottom:12px;line-height:1.9;}
+.doc-section ul,.doc-section ol{margin:8px 0 16px 24px;color:#C9D1D9;}
+.doc-section li{margin-bottom:8px;line-height:1.8;}
+.doc-section code{background:#0D1117;color:#58A6FF;padding:2px 8px;border-radius:4px;font-family:Consolas,monospace;font-size:13px;}
+.doc-section .highlight{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:6px;margin:16px 0;}
+.doc-section .warnbox{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:14px 18px;border-radius:6px;margin:16px 0;}
+.doc-section table{width:100%;border-collapse:collapse;font-size:14px;margin:12px 0 20px;}
+.doc-section th,.doc-section td{padding:10px 14px;border:1px solid #2D303A;text-align:left;}
+.doc-section th{background:rgba(212,175,55,0.12);color:#D4AF37;}
+.doc-section tr:nth-child(even){background:rgba(255,255,255,0.02);}
+.doc-section .example{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:16px;font-family:Consolas,monospace;font-size:13px;color:#C9D1D9;margin:12px 0;line-height:1.8;}
+.faq-item{border-bottom:1px solid #2D303A;padding:14px 0;}
+.faq-item:last-child{border-bottom:none;}
+.faq-q{color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;}
+.faq-a{color:#C9D1D9;font-size:14px;line-height:1.9;}</style>
+</head>
+<body>
+<div class="container">
+<nav style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;">
+  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏠 首頁</a>
+  <a href="https://www.ahpal.com/categories.html" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📚 全部分類</a>
+  <a href="https://www.ahpal.com/strategy/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📌 策略文章</a>
+  <a href="https://novels.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📖 小說站</a>
+  <a href="https://memories.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏛️ 回憶館</a>
+  <a href="https://bbs2.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">💬 BBS2</a>
+  <a href="https://pet.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">⚔️ 打怪場</a>
+  <a href="https://farm.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🌾 農場</a>
+  <a href="https://tools.ahpal.com/" style="color:#0D1117;background:#D4AF37;text-decoration:none;padding:4px 10px;font-weight:700;">🛠️ 工具箱</a>
+</nav>
+<div class="breadcrumb"><a href="https://tools.ahpal.com/">🛠️ 工具箱</a> › 二維碼掃描器</div>
+<article>
+<h1>📷 二維碼掃描器</h1>
+<p class="sub">把 QR Code 圖片解碼成文字或網址，純前端、完全離線。</p>
+<div class="card">
+  <label>選擇 QR Code 圖片</label>
+  <input type="file" id="file" accept="image/*" onchange="scan()">
+  <div class="tip">✅ 完全離線：所有解碼都在你的瀏覽器完成，不上傳任何資料。</div>
+</div>
+<div class="card"><label>解碼結果</label><div class="result" id="result">（請先選擇 QR Code 圖片）</div></div>
+<div class="doc-section">
+<h2>📚 二維碼掃描器是什麼？給門外漢的完整說明</h2>
+<p>你收到一張 QR Code 圖片，但手機掃不到；你截圖了一張 QR Code，想解出網址。這就是「二維碼掃描器」。這篇文章一次講清楚。</p>
+<h3>一、一句話講完</h3>
+<div class="highlight"><p><strong>二維碼掃描器 = 把「QR Code 圖片」解碼成「文字或網址」。</strong></p><p>純前端處理、完全離線、不上傳。</p></div>
+<h3>二、QR Code 是什麼？</h3>
+<p>QR Code（Quick Response Code）是 1994 年由日本 Denso Wave 發明的「二維條碼」。它能儲存網址、文字、名片、Wi-Fi 等資訊。</p>
+<h3>三、QR Code 的三個定位點</h3>
+<p>QR Code 角落有 3 個「回」字型方塊，是「定位點」，讓掃描器知道「這是 QR Code、方向是什麼」。</p>
+<h3>四、怎麼用？</h3>
+<div class="example">
+<div>1. 選 QR Code 圖片（PNG、JPG）</div>
+<div>2. 自動解碼</div>
+<div>3. 複製結果</div>
+</div>
+<h3>五、為什麼掃不出來？</h3>
+<ul>
+<li><strong>圖片模糊</strong>：拍照手震、壓縮過度。</li>
+<li><strong>QR Code 太小</strong>：小於 100×100 像素。</li>
+<li><strong>對比度不足</strong>：灰底灰字、深底深字。</li>
+<li><strong>QR Code 損壞</strong>：被遮擋、破損。</li>
+<li><strong>不是 QR Code</strong>：可能是條碼、Data Matrix。</li>
+</ul>
+<h3>六、常見誤解</h3>
+<ul>
+<li><strong>❌ 誤解：QR Code 只能用來開網址。</strong><br>✅ 事實：QR Code 能存文字、名片、Wi-Fi、付款資訊。</li>
+<li><strong>❌ 誤解：所有 QR Code 都一樣。</strong><br>✅ 事實：QR Code 有不同容錯等級（L、M、Q、H）。</li>
+<li><strong>❌ 誤解：掃描器一定成功。</strong><br>✅ 事實：圖片模糊、損壞、對比不足都會失敗。</li>
+<li><strong>❌ 誤解：掃描器會上傳圖片。</strong><br>✅ 事實：本工具純前端處理，不上傳。</li>
+<li><strong>❌ 誤解：QR Code 是安全的。</strong><br>✅ 事實：可能被貼上惡意網址，掃描前要看清楚。</li>
+</ul>
+<h3>七、這個工具能幫你做什麼？</h3>
+<ul><li><strong>解碼 QR Code</strong>：上傳圖片，自動解出文字</li><li><strong>一鍵複製</strong>：複製結果</li><li><strong>完全離線</strong>：不上傳任何資料</li></ul>
+<h3>八、常見問題（FAQ）</h3>
+<div class="doc-section"><h2>❓ 常見問題（FAQ）</h2><div class="faq-item"><div class="faq-q">二維碼掃描器是什麼？</div><div class="faq-a">二維碼掃描器是把「QR Code 圖片」解碼成「文字或網址」的工具。</div></div><div class="faq-item"><div class="faq-q">支援哪些圖片格式？</div><div class="faq-a">支援 PNG、JPG、WebP、GIF（依瀏覽器支援）。</div></div><div class="faq-item"><div class="faq-q">這個工具會上傳我的圖片嗎？</div><div class="faq-a">不會。所有解碼都在你的瀏覽器完成，不上傳任何資料。</div></div><div class="faq-item"><div class="faq-q">為什麼掃不出來？</div><div class="faq-a">可能原因：圖片模糊、QR Code 太小、對比度不足、QR Code 損壞。</div></div><div class="faq-item"><div class="faq-q">支援多個 QR Code 嗎？</div><div class="faq-a">一次解碼一個，若圖片有多個 QR Code，只會解出第一個。</div></div></div>
+<p style="text-align:center;color:#8B949E;font-size:13px;margin-top:24px;"><time datetime="2026-11-03">最後更新：2026-11-03</time></p>
+</article>
+<div class="footer">
+  <p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p>
+  <p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
+<script>
+function scan() {
+  var f = document.getElementById("file").files[0];
+  var result = document.getElementById("result");
+  if (!f) { result.innerHTML = '<p style="color:#F85149;">請先選擇圖片</p>'; return; }
+  result.innerHTML = '<p style="color:#58A6FF;">解碼中...</p>';
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    var img = new Image();
+    img.onload = function() {
+      var canvas = document.createElement("canvas");
+      canvas.width = img.width;
+      canvas.height = img.height;
+      var ctx = canvas.getContext("2d");
+      ctx.drawImage(img, 0, 0);
+      var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      var code = jsQR(imageData.data, imageData.width, imageData.height);
+      if (code) {
+        result.innerHTML = '<div style="text-align:center;"><div style="color:#3FB950;font-weight:700;margin-bottom:8px;">✅ 解碼成功</div><div style="font-size:16px;word-break:break-all;color:#E6EDF3;padding:12px;background:#161B22;border-radius:6px;">' + code.data.replace(/</g, "&lt;").replace(/>/g, "&gt;") + '</div><button onclick="copyData(\'' + code.data.replace(/'/g, "\\'").replace(/\n/g, " ") + '\')" style="margin-top:12px;">📋 複製</button></div>';
+      } else {
+        result.innerHTML = '<p style="color:#F85149;">❌ 解碼失敗：圖片中沒有 QR Code，或圖片太模糊。</p>';
+      }
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(f);
+}
+function copyData(t) {
+  navigator.clipboard.writeText(t).then(function() { alert("已複製！"); });
+}
+</script>
+</body>
+</html>

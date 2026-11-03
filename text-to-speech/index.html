@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>文字轉語音 | 雅寶工具箱 AHPAL.COM</title>
+<meta name="description" content="把文字轉成語音，支援多語言、語速、音調。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/text-to-speech/">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "文字轉語音", "applicationCategory": "MultimediaApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}, "description": "把文字轉成語音，支援多語言、語速、音調。純前端、完全離線。", "url": "https://tools.ahpal.com/text-to-speech/"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "工具箱", "item": "https://tools.ahpal.com/"}, {"@type": "ListItem", "position": 2, "name": "文字轉語音", "item": "https://tools.ahpal.com/text-to-speech/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "文字轉語音是什麼？", "acceptedAnswer": {"@type": "Answer", "text": "文字轉語音（TTS）是把「文字」轉成「語音」的工具。它用瀏覽器內建的 SpeechSynthesis API，完全離線。"}}, {"@type": "Question", "name": "支援哪些語言？", "acceptedAnswer": {"@type": "Answer", "text": "依你的瀏覽器與作業系統，通常支援中文（台灣、大陸）、英文、日文、韓文等。"}}, {"@type": "Question", "name": "這個工具會上傳我的文字嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不會。所有轉換都在你的瀏覽器完成，不上傳任何資料。"}}, {"@type": "Question", "name": "可以調整語速和音調嗎？", "acceptedAnswer": {"@type": "Answer", "text": "可以。支援語速（0.1~10 倍）與音調（0~2 倍）。"}}, {"@type": "Question", "name": "可以下載語音檔嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不行。SpeechSynthesis 只能播放，不能下載。要下載請用其他工具。"}}]}]}</script>
+<style>*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:40px 20px;}
+.container{max-width:1000px;margin:0 auto;}
+h1{color:#D4AF37;font-size:28px;margin-bottom:12px;}
+.sub{color:#8B949E;margin-bottom:24px;font-size:14px;}
+.card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin-bottom:16px;}
+label{color:#8B949E;font-size:13px;display:block;margin-bottom:6px;}
+input,select,textarea{width:100%;background:#0D1117;color:#E6EDF3;border:1px solid #2D303A;border-radius:8px;padding:12px;font-size:14px;margin-bottom:12px;font-family:inherit;}
+button{background:#D4AF37;color:#0D1117;border:none;border-radius:8px;padding:10px 20px;font-weight:700;cursor:pointer;margin:8px 8px 8px 0;font-size:14px;}
+button:hover{background:#e6c24a;}
+button.blue{background:#58A6FF;}
+.result{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:16px;font-size:15px;min-height:60px;}
+.result .big{font-size:28px;font-weight:700;color:#D4AF37;text-align:center;padding:12px 0;}
+.tip{background:rgba(63,185,80,0.08);border-left:4px solid #3FB950;padding:12px 16px;border-radius:6px;color:#C9D1D9;font-size:13px;margin-top:12px;}
+.warn{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:12px 16px;border-radius:6px;color:#C9D1D9;font-size:13px;margin-top:12px;}
+.footer{text-align:center;margin-top:60px;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:600px){.row{grid-template-columns:1fr;}}
+.breadcrumb{font-size:13px;color:#8B949E;margin-bottom:16px;}
+.breadcrumb a{color:#58A6FF;text-decoration:none;}
+.doc-section{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:28px 32px;margin-top:32px;}
+.doc-section h2{color:#D4AF37;font-size:22px;margin:24px 0 16px;padding-bottom:8px;border-bottom:2px solid #2D303A;}
+.doc-section h2:first-child{margin-top:0;}
+.doc-section h3{color:#58A6FF;font-size:17px;margin:24px 0 10px;}
+.doc-section p{color:#C9D1D9;margin-bottom:12px;line-height:1.9;}
+.doc-section ul,.doc-section ol{margin:8px 0 16px 24px;color:#C9D1D9;}
+.doc-section li{margin-bottom:8px;line-height:1.8;}
+.doc-section code{background:#0D1117;color:#58A6FF;padding:2px 8px;border-radius:4px;font-family:Consolas,monospace;font-size:13px;}
+.doc-section .highlight{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:6px;margin:16px 0;}
+.doc-section .warnbox{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:14px 18px;border-radius:6px;margin:16px 0;}
+.doc-section table{width:100%;border-collapse:collapse;font-size:14px;margin:12px 0 20px;}
+.doc-section th,.doc-section td{padding:10px 14px;border:1px solid #2D303A;text-align:left;}
+.doc-section th{background:rgba(212,175,55,0.12);color:#D4AF37;}
+.doc-section tr:nth-child(even){background:rgba(255,255,255,0.02);}
+.doc-section .example{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:16px;font-family:Consolas,monospace;font-size:13px;color:#C9D1D9;margin:12px 0;line-height:1.8;}
+.faq-item{border-bottom:1px solid #2D303A;padding:14px 0;}
+.faq-item:last-child{border-bottom:none;}
+.faq-q{color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;}
+.faq-a{color:#C9D1D9;font-size:14px;line-height:1.9;}</style>
+</head>
+<body>
+<div class="container">
+<nav style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;">
+  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏠 首頁</a>
+  <a href="https://www.ahpal.com/categories.html" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📚 全部分類</a>
+  <a href="https://www.ahpal.com/strategy/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📌 策略文章</a>
+  <a href="https://novels.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📖 小說站</a>
+  <a href="https://memories.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏛️ 回憶館</a>
+  <a href="https://bbs2.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">💬 BBS2</a>
+  <a href="https://pet.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">⚔️ 打怪場</a>
+  <a href="https://farm.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🌾 農場</a>
+  <a href="https://tools.ahpal.com/" style="color:#0D1117;background:#D4AF37;text-decoration:none;padding:4px 10px;font-weight:700;">🛠️ 工具箱</a>
+</nav>
+<div class="breadcrumb"><a href="https://tools.ahpal.com/">🛠️ 工具箱</a> › 文字轉語音</div>
+<article>
+<h1>🔊 文字轉語音</h1>
+<p class="sub">把文字轉成語音，支援多語言、語速、音調。</p>
+<div class="card">
+  <label>文字</label>
+  <textarea id="text" rows="5" placeholder="輸入要朗讀的文字...">歡迎來到雅寶社區，這裡有 41 個免費線上工具。</textarea>
+  <label>語言</label>
+  <select id="lang"></select>
+  <div class="row">
+    <div><label>語速（0.5~2）</label><input type="range" id="rate" min="0.5" max="2" step="0.1" value="1" oninput="document.getElementById('rateLabel').textContent=this.value"><div style="text-align:center;color:#D4AF37;" id="rateLabel">1</div></div>
+    <div><label>音調（0~2）</label><input type="range" id="pitch" min="0" max="2" step="0.1" value="1" oninput="document.getElementById('pitchLabel').textContent=this.value"><div style="text-align:center;color:#D4AF37;" id="pitchLabel">1</div></div>
+  </div>
+  <button onclick="speak()">🔊 朗讀</button>
+  <button class="blue" onclick="stop()">⏹️ 停止</button>
+  <div class="tip">✅ 完全離線：所有轉換都在你的瀏覽器完成，不上傳任何資料。</div>
+</div>
+<div class="card"><label>狀態</label><div class="result" id="status">（按「朗讀」開始）</div></div>
+<div class="doc-section">
+<h2>📚 文字轉語音是什麼？給門外漢的完整說明</h2>
+<p>你要聽文章，但眼睛累了；你要學外語，但不知道怎麼念；你要做影片旁白，但不想錄音。這就是「文字轉語音」。這篇文章一次講清楚。</p>
+<h3>一、一句話講完</h3>
+<div class="highlight"><p><strong>文字轉語音（TTS）= 把「文字」轉成「語音」。</strong></p><p>本工具用瀏覽器內建的 SpeechSynthesis API，完全離線。</p></div>
+<h3>二、TTS 是什麼？</h3>
+<p>TTS（Text-to-Speech）是「文字轉語音」的縮寫。它把文字轉成「人聲」，讓電腦「念」給你聽。常見用途：語音助理、有聲書、導航、影片旁白。</p>
+<h3>三、TTS 的兩種做法</h3>
+<table><tr><th>做法</th><th>原理</th><th>優點</th><th>缺點</th></tr>
+<tr><td>拼接式</td><td>拼接預錄音節</td><td>自然</td><td>檔案大</td></tr>
+<tr><td>參數式</td><td>用演算法合成</td><td>檔案小</td><td>較機械</td></tr></table>
+<p>本工具用「瀏覽器內建 TTS」，通常是「參數式」，聲音較機械，但完全離線。</p>
+<h3>四、支援的語言</h3>
+<p>依瀏覽器與作業系統，通常支援：中文（台灣、大陸）、英文（美、英）、日文、韓文、法文、德文、西班牙文等。</p>
+<h3>五、怎麼用？</h3>
+<div class="example">
+<div>1. 輸入文字（例如「歡迎來到雅寶社區」）</div>
+<div>2. 選語言（例如「中文（台灣）」）</div>
+<div>3. 調語速（0.5~2 倍）、音調（0~2 倍）</div>
+<div>4. 按「朗讀」</div>
+</div>
+<h3>六、常見誤解</h3>
+<ul>
+<li><strong>❌ 誤解：TTS 一定很機械。</strong><br>✅ 事實：現代 TTS（如 Google、Azure）已很自然，但本工具用「瀏覽器內建」，較機械。</li>
+<li><strong>❌ 誤解：TTS 可以下載語音檔。</strong><br>✅ 事實：SpeechSynthesis 只能播放，不能下載。</li>
+<li><strong>❌ 誤解：TTS 支援所有語言。</strong><br>✅ 事實：依瀏覽器與 OS，通常支援 20~30 種語言。</li>
+<li><strong>❌ 誤解：TTS 只能用來「聽」。</strong><br>✅ 事實：也能用來「學外語」（聽發音）。</li>
+<li><strong>❌ 誤解：TTS 會上傳文字。</strong><br>✅ 事實：本工具完全離線，不上傳。</li>
+</ul>
+<h3>七、這個工具能幫你做什麼？</h3>
+<ul><li><strong>朗讀文字</strong>：輸入文字，電腦念給你聽</li><li><strong>選語言</strong>：20~30 種語言</li><li><strong>調語速、音調</strong>：0.5~2 倍語速、0~2 倍音調</li><li><strong>完全離線</strong>：不上傳任何資料</li></ul>
+<h3>八、常見問題（FAQ）</h3>
+<div class="doc-section"><h2>❓ 常見問題（FAQ）</h2><div class="faq-item"><div class="faq-q">文字轉語音是什麼？</div><div class="faq-a">文字轉語音（TTS）是把「文字」轉成「語音」的工具。它用瀏覽器內建的 SpeechSynthesis API，完全離線。</div></div><div class="faq-item"><div class="faq-q">支援哪些語言？</div><div class="faq-a">依你的瀏覽器與作業系統，通常支援中文（台灣、大陸）、英文、日文、韓文等。</div></div><div class="faq-item"><div class="faq-q">這個工具會上傳我的文字嗎？</div><div class="faq-a">不會。所有轉換都在你的瀏覽器完成，不上傳任何資料。</div></div><div class="faq-item"><div class="faq-q">可以調整語速和音調嗎？</div><div class="faq-a">可以。支援語速（0.1~10 倍）與音調（0~2 倍）。</div></div><div class="faq-item"><div class="faq-q">可以下載語音檔嗎？</div><div class="faq-a">不行。SpeechSynthesis 只能播放，不能下載。要下載請用其他工具。</div></div></div>
+<p style="text-align:center;color:#8B949E;font-size:13px;margin-top:24px;"><time datetime="2026-11-03">最後更新：2026-11-03</time></p>
+</article>
+<div class="footer">
+  <p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p>
+  <p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p>
+</div>
+</div>
+<script>
+var voices = [];
+function loadVoices() {
+  voices = speechSynthesis.getVoices();
+  var sel = document.getElementById("lang");
+  sel.innerHTML = "";
+  var seen = {};
+  voices.forEach(function(v) {
+    if (seen[v.lang]) return;
+    seen[v.lang] = true;
+    var opt = document.createElement("option");
+    opt.value = v.lang;
+    opt.textContent = v.lang + " — " + v.name;
+    sel.appendChild(opt);
+  });
+}
+speechSynthesis.onvoiceschanged = loadVoices;
+function speak() {
+  var text = document.getElementById("text").value;
+  if (!text) { document.getElementById("status").textContent = "請輸入文字"; return; }
+  speechSynthesis.cancel();
+  var u = new SpeechSynthesisUtterance(text);
+  u.lang = document.getElementById("lang").value || "zh-TW";
+  u.rate = parseFloat(document.getElementById("rate").value) || 1;
+  u.pitch = parseFloat(document.getElementById("pitch").value) || 1;
+  u.onstart = function() { document.getElementById("status").textContent = "🔊 朗讀中..."; };
+  u.onend = function() { document.getElementById("status").textContent = "✅ 朗讀完成"; };
+  u.onerror = function(e) { document.getElementById("status").textContent = "❌ 錯誤：" + e.error; };
+  speechSynthesis.speak(u);
+}
+function stop() {
+  speechSynthesis.cancel();
+  document.getElementById("status").textContent = "⏹️ 已停止";
+}
+window.addEventListener("load", loadVoices);
+</script>
+</body>
+</html>

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>影片轉 GIF | 雅寶工具箱 AHPAL.COM</title>
+<meta name="description" content="把短影片轉成 GIF 動圖，可調幀率、尺寸、長度。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/video-to-gif/">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "影片轉 GIF", "applicationCategory": "MultimediaApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}, "description": "把短影片轉成 GIF 動圖，可調幀率、尺寸、長度。純前端、完全離線。", "url": "https://tools.ahpal.com/video-to-gif/"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "工具箱", "item": "https://tools.ahpal.com/"}, {"@type": "ListItem", "position": 2, "name": "影片轉 GIF", "item": "https://tools.ahpal.com/video-to-gif/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "影片轉 GIF 是什麼？", "acceptedAnswer": {"@type": "Answer", "text": "影片轉 GIF 是把「短影片」轉成「GIF 動圖」的工具。常用於社群分享、迷因製作。"}}, {"@type": "Question", "name": "支援哪些影片格式？", "acceptedAnswer": {"@type": "Answer", "text": "支援 MP4、WebM、MOV（依瀏覽器支援）。"}}, {"@type": "Question", "name": "這個工具會上傳我的影片嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不會。所有轉換都在你的瀏覽器完成，不上傳任何資料。"}}, {"@type": "Question", "name": "GIF 檔案會很大嗎？", "acceptedAnswer": {"@type": "Answer", "text": "會。GIF 是「無損動畫」，檔案比影片大很多。建議只轉 3~5 秒。"}}, {"@type": "Question", "name": "可以調 GIF 的參數嗎？", "acceptedAnswer": {"@type": "Answer", "text": "可以。支援幀率（5~20 fps）、尺寸、起始時間、長度。"}}]}]}</script>
+<style>*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:40px 20px;}
+.container{max-width:1000px;margin:0 auto;}
+h1{color:#D4AF37;font-size:28px;margin-bottom:12px;}
+.sub{color:#8B949E;margin-bottom:24px;font-size:14px;}
+.card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin-bottom:16px;}
+label{color:#8B949E;font-size:13px;display:block;margin-bottom:6px;}
+input,select,textarea{width:100%;background:#0D1117;color:#E6EDF3;border:1px solid #2D303A;border-radius:8px;padding:12px;font-size:14px;margin-bottom:12px;font-family:inherit;}
+button{background:#D4AF37;color:#0D1117;border:none;border-radius:8px;padding:10px 20px;font-weight:700;cursor:pointer;margin:8px 8px 8px 0;font-size:14px;}
+button:hover{background:#e6c24a;}
+button.blue{background:#58A6FF;}
+.result{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:16px;font-size:15px;min-height:60px;}
+.result .big{font-size:28px;font-weight:700;color:#D4AF37;text-align:center;padding:12px 0;}
+.tip{background:rgba(63,185,80,0.08);border-left:4px solid #3FB950;padding:12px 16px;border-radius:6px;color:#C9D1D9;font-size:13px;margin-top:12px;}
+.warn{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:12px 16px;border-radius:6px;color:#C9D1D9;font-size:13px;margin-top:12px;}
+.footer{text-align:center;margin-top:60px;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:600px){.row{grid-template-columns:1fr;}}
+.breadcrumb{font-size:13px;color:#8B949E;margin-bottom:16px;}
+.breadcrumb a{color:#58A6FF;text-decoration:none;}
+.doc-section{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:28px 32px;margin-top:32px;}
+.doc-section h2{color:#D4AF37;font-size:22px;margin:24px 0 16px;padding-bottom:8px;border-bottom:2px solid #2D303A;}
+.doc-section h2:first-child{margin-top:0;}
+.doc-section h3{color:#58A6FF;font-size:17px;margin:24px 0 10px;}
+.doc-section p{color:#C9D1D9;margin-bottom:12px;line-height:1.9;}
+.doc-section ul,.doc-section ol{margin:8px 0 16px 24px;color:#C9D1D9;}
+.doc-section li{margin-bottom:8px;line-height:1.8;}
+.doc-section code{background:#0D1117;color:#58A6FF;padding:2px 8px;border-radius:4px;font-family:Consolas,monospace;font-size:13px;}
+.doc-section .highlight{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:6px;margin:16px 0;}
+.doc-section .warnbox{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:14px 18px;border-radius:6px;margin:16px 0;}
+.doc-section table{width:100%;border-collapse:collapse;font-size:14px;margin:12px 0 20px;}
+.doc-section th,.doc-section td{padding:10px 14px;border:1px solid #2D303A;text-align:left;}
+.doc-section th{background:rgba(212,175,55,0.12);color:#D4AF37;}
+.doc-section tr:nth-child(even){background:rgba(255,255,255,0.02);}
+.doc-section .example{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:16px;font-family:Consolas,monospace;font-size:13px;color:#C9D1D9;margin:12px 0;line-height:1.8;}
+.faq-item{border-bottom:1px solid #2D303A;padding:14px 0;}
+.faq-item:last-child{border-bottom:none;}
+.faq-q{color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;}
+.faq-a{color:#C9D1D9;font-size:14px;line-height:1.9;}</style>
+</head>
+<body>
+<div class="container">
+<nav style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;">
+  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏠 首頁</a>
+  <a href="https://www.ahpal.com/categories.html" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📚 全部分類</a>
+  <a href="https://www.ahpal.com/strategy/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📌 策略文章</a>
+  <a href="https://novels.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📖 小說站</a>
+  <a href="https://memories.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏛️ 回憶館</a>
+  <a href="https://bbs2.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">💬 BBS2</a>
+  <a href="https://pet.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">⚔️ 打怪場</a>
+  <a href="https://farm.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🌾 農場</a>
+  <a href="https://tools.ahpal.com/" style="color:#0D1117;background:#D4AF37;text-decoration:none;padding:4px 10px;font-weight:700;">🛠️ 工具箱</a>
+</nav>
+<div class="breadcrumb"><a href="https://tools.ahpal.com/">🛠️ 工具箱</a> › 影片轉 GIF</div>
+<article>
+<h1>🎬 影片轉 GIF</h1>
+<p class="sub">把短影片轉成 GIF 動圖，可調幀率、尺寸、長度。</p>
+<div class="card">
+  <label>選擇影片</label>
+  <input type="file" id="video" accept="video/*" onchange="loadVideo()">
+  <div class="row">
+    <div><label>起始時間（秒）</label><input type="number" id="start" value="0" min="0" step="0.1"></div>
+    <div><label>長度（秒）</label><input type="number" id="duration" value="3" min="0.5" max="10" step="0.5"></div>
+  </div>
+  <div class="row">
+    <div><label>幀率（fps）</label><select id="fps"><option value="5">5（檔案小）</option><option value="10" selected>10（平衡）</option><option value="15">15（流暢）</option><option value="20">20（最流暢）</option></select></div>
+    <div><label>寬度（像素）</label><select id="width"><option value="320">320（小）</option><option value="480" selected>480（中）</option><option value="640">640（大）</option></select></div>
+  </div>
+  <button onclick="convert()">🎬 轉成 GIF</button>
+  <div class="tip">✅ 完全離線：所有轉換都在你的瀏覽器完成，不上傳任何資料。</div>
+  <div class="warn">⚠️ GIF 檔案較大，建議只轉 3~5 秒。</div>
+</div>
+<div class="card"><label>結果</label><div class="result" id="result">（請先選擇影片）</div></div>
+<div class="doc-section">
+<h2>📚 影片轉 GIF 是什麼？給門外漢的完整說明</h2>
+<p>你看到一段好笑的影片，想做成迷因；你看到一段教學，想做成動圖。這就是「影片轉 GIF」。這篇文章一次講清楚。</p>
+<h3>一、一句話講完</h3>
+<div class="highlight"><p><strong>影片轉 GIF = 把「短影片」轉成「GIF 動圖」。</strong></p><p>GIF 是「無損動畫」，可在任何平台播放、不需點擊。</p></div>
+<h3>二、GIF 是什麼？</h3>
+<p>GIF（Graphics Interchange Format）是 1987 年開發的「圖片格式」，支援「動畫」與「透明」。它是「自動播放、無限循環」的動圖。</p>
+<h3>三、GIF vs 影片</h3>
+<table><tr><th>項目</th><th>GIF</th><th>影片</th></tr>
+<tr><td>檔案大小</td><td>大</td><td>小</td></tr>
+<tr><td>自動播放</td><td>是</td><td>否（需點擊）</td></tr>
+<tr><td>音訊</td><td>無</td><td>有</td></tr>
+<tr><td>相容性</td><td>高</td><td>中</td></tr>
+<tr><td>用途</td><td>迷因、教學動圖</td><td>完整影片</td></tr></table>
+<h3>四、怎麼用？</h3>
+<div class="example">
+<div>1. 選影片（MP4、WebM、MOV）</div>
+<div>2. 設起始時間（例如 5 秒）</div>
+<div>3. 設長度（例如 3 秒）</div>
+<div>4. 設幀率（10 fps）、寬度（480px）</div>
+<div>5. 按「轉成 GIF」</div>
+</div>
+<h3>五、GIF 的三個限制</h3>
+<ul>
+<li><strong>檔案大</strong>：GIF 是「無損」，檔案比影片大很多。</li>
+<li><strong>色彩少</strong>：GIF 最多 256 色，色彩可能失真。</li>
+<li><strong>無音訊</strong>：GIF 沒有聲音。</li>
+</ul>
+<h3>六、常見誤解</h3>
+<ul>
+<li><strong>❌ 誤解：GIF 檔案比影片小。</strong><br>✅ 事實：GIF 通常比影片大（無損、256 色）。</li>
+<li><strong>❌ 誤解：GIF 有聲音。</strong><br>✅ 事實：GIF 沒有音訊。</li>
+<li><strong>❌ 誤解：GIF 可以很長。</strong><br>✅ 事實：GIF 越長，檔案越大，建議 3~5 秒。</li>
+<li><strong>❌ 誤解：影片轉 GIF 要上傳。</strong><br>✅ 事實：本工具純前端處理，不上傳。</li>
+<li><strong>❌ 誤解：GIF 畫質一定差。</strong><br>✅ 事實：GIF 是無損，但受限 256 色，複雜畫面會失真。</li>
+</ul>
+<h3>七、這個工具能幫你做什麼？</h3>
+<ul><li><strong>影片轉 GIF</strong>：選影片，即時轉換</li><li><strong>可調參數</strong>：起始時間、長度、幀率、寬度</li><li><strong>完全離線</strong>：不上傳任何資料</li></ul>
+<h3>八、常見問題（FAQ）</h3>
+<div class="doc-section"><h2>❓ 常見問題（FAQ）</h2><div class="faq-item"><div class="faq-q">影片轉 GIF 是什麼？</div><div class="faq-a">影片轉 GIF 是把「短影片」轉成「GIF 動圖」的工具。常用於社群分享、迷因製作。</div></div><div class="faq-item"><div class="faq-q">支援哪些影片格式？</div><div class="faq-a">支援 MP4、WebM、MOV（依瀏覽器支援）。</div></div><div class="faq-item"><div class="faq-q">這個工具會上傳我的影片嗎？</div><div class="faq-a">不會。所有轉換都在你的瀏覽器完成，不上傳任何資料。</div></div><div class="faq-item"><div class="faq-q">GIF 檔案會很大嗎？</div><div class="faq-a">會。GIF 是「無損動畫」，檔案比影片大很多。建議只轉 3~5 秒。</div></div><div class="faq-item"><div class="faq-q">可以調 GIF 的參數嗎？</div><div class="faq-a">可以。支援幀率（5~20 fps）、尺寸、起始時間、長度。</div></div></div>
+<p style="text-align:center;color:#8B949E;font-size:13px;margin-top:24px;"><time datetime="2026-11-03">最後更新：2026-11-03</time></p>
+</article>
+<div class="footer">
+  <p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p>
+  <p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.min.js"></script>
+<script>
+function loadVideo() {
+  var f = document.getElementById("video").files[0];
+  if (f) {
+    document.getElementById("result").innerHTML = '<p style="color:#8B949E;">已選擇：' + f.name + '，按「轉成 GIF」開始。</p>';
+  }
+}
+async function convert() {
+  var file = document.getElementById("video").files[0];
+  if (!file) { document.getElementById("result").innerHTML = '<p style="color:#F85149;">請先選擇影片</p>'; return; }
+  var result = document.getElementById("result");
+  result.innerHTML = '<p style="color:#58A6FF;">處理中，請稍候（可能需要 10~30 秒）...</p>';
+  try {
+    var url = URL.createObjectURL(file);
+    var video = document.createElement("video");
+    video.src = url;
+    video.muted = true;
+    await new Promise(function(res) { video.onloadedmetadata = res; });
+    var start = parseFloat(document.getElementById("start").value) || 0;
+    var duration = parseFloat(document.getElementById("duration").value) || 3;
+    var fps = parseInt(document.getElementById("fps").value) || 10;
+    var width = parseInt(document.getElementById("width").value) || 480;
+    var height = Math.round(width * video.videoHeight / video.videoWidth);
+    video.currentTime = start;
+    await new Promise(function(res) { video.onseeked = res; });
+    var gif = new GIF({
+      workers: 2,
+      quality: 10,
+      width: width,
+      height: height,
+      workerScript: "https://cdn.jsdelivr.net/npm/gif.js@0.2.0/dist/gif.worker.js"
+    });
+    var canvas = document.createElement("canvas");
+    canvas.width = width;
+    canvas.height = height;
+    var ctx = canvas.getContext("2d");
+    var frames = Math.floor(duration * fps);
+    var interval = 1000 / fps;
+    for (var i = 0; i < frames; i++) {
+      video.currentTime = start + i / fps;
+      await new Promise(function(res) { video.onseeked = res; });
+      ctx.drawImage(video, 0, 0, width, height);
+      gif.addFrame(ctx, { copy: true, delay: interval });
+    }
+    gif.on("finished", function(blob) {
+      var url2 = URL.createObjectURL(blob);
+      var kb = (blob.size / 1024).toFixed(1);
+      result.innerHTML = '<div style="text-align:center;"><div class="big">' + frames + ' 幀 → GIF</div><div style="color:#8B949E;">' + kb + ' KB</div><a href="' + url2 + '" download="video.gif" style="display:inline-block;margin-top:16px;background:#58A6FF;color:#0D1117;padding:10px 24px;border-radius:8px;text-decoration:none;font-weight:700;">⬇️ 下載 GIF</a></div>';
+    });
+    gif.render();
+  } catch(e) { result.innerHTML = '<p style="color:#F85149;">轉換失敗：' + e.message + '</p>'; }
+}
+</script>
+</body>
+</html>

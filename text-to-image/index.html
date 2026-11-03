@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>文字轉圖片 | 雅寶工具箱 AHPAL.COM</title>
+<meta name="description" content="把文字轉成社群卡片圖片，可調樣式、尺寸、下載 PNG。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/text-to-image/">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "文字轉圖片", "applicationCategory": "MultimediaApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}, "description": "把文字轉成社群卡片圖片，可調樣式、尺寸、下載 PNG。純前端、完全離線。", "url": "https://tools.ahpal.com/text-to-image/"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "工具箱", "item": "https://tools.ahpal.com/"}, {"@type": "ListItem", "position": 2, "name": "文字轉圖片", "item": "https://tools.ahpal.com/text-to-image/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "文字轉圖片是什麼？", "acceptedAnswer": {"@type": "Answer", "text": "文字轉圖片是把「一段文字」轉成「一張圖片」的工具，常用於社群媒體發文、名言卡片。"}}, {"@type": "Question", "name": "可以調整樣式嗎？", "acceptedAnswer": {"@type": "Answer", "text": "可以。支援背景色、文字色、字級、字型、對齊、內邊距。"}}, {"@type": "Question", "name": "圖片尺寸多大？", "acceptedAnswer": {"@type": "Answer", "text": "預設 1080×1080（Instagram 方形），可切換 1080×1920（限時動態）、1200×630（Facebook 連結預覽）。"}}, {"@type": "Question", "name": "這個工具會上傳我的文字嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不會。所有繪製都在你的瀏覽器完成（Canvas），不上傳任何資料。"}}, {"@type": "Question", "name": "可以下載圖片嗎？", "acceptedAnswer": {"@type": "Answer", "text": "可以。一鍵下載 PNG。"}}]}]}</script>
+<style>*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:40px 20px;}
+.container{max-width:1000px;margin:0 auto;}
+h1{color:#D4AF37;font-size:28px;margin-bottom:12px;}
+.sub{color:#8B949E;margin-bottom:24px;font-size:14px;}
+.card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin-bottom:16px;}
+label{color:#8B949E;font-size:13px;display:block;margin-bottom:6px;}
+input,select,textarea{width:100%;background:#0D1117;color:#E6EDF3;border:1px solid #2D303A;border-radius:8px;padding:12px;font-size:14px;margin-bottom:12px;font-family:inherit;}
+button{background:#D4AF37;color:#0D1117;border:none;border-radius:8px;padding:10px 20px;font-weight:700;cursor:pointer;margin:8px 8px 8px 0;font-size:14px;}
+button:hover{background:#e6c24a;}
+button.blue{background:#58A6FF;}
+.result{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:16px;font-size:15px;min-height:60px;}
+.result .big{font-size:28px;font-weight:700;color:#D4AF37;text-align:center;padding:12px 0;}
+.tip{background:rgba(63,185,80,0.08);border-left:4px solid #3FB950;padding:12px 16px;border-radius:6px;color:#C9D1D9;font-size:13px;margin-top:12px;}
+.warn{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:12px 16px;border-radius:6px;color:#C9D1D9;font-size:13px;margin-top:12px;}
+.footer{text-align:center;margin-top:60px;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:600px){.row{grid-template-columns:1fr;}}
+.breadcrumb{font-size:13px;color:#8B949E;margin-bottom:16px;}
+.breadcrumb a{color:#58A6FF;text-decoration:none;}
+.doc-section{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:28px 32px;margin-top:32px;}
+.doc-section h2{color:#D4AF37;font-size:22px;margin:24px 0 16px;padding-bottom:8px;border-bottom:2px solid #2D303A;}
+.doc-section h2:first-child{margin-top:0;}
+.doc-section h3{color:#58A6FF;font-size:17px;margin:24px 0 10px;}
+.doc-section p{color:#C9D1D9;margin-bottom:12px;line-height:1.9;}
+.doc-section ul,.doc-section ol{margin:8px 0 16px 24px;color:#C9D1D9;}
+.doc-section li{margin-bottom:8px;line-height:1.8;}
+.doc-section code{background:#0D1117;color:#58A6FF;padding:2px 8px;border-radius:4px;font-family:Consolas,monospace;font-size:13px;}
+.doc-section .highlight{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:6px;margin:16px 0;}
+.doc-section .warnbox{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:14px 18px;border-radius:6px;margin:16px 0;}
+.doc-section table{width:100%;border-collapse:collapse;font-size:14px;margin:12px 0 20px;}
+.doc-section th,.doc-section td{padding:10px 14px;border:1px solid #2D303A;text-align:left;}
+.doc-section th{background:rgba(212,175,55,0.12);color:#D4AF37;}
+.doc-section tr:nth-child(even){background:rgba(255,255,255,0.02);}
+.doc-section .example{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:16px;font-family:Consolas,monospace;font-size:13px;color:#C9D1D9;margin:12px 0;line-height:1.8;}
+.faq-item{border-bottom:1px solid #2D303A;padding:14px 0;}
+.faq-item:last-child{border-bottom:none;}
+.faq-q{color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;}
+.faq-a{color:#C9D1D9;font-size:14px;line-height:1.9;}</style>
+</head>
+<body>
+<div class="container">
+<nav style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;">
+  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏠 首頁</a>
+  <a href="https://www.ahpal.com/categories.html" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📚 全部分類</a>
+  <a href="https://www.ahpal.com/strategy/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📌 策略文章</a>
+  <a href="https://novels.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📖 小說站</a>
+  <a href="https://memories.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏛️ 回憶館</a>
+  <a href="https://bbs2.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">💬 BBS2</a>
+  <a href="https://pet.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">⚔️ 打怪場</a>
+  <a href="https://farm.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🌾 農場</a>
+  <a href="https://tools.ahpal.com/" style="color:#0D1117;background:#D4AF37;text-decoration:none;padding:4px 10px;font-weight:700;">🛠️ 工具箱</a>
+</nav>
+<div class="breadcrumb"><a href="https://tools.ahpal.com/">🛠️ 工具箱</a> › 文字轉圖片</div>
+<article>
+<h1>🖼️ 文字轉圖片</h1>
+<p class="sub">把文字轉成社群卡片圖片，可調樣式、尺寸、下載 PNG。</p>
+<div class="card">
+  <label>文字</label>
+  <textarea id="text" rows="3" oninput="draw()">人生不是等待風暴過去，而是學會在雨中跳舞。</textarea>
+  <div class="row">
+    <div><label>背景色</label><input type="color" id="bgColor" value="#0D1117" oninput="draw()"></div>
+    <div><label>文字色</label><input type="color" id="textColor" value="#D4AF37" oninput="draw()"></div>
+  </div>
+  <div class="row">
+    <div><label>尺寸</label><select id="size" onchange="resize()">
+      <option value="1080x1080">1080×1080（IG 方形）</option>
+      <option value="1080x1920">1080×1920（限時動態）</option>
+      <option value="1200x630">1200×630（FB 連結）</option>
+    </select></div>
+    <div><label>字級</label><input type="number" id="fontSize" value="60" min="12" max="200" oninput="draw()"></div>
+  </div>
+  <button onclick="download()">⬇️ 下載 PNG</button>
+  <div class="tip">✅ 完全離線：所有繪製都在你的瀏覽器完成，不上傳任何資料。</div>
+</div>
+<div class="card"><label>預覽</label><div style="text-align:center;"><canvas id="canvas" style="max-width:100%;border-radius:8px;"></canvas></div></div>
+<div class="doc-section">
+<h2>📚 文字轉圖片是什麼？給門外漢的完整說明</h2>
+<p>你要發 Instagram 名言卡片，但不會用 Photoshop；你要做 Facebook 連結預覽圖，但沒時間設計。這就是「文字轉圖片」。這篇文章一次講清楚。</p>
+<h3>一、一句話講完</h3>
+<div class="highlight"><p><strong>文字轉圖片 = 把「一段文字」轉成「一張圖片」。</strong></p><p>常用於社群媒體發文、名言卡片、連結預覽圖。</p></div>
+<h3>二、三種常用尺寸</h3>
+<table><tr><th>尺寸</th><th>像素</th><th>用途</th></tr>
+<tr><td>方形</td><td>1080×1080</td><td>Instagram 貼文</td></tr>
+<tr><td>直式</td><td>1080×1920</td><td>IG 限時動態、TikTok</td></tr>
+<tr><td>橫式</td><td>1200×630</td><td>Facebook 連結預覽、Twitter Card</td></tr></table>
+<h3>三、社群卡片的三個元素</h3>
+<ul>
+<li><strong>背景</strong>：純色、漸層、圖片。本工具用純色。</li>
+<li><strong>文字</strong>：名言、標題、副標。本工具用單一文字區塊。</li>
+<li><strong>品牌</strong>：Logo、網址。本工具預留底部空間。</li>
+</ul>
+<h3>四、怎麼用？</h3>
+<div class="example">
+<div>1. 輸入文字（例如「人生不是等待風暴過去」）</div>
+<div>2. 選背景色、文字色</div>
+<div>3. 選尺寸（IG 方形、限時、FB 連結）</div>
+<div>4. 調字級</div>
+<div>5. 下載 PNG</div>
+</div>
+<h3>五、設計建議</h3>
+<ul>
+<li><strong>對比</strong>：背景與文字要有對比（深底淺字、淺底深字）。</li>
+<li><strong>留白</strong>：文字不要貼邊，留 10~20% 邊距。</li>
+<li><strong>字型</strong>：用「黑體」或「明體」，不要用「藝術字」。</li>
+<li><strong>字級</strong>：標題 60~80px，內文 30~40px。</li>
+</ul>
+<h3>六、常見誤解</h3>
+<ul>
+<li><strong>❌ 誤解：文字轉圖片要上傳。</strong><br>✅ 事實：本工具用 Canvas 純前端繪製，不上傳。</li>
+<li><strong>❌ 誤解：圖片越大越好。</strong><br>✅ 事實：依平台建議尺寸（IG 1080×1080），太大會被壓縮。</li>
+<li><strong>❌ 誤解：字越多越好。</strong><br>✅ 事實：社群卡片「字少」才好看，一句話就好。</li>
+<li><strong>❌ 誤解：任何字型都行。</strong><br>✅ 事實：用「黑體」「明體」，不要用「藝術字」（難讀）。</li>
+<li><strong>❌ 誤解：文字轉圖片很難。</strong><br>✅ 事實：本工具 3 分鐘搞定。</li>
+</ul>
+<h3>七、這個工具能幫你做什麼？</h3>
+<ul><li><strong>文字轉圖片</strong>：輸入文字，即時預覽</li><li><strong>可調樣式</strong>：背景色、文字色、字級</li><li><strong>三種尺寸</strong>：IG 方形、限時、FB 連結</li><li><strong>一鍵下載</strong>：PNG 格式</li><li><strong>完全離線</strong>：不上傳任何資料</li></ul>
+<h3>八、常見問題（FAQ）</h3>
+<div class="doc-section"><h2>❓ 常見問題（FAQ）</h2><div class="faq-item"><div class="faq-q">文字轉圖片是什麼？</div><div class="faq-a">文字轉圖片是把「一段文字」轉成「一張圖片」的工具，常用於社群媒體發文、名言卡片。</div></div><div class="faq-item"><div class="faq-q">可以調整樣式嗎？</div><div class="faq-a">可以。支援背景色、文字色、字級、字型、對齊、內邊距。</div></div><div class="faq-item"><div class="faq-q">圖片尺寸多大？</div><div class="faq-a">預設 1080×1080（Instagram 方形），可切換 1080×1920（限時動態）、1200×630（Facebook 連結預覽）。</div></div><div class="faq-item"><div class="faq-q">這個工具會上傳我的文字嗎？</div><div class="faq-a">不會。所有繪製都在你的瀏覽器完成（Canvas），不上傳任何資料。</div></div><div class="faq-item"><div class="faq-q">可以下載圖片嗎？</div><div class="faq-a">可以。一鍵下載 PNG。</div></div></div>
+<p style="text-align:center;color:#8B949E;font-size:13px;margin-top:24px;"><time datetime="2026-11-03">最後更新：2026-11-03</time></p>
+</article>
+<div class="footer">
+  <p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p>
+  <p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p>
+</div>
+</div>
+<script>
+function resize() { draw(); }
+function draw() {
+  var c = document.getElementById("canvas");
+  var size = document.getElementById("size").value.split("x");
+  c.width = parseInt(size[0]);
+  c.height = parseInt(size[1]);
+  var ctx = c.getContext("2d");
+  var bg = document.getElementById("bgColor").value;
+  var tc = document.getElementById("textColor").value;
+  var text = document.getElementById("text").value || "（請輸入文字）";
+  var fs = parseInt(document.getElementById("fontSize").value) || 60;
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, c.width, c.height);
+  ctx.fillStyle = tc;
+  ctx.font = "bold " + fs + "px 'Microsoft JhengHei', sans-serif";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  var maxWidth = c.width * 0.8;
+  var words = text.split("");
+  var lines = [];
+  var line = "";
+  words.forEach(function(ch) {
+    var test = line + ch;
+    if (ctx.measureText(test).width > maxWidth && line) {
+      lines.push(line);
+      line = ch;
+    } else {
+      line = test;
+    }
+  });
+  if (line) lines.push(line);
+  var lineHeight = fs * 1.4;
+  var totalH = lines.length * lineHeight;
+  var startY = (c.height - totalH) / 2 + lineHeight / 2;
+  lines.forEach(function(l, i) {
+    ctx.fillText(l, c.width / 2, startY + i * lineHeight);
+  });
+  ctx.font = "20px 'Microsoft JhengHei', sans-serif";
+  ctx.fillStyle = "rgba(139,148,158,0.7)";
+  ctx.fillText("© 2026 雅寶社區 AHPAL.COM", c.width / 2, c.height - 40);
+}
+function download() {
+  var c = document.getElementById("canvas");
+  var a = document.createElement("a");
+  a.download = "card-" + Date.now() + ".png";
+  a.href = c.toDataURL("image/png");
+  a.click();
+}
+window.addEventListener("load", draw);
+</script>
+</body>
+</html>
