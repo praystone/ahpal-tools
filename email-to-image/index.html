@@ -28,6 +28,24 @@ button.gray{background:#2D303A;color:#E6EDF3;}
 .warn{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:12px 16px;border-radius:6px;color:#C9D1D9;font-size:13px;margin-top:12px;}
 .footer{text-align:center;margin-top:60px;color:#8B949E;font-size:13px;}
 .footer a{color:#58A6FF;text-decoration:none;}
+
+.doc-section{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:28px 32px;margin-top:32px;}
+.doc-section h2{color:#D4AF37;font-size:22px;margin:0 0 16px;padding-bottom:8px;border-bottom:2px solid #2D303A;}
+.doc-section h3{color:#58A6FF;font-size:17px;margin:24px 0 10px;}
+.doc-section p{color:#C9D1D9;margin-bottom:12px;line-height:1.9;}
+.doc-section ul,.doc-section ol{margin:8px 0 16px 24px;color:#C9D1D9;}
+.doc-section li{margin-bottom:8px;line-height:1.8;}
+.doc-section code{background:#0D1117;color:#58A6FF;padding:2px 8px;border-radius:4px;font-family:Consolas,monospace;font-size:13px;}
+.doc-section .highlight{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:6px;margin:16px 0;}
+.doc-section .warnbox{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:14px 18px;border-radius:6px;margin:16px 0;}
+.doc-section table{width:100%;border-collapse:collapse;font-size:14px;margin:12px 0 20px;}
+.doc-section th,.doc-section td{padding:10px 14px;border:1px solid #2D303A;text-align:left;}
+.doc-section th{background:rgba(212,175,55,0.12);color:#D4AF37;}
+.doc-section tr:nth-child(even){background:rgba(255,255,255,0.02);}
+.doc-section .example{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:16px;font-family:Consolas,monospace;font-size:13px;color:#C9D1D9;margin:12px 0;line-height:1.8;}
+.doc-section .example .label{color:#8B949E;font-size:12px;}
+.doc-section .example .val{color:#D4AF37;font-weight:700;}
+.doc-section .example .arrow{color:#58A6FF;}
 </style>
 </head>
 <body>
@@ -144,5 +162,86 @@ function clearAll(){
 // 頁面載入時自動產生一次
 render();
 </script>
+
+<div class="doc-section" id="email-doc">
+  <h2>📚 為什麼要把 Email 變成圖片？給門外漢的完整說明</h2>
+
+  <p>你可能想過：為什麼有些網站的 Email 是「圖片」，不是「文字」？為什麼不直接寫 <code>contact@example.com</code>？</p>
+
+  <h3>一、一句話講完</h3>
+  <div class="highlight">
+    <p><strong>把 Email 變成圖片 = 防止「爬蟲」自動抓取你的 Email，避免收到垃圾信。</strong></p>
+    <p>爬蟲能讀「文字」，但讀「圖片」需要 OCR（光學字元辨識），成本高，所以大部分爬蟲會跳過圖片。</p>
+  </div>
+
+  <h3>二、爬蟲怎麼抓 Email？</h3>
+  <p>爬蟲（spider / bot）會做三件事：</p>
+  <ol>
+    <li><strong>下載網頁 HTML</strong></li>
+    <li><strong>用正則表達式找 Email</strong>（例如 <code>[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}</code>）</li>
+    <li><strong>把找到的 Email 存進資料庫</strong>，賣給廣告商或發垃圾信</li>
+  </ol>
+  <p>如果你的 Email 是「文字」，爬蟲一秒就能抓到。如果 Email 是「圖片」，爬蟲抓到的只是「<code>&lt;img src="..."&gt;</code>」，抓不到 Email。</p>
+
+  <h3>三、圖片化的 3 種做法</h3>
+  <table>
+    <tr><th>做法</th><th>優點</th><th>缺點</th></tr>
+    <tr><td>靜態圖片（PNG）</td><td>簡單、不用 JS</td><td>要手動做圖、改 Email 要重做</td></tr>
+    <tr><td>Canvas 動態生成</td><td>即時、可改字級顏色</td><td>要 JS、無 JS 環境看不到</td></tr>
+    <tr><td>CSS 混淆（如 <code>mailto:</code> 拆開）</td><td>不用圖片</td><td>進階爬蟲能破解</td></tr>
+  </table>
+  <p>本工具用「Canvas 動態生成」：你在網頁輸入 Email，Canvas 即時畫成圖片，可下載 PNG。完全離線，不上傳。</p>
+
+  <h3>四、圖片化能防什麼？不能防什麼？</h3>
+  <table>
+    <tr><th>能防</th><th>不能防</th></tr>
+    <tr><td>簡單爬蟲（正則表達式抓文字）</td><td>OCR（光學字元辨識）</td></tr>
+    <tr><td>自動化垃圾信收集器</td><td>真人手動複製</td></tr>
+    <tr><td>大規模 Email 掃描</td><td>針對性攻擊</td></tr>
+  </table>
+  <p>圖片化能阻擋 90% 的簡單爬蟲，但無法阻擋 OCR。高敏感 Email 請搭配其他防護（如聯絡表單）。</p>
+
+  <h3>五、圖片化的實際用途</h3>
+  <ul>
+    <li><strong>個人網站</strong>：防止 Email 被爬</li>
+    <li><strong>公司聯絡頁</strong>：防止業務 Email 被騷擾</li>
+    <li><strong>部落格</strong>：防止垃圾留言</li>
+    <li><strong>論壇</strong>：防止會員 Email 被盜</li>
+  </ul>
+
+  <h3>六、圖片化 vs 聯絡表單：哪個好？</h3>
+  <table>
+    <tr><th>項目</th><th>圖片化</th><th>聯絡表單</th></tr>
+    <tr><td>防護力</td><td>中（可被 OCR 破解）</td><td>高（需後端驗證）</td></tr>
+    <tr><td>使用難度</td><td>低（複製圖片網址）</td><td>中（要填表單）</td></tr>
+    <tr><td>成本</td><td>零（純前端）</td><td>要後端（Worker / 郵件服務）</td></tr>
+  </table>
+  <p>圖片化適合「不想被爬，但也不想花錢做表單」的情境。如果要高防護，用聯絡表單。</p>
+
+  <h3>七、常見誤解</h3>
+  <ul>
+    <li><strong>❌ 誤解：圖片化能完全防爬蟲。</strong><br>✅ 事實：只能防「簡單爬蟲」，OCR 還是能讀。</li>
+    <li><strong>❌ 誤解：圖片化後 Email 就完全安全。</strong><br>✅ 事實：圖片化只是「增加爬蟲成本」，不是「絕對安全」。</li>
+    <li><strong>❌ 誤解：所有網站都該用圖片化。</strong><br>✅ 事實：只適合「不想被爬」的情境，一般網站不需要。</li>
+    <li><strong>❌ 誤解：圖片化要後端。</strong><br>✅ 事實：用 Canvas 可以純前端，完全離線。</li>
+    <li><strong>❌ 誤解：圖片化後不能複製 Email。</strong><br>✅ 事實：圖片化後「不能複製文字」，但「能看圖手打」。</li>
+  </ul>
+
+  <h3>八、這個工具能幫你做什麼？</h3>
+  <ul>
+    <li><strong>產生圖片</strong>：輸入 Email，Canvas 即時畫成圖片</li>
+    <li><strong>下載 PNG</strong>：一鍵下載圖片，放進網站</li>
+    <li><strong>調整樣式</strong>：可調字級、顏色、背景</li>
+    <li><strong>完全離線</strong>：所有繪製都在你的瀏覽器，不上傳任何資料</li>
+  </ul>
+
+  <div class="highlight">
+    <p style="margin:0;"><strong>🦞 龍蝦總工程師的話：</strong></p>
+    <p style="margin:8px 0 0;">「圖片化不是萬靈丹，但它是『最便宜的防護』。不用後端、不用外掛，一行 Canvas 就能擋掉 90% 的爬蟲。」</p>
+  </div>
+
+  <p style="text-align:center;color:#8B949E;font-size:13px;margin-top:24px;margin-bottom:0;">本文由 🦞 龍蝦總工程師撰寫 · 2026-11-03 · 雅寶社區 AHPAL.COM</p>
+</div>
+
 </body>
 </html>

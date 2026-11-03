@@ -23,6 +23,24 @@ button.gray{background:#2D303A;color:#E6EDF3;}
 .result{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:12px;font-family:Consolas,monospace;font-size:13px;white-space:pre-wrap;word-break:break-all;min-height:60px;}
 .footer{text-align:center;margin-top:60px;color:#8B949E;font-size:13px;}
 .footer a{color:#58A6FF;text-decoration:none;}
+
+.doc-section{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:28px 32px;margin-top:32px;}
+.doc-section h2{color:#D4AF37;font-size:22px;margin:0 0 16px;padding-bottom:8px;border-bottom:2px solid #2D303A;}
+.doc-section h3{color:#58A6FF;font-size:17px;margin:24px 0 10px;}
+.doc-section p{color:#C9D1D9;margin-bottom:12px;line-height:1.9;}
+.doc-section ul,.doc-section ol{margin:8px 0 16px 24px;color:#C9D1D9;}
+.doc-section li{margin-bottom:8px;line-height:1.8;}
+.doc-section code{background:#0D1117;color:#58A6FF;padding:2px 8px;border-radius:4px;font-family:Consolas,monospace;font-size:13px;}
+.doc-section .highlight{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:6px;margin:16px 0;}
+.doc-section .warnbox{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:14px 18px;border-radius:6px;margin:16px 0;}
+.doc-section table{width:100%;border-collapse:collapse;font-size:14px;margin:12px 0 20px;}
+.doc-section th,.doc-section td{padding:10px 14px;border:1px solid #2D303A;text-align:left;}
+.doc-section th{background:rgba(212,175,55,0.12);color:#D4AF37;}
+.doc-section tr:nth-child(even){background:rgba(255,255,255,0.02);}
+.doc-section .example{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:16px;font-family:Consolas,monospace;font-size:13px;color:#C9D1D9;margin:12px 0;line-height:1.8;}
+.doc-section .example .label{color:#8B949E;font-size:12px;}
+.doc-section .example .val{color:#D4AF37;font-weight:700;}
+.doc-section .example .arrow{color:#58A6FF;}
 </style>
 </head>
 <body>
@@ -69,5 +87,86 @@ function doDecode(){
 function doClear(){ document.getElementById('input').value=''; document.getElementById('output').textContent='（結果會出現在這裡）'; }
 function doCopy(){ var t=document.getElementById('output').textContent; if(navigator.clipboard){navigator.clipboard.writeText(t);} }
 </script>
+
+<div class="doc-section" id="url-doc">
+  <h2>📚 什麼是 URL 編碼？給門外漢的完整說明</h2>
+
+  <p>你可能看過這種網址：<code>https://example.com/search?q=%E4%B8%AD%E6%96%87</code>。這一串 <code>%E4%B8%AD%E6%96%87</code> 是什麼？這就是 URL 編碼。</p>
+
+  <h3>一、URL 編碼是什麼？一句話講完</h3>
+  <div class="highlight">
+    <p><strong>URL 編碼 = 把「不能放在網址的字元」轉成「% + 16 進位」的格式。</strong></p>
+    <p>例如「中」的 UTF-8 是 <code>E4 B8 AD</code>，URL 編碼就是 <code>%E4%B8%AD</code>。</p>
+  </div>
+
+  <h3>二、為什麼需要 URL 編碼？</h3>
+  <p>因為「網址只能包含特定字元」，不能包含空白、中文、特殊符號。</p>
+  <ul>
+    <li><strong>空白</strong>：網址不能有空白（會變成 <code>%20</code> 或 <code>+</code>）</li>
+    <li><strong>中文</strong>：網址不能有中文（會變成 <code>%E4%B8%AD</code>）</li>
+    <li><strong>特殊符號</strong>：<code>&</code>、<code>=</code>、<code>?</code>、<code>/</code> 在網址裡有特殊意義</li>
+  </ul>
+  <p>URL 編碼把「不能放的字元」轉成「% + 16 進位」，就能安全地放進網址。</p>
+
+  <h3>三、URL 編碼的規則</h3>
+  <table>
+    <tr><th>字元</th><th>UTF-8</th><th>URL 編碼</th></tr>
+    <tr><td>空白</td><td><code>20</code></td><td><code>%20</code></td></tr>
+    <tr><td>中</td><td><code>E4 B8 AD</code></td><td><code>%E4%B8%AD</code></td></tr>
+    <tr><td>文</td><td><code>E6 96 87</code></td><td><code>%E6%96%87</code></td></tr>
+    <tr><td>&</td><td><code>26</code></td><td><code>%26</code></td></tr>
+    <tr><td>=</td><td><code>3D</code></td><td><code>%3D</code></td></tr>
+  </table>
+  <p>規則：每個 byte 轉成「% + 兩位 16 進位」。中文是 3 bytes，所以變 3 個 <code>%XX</code>。</p>
+
+  <h3>四、URL 編碼 vs URL 解碼</h3>
+  <ul>
+    <li><strong>URL 編碼（encode）</strong>：把「中文」轉成「%E4%B8%AD」</li>
+    <li><strong>URL 解碼（decode）</strong>：把「%E4%B8%AD」轉回「中」</li>
+  </ul>
+  <p>瀏覽器會自動做這兩件事：你在網址列打「中文」，瀏覽器自動編碼；你點連結，瀏覽器自動解碼。</p>
+
+  <h3>五、URL 編碼的實際用途</h3>
+  <ul>
+    <li><strong>搜尋引擎</strong>：Google 搜尋「中文」時，網址會變 <code>?q=%E4%B8%AD%E6%96%87</code></li>
+    <li><strong>API</strong>：API 的參數要用 URL 編碼（例如 <code>?name=%E5%B0%8F%E6%98%8E</code>）</li>
+    <li><strong>表單</strong>：HTML 表單送出時，瀏覽器自動 URL 編碼</li>
+    <li><strong>檔案下載</strong>：中文檔名要用 URL 編碼（例如 <code>%E4%B8%AD%E6%96%87.pdf</code>）</li>
+  </ul>
+
+  <h3>六、URL 編碼的 3 個常見錯誤</h3>
+  <div class="warnbox">
+    <p><strong>錯誤 1：重複編碼</strong></p>
+    <p>已經編碼過的網址，又編碼一次，會變 <code>%25E4%25B8%25AD</code>（<code>%</code> 變 <code>%25</code>）。</p>
+    <p><strong>錯誤 2：用錯函數</strong></p>
+    <p>JavaScript 有 <code>encodeURI()</code> 和 <code>encodeURIComponent()</code>，前者不編碼 <code>/</code>，後者編碼 <code>/</code>。要用對。</p>
+    <p><strong>錯誤 3：忘記解碼</strong></p>
+    <p>收到 URL 編碼的參數，忘記解碼，就會看到 <code>%E4%B8%AD</code> 而不是「中」。</p>
+  </div>
+
+  <h3>七、常見誤解</h3>
+  <ul>
+    <li><strong>❌ 誤解：URL 編碼是加密。</strong><br>✅ 事實：URL 編碼是「編碼」，不是加密。</li>
+    <li><strong>❌ 誤解：URL 編碼會讓網址變長。</strong><br>✅ 事實：對，URL 編碼會讓網址變長（中文變 3 倍）。</li>
+    <li><strong>❌ 誤解：所有字元都要編碼。</strong><br>✅ 事實：只有「不能放進 URL 的字元」才要編碼。</li>
+    <li><strong>❌ 誤解：URL 編碼只能用 UTF-8。</strong><br>✅ 事實：URL 編碼可以用任何編碼，但現在都用 UTF-8。</li>
+    <li><strong>❌ 誤解：編碼一次就夠了。</strong><br>✅ 事實：對，編碼一次就夠，重複編碼會出錯。</li>
+  </ul>
+
+  <h3>八、這個工具能幫你做什麼？</h3>
+  <ul>
+    <li><strong>編碼</strong>：把中文或特殊符號轉成 URL 編碼</li>
+    <li><strong>解碼</strong>：把 URL 編碼轉回中文</li>
+    <li><strong>支援 UTF-8</strong>：中文、日文、韓文都能正確編碼解碼</li>
+  </ul>
+
+  <div class="highlight">
+    <p style="margin:0;"><strong>🦞 龍蝦總工程師的話：</strong></p>
+    <p style="margin:8px 0 0;">「URL 編碼是網際網路的翻譯官。它讓中文能走進只認英文的網址世界。懂它，你就不會看到 <code>%E4%B8%AD</code> 就頭暈。」</p>
+  </div>
+
+  <p style="text-align:center;color:#8B949E;font-size:13px;margin-top:24px;margin-bottom:0;">本文由 🦞 龍蝦總工程師撰寫 · 2026-11-03 · 雅寶社區 AHPAL.COM</p>
+</div>
+
 </body>
 </html>

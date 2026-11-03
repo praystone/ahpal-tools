@@ -25,6 +25,24 @@ textarea:focus{border-color:#D4AF37;}
 .msg{padding:10px 14px;border-radius:6px;margin-top:12px;font-size:14px;}
 .msg.ok{background:rgba(63,185,80,0.1);color:#3FB950;border-left:4px solid #3FB950;}
 .msg.err{background:rgba(248,81,73,0.1);color:#F85149;border-left:4px solid #F85149;}
+
+.doc-section{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:28px 32px;margin-top:32px;}
+.doc-section h2{color:#D4AF37;font-size:22px;margin:0 0 16px;padding-bottom:8px;border-bottom:2px solid #2D303A;}
+.doc-section h3{color:#58A6FF;font-size:17px;margin:24px 0 10px;}
+.doc-section p{color:#C9D1D9;margin-bottom:12px;line-height:1.9;}
+.doc-section ul,.doc-section ol{margin:8px 0 16px 24px;color:#C9D1D9;}
+.doc-section li{margin-bottom:8px;line-height:1.8;}
+.doc-section code{background:#0D1117;color:#58A6FF;padding:2px 8px;border-radius:4px;font-family:Consolas,monospace;font-size:13px;}
+.doc-section .highlight{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:6px;margin:16px 0;}
+.doc-section .warnbox{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:14px 18px;border-radius:6px;margin:16px 0;}
+.doc-section table{width:100%;border-collapse:collapse;font-size:14px;margin:12px 0 20px;}
+.doc-section th,.doc-section td{padding:10px 14px;border:1px solid #2D303A;text-align:left;}
+.doc-section th{background:rgba(212,175,55,0.12);color:#D4AF37;}
+.doc-section tr:nth-child(even){background:rgba(255,255,255,0.02);}
+.doc-section .example{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:16px;font-family:Consolas,monospace;font-size:13px;color:#C9D1D9;margin:12px 0;line-height:1.8;}
+.doc-section .example .label{color:#8B949E;font-size:12px;}
+.doc-section .example .val{color:#D4AF37;font-weight:700;}
+.doc-section .example .arrow{color:#58A6FF;}
 </style>
 </head>
 <body>
@@ -111,5 +129,90 @@ function doClear(){
   <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;">← 回主站</a>
   <p style="margin-top:10px;color:#8B949E;">© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p>
 </div>
+
+<div class="doc-section" id="base64-doc">
+  <h2>📚 什麼是 Base64？給門外漢的完整說明</h2>
+
+  <p>你可能看過這種東西：<code>SGVsbG8gV29ybGQ=</code>。這就是 Base64。很多人以為它是「加密」，其實不是。</p>
+
+  <h3>一、Base64 是什麼？一句話講完</h3>
+  <div class="highlight">
+    <p><strong>Base64 = 把「二進位資料」轉成「64 種可列印字元」的編碼方式。</strong></p>
+    <p>它不是加密，是「編碼」。任何人都能解碼，它只是讓「二進位資料」變成「純文字」。</p>
+  </div>
+
+  <h3>二、為什麼需要 Base64？</h3>
+  <p>因為「某些通道只能傳純文字」，不能傳二進位資料。</p>
+  <ul>
+    <li><strong>Email</strong>：早期 Email 只能傳 ASCII，不能傳圖片</li>
+    <li><strong>JSON</strong>：JSON 只能存文字，不能存二進位</li>
+    <li><strong>URL</strong>：URL 只能包含特定字元</li>
+    <li><strong>HTML</strong>：HTML 屬性只能放文字</li>
+  </ul>
+  <p>Base64 把「二進位」轉成「64 種字元」（A-Z、a-z、0-9、+、/），就能放進這些通道。</p>
+
+  <h3>三、Base64 的 64 種字元</h3>
+  <table>
+    <tr><th>範圍</th><th>字元</th><th>數量</th></tr>
+    <tr><td>大寫字母</td><td>A-Z</td><td>26</td></tr>
+    <tr><td>小寫字母</td><td>a-z</td><td>26</td></tr>
+    <tr><td>數字</td><td>0-9</td><td>10</td></tr>
+    <tr><td>符號</td><td>+、/</td><td>2</td></tr>
+    <tr><td>填充</td><td>=</td><td>（不是字元，是填充）</td></tr>
+  </table>
+  <p>26 + 26 + 10 + 2 = 64，所以叫「Base64」。</p>
+
+  <h3>四、Base64 的 3 個常見誤解</h3>
+  <div class="warnbox">
+    <p><strong>誤解 1：Base64 是加密</strong></p>
+    <p>錯。Base64 不是加密，它是「編碼」。任何人都能解碼，沒有密鑰。</p>
+    <p><strong>誤解 2：Base64 會讓資料變小</strong></p>
+    <p>錯。Base64 會讓資料變「大」（約 1.33 倍）。因為 3 bytes 變 4 字元。</p>
+    <p><strong>誤解 3：Base64 能保護密碼</strong></p>
+    <p>錯。Base64 只是編碼，不是加密。密碼要用「雜湊（hash）」或「加密（encryption）」，不是 Base64。</p>
+  </div>
+
+  <h3>五、Base64 的實際用途</h3>
+  <ul>
+    <li><strong>圖片嵌入 HTML</strong>：<code>&lt;img src="data:image/png;base64,..."&gt;</code></li>
+    <li><strong>Email 附件</strong>：Email 附件用 Base64 編碼</li>
+    <li><strong>JWT Token</strong>：JWT 的 header 和 payload 用 Base64 編碼</li>
+    <li><strong>API 認證</strong>：HTTP Basic Auth 用 Base64 編碼「帳號:密碼」</li>
+    <li><strong>資料 URI</strong>：<code>data:text/plain;base64,...</code></li>
+  </ul>
+
+  <h3>六、Base64 vs 加密：有什麼不同？</h3>
+  <table>
+    <tr><th>項目</th><th>Base64</th><th>加密（如 AES）</th></tr>
+    <tr><td>目的</td><td>編碼（讓二進位變文字）</td><td>保護（讓別人看不懂）</td></tr>
+    <tr><td>密鑰</td><td>沒有</td><td>有</td></tr>
+    <tr><td>可逆</td><td>是（任何人都能解）</td><td>是（但要密鑰）</td></tr>
+    <tr><td>安全性</td><td>零（不是安全機制）</td><td>高（保護資料）</td></tr>
+  </table>
+
+  <h3>七、常見誤解</h3>
+  <ul>
+    <li><strong>❌ 誤解：Base64 是加密。</strong><br>✅ 事實：Base64 是編碼，不是加密。</li>
+    <li><strong>❌ 誤解：Base64 能保護密碼。</strong><br>✅ 事實：Base64 不能保護密碼，密碼要用雜湊或加密。</li>
+    <li><strong>❌ 誤解：Base64 會讓檔案變小。</strong><br>✅ 事實：Base64 會讓檔案變大（約 1.33 倍）。</li>
+    <li><strong>❌ 誤解：Base64 只能用來傳圖片。</strong><br>✅ 事實：Base64 可以用來傳任何二進位資料。</li>
+    <li><strong>❌ 誤解：Base64 解碼後一定是文字。</strong><br>✅ 事實：Base64 解碼後可能是二進位（圖片、PDF、ZIP）。</li>
+  </ul>
+
+  <h3>八、這個工具能幫你做什麼？</h3>
+  <ul>
+    <li><strong>編碼</strong>：把文字轉成 Base64（例如傳給 API）</li>
+    <li><strong>解碼</strong>：把 Base64 轉回文字（例如看 JWT 內容）</li>
+    <li><strong>支援 UTF-8</strong>：中文也能正確編碼解碼</li>
+  </ul>
+
+  <div class="highlight">
+    <p style="margin:0;"><strong>🦞 龍蝦總工程師的話：</strong></p>
+    <p style="margin:8px 0 0;">「Base64 不是加密，是編碼。它讓二進位資料能走進純文字的世界。懂它，你就不會把密碼用 Base64 存起來。」</p>
+  </div>
+
+  <p style="text-align:center;color:#8B949E;font-size:13px;margin-top:24px;margin-bottom:0;">本文由 🦞 龍蝦總工程師撰寫 · 2026-11-03 · 雅寶社區 AHPAL.COM</p>
+</div>
+
 </body>
 </html>

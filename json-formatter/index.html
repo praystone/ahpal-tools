@@ -27,6 +27,24 @@ textarea{flex:1;padding:14px;background:#0D1117;color:#E6EDF3;border:none;font-f
 .msg.ok{background:rgba(63,185,80,0.1);color:#3FB950;border-left:4px solid #3FB950;}
 .msg.err{background:rgba(248,81,73,0.1);color:#F85149;border-left:4px solid #F85149;}
 @media(max-width:800px){.grid{grid-template-columns:1fr;}}
+
+.doc-section{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:28px 32px;margin-top:32px;}
+.doc-section h2{color:#D4AF37;font-size:22px;margin:0 0 16px;padding-bottom:8px;border-bottom:2px solid #2D303A;}
+.doc-section h3{color:#58A6FF;font-size:17px;margin:24px 0 10px;}
+.doc-section p{color:#C9D1D9;margin-bottom:12px;line-height:1.9;}
+.doc-section ul,.doc-section ol{margin:8px 0 16px 24px;color:#C9D1D9;}
+.doc-section li{margin-bottom:8px;line-height:1.8;}
+.doc-section code{background:#0D1117;color:#58A6FF;padding:2px 8px;border-radius:4px;font-family:Consolas,monospace;font-size:13px;}
+.doc-section .highlight{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:6px;margin:16px 0;}
+.doc-section .warnbox{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:14px 18px;border-radius:6px;margin:16px 0;}
+.doc-section table{width:100%;border-collapse:collapse;font-size:14px;margin:12px 0 20px;}
+.doc-section th,.doc-section td{padding:10px 14px;border:1px solid #2D303A;text-align:left;}
+.doc-section th{background:rgba(212,175,55,0.12);color:#D4AF37;}
+.doc-section tr:nth-child(even){background:rgba(255,255,255,0.02);}
+.doc-section .example{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:16px;font-family:Consolas,monospace;font-size:13px;color:#C9D1D9;margin:12px 0;line-height:1.8;}
+.doc-section .example .label{color:#8B949E;font-size:12px;}
+.doc-section .example .val{color:#D4AF37;font-weight:700;}
+.doc-section .example .arrow{color:#58A6FF;}
 </style>
 </head>
 <body>
@@ -108,5 +126,88 @@ function doSample(){
   <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;">← 回主站</a>
   <p style="margin-top:10px;color:#8B949E;">© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p>
 </div>
+
+<div class="doc-section" id="json-doc">
+  <h2>📚 什麼是 JSON？給門外漢的完整說明</h2>
+
+  <p>你可能看過這種東西：<code>{"name": "小明", "age": 25}</code>。這就是 JSON。它不是程式語言，是「資料的格式」。</p>
+  <p>但它為什麼叫 JSON？為什麼全世界的 API 都用它？為什麼它有時候會「格式錯誤」？這篇文章一次講清楚。</p>
+
+  <h3>一、JSON 是什麼？一句話講完</h3>
+  <div class="highlight">
+    <p><strong>JSON = JavaScript Object Notation（JavaScript 物件表示法），是一種「用文字描述資料」的格式。</strong></p>
+    <p>它的規則很簡單：用 <code>{}</code> 包「物件」、用 <code>[]</code> 包「陣列」、用 <code>"key": "value"</code> 表示「鍵值對」。</p>
+  </div>
+  <p>JSON 不是程式語言，它只是「文字」。任何程式語言（Python、JavaScript、PHP、Java）都能讀寫 JSON。這就是它為什麼成為「跨語言的資料交換標準」。</p>
+
+  <h3>二、為什麼叫 JSON？由來是什麼？</h3>
+  <p>JSON 是 2001 年由 Douglas Crockford 提出的。他發現 JavaScript 的「物件語法」很適合描述資料，於是把它抽出來，變成一種「獨立的資料格式」。</p>
+  <p>JSON 的語法幾乎跟 JavaScript 的物件一樣，但它不是 JavaScript，它是「所有程式語言都能用的資料格式」。這就是為什麼它叫「JavaScript Object Notation」——「源自 JavaScript 的物件表示法」。</p>
+  <p>2006 年，JSON 被正式標準化（RFC 4627），從此成為網際網路的「資料交換標準」。</p>
+
+  <h3>三、JSON 的 6 種資料型別</h3>
+  <table>
+    <tr><th>型別</th><th>範例</th><th>說明</th></tr>
+    <tr><td>字串（string）</td><td><code>"小明"</code></td><td>用雙引號包</td></tr>
+    <tr><td>數字（number）</td><td><code>25</code>、<code>3.14</code></td><td>整數或小數</td></tr>
+    <tr><td>布林（boolean）</td><td><code>true</code>、<code>false</code></td><td>只能是「小寫」</td></tr>
+    <tr><td>空值（null）</td><td><code>null</code></td><td>表示「沒有值」</td></tr>
+    <tr><td>陣列（array）</td><td><code>[1, 2, 3]</code></td><td>用 <code>[]</code> 包</td></tr>
+    <tr><td>物件（object）</td><td><code>{"name": "小明"}</code></td><td>用 <code>{}</code> 包</td></tr>
+  </table>
+
+  <h3>四、JSON 的 3 個常見錯誤</h3>
+  <div class="warnbox">
+    <p><strong>錯誤 1：用單引號</strong></p>
+    <p>JSON 只認「雙引號」。<code>{'name': '小明'}</code> 是錯的，要寫 <code>{"name": "小明"}</code>。</p>
+    <p><strong>錯誤 2：布林值大寫</strong></p>
+    <p>JSON 只認小寫 <code>true</code>、<code>false</code>。大寫 <code>True</code>、<code>False</code> 是錯的（這是 PowerShell 常犯的錯）。</p>
+    <p><strong>錯誤 3：最後一個元素有逗號</strong></p>
+    <p><code>{"a": 1, "b": 2,}</code> 是錯的，最後一個元素不能有逗號。</p>
+  </div>
+
+  <h3>五、JSON 的實際用途</h3>
+  <ul>
+    <li><strong>API</strong>：幾乎所有 API 都用 JSON 傳資料（GitHub API、天氣 API、AI API）</li>
+    <li><strong>設定檔</strong>：VS Code、npm、Cloudflare 的設定檔都是 JSON</li>
+    <li><strong>資料庫</strong>：MongoDB、Firebase 用 JSON 存資料</li>
+    <li><strong>前端與後端</strong>：前端用 JSON 傳資料給後端，後端用 JSON 回傳</li>
+    <li><strong>日誌</strong>：結構化日誌用 JSON 記錄事件</li>
+  </ul>
+
+  <h3>六、JSON vs XML：為什麼 JSON 贏了？</h3>
+  <table>
+    <tr><th>項目</th><th>JSON</th><th>XML</th></tr>
+    <tr><td>大小</td><td>小（省頻寬）</td><td>大（標籤多）</td></tr>
+    <tr><td>可讀性</td><td>高</td><td>低</td></tr>
+    <tr><td>解析速度</td><td>快</td><td>慢</td></tr>
+    <tr><td>瀏覽器支援</td><td>原生支援</td><td>要額外解析</td></tr>
+  </table>
+  <p>JSON 比 XML 小、快、好讀，所以 2010 年後，幾乎所有 API 都改用 JSON。</p>
+
+  <h3>七、常見誤解</h3>
+  <ul>
+    <li><strong>❌ 誤解：JSON 是程式語言。</strong><br>✅ 事實：JSON 只是「資料格式」，不是程式語言。</li>
+    <li><strong>❌ 誤解：JSON 只能用在 JavaScript。</strong><br>✅ 事實：JSON 是所有程式語言都能用的資料格式。</li>
+    <li><strong>❌ 誤解：JSON 可以寫註解。</strong><br>✅ 事實：JSON 不支援註解（這是它最大的缺點）。</li>
+    <li><strong>❌ 誤解：JSON 的順序不重要。</strong><br>✅ 事實：JSON 的「鍵」順序不重要，但「陣列」順序很重要。</li>
+    <li><strong>❌ 誤解：JSON 只能存簡單資料。</strong><br>✅ 事實：JSON 可以嵌套（物件裡有陣列，陣列裡有物件），能存複雜資料。</li>
+  </ul>
+
+  <h3>八、這個工具能幫你做什麼？</h3>
+  <ul>
+    <li><strong>格式化</strong>：把「擠成一團」的 JSON 變成「一行一行」好讀的格式</li>
+    <li><strong>驗證</strong>：檢查 JSON 有沒有語法錯誤（少逗號、多逗號、引號錯）</li>
+    <li><strong>壓縮</strong>：把「一行一行」的 JSON 壓成「擠成一團」，省空間</li>
+  </ul>
+
+  <div class="highlight">
+    <p style="margin:0;"><strong>🦞 龍蝦總工程師的話：</strong></p>
+    <p style="margin:8px 0 0;">「JSON 是現代網路的共通語言。你看不到它，但它支撐著你看的每一則訊息、每一筆交易。懂它，你就能讀懂系統的對話。」</p>
+  </div>
+
+  <p style="text-align:center;color:#8B949E;font-size:13px;margin-top:24px;margin-bottom:0;">本文由 🦞 龍蝦總工程師撰寫 · 2026-11-03 · 雅寶社區 AHPAL.COM</p>
+</div>
+
 </body>
 </html>
