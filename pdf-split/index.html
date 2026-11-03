@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>PDF 分割工具（純前端、不上傳） | 雅寶工具箱 AHPAL.COM</title>
+<meta name="description" content="分割 PDF 檔案，按頁數、按範圍、逐頁分割，完全在瀏覽器內處理，檔案不上傳，隱私零風險。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/pdf-split/">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:40px 20px;}
+.container{max-width:1000px;margin:0 auto;}
+h1{color:#D4AF37;font-size:28px;margin-bottom:12px;}
+.sub{color:#8B949E;margin-bottom:24px;font-size:14px;}
+.card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin-bottom:16px;}
+label{color:#8B949E;font-size:13px;display:block;margin-bottom:6px;}
+input[type=text],input[type=number],input[type=file],select{width:100%;background:#0D1117;color:#E6EDF3;border:1px solid #2D303A;border-radius:8px;padding:12px;font-size:14px;margin-bottom:12px;}
+button{background:#D4AF37;color:#0D1117;border:none;border-radius:8px;padding:10px 20px;font-weight:700;cursor:pointer;margin:8px 8px 8px 0;font-size:14px;}
+button:hover{background:#e6c24a;}
+button.blue{background:#58A6FF;}
+button.gray{background:#2D303A;color:#E6EDF3;}
+.result{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:12px;font-family:Consolas,monospace;font-size:13px;white-space:pre-wrap;word-break:break-all;min-height:60px;max-height:400px;overflow:auto;}
+.tip{background:rgba(63,185,80,0.08);border-left:4px solid #3FB950;padding:12px 16px;border-radius:6px;color:#C9D1D9;font-size:13px;margin-top:12px;}
+.warn{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:12px 16px;border-radius:6px;color:#C9D1D9;font-size:13px;margin-top:12px;}
+.footer{text-align:center;margin-top:60px;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+.loading{color:#D4AF37;font-weight:700;padding:12px;text-align:center;}
+
+.doc-section{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:28px 32px;margin-top:32px;}
+.doc-section h2{color:#D4AF37;font-size:22px;margin:0 0 16px;padding-bottom:8px;border-bottom:2px solid #2D303A;}
+.doc-section h3{color:#58A6FF;font-size:17px;margin:24px 0 10px;}
+.doc-section p{color:#C9D1D9;margin-bottom:12px;line-height:1.9;}
+.doc-section ul,.doc-section ol{margin:8px 0 16px 24px;color:#C9D1D9;}
+.doc-section li{margin-bottom:8px;line-height:1.8;}
+.doc-section code{background:#0D1117;color:#58A6FF;padding:2px 8px;border-radius:4px;font-family:Consolas,monospace;font-size:13px;}
+.doc-section .highlight{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:6px;margin:16px 0;}
+.doc-section .warnbox{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:14px 18px;border-radius:6px;margin:16px 0;}
+.doc-section table{width:100%;border-collapse:collapse;font-size:14px;margin:12px 0 20px;}
+.doc-section th,.doc-section td{padding:10px 14px;border:1px solid #2D303A;text-align:left;}
+.doc-section th{background:rgba(212,175,55,0.12);color:#D4AF37;}
+.doc-section tr:nth-child(even){background:rgba(255,255,255,0.02);}
+.doc-section .example{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:16px;font-family:Consolas,monospace;font-size:13px;color:#C9D1D9;margin:12px 0;line-height:1.8;}
+.doc-section .example .label{color:#8B949E;font-size:12px;}
+.doc-section .example .val{color:#D4AF37;font-weight:700;}
+.doc-section .example .arrow{color:#58A6FF;}
+
+</style>
+</head>
+<body>
+<nav class="ahpal-top-nav" style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;position:relative;z-index:10;">
+  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">🏠 首頁</a>
+  <a href="https://www.ahpal.com/categories.html" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">📚 全部分類</a>
+  <a href="https://www.ahpal.com/strategy/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">📌 策略文章</a>
+  <a href="https://novels.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">📖 小說站</a>
+  <a href="https://memories.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">🏛️ 回憶館</a>
+  <a href="https://bbs2.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">💬 BBS2</a>
+  <a href="https://pet.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">⚔️ 打怪場</a>
+  <a href="https://farm.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">🌾 農場</a>
+  <a href="https://tools.ahpal.com/" style="color:#0D1117;background:#D4AF37;text-decoration:none;padding:4px 10px;border-radius:6px;font-weight:700;">🛠️ 工具箱</a>
+</nav>
+<div class="container">
+<h1>✂️ PDF 分割工具</h1>
+<p class="sub">分割 PDF 檔案，按頁數、按範圍、逐頁分割，完全在瀏覽器內處理，檔案不上傳。</p>
+
+<div class="card">
+  <label>選擇 PDF 檔案</label>
+  <input type="file" id="file" accept=".pdf">
+  <div id="file-info" style="margin:12px 0;color:#8B949E;font-size:13px;"></div>
+  <label>分割模式</label>
+  <select id="mode">
+    <option value="range">按頁數範圍（如 1-5, 6-10）</option>
+    <option value="every">每 N 頁拆成一個 PDF</option>
+    <option value="single">逐頁分割（每頁一個 PDF）</option>
+  </select>
+  <div id="mode-input"></div>
+  <div>
+    <button onclick="splitPDF()">🚀 分割 PDF</button>
+    <button class="gray" onclick="clearAll()">🧹 清空</button>
+  </div>
+  <div class="tip">✅ 完全離線：所有處理都在你的瀏覽器完成，不會上傳任何檔案。</div>
+  <div id="status" class="loading" style="display:none;"></div>
+</div>
+
+<div class="card">
+  <label>分割結果</label>
+  <div id="result" class="result">（選擇 PDF 後，按「分割 PDF」）</div>
+</div>
+
+
+<div class="doc-section" id="pdf-split-doc">
+  <h2>📚 為什麼 PDF 分割也要在本地做？給門外漢的完整說明</h2>
+
+  <p>PDF 分割是「把一個 PDF 拆成多個 PDF」。你可能要把 100 頁的報告拆成 10 個 10 頁的檔案，或把一份合約的某一頁抽出來。</p>
+
+  <h3>一、一句話講完</h3>
+  <div class="highlight">
+    <p><strong>PDF 分割 = 把一個 PDF 按頁數拆成多個 PDF。</strong></p>
+    <p>本工具用「純前端」技術，PDF 在你的瀏覽器內處理，<strong>完全不上傳</strong>。</p>
+  </div>
+
+  <h3>二、PDF 分割的 3 種模式</h3>
+  <table>
+    <tr><th>模式</th><th>說明</th><th>適用情境</th></tr>
+    <tr><td>按頁數分割</td><td>每 N 頁拆成一個 PDF</td><td>把 100 頁報告拆成 10 個 10 頁</td></tr>
+    <tr><td>按範圍分割</td><td>指定頁碼範圍（如 1-5, 6-10）</td><td>抽出特定章節</td></tr>
+    <tr><td>逐頁分割</td><td>每一頁拆成一個 PDF</td><td>把合約每一頁單獨存</td></tr>
+  </table>
+
+  <h3>三、純前端 PDF 分割的原理</h3>
+  <p>本工具用開源的 <code>pdf-lib</code>，在瀏覽器內：</p>
+  <ol>
+    <li>讀取你選的 PDF（用 <code>FileReader</code>，不上傳）</li>
+    <li>用 <code>pdf-lib</code> 解析頁數</li>
+    <li>按你選的模式，把頁面複製到新的 PDF</li>
+    <li>產生多個 PDF 讓你下載</li>
+  </ol>
+
+  <h3>四、純前端 vs 線上的比較</h3>
+  <table>
+    <tr><th>項目</th><th>本工具</th><th>線上工具</th></tr>
+    <tr><td>隱私</td><td>✅ 檔案不上傳</td><td>❌ 檔案上傳境外</td></tr>
+    <tr><td>檔案大小</td><td>✅ 只受記憶體限制</td><td>❌ 免費版限 10~50MB</td></tr>
+    <tr><td>廣告</td><td>✅ 零廣告</td><td>❌ 一堆廣告</td></tr>
+    <tr><td>離線</td><td>✅ 可離線</td><td>❌ 要連網</td></tr>
+  </table>
+
+  <h3>五、PDF 分割的實際用途</h3>
+  <ul>
+    <li><strong>報告</strong>：把大報告拆成章節</li>
+    <li><strong>合約</strong>：把合約每頁單獨存</li>
+    <li><strong>掃描</strong>：把掃描檔按頁拆開</li>
+    <li><strong>講義</strong>：把講義按章節拆開</li>
+    <li><strong>發票</strong>：把多張發票拆開報帳</li>
+  </ul>
+
+  <h3>六、常見誤解</h3>
+  <ul>
+    <li><strong>❌ 誤解：PDF 分割會改變內容。</strong><br>✅ 事實：分割只拆頁面，不改變內容。</li>
+    <li><strong>❌ 誤解：線上工具比較快。</strong><br>✅ 事實：純前端不用上傳下載，通常更快。</li>
+    <li><strong>❌ 誤解：純前端不能處理大檔案。</strong><br>✅ 事實：只受記憶體限制。</li>
+    <li><strong>❌ 誤解：分割後檔案會變大。</strong><br>✅ 事實：分割後每個檔案變小，總大小差不多。</li>
+    <li><strong>❌ 誤解：只能按頁數分割。</strong><br>✅ 事實：可按頁數、按範圍、逐頁分割。</li>
+  </ul>
+
+  <h3>七、這個工具能幫你做什麼？</h3>
+  <ul>
+    <li><strong>按頁數分割</strong>：每 N 頁拆成一個 PDF</li>
+    <li><strong>按範圍分割</strong>：指定頁碼範圍</li>
+    <li><strong>逐頁分割</strong>：每頁一個 PDF</li>
+    <li><strong>完全離線</strong>：檔案不上傳</li>
+  </ul>
+
+  <div class="highlight">
+    <p style="margin:0;"><strong>🦞 龍蝦總工程師的話：</strong></p>
+    <p style="margin:8px 0 0;">「PDF 分割，是『把大檔案拆成小檔案』的藝術。純前端做，隱私零風險。」</p>
+  </div>
+
+  <p style="text-align:center;color:#8B949E;font-size:13px;margin-top:24px;margin-bottom:0;">本文由 🦞 龍蝦總工程師撰寫 · 2026-11-03 · 雅寶社區 AHPAL.COM</p>
+</div>
+
+
+<div class="footer">
+  <p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p>
+  <p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p>
+</div>
+</div>
+
+<script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script>
+var currentFile = null;
+
+document.getElementById('file').addEventListener('change', function(e) {
+  currentFile = e.target.files[0];
+  if (currentFile) {
+    document.getElementById('file-info').textContent = '已選：' + currentFile.name + ' (' + (currentFile.size/1024).toFixed(1) + ' KB)';
+  }
+});
+
+document.getElementById('mode').addEventListener('change', function() {
+  var mode = this.value;
+  var el = document.getElementById('mode-input');
+  if (mode === 'range') {
+    el.innerHTML = '<label>頁碼範圍（例如 1-5, 6-10）</label><input type="text" id="range" placeholder="1-5, 6-10">';
+  } else if (mode === 'every') {
+    el.innerHTML = '<label>每幾頁拆一個 PDF</label><input type="number" id="every" value="10" min="1">';
+  } else {
+    el.innerHTML = '';
+  }
+});
+document.getElementById('mode').dispatchEvent(new Event('change'));
+
+async function splitPDF() {
+  if (!currentFile) { alert('請先選 PDF'); return; }
+  var status = document.getElementById('status');
+  status.style.display = 'block';
+  status.textContent = '⏳ 分割中...';
+  try {
+    var { PDFDocument } = PDFLib;
+    var arrayBuffer = await currentFile.arrayBuffer();
+    var pdf = await PDFDocument.load(arrayBuffer);
+    var totalPages = pdf.getPageCount();
+    var mode = document.getElementById('mode').value;
+    var ranges = [];
+    if (mode === 'range') {
+      var rangeStr = document.getElementById('range').value;
+      ranges = rangeStr.split(',').map(function(s) {
+        var parts = s.trim().split('-');
+        var start = parseInt(parts[0]);
+        var end = parts[1] ? parseInt(parts[1]) : start;
+        return [start-1, end-1];
+      });
+    } else if (mode === 'every') {
+      var every = parseInt(document.getElementById('every').value) || 10;
+      for (var i = 0; i < totalPages; i += every) {
+        ranges.push([i, Math.min(i+every-1, totalPages-1)]);
+      }
+    } else {
+      for (var j = 0; j < totalPages; j++) {
+        ranges.push([j, j]);
+      }
+    }
+    var html = '<div style="color:#8B949E;font-size:13px;margin-bottom:8px;">共 ' + totalPages + ' 頁，分割成 ' + ranges.length + ' 個 PDF：</div>';
+    for (var k = 0; k < ranges.length; k++) {
+      status.textContent = '⏳ 處理第 ' + (k+1) + ' / ' + ranges.length + ' 個';
+      var newPdf = await PDFDocument.create();
+      var pages = await newPdf.copyPages(pdf, ranges[k]);
+      pages.forEach(function(page) { newPdf.addPage(page); });
+      var bytes = await newPdf.save();
+      var blob = new Blob([bytes], { type: 'application/pdf' });
+      var url = URL.createObjectURL(blob);
+      var start = ranges[k][0] + 1, end = ranges[k][1] + 1;
+      var name = currentFile.name.replace('.pdf', '') + '-p' + start + '-' + end + '.pdf';
+      html += '<div style="margin-bottom:6px;"><a href="' + url + '" download="' + name + '" style="color:#58A6FF;">⬇️ ' + name + ' (' + (bytes.length/1024).toFixed(1) + ' KB)</a></div>';
+    }
+    document.getElementById('result').innerHTML = html;
+    status.textContent = '✅ 分割完成！';
+  } catch(e) {
+    status.textContent = '❌ 分割失敗：' + e.message;
+  }
+}
+
+function clearAll() {
+  currentFile = null;
+  document.getElementById('file').value = '';
+  document.getElementById('file-info').textContent = '';
+  document.getElementById('result').textContent = '（選擇 PDF 後，按「分割 PDF」）';
+  document.getElementById('status').style.display = 'none';
+}
+</script>
+</body>
+</html>
