@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>元素週期表查詢 · 免費線上教育工具 | 雅寶工具箱</title>
+<meta name="description" content="輸入元素符號或原子序，查原子量與分類。給國中理化、高中化學使用。純前端、離線、不上傳。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/periodic-table/">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "EducationalApplication", "name": "元素週期表查詢", "description": "輸入元素符號或原子序，查原子量與分類。給國中理化、高中化學使用。純前端、離線、不上傳。", "url": "https://tools.ahpal.com/periodic-table/", "applicationCategory": "EducationalApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "元素週期表怎麼用？", "acceptedAnswer": {"@type": "Answer", "text": "輸入元素符號（H、O、Fe）或原子序（1、8、26），按查詢。"}}, {"@type": "Question", "name": "收錄多少元素？", "acceptedAnswer": {"@type": "Answer", "text": "目前收錄 28 個常見元素，未來會擴充完整 118 個。"}}, {"@type": "Question", "name": "什麼是原子序？", "acceptedAnswer": {"@type": "Answer", "text": "質子數，也是元素在週期表的位置。氫是 1，氧是 8。"}}, {"@type": "Question", "name": "什麼是原子量？", "acceptedAnswer": {"@type": "Answer", "text": "原子核的質量，單位是 u（原子質量單位）。"}}, {"@type": "Question", "name": "適合幾年級？", "acceptedAnswer": {"@type": "Answer", "text": "國中理化、高中化學。"}}, {"@type": "Question", "name": "資料會上傳嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不會，全部在瀏覽器。"}}, {"@type": "Question", "name": "可以查同位素嗎？", "acceptedAnswer": {"@type": "Answer", "text": "目前沒有，未來可加。"}}, {"@type": "Question", "name": "為什麼叫週期表？", "acceptedAnswer": {"@type": "Answer", "text": "因為元素性質會「週期性」重複（如鹼金屬都很活潑）。"}}, {"@type": "Question", "name": "可以列印嗎？", "acceptedAnswer": {"@type": "Answer", "text": "可以，按瀏覽器列印。"}}, {"@type": "Question", "name": "有電子組態嗎？", "acceptedAnswer": {"@type": "Answer", "text": "目前沒有，未來可加。"}}]}</script>
+<style>*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:20px;}
+.container{max-width:900px;margin:0 auto;}
+h1{color:#D4AF37;font-size:30px;margin:16px 0 8px;text-align:center;}
+.sub{color:#8B949E;font-size:15px;text-align:center;margin-bottom:24px;}
+.card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin-bottom:20px;}
+label{display:block;color:#C9D1D9;font-size:14px;margin:10px 0 4px;}
+input,textarea,select{width:100%;padding:12px;background:#0D1117;border:1px solid #2D303A;border-radius:8px;color:#E6EDF3;font-size:16px;font-family:inherit;}
+button{padding:12px 28px;background:#D4AF37;color:#0D1117;border:none;border-radius:10px;font-size:16px;font-weight:700;cursor:pointer;margin:8px 6px 0 0;}
+button:hover{opacity:0.85;}
+.result{background:#0D1117;border:1px solid #D4AF37;border-radius:8px;padding:16px;margin-top:16px;font-size:15px;line-height:1.9;white-space:pre-wrap;word-break:break-word;}
+.faq{margin-top:12px;}
+.faq h3{color:#58A6FF;font-size:16px;margin:16px 0 6px;}
+.faq p{color:#C9D1D9;font-size:14px;}
+.tip{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:8px;margin:16px 0;font-size:14px;color:#C9D1D9;}
+.knowledge{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin:20px 0;}
+.knowledge h2{color:#D4AF37;font-size:20px;margin:0 0 12px;}
+.knowledge h3{color:#58A6FF;font-size:16px;margin:18px 0 8px;}
+.knowledge p{color:#C9D1D9;font-size:15px;line-height:1.9;margin-bottom:10px;}
+.misconception{background:rgba(248,81,73,0.06);border-left:4px solid #F85149;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+.misconception strong{color:#F85149;}
+.when-to-use{background:rgba(63,185,80,0.06);border-left:4px solid #3FB950;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+.footer{text-align:center;margin-top:48px;padding-top:20px;border-top:1px solid #2D303A;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+@media print{.ahpal-top-nav,button,.tip{display:none!important;}body{background:#fff;color:#000;}.card{border:1px solid #999;}}</style>
+</head>
+<body>
+<div class="container">
+<nav class="ahpal-top-nav" style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;">
+  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏠 首頁</a>
+  <a href="https://www.ahpal.com/categories.html" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📚 全部分類</a>
+  <a href="https://www.ahpal.com/strategy/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📌 策略文章</a>
+  <a href="https://pet.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">⚔️ 打怪場</a>
+  <a href="https://farm.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🌾 農場</a>
+  <a href="https://tools.ahpal.com/" style="color:#0D1117;background:#D4AF37;text-decoration:none;padding:4px 10px;font-weight:700;">🛠️ 工具箱</a>
+</nav>
+<nav class="breadcrumb" aria-label="breadcrumb" style="font-size:13px;color:#8B949E;margin-bottom:12px;"><a href="https://tools.ahpal.com/" style="color:#58A6FF;text-decoration:none;">工具箱</a> › 元素週期表查詢</nav>
+<article>
+<h1>元素週期表查詢</h1>
+<p class="sub">輸入元素符號或原子序，查原子量與分類。給國中理化、高中化學使用。純前端、離線、不上傳。</p>
+<div class="card">
+<label>輸入元素符號或原子序（例：H、O、Fe、26）</label>
+<input id="q" placeholder="H 或 26">
+<button onclick="lookup()">查詢</button>
+<div class="result" id="out"></div>
+</div>
+<div class="tip">🔒 這個工具<strong>純前端、完全離線、不上傳</strong>。你的資料只留在你的瀏覽器，不會傳到任何伺服器。</div>
+<div class="knowledge">
+<h2>📖 元素週期表背後的知識</h2>
+<p>元素週期表是化學的「地圖」。1869 年俄國化學家門得列夫（Dmitri Mendeleev）發現：把元素按原子量排列，性質會「週期性」重複。他因此大膽留了空格，預測了還沒被發現的元素（如鎵、鍺），後來都被證實。這是科學史上最美的一次「預測」。</p>
+<p>週期表的「列」叫週期（period），「欄」叫族（group）。同族的元素性質相似，因為最外層電子數相同。例如第 1 族（鹼金屬）都很活潑，第 18 族（惰性氣體）都很穩定。理解這個，就不用死背 118 個元素。</p>
+<h3>⚠️ 常見誤解</h3>
+<div class="misconception"><strong>❌「週期表要死背」</strong> → 不用。理解「同族性質相似」「同週期電子層數相同」，就能推。高中只需熟記前 20 個 + 常見過渡金屬。</div>
+<div class="misconception"><strong>❌「原子量越大，元素越重」</strong> → 大致對，但「重量」是巨觀，「原子量」是單顆原子的相對質量。</div>
+<div class="misconception"><strong>❌「元素符號是英文縮寫」</strong> → 有些是拉丁文。例如 Fe（鐵）來自拉丁文 ferrum，Au（金）來自 aurum。</div>
+<div class="misconception"><strong>❌「惰性氣體不能反應」</strong> → 很難，但不是完全不能。XeF4、KrF2 都是人工合成的惰性氣體化合物。</div>
+<div class="misconception"><strong>❌「週期表只有 118 個元素」</strong> → 118 是「已確認」的，科學家還在合成更重的元素（如 119、120）。</div>
+<h3>🩺 使用時機與注意事項</h3>
+<div class="when-to-use"><strong>✅ 適合：</strong>國中理化、高中化學、準備會考/學測、老師出題。<br><strong>⚠️ 注意：</strong>這個工具收錄常見 28 個元素，不是完整 118 個。需要完整表請查 IUPAC 官方週期表。</div>
+<h3>❓ 更多常見問題</h3>
+<h3>什麼是「族」？</h3><p>週期表的「欄」。同族元素最外層電子數相同，性質相似。例如第 1 族是鹼金屬。</p>
+<h3>什麼是「週期」？</h3><p>週期表的「列」。同週期元素電子層數相同。例如第 2 週期有 8 個元素。</p>
+<h3>為什麼鐵的符號是 Fe？</h3><p>來自拉丁文 ferrum。很多元素符號是拉丁文，不是英文。</p>
+<h3>最活潑的金屬是哪個？</h3><p>銫（Cs）和氟（F）是週期表上最活潑的金屬和非金屬。</p>
+<h3>118 號元素叫什麼？</h3><p>Og（Oganesson），以俄羅斯物理學家 Yuri Oganessian 命名。</p>
+</div>
+<div class="faq"><h2 style="color:#D4AF37;font-size:20px;margin:24px 0 12px;">常見問題</h2><h3>元素週期表怎麼用？</h3><p>輸入元素符號（H、O、Fe）或原子序（1、8、26），按查詢。</p><h3>收錄多少元素？</h3><p>目前收錄 28 個常見元素，未來會擴充完整 118 個。</p><h3>什麼是原子序？</h3><p>質子數，也是元素在週期表的位置。氫是 1，氧是 8。</p><h3>什麼是原子量？</h3><p>原子核的質量，單位是 u（原子質量單位）。</p><h3>適合幾年級？</h3><p>國中理化、高中化學。</p><h3>資料會上傳嗎？</h3><p>不會，全部在瀏覽器。</p><h3>可以查同位素嗎？</h3><p>目前沒有，未來可加。</p><h3>為什麼叫週期表？</h3><p>因為元素性質會「週期性」重複（如鹼金屬都很活潑）。</p><h3>可以列印嗎？</h3><p>可以，按瀏覽器列印。</p><h3>有電子組態嗎？</h3><p>目前沒有，未來可加。</p></div>
+</article>
+<div class="footer"><p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p><p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p></div>
+</div>
+<script>
+var ELEMENTS={"H":{n:1,name:"氫",w:1.008,cat:"非金屬"},"He":{n:2,name:"氦",w:4.003,cat:"惰性氣體"},"Li":{n:3,name:"鋰",w:6.94,cat:"鹼金屬"},"Be":{n:4,name:"鈹",w:9.012,cat:"鹼土金屬"},"B":{n:5,name:"硼",w:10.81,cat:"類金屬"},"C":{n:6,name:"碳",w:12.011,cat:"非金屬"},"N":{n:7,name:"氮",w:14.007,cat:"非金屬"},"O":{n:8,name:"氧",w:15.999,cat:"非金屬"},"F":{n:9,name:"氟",w:18.998,cat:"鹵素"},"Ne":{n:10,name:"氖",w:20.180,cat:"惰性氣體"},"Na":{n:11,name:"鈉",w:22.990,cat:"鹼金屬"},"Mg":{n:12,name:"鎂",w:24.305,cat:"鹼土金屬"},"Al":{n:13,name:"鋁",w:26.982,cat:"貧金屬"},"Si":{n:14,name:"矽",w:28.085,cat:"類金屬"},"P":{n:15,name:"磷",w:30.974,cat:"非金屬"},"S":{n:16,name:"硫",w:32.06,cat:"非金屬"},"Cl":{n:17,name:"氯",w:35.45,cat:"鹵素"},"Ar":{n:18,name:"氬",w:39.948,cat:"惰性氣體"},"K":{n:19,name:"鉀",w:39.098,cat:"鹼金屬"},"Ca":{n:20,name:"鈣",w:40.078,cat:"鹼土金屬"},"Fe":{n:26,name:"鐵",w:55.845,cat:"過渡金屬"},"Cu":{n:29,name:"銅",w:63.546,cat:"過渡金屬"},"Zn":{n:30,name:"鋅",w:65.38,cat:"過渡金屬"},"Ag":{n:47,name:"銀",w:107.87,cat:"過渡金屬"},"Au":{n:79,name:"金",w:196.97,cat:"過渡金屬"},"Hg":{n:80,name:"汞",w:200.59,cat:"過渡金屬"},"Pb":{n:82,name:"鉛",w:207.2,cat:"貧金屬"},"U":{n:92,name:"鈾",w:238.03,cat:"錒系"}};
+function lookup(){
+  var q=document.getElementById("q").value.trim();
+  var el=null;
+  if(/^\d+$/.test(q)){
+    var num=parseInt(q);
+    for(var k in ELEMENTS){if(ELEMENTS[k].n===num){el=ELEMENTS[k];el.sym=k;break;}}
+  } else {
+    var key=q.charAt(0).toUpperCase()+q.slice(1).toLowerCase();
+    if(ELEMENTS[key]){el=ELEMENTS[key];el.sym=key;}
+  }
+  var o=document.getElementById("out");
+  if(!el){o.textContent="找不到元素，請輸入符號（H、O、Fe）或原子序（1、8、26）";return;}
+  o.innerHTML="<p style='font-size:22px;color:#D4AF37;text-align:center;'>"+el.sym+" · "+el.name+"</p><p style='text-align:center;'>原子序：<strong>"+el.n+"</strong></p><p style='text-align:center;'>原子量：<strong>"+el.w+"</strong></p><p style='text-align:center;'>分類：<strong>"+el.cat+"</strong></p>";
+}
+</script>
+</body>
+</html>

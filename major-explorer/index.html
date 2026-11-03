@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>大學科系探索 · 免費線上教育工具 | 雅寶工具箱</title>
+<meta name="description" content="選興趣方向，推薦科系。給高中生選組選系、大學生轉系參考。純前端、離線、不上傳。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/major-explorer/">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "EducationalApplication", "name": "大學科系探索", "description": "選興趣方向，推薦科系。給高中生選組選系、大學生轉系參考。純前端、離線、不上傳。", "url": "https://tools.ahpal.com/major-explorer/", "applicationCategory": "EducationalApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "科系探索怎麼用？", "acceptedAnswer": {"@type": "Answer", "text": "選 1~8 個最感興趣的方向（可複選），按推薦，會列出對應科系。"}}, {"@type": "Question", "name": "推薦準嗎？", "acceptedAnswer": {"@type": "Answer", "text": "只是「方向參考」，不是「絕對答案」。實際選系要看課程、師資、自己的強項。"}}, {"@type": "Question", "name": "可以複選嗎？", "acceptedAnswer": {"@type": "Answer", "text": "可以，用逗號分隔，例如 1,3,5。"}}, {"@type": "Question", "name": "適合幾年級？", "acceptedAnswer": {"@type": "Answer", "text": "高中生選組、選系，大學生轉系參考。"}}, {"@type": "Question", "name": "資料會上傳嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不會，全部在瀏覽器。"}}, {"@type": "Question", "name": "有科系介紹嗎？", "acceptedAnswer": {"@type": "Answer", "text": "目前只有名稱，未來可加課程、出路。"}}, {"@type": "Question", "name": "可以看落點嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不行，這是興趣探索，不是落點分析。"}}, {"@type": "Question", "name": "有 18 學群嗎？", "acceptedAnswer": {"@type": "Answer", "text": "目前用 8 大方向簡化，未來可對應 18 學群。"}}, {"@type": "Question", "name": "可以列印嗎？", "acceptedAnswer": {"@type": "Answer", "text": "可以，按瀏覽器列印。"}}, {"@type": "Question", "name": "家長可以用嗎？", "acceptedAnswer": {"@type": "Answer", "text": "可以，陪孩子一起探索興趣。"}}]}</script>
+<style>*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:20px;}
+.container{max-width:900px;margin:0 auto;}
+h1{color:#D4AF37;font-size:30px;margin:16px 0 8px;text-align:center;}
+.sub{color:#8B949E;font-size:15px;text-align:center;margin-bottom:24px;}
+.card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin-bottom:20px;}
+label{display:block;color:#C9D1D9;font-size:14px;margin:10px 0 4px;}
+input,textarea,select{width:100%;padding:12px;background:#0D1117;border:1px solid #2D303A;border-radius:8px;color:#E6EDF3;font-size:16px;font-family:inherit;}
+button{padding:12px 28px;background:#D4AF37;color:#0D1117;border:none;border-radius:10px;font-size:16px;font-weight:700;cursor:pointer;margin:8px 6px 0 0;}
+button:hover{opacity:0.85;}
+.result{background:#0D1117;border:1px solid #D4AF37;border-radius:8px;padding:16px;margin-top:16px;font-size:15px;line-height:1.9;white-space:pre-wrap;word-break:break-word;}
+.faq{margin-top:12px;}
+.faq h3{color:#58A6FF;font-size:16px;margin:16px 0 6px;}
+.faq p{color:#C9D1D9;font-size:14px;}
+.tip{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:8px;margin:16px 0;font-size:14px;color:#C9D1D9;}
+.knowledge{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin:20px 0;}
+.knowledge h2{color:#D4AF37;font-size:20px;margin:0 0 12px;}
+.knowledge h3{color:#58A6FF;font-size:16px;margin:18px 0 8px;}
+.knowledge p{color:#C9D1D9;font-size:15px;line-height:1.9;margin-bottom:10px;}
+.misconception{background:rgba(248,81,73,0.06);border-left:4px solid #F85149;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+.misconception strong{color:#F85149;}
+.when-to-use{background:rgba(63,185,80,0.06);border-left:4px solid #3FB950;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+.footer{text-align:center;margin-top:48px;padding-top:20px;border-top:1px solid #2D303A;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+@media print{.ahpal-top-nav,button,.tip{display:none!important;}body{background:#fff;color:#000;}.card{border:1px solid #999;}}</style>
+</head>
+<body>
+<div class="container">
+<nav class="ahpal-top-nav" style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;">
+  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏠 首頁</a>
+  <a href="https://www.ahpal.com/categories.html" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📚 全部分類</a>
+  <a href="https://www.ahpal.com/strategy/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📌 策略文章</a>
+  <a href="https://pet.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">⚔️ 打怪場</a>
+  <a href="https://farm.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🌾 農場</a>
+  <a href="https://tools.ahpal.com/" style="color:#0D1117;background:#D4AF37;text-decoration:none;padding:4px 10px;font-weight:700;">🛠️ 工具箱</a>
+</nav>
+<nav class="breadcrumb" aria-label="breadcrumb" style="font-size:13px;color:#8B949E;margin-bottom:12px;"><a href="https://tools.ahpal.com/" style="color:#58A6FF;text-decoration:none;">工具箱</a> › 大學科系探索</nav>
+<article>
+<h1>大學科系探索</h1>
+<p class="sub">選興趣方向，推薦科系。給高中生選組選系、大學生轉系參考。純前端、離線、不上傳。</p>
+<div class="card">
+<label>選一個你最感興趣的方向（可複選，用逗號分隔：1,3,5）</label>
+<div style="color:#C9D1D9;font-size:14px;line-height:2;margin:10px 0;">
+1. 動手做東西（機械、電子、程式）<br>
+2. 跟人互動（教育、心理、社工）<br>
+3. 分析數據（數學、統計、資工）<br>
+4. 表達創作（語文、設計、傳播）<br>
+5. 研究自然（生物、化學、地球科學）<br>
+6. 管理資源（企管、財金、會計）<br>
+7. 照顧健康（醫學、護理、藥學）<br>
+8. 探索社會（法律、政治、社會）
+</div>
+<input id="q" placeholder="例如：1,3,5">
+<button onclick="explore()">推薦科系</button>
+<div class="result" id="out"></div>
+</div>
+<div class="tip">🔒 這個工具<strong>純前端、完全離線、不上傳</strong>。你的資料只留在你的瀏覽器，不會傳到任何伺服器。</div>
+<div class="knowledge">
+<h2>📖 大學科系探索背後的知識</h2>
+<p>台灣的大學科系，傳統分「18 學群」：資訊、工程、數理化、醫藥衛生、生命科學、生物資源、地球環境、建築設計、藝術、社會心理、大眾傳播、外語、文史哲、教育、法政、管理、財經、體育。但選系不是「選名字」，是「選未來四年的生活」。</p>
+<p>很多高中生選系只看「分數落點」或「家長期待」，結果讀了一年才發現沒興趣。其實選系前應該問三個問題：①我喜歡做什麼？②我擅長什麼？③這個科系畢業後做什麼？三個圈圈的交集，才是適合的科系。</p>
+<h3>⚠️ 常見誤解</h3>
+<div class="misconception"><strong>❌「分數高就要選」</strong> → 分數高不代表適合。讀不喜歡的科系，四年很痛苦。</div>
+<div class="misconception"><strong>❌「選系等於選職業」</strong> → 不一定。很多人畢業後做非本科工作。科系是「訓練思考」，不是「職業保證」。</div>
+<div class="misconception"><strong>❌「冷門科系沒出路」</strong> → 冷門科系競爭少，若真有興趣，反而容易突出。重點是「有沒有學到東西」。</div>
+<div class="misconception"><strong>❌「先選校再選系」</strong> → 看情況。若校風、資源差異大，選校有理；若科系差異大，選系更重要。</div>
+<div class="misconception"><strong>❌「這個工具會告訴我讀什麼」</strong> → 不會。它只給方向，決定權在你。</div>
+<h3>🩺 使用時機與注意事項</h3>
+<div class="when-to-use"><strong>✅ 適合：</strong>高中生選組、選系、大學生轉系參考、家長陪孩子探索。<br><strong>⚠️ 注意：</strong>這個工具是「興趣方向參考」，不是「落點分析」也不是「職涯規劃」。實際選系請看課程地圖、問學長姐、參加校系博覽會。</div>
+<h3>❓ 更多常見問題</h3>
+<h3>18 學群是什麼？</h3><p>台灣大學科系依性質分 18 類，例如資訊、工程、醫藥衛生、社會心理等。</p>
+<h3>選系還是選校？</h3><p>看情況。校風差異大選校，科系差異大選系。沒有絕對答案。</p>
+<h3>什麼是「課程地圖」？</h3><p>大學科系的四年課程規劃。選系前一定要看，才知道四年學什麼。</p>
+<h3>可以轉系嗎？</h3><p>可以，但通常要看大一成績，名額有限。選系前多想想，比轉系容易。</p>
+<h3>雙主修、輔系是什麼？</h3><p>雙主修是修兩個系的必修，輔系是修另一個系的部分課程。可以擴展能力。</p>
+</div>
+<div class="faq"><h2 style="color:#D4AF37;font-size:20px;margin:24px 0 12px;">常見問題</h2><h3>科系探索怎麼用？</h3><p>選 1~8 個最感興趣的方向（可複選），按推薦，會列出對應科系。</p><h3>推薦準嗎？</h3><p>只是「方向參考」，不是「絕對答案」。實際選系要看課程、師資、自己的強項。</p><h3>可以複選嗎？</h3><p>可以，用逗號分隔，例如 1,3,5。</p><h3>適合幾年級？</h3><p>高中生選組、選系，大學生轉系參考。</p><h3>資料會上傳嗎？</h3><p>不會，全部在瀏覽器。</p><h3>有科系介紹嗎？</h3><p>目前只有名稱，未來可加課程、出路。</p><h3>可以看落點嗎？</h3><p>不行，這是興趣探索，不是落點分析。</p><h3>有 18 學群嗎？</h3><p>目前用 8 大方向簡化，未來可對應 18 學群。</p><h3>可以列印嗎？</h3><p>可以，按瀏覽器列印。</p><h3>家長可以用嗎？</h3><p>可以，陪孩子一起探索興趣。</p></div>
+</article>
+<div class="footer"><p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p><p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p></div>
+</div>
+<script>
+var MAP={"1":["機械工程","電機工程","資訊工程","電子工程"],"2":["教育","心理","社會工作","諮商輔導"],"3":["數學","統計","資訊工程","資料科學"],"4":["中國文學","外國語文","視覺設計","大眾傳播"],"5":["生物","化學","地球科學","環境工程"],"6":["企業管理","財務金融","會計","國際貿易"],"7":["醫學","護理","藥學","物理治療"],"8":["法律","政治","社會","公共行政"]};
+function explore(){
+  var q=document.getElementById("q").value.trim();
+  var keys=q.split(/[,，\s]+/).filter(function(x){return x;});
+  var o=document.getElementById("out");
+  if(keys.length===0){o.textContent="請輸入至少一個數字（1~8）";return;}
+  var seen={},result=[];
+  for(var i=0;i<keys.length;i++){
+    var k=keys[i];
+    if(MAP[k]){for(var j=0;j<MAP[k].length;j++){if(!seen[MAP[k][j]]){seen[MAP[k][j]]=1;result.push(MAP[k][j]);}}}
+  }
+  if(result.length===0){o.textContent="找不到對應科系，請輸入 1~8";return;}
+  var h="<p style='font-size:18px;color:#D4AF37;'>根據你的興趣，推薦這些科系方向：</p><ul style='font-size:16px;line-height:2;margin:12px 0 0 24px;'>";
+  for(var m=0;m<result.length;m++) h+="<li>"+result[m]+"</li>";
+  h+="</ul><p style='font-size:14px;color:#8B949E;margin-top:12px;'>這只是「方向參考」，實際選系還要看課程、師資、自己的強項。</p>";
+  o.innerHTML=h;
+}
+</script>
+</body>
+</html>

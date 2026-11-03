@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>分數計算器 · 免費線上教育工具 | 雅寶工具箱</title>
+<meta name="description" content="分數加減乘除，自動約分。給小五~國一學分數、家長檢查作業使用。純前端、離線、不上傳。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/fraction-calculator/">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "EducationalApplication", "name": "分數計算器", "description": "分數加減乘除，自動約分。給小五~國一學分數、家長檢查作業使用。純前端、離線、不上傳。", "url": "https://tools.ahpal.com/fraction-calculator/", "applicationCategory": "EducationalApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "分數計算器怎麼用？", "acceptedAnswer": {"@type": "Answer", "text": "輸入兩個分數的分子分母，選運算（+ - × ÷），按計算，會顯示結果並約分。"}}, {"@type": "Question", "name": "會約分嗎？", "acceptedAnswer": {"@type": "Answer", "text": "會，自動用最大公因數約分。"}}, {"@type": "Question", "name": "分母可以為 0 嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不行，分母為 0 會顯示錯誤。"}}, {"@type": "Question", "name": "適合幾年級？", "acceptedAnswer": {"@type": "Answer", "text": "小五~國一學分數加減乘除。"}}, {"@type": "Question", "name": "資料會上傳嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不會，全部在瀏覽器。"}}, {"@type": "Question", "name": "可以算帶分數嗎？", "acceptedAnswer": {"@type": "Answer", "text": "目前只算真分數/假分數，帶分數要先換成假分數。"}}, {"@type": "Question", "name": "可以算小數嗎？", "acceptedAnswer": {"@type": "Answer", "text": "目前只算分數，小數要先換成分數。"}}, {"@type": "Question", "name": "為什麼要約分？", "acceptedAnswer": {"@type": "Answer", "text": "約分讓答案更簡潔，也是分數的基本功。"}}, {"@type": "Question", "name": "可以列印嗎？", "acceptedAnswer": {"@type": "Answer", "text": "可以，按瀏覽器列印。"}}, {"@type": "Question", "name": "有步驟說明嗎？", "acceptedAnswer": {"@type": "Answer", "text": "目前只顯示結果，未來可加步驟。"}}]}</script>
+<style>*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:20px;}
+.container{max-width:900px;margin:0 auto;}
+h1{color:#D4AF37;font-size:30px;margin:16px 0 8px;text-align:center;}
+.sub{color:#8B949E;font-size:15px;text-align:center;margin-bottom:24px;}
+.card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin-bottom:20px;}
+label{display:block;color:#C9D1D9;font-size:14px;margin:10px 0 4px;}
+input,textarea,select{width:100%;padding:12px;background:#0D1117;border:1px solid #2D303A;border-radius:8px;color:#E6EDF3;font-size:16px;font-family:inherit;}
+button{padding:12px 28px;background:#D4AF37;color:#0D1117;border:none;border-radius:10px;font-size:16px;font-weight:700;cursor:pointer;margin:8px 6px 0 0;}
+button:hover{opacity:0.85;}
+.result{background:#0D1117;border:1px solid #D4AF37;border-radius:8px;padding:16px;margin-top:16px;font-size:15px;line-height:1.9;white-space:pre-wrap;word-break:break-word;}
+.faq{margin-top:12px;}
+.faq h3{color:#58A6FF;font-size:16px;margin:16px 0 6px;}
+.faq p{color:#C9D1D9;font-size:14px;}
+.tip{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:8px;margin:16px 0;font-size:14px;color:#C9D1D9;}
+.knowledge{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin:20px 0;}
+.knowledge h2{color:#D4AF37;font-size:20px;margin:0 0 12px;}
+.knowledge h3{color:#58A6FF;font-size:16px;margin:18px 0 8px;}
+.knowledge p{color:#C9D1D9;font-size:15px;line-height:1.9;margin-bottom:10px;}
+.misconception{background:rgba(248,81,73,0.06);border-left:4px solid #F85149;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+.misconception strong{color:#F85149;}
+.when-to-use{background:rgba(63,185,80,0.06);border-left:4px solid #3FB950;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+.footer{text-align:center;margin-top:48px;padding-top:20px;border-top:1px solid #2D303A;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+@media print{.ahpal-top-nav,button,.tip{display:none!important;}body{background:#fff;color:#000;}.card{border:1px solid #999;}}</style>
+</head>
+<body>
+<div class="container">
+<nav class="ahpal-top-nav" style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;">
+  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏠 首頁</a>
+  <a href="https://www.ahpal.com/categories.html" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📚 全部分類</a>
+  <a href="https://www.ahpal.com/strategy/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📌 策略文章</a>
+  <a href="https://pet.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">⚔️ 打怪場</a>
+  <a href="https://farm.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🌾 農場</a>
+  <a href="https://tools.ahpal.com/" style="color:#0D1117;background:#D4AF37;text-decoration:none;padding:4px 10px;font-weight:700;">🛠️ 工具箱</a>
+</nav>
+<nav class="breadcrumb" aria-label="breadcrumb" style="font-size:13px;color:#8B949E;margin-bottom:12px;"><a href="https://tools.ahpal.com/" style="color:#58A6FF;text-decoration:none;">工具箱</a> › 分數計算器</nav>
+<article>
+<h1>分數計算器</h1>
+<p class="sub">分數加減乘除，自動約分。給小五~國一學分數、家長檢查作業使用。純前端、離線、不上傳。</p>
+<div class="card">
+<label>分子 1</label><input type="number" id="n1" value="1">
+<label>分母 1</label><input type="number" id="d1" value="2">
+<label>運算</label><select id="op"><option value="+">+</option><option value="-">-</option><option value="*">×</option><option value="/">÷</option></select>
+<label>分子 2</label><input type="number" id="n2" value="1">
+<label>分母 2</label><input type="number" id="d2" value="3">
+<button onclick="calc()">計算</button>
+<div class="result" id="out"></div>
+</div>
+<div class="tip">🔒 這個工具<strong>純前端、完全離線、不上傳</strong>。你的資料只留在你的瀏覽器，不會傳到任何伺服器。</div>
+<div class="knowledge">
+<h2>📖 分數計算背後的知識</h2>
+<p>分數是「整體的一部分」。1/2 是「一個東西切成兩份，拿一份」。小五開始學分數的加減乘除，但很多孩子卡在「為什麼分母要通分」。其實道理很簡單：分母是「一份有多大」，分子是「有幾份」。分母不同，一份的大小就不同，不能直接相加，要先「通分」——把兩邊切成一樣大，才能加。</p>
+<p>乘法和除法又更抽象：2/3 × 3/4 = 6/12 = 1/2。為什麼不是「分子加分子、分母加分母」？因為乘法是「部分的再部分」——2/3 的 3/4，就是「先取 2/3，再從中取 3/4」。理解了這個，就不會亂算。</p>
+<h3>⚠️ 常見誤解</h3>
+<div class="misconception"><strong>❌「分子加分子、分母加分母」</strong> → 只有「同分母」才能直接加分子。不同分母要先通分。</div>
+<div class="misconception"><strong>❌「分母越大，分數越大」</strong> → 相反。1/2 > 1/3，分母越大，一份越小。</div>
+<div class="misconception"><strong>❌「約分會改變大小」</strong> → 約分只是換寫法，大小不變。2/4 = 1/2。</div>
+<div class="misconception"><strong>❌「分數一定小於 1」</strong> → 假分數（如 3/2）大於 1，帶分數（1 又 1/2）也是。</div>
+<div class="misconception"><strong>❌「除法就是分子除以分子、分母除以分母」</strong> → 除法是「乘以倒數」：(a/b) ÷ (c/d) = (a/b) × (d/c)。</div>
+<h3>🩺 使用時機與注意事項</h3>
+<div class="when-to-use"><strong>✅ 適合：</strong>小五~國一學分數、家長檢查作業、老師出題。<br><strong>⚠️ 注意：</strong>這個工具只算「真分數/假分數」，帶分數要先換成假分數。理解「為什麼」比「算出答案」重要。</div>
+<h3>❓ 更多常見問題</h3>
+<h3>什麼是通分？</h3><p>把不同分母的分數，換成相同分母。例如 1/2 + 1/3 = 3/6 + 2/6 = 5/6。</p>
+<h3>什麼是約分？</h3><p>把分子分母同除以公因數，讓數字變小。例如 6/12 = 1/2。</p>
+<h3>什麼是最大公因數？</h3><p>兩個數共同的因數中最大的。例如 12 和 18 的最大公因數是 6。</p>
+<h3>帶分數怎麼換假分數？</h3><p>整數 × 分母 + 分子，放回分母上。例如 1 又 1/2 = (1×2+1)/2 = 3/2。</p>
+<h3>分數除法為什麼要乘以倒數？</h3><p>除法是「乘法的逆運算」。除以 2/3 等於乘以 3/2，這樣才能抵消。</p>
+</div>
+<div class="faq"><h2 style="color:#D4AF37;font-size:20px;margin:24px 0 12px;">常見問題</h2><h3>分數計算器怎麼用？</h3><p>輸入兩個分數的分子分母，選運算（+ - × ÷），按計算，會顯示結果並約分。</p><h3>會約分嗎？</h3><p>會，自動用最大公因數約分。</p><h3>分母可以為 0 嗎？</h3><p>不行，分母為 0 會顯示錯誤。</p><h3>適合幾年級？</h3><p>小五~國一學分數加減乘除。</p><h3>資料會上傳嗎？</h3><p>不會，全部在瀏覽器。</p><h3>可以算帶分數嗎？</h3><p>目前只算真分數/假分數，帶分數要先換成假分數。</p><h3>可以算小數嗎？</h3><p>目前只算分數，小數要先換成分數。</p><h3>為什麼要約分？</h3><p>約分讓答案更簡潔，也是分數的基本功。</p><h3>可以列印嗎？</h3><p>可以，按瀏覽器列印。</p><h3>有步驟說明嗎？</h3><p>目前只顯示結果，未來可加步驟。</p></div>
+</article>
+<div class="footer"><p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p><p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p></div>
+</div>
+<script>
+function gcd(a,b){a=Math.abs(a);b=Math.abs(b);while(b){var t=b;b=a%b;a=t;}return a;}
+function calc(){
+  var n1=parseInt(document.getElementById("n1").value),d1=parseInt(document.getElementById("d1").value);
+  var n2=parseInt(document.getElementById("n2").value),d2=parseInt(document.getElementById("d2").value);
+  var op=document.getElementById("op").value;
+  if(!d1||!d2){document.getElementById("out").textContent="分母不能為 0";return;}
+  var n,d;
+  if(op==="+"){n=n1*d2+n2*d1;d=d1*d2;}
+  else if(op==="-"){n=n1*d2-n2*d1;d=d1*d2;}
+  else if(op==="*"){n=n1*n2;d=d1*d2;}
+  else{n=n1*d2;d=d1*n2;}
+  if(d<0){n=-n;d=-d;}
+  var g=gcd(n,d);
+  if(g){n/=g;d/=g;}
+  var h="<p style='font-size:20px;text-align:center;'>"+n1+"/"+d1+" "+op+" "+n2+"/"+d2+" = <strong style='color:#D4AF37;'>"+n+"/"+d+"</strong></p>";
+  if(d===1) h+="<p style='text-align:center;'>即 <strong>"+n+"</strong></p>";
+  h+="<p style='text-align:center;font-size:14px;color:#8B949E;'>已約分（GCD 最大公因數）</p>";
+  document.getElementById("out").innerHTML=h;
+}
+</script>
+</body>
+</html>
