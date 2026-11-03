@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>📊 多益分數換算 | 雅寶工具箱</title>
+<meta name="description" content="多益聽力閱讀分數換算 CEFR、全民英檢、對應職務，純前端、離線、不上傳。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/toeic-converter/">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8637791667872348" crossorigin="anonymous"></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "📊 多益分數換算", "description": "多益聽力閱讀分數換算 CEFR、全民英檢、對應職務，純前端、離線、不上傳。", "url": "https://tools.ahpal.com/toeic-converter/", "applicationCategory": "EducationalApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "多益滿分多少？", "acceptedAnswer": {"@type": "Answer", "text": "多益聽力與閱讀滿分 990 分，聽力 495、閱讀 495。"}}, {"@type": "Question", "name": "多益 550 大概是什麼程度？", "acceptedAnswer": {"@type": "Answer", "text": "CEFR B1 進階級，全民英檢中級，對應科技業工程師、國內業務、客服。"}}, {"@type": "Question", "name": "多益 785 大概是什麼程度？", "acceptedAnswer": {"@type": "Answer", "text": "CEFR B2 高階級，全民英檢中高級，對應外商工程師、國際業務、空服員。"}}, {"@type": "Question", "name": "多益 945 大概是什麼程度？", "acceptedAnswer": {"@type": "Answer", "text": "CEFR C1 精通級，全民英檢高級，對應外商主管、雙語教師、國際業務。"}}, {"@type": "Question", "name": "多益 990 就等於母語人士嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不等於。多益只考聽力與閱讀，不考說與寫。"}}, {"@type": "Question", "name": "多益分數可以換算多益口說嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不行。多益口說與寫作是獨立測驗，滿分 200 + 200。"}}, {"@type": "Question", "name": "多益成績有效多久？", "acceptedAnswer": {"@type": "Answer", "text": "通常 2 年，少數機構接受 3 年。"}}, {"@type": "Question", "name": "企業常見門檻是多少？", "acceptedAnswer": {"@type": "Answer", "text": "常見 550、650、750、850。外商通常要求 750 以上。"}}, {"@type": "Question", "name": "可以離線使用嗎？", "acceptedAnswer": {"@type": "Answer", "text": "可以，全部在瀏覽器，不上傳。"}}, {"@type": "Question", "name": "資料會上傳嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不會，純前端。"}}]}</script>
+<style>*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:20px;}
+.container{max-width:900px;margin:0 auto;}
+h1{color:#D4AF37;font-size:30px;margin:16px 0 8px;text-align:center;}
+.sub{color:#8B949E;font-size:15px;text-align:center;margin-bottom:24px;}
+.box{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin-bottom:20px;}
+.box label{display:block;color:#58A6FF;font-size:14px;font-weight:700;margin-bottom:8px;margin-top:12px;}
+.box label:first-child{margin-top:0;}
+.box input,.box select{width:100%;padding:12px 16px;background:#0D1117;border:1px solid #D4AF37;border-radius:8px;color:#E6EDF3;font-size:16px;margin-bottom:4px;}
+.box .row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.box .btn{padding:12px 28px;background:#D4AF37;color:#0D1117;border:none;border-radius:8px;font-size:16px;font-weight:700;cursor:pointer;margin-top:12px;width:100%;}
+.box .btn:hover{background:#E6C65C;}
+.result{margin-top:16px;padding:16px;border-radius:8px;font-size:15px;line-height:2;}
+.result.ok{background:rgba(63,185,80,0.08);border-left:4px solid #3FB950;color:#C9D1D9;}
+.result.err{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;color:#C9D1D9;}
+.result.info{background:rgba(88,166,255,0.08);border-left:4px solid #58A6FF;color:#C9D1D9;}
+.result .big{font-size:28px;font-weight:900;color:#D4AF37;}
+.result table{width:100%;border-collapse:collapse;margin:8px 0;}
+.result th,.result td{border:1px solid #2D303A;padding:6px 10px;font-size:14px;text-align:center;}
+.result th{background:#0D1117;color:#D4AF37;}
+.knowledge{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin:20px 0;}
+.knowledge h2{color:#D4AF37;font-size:20px;margin:0 0 12px;}
+.knowledge h3{color:#58A6FF;font-size:16px;margin:18px 0 8px;}
+.knowledge p{color:#C9D1D9;font-size:15px;line-height:1.9;margin-bottom:10px;}
+.knowledge table{width:100%;border-collapse:collapse;margin:12px 0;}
+.knowledge th,.knowledge td{border:1px solid #2D303A;padding:8px 12px;font-size:14px;color:#C9D1D9;text-align:left;}
+.knowledge th{background:#0D1117;color:#D4AF37;}
+.misconception{background:rgba(248,81,73,0.06);border-left:4px solid #F85149;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+.misconception strong{color:#F85149;}
+.when-to-use{background:rgba(63,185,80,0.06);border-left:4px solid #3FB950;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+.faq h3{color:#58A6FF;font-size:16px;margin:16px 0 6px;}
+.faq p{color:#C9D1D9;font-size:14px;}
+.tip{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:8px;margin:16px 0;font-size:14px;color:#C9D1D9;}
+.footer{text-align:center;margin-top:48px;padding-top:20px;border-top:1px solid #2D303A;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+@media (max-width:700px){.box .row{grid-template-columns:1fr;}}
+@media print{.ahpal-top-nav,.tip{display:none!important;}body{background:#fff;color:#000;}}</style>
+</head>
+<body>
+<div class="container">
+<nav class="ahpal-top-nav" style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;">
+  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏠 首頁</a>
+  <a href="https://www.ahpal.com/categories.html" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📚 全部分類</a>
+  <a href="https://tools.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🛠️ 工具箱</a>
+  <a href="https://pet.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">⚔️ 打怪場</a>
+  <a href="https://farm.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🌾 農場</a>
+</nav>
+<nav class="breadcrumb" aria-label="breadcrumb" style="font-size:13px;color:#8B949E;margin-bottom:12px;"><a href="https://tools.ahpal.com/" style="color:#58A6FF;text-decoration:none;">工具箱</a> › 📊 多益分數換算</nav>
+<article>
+<h1>📊 多益分數換算</h1>
+<p class="sub">多益聽力閱讀分數換算 CEFR、全民英檢、對應職務，純前端、離線、不上傳。</p>
+<div class="box">
+  <label>聽力分數（0~495）</label>
+  <input type="number" id="tc-listen" value="400" min="0" max="495">
+  <label>閱讀分數（0~495）</label>
+  <input type="number" id="tc-read" value="400" min="0" max="495">
+  <button class="btn" onclick="calcToeic()">換算</button>
+  <div class="result info" id="tc-result">輸入聽力與閱讀分數後按「換算」。</div>
+</div>
+<script>
+function calcToeic(){
+  var L = parseInt(document.getElementById("tc-listen").value) || 0;
+  var R = parseInt(document.getElementById("tc-read").value) || 0;
+  var el = document.getElementById("tc-result");
+  if (L < 0 || L > 495 || R < 0 || R > 495) { el.className = "result err"; el.textContent = "聽力與閱讀分數必須在 0~495 之間。"; return; }
+  var total = L + R;
+  var cefr = "", gEPT = "", job = "";
+  if (total >= 945) { cefr = "C1 精通級"; gEPT = "高級"; job = "外商主管、雙語教師、國際業務"; }
+  else if (total >= 785) { cefr = "B2 高階級"; gEPT = "中高級"; job = "外商工程師、國際業務、空服員"; }
+  else if (total >= 550) { cefr = "B1 進階級"; gEPT = "中級"; job = "科技業工程師、國內業務、客服"; }
+  else if (total >= 225) { cefr = "A2 基礎級"; gEPT = "初級"; job = "一般服務業、行政助理"; }
+  else { cefr = "A1 入門級"; gEPT = "初級（未達）"; job = "基礎會話、旅遊英語"; }
+  el.className = "result ok";
+  el.innerHTML = "📊 <strong>多益換算結果</strong><br>聽力：<strong>" + L + "</strong> / 閱讀：<strong>" + R + "</strong><br>總分：<span class='big'>" + total + "</span><br><br><table><tr><th>對照</th><th>等級</th></tr><tr><td>CEFR</td><td>" + cefr + "</td></tr><tr><td>全民英檢（GEPT）</td><td>" + gEPT + "</td></tr><tr><td>對應職務</td><td>" + job + "</td></tr></table><span style='font-size:13px;color:#8B949E;'>CEFR 對照為約略值，實際依各機構認定為準。</span>";
+}
+</script>
+<div class="knowledge">
+<h2>📖 多益分數背後的知識</h2>
+<p>多益（TOEIC，Test of English for International Communication）是由美國教育測驗服務社（ETS）主辦的英語能力測驗，主要針對「職場英語」。多益聽力與閱讀測驗（TOEIC Listening and Reading）滿分 990 分，聽力 495、閱讀 495，考試時間約 2 小時。</p>
+<p>多益分數常被換算成 CEFR（歐洲語言共同參考架構）與全民英檢（GEPT）等級。CEFR 分 A1（入門）、A2（基礎）、B1（進階）、B2（高階）、C1（精通）、C2（母語）六級；全民英檢分初級、中級、中高級、高級、優級五級。企業招募常以多益 550、650、750、850 為門檻。</p>
+<h3>⚠️ 常見誤解</h3>
+<div class="misconception"><strong>❌「多益 990 就等於英文母語」</strong> → 錯。多益只考「聽力與閱讀」，不考「說與寫」。990 分代表聽讀很強，不代表口說流利。</div>
+<div class="misconception"><strong>❌「多益分數可以換算多益口說」</strong> → 不行。多益口說與寫作（TOEIC Speaking and Writing）是獨立測驗，滿分 200 + 200，不能直接換算。</div>
+<div class="misconception"><strong>❌「多益 550 就能進外商」</strong> → 不一定。外商通常要求 750 以上，且會看「口說能力」，不是只看筆試。</div>
+<div class="misconception"><strong>❌「多益分數永久有效」</strong> → 錯。多益成績有效期限通常是 2 年，少數機構接受 3 年。</div>
+<div class="misconception"><strong>❌「CEFR 對照是官方標準」</strong> → 不是。ETS 有官方對照表，但各機構（學校、企業）可自行認定，本工具僅供參考。</div>
+<h3>🩺 使用時機與注意事項</h3>
+<div class="when-to-use"><strong>✅ 適合：</strong>考生自我評估、求職前確認門檻、企業招募參考、了解 CEFR 對照。<br><strong>⚠️ 注意：</strong>本工具僅供參考，實際認定以各機構（學校、企業、ETS）公告為準。</div>
+</div>
+<div class="faq"><h2 style="color:#D4AF37;font-size:20px;margin:24px 0 12px;">常見問題</h2><h3>多益滿分多少？</h3><p>多益聽力與閱讀滿分 990 分，聽力 495、閱讀 495。</p><h3>多益 550 大概是什麼程度？</h3><p>CEFR B1 進階級，全民英檢中級，對應科技業工程師、國內業務、客服。</p><h3>多益 785 大概是什麼程度？</h3><p>CEFR B2 高階級，全民英檢中高級，對應外商工程師、國際業務、空服員。</p><h3>多益 945 大概是什麼程度？</h3><p>CEFR C1 精通級，全民英檢高級，對應外商主管、雙語教師、國際業務。</p><h3>多益 990 就等於母語人士嗎？</h3><p>不等於。多益只考聽力與閱讀，不考說與寫。</p><h3>多益分數可以換算多益口說嗎？</h3><p>不行。多益口說與寫作是獨立測驗，滿分 200 + 200。</p><h3>多益成績有效多久？</h3><p>通常 2 年，少數機構接受 3 年。</p><h3>企業常見門檻是多少？</h3><p>常見 550、650、750、850。外商通常要求 750 以上。</p><h3>可以離線使用嗎？</h3><p>可以，全部在瀏覽器，不上傳。</p><h3>資料會上傳嗎？</h3><p>不會，純前端。</p></div>
+</article>
+<div class="footer"><p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p><p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>🎓 學測落點分析 | 雅寶工具箱</title>
+<meta name="description" content="學測級分落點預估，含頂尖國立、中字輩、一般國立、私立前段，純前端、離線、不上傳。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/gsat-estimator/">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8637791667872348" crossorigin="anonymous"></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "🎓 學測落點分析", "description": "學測級分落點預估，含頂尖國立、中字輩、一般國立、私立前段，純前端、離線、不上傳。", "url": "https://tools.ahpal.com/gsat-estimator/", "applicationCategory": "EducationalApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "學測滿級分多少？", "acceptedAnswer": {"@type": "Answer", "text": "每科 15 級分，五科合計 75 級分。"}}, {"@type": "Question", "name": "學測幾月考試？", "acceptedAnswer": {"@type": "Answer", "text": "每年 1 月，通常 1 月中下旬。"}}, {"@type": "Question", "name": "個人申請可以填幾個志願？", "acceptedAnswer": {"@type": "Answer", "text": "6 個。建議「夢幻 2 + 務實 2 + 安全 2」。"}}, {"@type": "Question", "name": "落點分析準嗎？", "acceptedAnswer": {"@type": "Answer", "text": "只能粗略參考。受各科權重、超額篩選、備審面試、當年度考生程度影響。"}}, {"@type": "Question", "name": "個人申請只看學測嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不是。學測約占 50%，備審 30%、面試 20%（各校不同）。"}}, {"@type": "Question", "name": "繁星推薦比較簡單嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不一定。繁星看在校成績百分比，社區高中前 1% 比明星高中前 10% 有利，但名額有限。"}}, {"@type": "Question", "name": "級分高就一定上嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不一定。有些校系看單科、有些看備審面試，總級分高不代表一定上。"}}, {"@type": "Question", "name": "可以離線使用嗎？", "acceptedAnswer": {"@type": "Answer", "text": "可以，全部在瀏覽器，不上傳。"}}, {"@type": "Question", "name": "資料會上傳嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不會，純前端。"}}, {"@type": "Question", "name": "這個工具是官方落點嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不是。這是依概略門檻預估，實際以甄選會公告與各校系簡章為準。"}}]}</script>
+<style>*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:20px;}
+.container{max-width:900px;margin:0 auto;}
+h1{color:#D4AF37;font-size:30px;margin:16px 0 8px;text-align:center;}
+.sub{color:#8B949E;font-size:15px;text-align:center;margin-bottom:24px;}
+.box{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin-bottom:20px;}
+.box label{display:block;color:#58A6FF;font-size:14px;font-weight:700;margin-bottom:8px;margin-top:12px;}
+.box label:first-child{margin-top:0;}
+.box input,.box select{width:100%;padding:12px 16px;background:#0D1117;border:1px solid #D4AF37;border-radius:8px;color:#E6EDF3;font-size:16px;margin-bottom:4px;}
+.box .row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.box .btn{padding:12px 28px;background:#D4AF37;color:#0D1117;border:none;border-radius:8px;font-size:16px;font-weight:700;cursor:pointer;margin-top:12px;width:100%;}
+.box .btn:hover{background:#E6C65C;}
+.result{margin-top:16px;padding:16px;border-radius:8px;font-size:15px;line-height:2;}
+.result.ok{background:rgba(63,185,80,0.08);border-left:4px solid #3FB950;color:#C9D1D9;}
+.result.err{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;color:#C9D1D9;}
+.result.info{background:rgba(88,166,255,0.08);border-left:4px solid #58A6FF;color:#C9D1D9;}
+.result .big{font-size:28px;font-weight:900;color:#D4AF37;}
+.result table{width:100%;border-collapse:collapse;margin:8px 0;}
+.result th,.result td{border:1px solid #2D303A;padding:6px 10px;font-size:14px;text-align:center;}
+.result th{background:#0D1117;color:#D4AF37;}
+.knowledge{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin:20px 0;}
+.knowledge h2{color:#D4AF37;font-size:20px;margin:0 0 12px;}
+.knowledge h3{color:#58A6FF;font-size:16px;margin:18px 0 8px;}
+.knowledge p{color:#C9D1D9;font-size:15px;line-height:1.9;margin-bottom:10px;}
+.knowledge table{width:100%;border-collapse:collapse;margin:12px 0;}
+.knowledge th,.knowledge td{border:1px solid #2D303A;padding:8px 12px;font-size:14px;color:#C9D1D9;text-align:left;}
+.knowledge th{background:#0D1117;color:#D4AF37;}
+.misconception{background:rgba(248,81,73,0.06);border-left:4px solid #F85149;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+.misconception strong{color:#F85149;}
+.when-to-use{background:rgba(63,185,80,0.06);border-left:4px solid #3FB950;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+.faq h3{color:#58A6FF;font-size:16px;margin:16px 0 6px;}
+.faq p{color:#C9D1D9;font-size:14px;}
+.tip{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:8px;margin:16px 0;font-size:14px;color:#C9D1D9;}
+.footer{text-align:center;margin-top:48px;padding-top:20px;border-top:1px solid #2D303A;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+@media (max-width:700px){.box .row{grid-template-columns:1fr;}}
+@media print{.ahpal-top-nav,.tip{display:none!important;}body{background:#fff;color:#000;}}</style>
+</head>
+<body>
+<div class="container">
+<nav class="ahpal-top-nav" style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;">
+  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏠 首頁</a>
+  <a href="https://www.ahpal.com/categories.html" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📚 全部分類</a>
+  <a href="https://tools.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🛠️ 工具箱</a>
+  <a href="https://pet.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">⚔️ 打怪場</a>
+  <a href="https://farm.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🌾 農場</a>
+</nav>
+<nav class="breadcrumb" aria-label="breadcrumb" style="font-size:13px;color:#8B949E;margin-bottom:12px;"><a href="https://tools.ahpal.com/" style="color:#58A6FF;text-decoration:none;">工具箱</a> › 🎓 學測落點分析</nav>
+<article>
+<h1>🎓 學測落點分析</h1>
+<p class="sub">學測級分落點預估，含頂尖國立、中字輩、一般國立、私立前段，純前端、離線、不上傳。</p>
+<div class="box">
+  <label>學測總級分（0~75）</label>
+  <input type="number" id="gs-score" value="55" min="0" max="75">
+  <label>目標校系（範例）</label>
+  <select id="gs-target">
+    <option value="top">頂尖國立（台大、清大、交大、成大）</option>
+    <option value="mid">中字輩國立（中央、中山、中正、中興）</option>
+    <option value="normal">一般國立（師大、彰師、高師）</option>
+    <option value="private">私立前段（輔大、東吳、淡江）</option>
+    <option value="any">一般私立</option>
+  </select>
+  <button class="btn" onclick="calcGsat()">預估</button>
+  <div class="result info" id="gs-result">輸入級分與目標校系後按「預估」。</div>
+</div>
+<script>
+function calcGsat(){
+  var s = parseInt(document.getElementById("gs-score").value) || 0;
+  var t = document.getElementById("gs-target").value;
+  var el = document.getElementById("gs-result");
+  if (s < 0 || s > 75) { el.className = "result err"; el.textContent = "級分必須在 0~75 之間。"; return; }
+  var thresholds = {
+    top: {safe: 60, risk: 56, hard: 52, name: "頂尖國立"},
+    mid: {safe: 54, risk: 50, hard: 46, name: "中字輩國立"},
+    normal: {safe: 48, risk: 44, hard: 40, name: "一般國立"},
+    private: {safe: 42, risk: 38, hard: 34, name: "私立前段"},
+    any: {safe: 30, risk: 26, hard: 22, name: "一般私立"}
+  };
+  var th = thresholds[t];
+  var verdict = "", cls = "ok";
+  if (s >= th.safe) { verdict = "✅ <strong>安全區</strong>：預估可上，建議仍要準備備審與面試。"; }
+  else if (s >= th.risk) { verdict = "⚠️ <strong>邊緣區</strong>：有機會，但風險較高，建議多填幾個志願。"; cls = "info"; }
+  else if (s >= th.hard) { verdict = "⚠️ <strong>挑戰區</strong>：難度較高，建議把這個校系放「夢幻志願」，另填安全志願。"; cls = "info"; }
+  else { verdict = "❌ <strong>落點偏低</strong>：預估較難，建議調整志願或考慮其他校系。"; cls = "err"; }
+  el.className = "result " + cls;
+  el.innerHTML = "🎓 <strong>學測落點預估</strong><br>你的級分：<span class='big'>" + s + "</span> / 75<br>目標：<strong>" + th.name + "</strong><br><br>安全區：≥ " + th.safe + " 級分<br>邊緣區：" + th.risk + "~" + (th.safe-1) + " 級分<br>挑戰區：" + th.hard + "~" + (th.risk-1) + " 級分<br>落點偏低：< " + th.hard + " 級分<br><br>" + verdict + "<br><span style='font-size:13px;color:#8B949E;'>此為粗略預估，實際落點受「各科權重、超額篩選、備審面試、當年度考生程度」影響，請以甄選會公告為準。</span>";
+}
+</script>
+<div class="knowledge">
+<h2>📖 學測落點背後的知識</h2>
+<p>學測（General Scholastic Ability Test，GSAT）是台灣高中生升大學的主要考試之一，每年 1 月舉行，考國文、英文、數學、社會、自然五科，每科 15 級分，總級分 75 級分。學測成績用於「個人申請」與「繁星推薦」兩種入學管道。</p>
+<p>「落點分析」是依歷年各校系錄取級分，預估今年的錄取門檻。影響落點的因素很多：<strong>各科權重</strong>（有些校系數學加權 ×1.5）、<strong>超額篩選</strong>（同級分比序）、<strong>備審與面試</strong>（占總分 30~50%）、<strong>當年度考生程度</strong>（題目難易影響級分分布）。所以「落點分析」只能粗略參考，不能當唯一依據。</p>
+<h3>⚠️ 常見誤解</h3>
+<div class="misconception"><strong>❌「落點分析一定準」</strong> → 錯。落點受「各科權重、超額篩選、備審面試、當年度考生程度」影響，只能粗略參考。</div>
+<div class="misconception"><strong>❌「級分高就一定上」</strong> → 不一定。有些校系看「單科」，有些看「備審面試」，總級分高不代表一定上。</div>
+<div class="misconception"><strong>❌「個人申請只看學測」</strong> → 錯。個人申請占總分比例：學測 50%、備審 30%、面試 20%（各校不同）。</div>
+<div class="misconception"><strong>❌「繁星推薦比較簡單」</strong> → 不一定。繁星看「在校成績百分比」，社區高中前 1% 比明星高中前 10% 有利，但名額有限。</div>
+<div class="misconception"><strong>❌「填 6 個志願就好」</strong> → 錯。個人申請可填 6 個志願，但建議「夢幻 2 + 務實 2 + 安全 2」的配置。</div>
+<h3>🩺 使用時機與注意事項</h3>
+<div class="when-to-use"><strong>✅ 適合：</strong>高中生自我評估、家長了解落點、老師輔導選填志願。<br><strong>⚠️ 注意：</strong>本工具僅供粗略參考，實際落點以甄選會公告與各校系簡章為準。建議搭配「歷年錄取級分」與「備審面試」綜合評估。</div>
+</div>
+<div class="faq"><h2 style="color:#D4AF37;font-size:20px;margin:24px 0 12px;">常見問題</h2><h3>學測滿級分多少？</h3><p>每科 15 級分，五科合計 75 級分。</p><h3>學測幾月考試？</h3><p>每年 1 月，通常 1 月中下旬。</p><h3>個人申請可以填幾個志願？</h3><p>6 個。建議「夢幻 2 + 務實 2 + 安全 2」。</p><h3>落點分析準嗎？</h3><p>只能粗略參考。受各科權重、超額篩選、備審面試、當年度考生程度影響。</p><h3>個人申請只看學測嗎？</h3><p>不是。學測約占 50%，備審 30%、面試 20%（各校不同）。</p><h3>繁星推薦比較簡單嗎？</h3><p>不一定。繁星看在校成績百分比，社區高中前 1% 比明星高中前 10% 有利，但名額有限。</p><h3>級分高就一定上嗎？</h3><p>不一定。有些校系看單科、有些看備審面試，總級分高不代表一定上。</p><h3>可以離線使用嗎？</h3><p>可以，全部在瀏覽器，不上傳。</p><h3>資料會上傳嗎？</h3><p>不會，純前端。</p><h3>這個工具是官方落點嗎？</h3><p>不是。這是依概略門檻預估，實際以甄選會公告與各校系簡章為準。</p></div>
+</article>
+<div class="footer"><p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p><p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>🎓 統測落點分析 | 雅寶工具箱</title>
+<meta name="description" content="統測總分落點預估，含類群與學校類型，純前端、離線、不上傳。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/tvet-estimator/">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8637791667872348" crossorigin="anonymous"></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "🎓 統測落點分析", "description": "統測總分落點預估，含類群與學校類型，純前端、離線、不上傳。", "url": "https://tools.ahpal.com/tvet-estimator/", "applicationCategory": "EducationalApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "統測滿分多少？", "acceptedAnswer": {"@type": "Answer", "text": "依類群不同，多數類群滿分 700 分（國英數各 100 + 專業科目一 200 + 專業科目二 200）。"}}, {"@type": "Question", "name": "統測幾月考試？", "acceptedAnswer": {"@type": "Answer", "text": "每年 5 月，通常 5 月初。"}}, {"@type": "Question", "name": "統測可以跨類群報考嗎？", "acceptedAnswer": {"@type": "Answer", "text": "可以，但要加考該類群的專業科目，且志願只能填該類群的校系。"}}, {"@type": "Question", "name": "落點分析準嗎？", "acceptedAnswer": {"@type": "Answer", "text": "只能粗略參考。受各科加權、超額篩選、備審面試、當年度考生程度影響。"}}, {"@type": "Question", "name": "甄選入學只看統測嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不是。統測約占 40~50%，備審 30~40%、面試 10~30%（各校不同）。"}}, {"@type": "Question", "name": "登記分發只看分數嗎？", "acceptedAnswer": {"@type": "Answer", "text": "對，但志願序很重要。分數高但志願填錯，還是可能落榜。"}}, {"@type": "Question", "name": "統測分數可以跨類群比較嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不行。每個類群的專業科目不同、加權不同。"}}, {"@type": "Question", "name": "可以離線使用嗎？", "acceptedAnswer": {"@type": "Answer", "text": "可以，全部在瀏覽器，不上傳。"}}, {"@type": "Question", "name": "資料會上傳嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不會，純前端。"}}, {"@type": "Question", "name": "這個工具是官方落點嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不是。這是依概略門檻預估，實際以統測中心公告與各校系簡章為準。"}}]}</script>
+<style>*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:20px;}
+.container{max-width:900px;margin:0 auto;}
+h1{color:#D4AF37;font-size:30px;margin:16px 0 8px;text-align:center;}
+.sub{color:#8B949E;font-size:15px;text-align:center;margin-bottom:24px;}
+.box{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin-bottom:20px;}
+.box label{display:block;color:#58A6FF;font-size:14px;font-weight:700;margin-bottom:8px;margin-top:12px;}
+.box label:first-child{margin-top:0;}
+.box input,.box select{width:100%;padding:12px 16px;background:#0D1117;border:1px solid #D4AF37;border-radius:8px;color:#E6EDF3;font-size:16px;margin-bottom:4px;}
+.box .row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.box .btn{padding:12px 28px;background:#D4AF37;color:#0D1117;border:none;border-radius:8px;font-size:16px;font-weight:700;cursor:pointer;margin-top:12px;width:100%;}
+.box .btn:hover{background:#E6C65C;}
+.result{margin-top:16px;padding:16px;border-radius:8px;font-size:15px;line-height:2;}
+.result.ok{background:rgba(63,185,80,0.08);border-left:4px solid #3FB950;color:#C9D1D9;}
+.result.err{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;color:#C9D1D9;}
+.result.info{background:rgba(88,166,255,0.08);border-left:4px solid #58A6FF;color:#C9D1D9;}
+.result .big{font-size:28px;font-weight:900;color:#D4AF37;}
+.result table{width:100%;border-collapse:collapse;margin:8px 0;}
+.result th,.result td{border:1px solid #2D303A;padding:6px 10px;font-size:14px;text-align:center;}
+.result th{background:#0D1117;color:#D4AF37;}
+.knowledge{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin:20px 0;}
+.knowledge h2{color:#D4AF37;font-size:20px;margin:0 0 12px;}
+.knowledge h3{color:#58A6FF;font-size:16px;margin:18px 0 8px;}
+.knowledge p{color:#C9D1D9;font-size:15px;line-height:1.9;margin-bottom:10px;}
+.knowledge table{width:100%;border-collapse:collapse;margin:12px 0;}
+.knowledge th,.knowledge td{border:1px solid #2D303A;padding:8px 12px;font-size:14px;color:#C9D1D9;text-align:left;}
+.knowledge th{background:#0D1117;color:#D4AF37;}
+.misconception{background:rgba(248,81,73,0.06);border-left:4px solid #F85149;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+.misconception strong{color:#F85149;}
+.when-to-use{background:rgba(63,185,80,0.06);border-left:4px solid #3FB950;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+.faq h3{color:#58A6FF;font-size:16px;margin:16px 0 6px;}
+.faq p{color:#C9D1D9;font-size:14px;}
+.tip{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:8px;margin:16px 0;font-size:14px;color:#C9D1D9;}
+.footer{text-align:center;margin-top:48px;padding-top:20px;border-top:1px solid #2D303A;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+@media (max-width:700px){.box .row{grid-template-columns:1fr;}}
+@media print{.ahpal-top-nav,.tip{display:none!important;}body{background:#fff;color:#000;}}</style>
+</head>
+<body>
+<div class="container">
+<nav class="ahpal-top-nav" style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;">
+  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏠 首頁</a>
+  <a href="https://www.ahpal.com/categories.html" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📚 全部分類</a>
+  <a href="https://tools.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🛠️ 工具箱</a>
+  <a href="https://pet.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">⚔️ 打怪場</a>
+  <a href="https://farm.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🌾 農場</a>
+</nav>
+<nav class="breadcrumb" aria-label="breadcrumb" style="font-size:13px;color:#8B949E;margin-bottom:12px;"><a href="https://tools.ahpal.com/" style="color:#58A6FF;text-decoration:none;">工具箱</a> › 🎓 統測落點分析</nav>
+<article>
+<h1>🎓 統測落點分析</h1>
+<p class="sub">統測總分落點預估，含類群與學校類型，純前端、離線、不上傳。</p>
+<div class="box">
+  <label>統測總分（0~700）</label>
+  <input type="number" id="tv-score" value="500" min="0" max="700">
+  <label>報考類群</label>
+  <select id="tv-group">
+    <option value="eng">機械群</option>
+    <option value="elec">電機與電子群</option>
+    <option value="civil">土木與建築群</option>
+    <option value="chem">化工群</option>
+    <option value="biz">商業與管理群</option>
+    <option value="design">設計群</option>
+    <option value="agri">農業群</option>
+    <option value="home">家政群</option>
+    <option value="lang">外語群</option>
+    <option value="food">餐旅群</option>
+  </select>
+  <label>目標學校類型</label>
+  <select id="tv-target">
+    <option value="top">頂尖國立科大（台科大、北科大）</option>
+    <option value="normal">一般國立科大（雲科大、高科大）</option>
+    <option value="private">私立前段科大（明志、龍華、致理）</option>
+    <option value="any">一般私立科大</option>
+  </select>
+  <button class="btn" onclick="calcTvet()">預估</button>
+  <div class="result info" id="tv-result">輸入總分、類群、目標學校後按「預估」。</div>
+</div>
+<script>
+function calcTvet(){
+  var s = parseInt(document.getElementById("tv-score").value) || 0;
+  var g = document.getElementById("tv-group").value;
+  var t = document.getElementById("tv-target").value;
+  var el = document.getElementById("tv-result");
+  if (s < 0 || s > 700) { el.className = "result err"; el.textContent = "統測總分必須在 0~700 之間。"; return; }
+  var groupName = document.getElementById("tv-group").options[document.getElementById("tv-group").selectedIndex].text;
+  var thresholds = {
+    top: {safe: 600, risk: 560, hard: 520, name: "頂尖國立科大"},
+    normal: {safe: 520, risk: 480, hard: 440, name: "一般國立科大"},
+    private: {safe: 420, risk: 380, hard: 340, name: "私立前段科大"},
+    any: {safe: 300, risk: 260, hard: 220, name: "一般私立科大"}
+  };
+  var th = thresholds[t];
+  var verdict = "", cls = "ok";
+  if (s >= th.safe) { verdict = "✅ <strong>安全區</strong>：預估可上，建議仍要準備備審與面試。"; }
+  else if (s >= th.risk) { verdict = "⚠️ <strong>邊緣區</strong>：有機會，但風險較高，建議多填幾個志願。"; cls = "info"; }
+  else if (s >= th.hard) { verdict = "⚠️ <strong>挑戰區</strong>：難度較高，建議把這個校系放「夢幻志願」，另填安全志願。"; cls = "info"; }
+  else { verdict = "❌ <strong>落點偏低</strong>：預估較難，建議調整志願或考慮其他校系。"; cls = "err"; }
+  el.className = "result " + cls;
+  el.innerHTML = "🎓 <strong>統測落點預估</strong><br>你的總分：<span class='big'>" + s + "</span> / 700<br>類群：<strong>" + groupName + "</strong><br>目標：<strong>" + th.name + "</strong><br><br>安全區：≥ " + th.safe + " 分<br>邊緣區：" + th.risk + "~" + (th.safe-1) + " 分<br>挑戰區：" + th.hard + "~" + (th.risk-1) + " 分<br>落點偏低：< " + th.hard + " 分<br><br>" + verdict + "<br><span style='font-size:13px;color:#8B949E;'>此為粗略預估，實際落點受「各科加權、超額篩選、備審面試、當年度考生程度」影響，請以統測中心公告為準。</span>";
+}
+</script>
+<div class="knowledge">
+<h2>📖 統測落點背後的知識</h2>
+<p>統測（四技二專統一入學測驗）是高職生升科技大學的主要考試，每年 5 月舉行，考國文、英文、數學、專業科目一、專業科目二，依報考類群不同，滿分不同（多數類群滿分 700 分）。統測成績用於「甄選入學」與「登記分發」兩種入學管道。</p>
+<p>「統測落點」比學測更複雜，因為<strong>每個類群的專業科目不同、加權不同</strong>。例如機械群專業科目一（機械製造）加權 ×2、專業科目二（機械力學）加權 ×2，國英數各 ×1，總分 700。所以「同樣 500 分」，在機械群與商業群的落點可能差很多。</p>
+<h3>⚠️ 常見誤解</h3>
+<div class="misconception"><strong>❌「統測分數可以跨類群比較」</strong> → 錯。每個類群的專業科目不同、加權不同，同樣 500 分在不同類群落點不同。</div>
+<div class="misconception"><strong>❌「落點分析一定準」</strong> → 錯。落點受「各科加權、超額篩選、備審面試、當年度考生程度」影響，只能粗略參考。</div>
+<div class="misconception"><strong>❌「統測只看總分」</strong> → 錯。有些校系看「專業科目加權」，有些看「英文門檻」，不是只看總分。</div>
+<div class="misconception"><strong>❌「甄選入學比較簡單」</strong> → 不一定。甄選入學占總分比例：統測 40~50%、備審 30~40%、面試 10~30%（各校不同）。</div>
+<div class="misconception"><strong>❌「登記分發只看分數」</strong> → 對，但志願序很重要。分數高但志願填錯，還是可能落榜。</div>
+<h3>🩺 使用時機與注意事項</h3>
+<div class="when-to-use"><strong>✅ 適合：</strong>高職生自我評估、家長了解落點、老師輔導選填志願。<br><strong>⚠️ 注意：</strong>本工具僅供粗略參考，實際落點以統測中心公告與各校系簡章為準。建議搭配「歷年錄取分數」與「備審面試」綜合評估。</div>
+</div>
+<div class="faq"><h2 style="color:#D4AF37;font-size:20px;margin:24px 0 12px;">常見問題</h2><h3>統測滿分多少？</h3><p>依類群不同，多數類群滿分 700 分（國英數各 100 + 專業科目一 200 + 專業科目二 200）。</p><h3>統測幾月考試？</h3><p>每年 5 月，通常 5 月初。</p><h3>統測可以跨類群報考嗎？</h3><p>可以，但要加考該類群的專業科目，且志願只能填該類群的校系。</p><h3>落點分析準嗎？</h3><p>只能粗略參考。受各科加權、超額篩選、備審面試、當年度考生程度影響。</p><h3>甄選入學只看統測嗎？</h3><p>不是。統測約占 40~50%，備審 30~40%、面試 10~30%（各校不同）。</p><h3>登記分發只看分數嗎？</h3><p>對，但志願序很重要。分數高但志願填錯，還是可能落榜。</p><h3>統測分數可以跨類群比較嗎？</h3><p>不行。每個類群的專業科目不同、加權不同。</p><h3>可以離線使用嗎？</h3><p>可以，全部在瀏覽器，不上傳。</p><h3>資料會上傳嗎？</h3><p>不會，純前端。</p><h3>這個工具是官方落點嗎？</h3><p>不是。這是依概略門檻預估，實際以統測中心公告與各校系簡章為準。</p></div>
+</article>
+<div class="footer"><p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p><p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p></div>
+</div>
+</body>
+</html>
