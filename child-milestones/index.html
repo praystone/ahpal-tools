@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>兒童發展里程碑 · 免費線上工具 | 雅寶工具箱</title>
+<meta name="description" content="輸入月齡，查看該年齡的發展里程碑。給家長、幼兒園老師使用。純前端、不上傳。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/child-milestones/">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8637791667872348" crossorigin="anonymous"></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "兒童發展里程碑", "description": "輸入月齡，查看該年齡的發展里程碑。給家長、幼兒園老師使用。純前端、不上傳。", "url": "https://tools.ahpal.com/child-milestones/", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "這是絕對標準嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不是。每個孩子發展速度不同，這是參考。"}}, {"@type": "Question", "name": "落後怎麼辦？", "acceptedAnswer": {"@type": "Answer", "text": "先觀察，如有疑慮請諮詢小兒科醫師，越早發現越早幫助。"}}, {"@type": "Question", "name": "早產兒怎麼算？", "acceptedAnswer": {"@type": "Answer", "text": "早產兒用「矯正年齡」到 2 歲，請諮詢醫師。"}}, {"@type": "Question", "name": "資料會上傳嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不會，全部在瀏覽器。"}}, {"@type": "Question", "name": "幾個月會走路？", "acceptedAnswer": {"@type": "Answer", "text": "一般 10-15 個月，有些到 18 個月才走，都算正常。"}}, {"@type": "Question", "name": "幾個月會說話？", "acceptedAnswer": {"@type": "Answer", "text": "10-12 個月叫爸爸媽媽，2 歲說簡單句子。"}}, {"@type": "Question", "name": "什麼是發展遲緩？", "acceptedAnswer": {"@type": "Answer", "text": "發展明顯落後同年齡兒童，需專業評估。"}}, {"@type": "Question", "name": "可以列印嗎？", "acceptedAnswer": {"@type": "Answer", "text": "可以，按瀏覽器列印。"}}, {"@type": "Question", "name": "要看醫生嗎？", "acceptedAnswer": {"@type": "Answer", "text": "如有疑慮請諮詢小兒科醫師或兒童發展聯合評估中心。"}}, {"@type": "Question", "name": "可以用來診斷嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不行。這是參考，診斷要由專業醫師。"}}]}</script>
+<style>*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:20px;}
+.container{max-width:900px;margin:0 auto;}
+h1{color:#D4AF37;font-size:30px;margin:16px 0 8px;text-align:center;}
+.sub{color:#8B949E;font-size:15px;text-align:center;margin-bottom:24px;}
+.card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin-bottom:20px;}
+label{display:block;color:#C9D1D9;font-size:14px;margin:10px 0 4px;}
+input,textarea,select{width:100%;padding:12px;background:#0D1117;border:1px solid #2D303A;border-radius:8px;color:#E6EDF3;font-size:16px;font-family:inherit;}
+button{padding:12px 28px;background:#D4AF37;color:#0D1117;border:none;border-radius:10px;font-size:16px;font-weight:700;cursor:pointer;margin:8px 6px 0 0;}
+button:hover{opacity:0.85;}
+.result{background:#0D1117;border:1px solid #D4AF37;border-radius:8px;padding:16px;margin-top:16px;font-size:15px;line-height:1.9;white-space:pre-wrap;word-break:break-word;}
+.faq{margin-top:12px;}
+.faq h3{color:#58A6FF;font-size:16px;margin:16px 0 6px;}
+.faq p{color:#C9D1D9;font-size:14px;}
+.tip{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:8px;margin:16px 0;font-size:14px;color:#C9D1D9;}
+.knowledge{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin:20px 0;}
+.knowledge h2{color:#D4AF37;font-size:20px;margin:0 0 12px;}
+.knowledge h3{color:#58A6FF;font-size:16px;margin:18px 0 8px;}
+.knowledge p{color:#C9D1D9;font-size:15px;line-height:1.9;margin-bottom:10px;}
+.misconception{background:rgba(248,81,73,0.06);border-left:4px solid #F85149;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+.misconception strong{color:#F85149;}
+.when-to-use{background:rgba(63,185,80,0.06);border-left:4px solid #3FB950;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+.footer{text-align:center;margin-top:48px;padding-top:20px;border-top:1px solid #2D303A;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+@media print{.ahpal-top-nav,button,.tip{display:none!important;}body{background:#fff;color:#000;}.card{border:1px solid #999;}}</style>
+</head>
+<body>
+<div class="container">
+<nav class="ahpal-top-nav" style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;">
+  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏠 首頁</a>
+  <a href="https://www.ahpal.com/categories.html" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📚 全部分類</a>
+  <a href="https://www.ahpal.com/strategy/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📌 策略文章</a>
+  <a href="https://pet.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">⚔️ 打怪場</a>
+  <a href="https://farm.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🌾 農場</a>
+  <a href="https://tools.ahpal.com/" style="color:#0D1117;background:#D4AF37;text-decoration:none;padding:4px 10px;font-weight:700;">🛠️ 工具箱</a>
+</nav>
+<nav class="breadcrumb" aria-label="breadcrumb" style="font-size:13px;color:#8B949E;margin-bottom:12px;"><a href="https://tools.ahpal.com/" style="color:#58A6FF;text-decoration:none;">工具箱</a> › 兒童發展里程碑</nav>
+<article>
+<h1>兒童發展里程碑</h1>
+<p class="sub">輸入月齡，查看該年齡的發展里程碑。給家長、幼兒園老師使用。純前端、不上傳。</p>
+<div class="card">
+<label>選擇年齡（月）</label>
+<input type="number" id="age" value="12" min="0" max="72">
+<button onclick="check()">查看里程碑</button>
+<div class="result" id="out"></div>
+</div>
+<div class="tip">🔒 這個工具<strong>純前端、完全離線、不上傳</strong>。你的資料只留在你的瀏覽器，不會傳到任何伺服器。</div>
+<div class="knowledge">
+<h2>📖 兒童發展里程碑背後的知識</h2>
+<p>兒童發展分四大領域：粗動作（跑跳）、細動作（拿筆、扣釦子）、語言（說話、理解）、社會情緒（互動、表達）。每個領域有不同的里程碑，例如 12 個月會扶走、會叫爸爸媽媽；24 個月會跑、會說簡單句子。這些里程碑是「參考」，不是「絕對標準」——每個孩子有自己的節奏。</p>
+<p>台灣的兒科醫師會用「兒童健康手冊」的發展篩檢表，定期檢查。如果孩子在多個領域明顯落後，或出現「發展遲緩」的警訊（如 18 個月還不會走、2 歲還不會說單字），就要及早評估。早期療育（0-6 歲）效果最好，越早發現越早幫助。</p>
+<h3>⚠️ 常見誤解</h3>
+<div class="misconception"><strong>❌「發展慢就是笨」</strong> → 錯。發展慢可能是環境刺激不足、聽力問題、或其他原因，及早介入多數能改善。</div>
+<div class="misconception"><strong>❌「大隻雞慢啼，不用擔心」</strong> → 錯。如果明顯落後，還是要評估，不要只用「慢啼」安慰自己。</div>
+<div class="misconception"><strong>❌「早點學寫字比較好」</strong> → 錯。太早寫字可能影響手部發育，要依發展階段。</div>
+<div class="misconception"><strong>❌「這個工具可以診斷」</strong> → 不行。這是參考，診斷要由專業醫師。</div>
+<div class="misconception"><strong>❌「男孩本來就比較慢」</strong> → 男女平均有差，但差異不大。明顯落後還是要評估。</div>
+<h3>🩺 使用時機與注意事項</h3>
+<div class="when-to-use"><strong>✅ 適合：</strong>家長、幼兒園老師、想了解孩子發展的人。<br><strong>⚠️ 注意：</strong>這是參考，不是診斷。如有疑慮請諮詢小兒科醫師，或各縣市「兒童發展聯合評估中心」。早產兒要用矯正年齡。</div>
+<h3>❓ 更多常見問題</h3>
+<h3>什麼是「矯正年齡」？</h3><p>早產兒的實際年齡減去早產週數，用到 2 歲。例如 32 週出生（早 8 週），6 個月大時矯正年齡是 4 個月。</p>
+<h3>什麼是「發展遲緩」？</h3><p>在動作、語言、認知、社會情緒等領域明顯落後同年齡兒童。</p>
+<h3>什麼是「早期療育」？</h3><p>0-6 歲發展遲緩兒童的治療與教育，越早效果越好。</p>
+<h3>要看哪一科？</h3><p>小兒科、兒童復健科、兒童心智科，或各縣市兒童發展聯合評估中心。</p>
+<h3>可以用手機app評估嗎？</h3><p>可以參考，但不能取代專業評估。</p>
+</div>
+<div class="faq"><h2 style="color:#D4AF37;font-size:20px;margin:24px 0 12px;">常見問題</h2><h3>這是絕對標準嗎？</h3><p>不是。每個孩子發展速度不同，這是參考。</p><h3>落後怎麼辦？</h3><p>先觀察，如有疑慮請諮詢小兒科醫師，越早發現越早幫助。</p><h3>早產兒怎麼算？</h3><p>早產兒用「矯正年齡」到 2 歲，請諮詢醫師。</p><h3>資料會上傳嗎？</h3><p>不會，全部在瀏覽器。</p><h3>幾個月會走路？</h3><p>一般 10-15 個月，有些到 18 個月才走，都算正常。</p><h3>幾個月會說話？</h3><p>10-12 個月叫爸爸媽媽，2 歲說簡單句子。</p><h3>什麼是發展遲緩？</h3><p>發展明顯落後同年齡兒童，需專業評估。</p><h3>可以列印嗎？</h3><p>可以，按瀏覽器列印。</p><h3>要看醫生嗎？</h3><p>如有疑慮請諮詢小兒科醫師或兒童發展聯合評估中心。</p><h3>可以用來診斷嗎？</h3><p>不行。這是參考，診斷要由專業醫師。</p></div>
+</article>
+<div class="footer"><p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p><p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p></div>
+</div>
+<script>
+var MILESTONES={
+  "0-3":"俯臥時能抬頭、眼睛會追視、對聲音有反應、會微笑。",
+  "4-6":"會翻身、能用手抓東西、會發出咿呀聲、認得主要照顧者。",
+  "7-9":"會坐、會爬、會扶站、會用手指拿小東西、會模仿聲音。",
+  "10-12":"會扶走或獨走幾步、會叫爸爸媽媽、會用食指指東西、會揮手再見。",
+  "13-18":"會獨走、會跑、會說 5-10 個單字、會堆疊積木、會自己拿杯子。",
+  "19-24":"會跑跳、會說簡單句子、會自己脫鞋、會玩扮家家酒。",
+  "25-36":"會雙腳跳、會說完整句子、會自己穿脫簡單衣物、會與同伴玩。",
+  "37-48":"會單腳站、會數 1-10、會畫簡單圖形、會表達情緒。",
+  "49-60":"會寫自己名字、會說故事、會遵守規則、會分享。",
+  "61-72":"會跳繩、會讀簡單字、會算簡單加減、會與朋友合作。"
+};
+function check(){
+  var age=parseInt(document.getElementById("age").value)||0;
+  if(age<0||age>72){document.getElementById("out").textContent="請輸入 0~72 個月";return;}
+  var key="";
+  if(age<=3) key="0-3";
+  else if(age<=6) key="4-6";
+  else if(age<=9) key="7-9";
+  else if(age<=12) key="10-12";
+  else if(age<=18) key="13-18";
+  else if(age<=24) key="19-24";
+  else if(age<=36) key="25-36";
+  else if(age<=48) key="37-48";
+  else if(age<=60) key="49-60";
+  else key="61-72";
+  var o=document.getElementById("out");
+  o.innerHTML="<p style='font-size:18px;color:#D4AF37;'>"+key+" 個月發展里程碑</p><p style='font-size:16px;line-height:2;'>"+MILESTONES[key]+"</p><p style='font-size:13px;color:#8B949E;margin-top:12px;'>⚠️ 每個孩子發展速度不同，這是參考，不是絕對標準。如有疑慮請諮詢小兒科醫師。</p>";
+}
+</script>
+</body>
+</html>

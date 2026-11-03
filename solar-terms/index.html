@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>台灣節氣與養生 · 免費線上工具 | 雅寶工具箱</title>
+<meta name="description" content="查詢 24 節氣的日期與養生建議。給對傳統養生有興趣的人、家有長輩使用。純前端、不上傳。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/solar-terms/">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8637791667872348" crossorigin="anonymous"></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "台灣節氣與養生", "description": "查詢 24 節氣的日期與養生建議。給對傳統養生有興趣的人、家有長輩使用。純前端、不上傳。", "url": "https://tools.ahpal.com/solar-terms/", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "二十四節氣怎麼來的？", "acceptedAnswer": {"@type": "Answer", "text": "中國古代農民觀察太陽運行、氣候變化，訂出 24 個節氣，用來指導農事。"}}, {"@type": "Question", "name": "節氣和養生有什麼關係？", "acceptedAnswer": {"@type": "Answer", "text": "中醫認為人體要順應四季，不同節氣有不同的養生重點（春養肝、夏養心、秋養肺、冬養腎）。"}}, {"@type": "Question", "name": "節氣日期固定嗎？", "acceptedAnswer": {"@type": "Answer", "text": "大致固定（例如冬至約 12/21-22），但每年差 1 天。"}}, {"@type": "Question", "name": "資料會上傳嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不會，全部在瀏覽器。"}}, {"@type": "Question", "name": "可以取代醫師嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不行。這是傳統養生參考，不能取代醫師。"}}, {"@type": "Question", "name": "台灣也適用嗎？", "acceptedAnswer": {"@type": "Answer", "text": "適用，但台灣氣候較熱，實際養生要依個人體質調整。"}}, {"@type": "Question", "name": "節氣和星座一樣嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不一樣。節氣依太陽運行（陽曆），星座依出生日期。"}}, {"@type": "Question", "name": "可以查節氣日期嗎？", "acceptedAnswer": {"@type": "Answer", "text": "目前是固定日期，實際每年略有差異。"}}, {"@type": "Question", "name": "可以列印嗎？", "acceptedAnswer": {"@type": "Answer", "text": "可以，按瀏覽器列印。"}}, {"@type": "Question", "name": "養生一定要照節氣嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不一定。順應自然很好，但還是要看個人體質。"}}]}</script>
+<style>*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:20px;}
+.container{max-width:900px;margin:0 auto;}
+h1{color:#D4AF37;font-size:30px;margin:16px 0 8px;text-align:center;}
+.sub{color:#8B949E;font-size:15px;text-align:center;margin-bottom:24px;}
+.card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin-bottom:20px;}
+label{display:block;color:#C9D1D9;font-size:14px;margin:10px 0 4px;}
+input,textarea,select{width:100%;padding:12px;background:#0D1117;border:1px solid #2D303A;border-radius:8px;color:#E6EDF3;font-size:16px;font-family:inherit;}
+button{padding:12px 28px;background:#D4AF37;color:#0D1117;border:none;border-radius:10px;font-size:16px;font-weight:700;cursor:pointer;margin:8px 6px 0 0;}
+button:hover{opacity:0.85;}
+.result{background:#0D1117;border:1px solid #D4AF37;border-radius:8px;padding:16px;margin-top:16px;font-size:15px;line-height:1.9;white-space:pre-wrap;word-break:break-word;}
+.faq{margin-top:12px;}
+.faq h3{color:#58A6FF;font-size:16px;margin:16px 0 6px;}
+.faq p{color:#C9D1D9;font-size:14px;}
+.tip{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:8px;margin:16px 0;font-size:14px;color:#C9D1D9;}
+.knowledge{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin:20px 0;}
+.knowledge h2{color:#D4AF37;font-size:20px;margin:0 0 12px;}
+.knowledge h3{color:#58A6FF;font-size:16px;margin:18px 0 8px;}
+.knowledge p{color:#C9D1D9;font-size:15px;line-height:1.9;margin-bottom:10px;}
+.misconception{background:rgba(248,81,73,0.06);border-left:4px solid #F85149;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+.misconception strong{color:#F85149;}
+.when-to-use{background:rgba(63,185,80,0.06);border-left:4px solid #3FB950;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+.footer{text-align:center;margin-top:48px;padding-top:20px;border-top:1px solid #2D303A;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+@media print{.ahpal-top-nav,button,.tip{display:none!important;}body{background:#fff;color:#000;}.card{border:1px solid #999;}}</style>
+</head>
+<body>
+<div class="container">
+<nav class="ahpal-top-nav" style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;">
+  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏠 首頁</a>
+  <a href="https://www.ahpal.com/categories.html" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📚 全部分類</a>
+  <a href="https://www.ahpal.com/strategy/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📌 策略文章</a>
+  <a href="https://pet.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">⚔️ 打怪場</a>
+  <a href="https://farm.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🌾 農場</a>
+  <a href="https://tools.ahpal.com/" style="color:#0D1117;background:#D4AF37;text-decoration:none;padding:4px 10px;font-weight:700;">🛠️ 工具箱</a>
+</nav>
+<nav class="breadcrumb" aria-label="breadcrumb" style="font-size:13px;color:#8B949E;margin-bottom:12px;"><a href="https://tools.ahpal.com/" style="color:#58A6FF;text-decoration:none;">工具箱</a> › 台灣節氣與養生</nav>
+<article>
+<h1>台灣節氣與養生</h1>
+<p class="sub">查詢 24 節氣的日期與養生建議。給對傳統養生有興趣的人、家有長輩使用。純前端、不上傳。</p>
+<div class="card">
+<label>選擇節氣</label>
+<select id="q">
+<option value="立春">立春</option><option value="雨水">雨水</option><option value="驚蟄">驚蟄</option>
+<option value="春分">春分</option><option value="清明">清明</option><option value="穀雨">穀雨</option>
+<option value="立夏">立夏</option><option value="小滿">小滿</option><option value="芒種">芒種</option>
+<option value="夏至">夏至</option><option value="小暑">小暑</option><option value="大暑">大暑</option>
+<option value="立秋">立秋</option><option value="處暑">處暑</option><option value="白露">白露</option>
+<option value="秋分">秋分</option><option value="寒露">寒露</option><option value="霜降">霜降</option>
+<option value="立冬">立冬</option><option value="小雪">小雪</option><option value="大雪">大雪</option>
+<option value="冬至">冬至</option><option value="小寒">小寒</option><option value="大寒">大寒</option>
+</select>
+<button onclick="show()">查看養生建議</button>
+<div class="result" id="out"></div>
+</div>
+<div class="tip">🔒 這個工具<strong>純前端、完全離線、不上傳</strong>。你的資料只留在你的瀏覽器，不會傳到任何伺服器。</div>
+<div class="knowledge">
+<h2>📖 二十四節氣背後的知識</h2>
+<p>二十四節氣是中國古代農民觀察太陽運行、氣候變化，訂出的 24 個時點，用來指導農事。它依「太陽黃經」劃分，每 15 度一個節氣，所以節氣日期在陽曆上大致固定（例如冬至約 12/21-22）。2016 年，聯合國教科文組織將「二十四節氣」列入人類非物質文化遺產。</p>
+<p>中醫認為人體要順應四季：春養肝、夏養心、秋養肺、冬養腎。每個節氣有不同的養生重點，例如立春要早起伸展、冬至要吃湯圓進補。但這些是「傳統養生參考」，不是「醫療建議」。台灣氣候較熱，實際養生要依個人體質調整。</p>
+<h3>⚠️ 常見誤解</h3>
+<div class="misconception"><strong>❌「節氣是農曆」</strong> → 錯。節氣依太陽運行（陽曆），不是農曆。所以節氣日期在陽曆上固定。</div>
+<div class="misconception"><strong>❌「節氣養生一定有效」</strong> → 傳統經驗，不是科學實證。有病要看醫生，不要只靠養生。</div>
+<div class="misconception"><strong>❌「冬至一定要進補」</strong> → 不一定。體質燥熱的人過度進補會上火。</div>
+<div class="misconception"><strong>❌「節氣和星座一樣」</strong> → 不一樣。節氣依太陽，星座依出生日期。</div>
+<div class="misconception"><strong>❌「這個工具可以取代醫師」</strong> → 不行。這是傳統養生參考，不能取代醫師。</div>
+<h3>🩺 使用時機與注意事項</h3>
+<div class="when-to-use"><strong>✅ 適合：</strong>對傳統養生有興趣的人、家有長輩、想順應四季調整作息的人。<br><strong>⚠️ 注意：</strong>這是傳統養生參考，不能取代醫師。如有不適請就醫。體質燥熱、孕婦、慢性病患者，進補前請諮詢中醫師。</div>
+<h3>❓ 更多常見問題</h3>
+<h3>二十四節氣有幾個？</h3><p>24 個，每個約 15 天。</p>
+<h3>節氣和氣候一樣嗎？</h3><p>不完全一樣。節氣是「時點」，氣候是「實際天氣」。台灣實際氣候比節氣暖。</p>
+<h3>為什麼冬至要吃湯圓？</h3><p>傳統習俗，象徵團圓、添歲。不是養生必要。</p>
+<h3>節氣可以算命嗎？</h3><p>節氣是農事、養生用，不是算命。算命用八字、紫微斗數。</p>
+<h3>台灣的節氣和中國一樣嗎？</h3><p>日期一樣（依太陽），但氣候不同。台灣較熱，養生要調整。</p>
+</div>
+<div class="faq"><h2 style="color:#D4AF37;font-size:20px;margin:24px 0 12px;">常見問題</h2><h3>二十四節氣怎麼來的？</h3><p>中國古代農民觀察太陽運行、氣候變化，訂出 24 個節氣，用來指導農事。</p><h3>節氣和養生有什麼關係？</h3><p>中醫認為人體要順應四季，不同節氣有不同的養生重點（春養肝、夏養心、秋養肺、冬養腎）。</p><h3>節氣日期固定嗎？</h3><p>大致固定（例如冬至約 12/21-22），但每年差 1 天。</p><h3>資料會上傳嗎？</h3><p>不會，全部在瀏覽器。</p><h3>可以取代醫師嗎？</h3><p>不行。這是傳統養生參考，不能取代醫師。</p><h3>台灣也適用嗎？</h3><p>適用，但台灣氣候較熱，實際養生要依個人體質調整。</p><h3>節氣和星座一樣嗎？</h3><p>不一樣。節氣依太陽運行（陽曆），星座依出生日期。</p><h3>可以查節氣日期嗎？</h3><p>目前是固定日期，實際每年略有差異。</p><h3>可以列印嗎？</h3><p>可以，按瀏覽器列印。</p><h3>養生一定要照節氣嗎？</h3><p>不一定。順應自然很好，但還是要看個人體質。</p></div>
+</article>
+<div class="footer"><p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p><p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p></div>
+</div>
+<script>
+var JIEQI={
+  "立春":{month:"2月4日左右",season:"春",tip:"萬物復甦，適合早起、伸展。飲食宜甘少酸，養肝。"},
+  "雨水":{month:"2月19日左右",season:"春",tip:"雨水增多，注意保暖防濕。飲食宜健脾祛濕（山藥、薏仁）。"},
+  "驚蟄":{month:"3月5日左右",season:"春",tip:"春雷響，萬物醒。適合戶外活動，飲食清淡。"},
+  "春分":{month:"3月20日左右",season:"春",tip:"晝夜等長，陰陽平衡。飲食宜均衡，作息規律。"},
+  "清明":{month:"4月4日左右",season:"春",tip:"掃墓踏青，情緒宜舒緩。飲食宜清淡，多吃綠色蔬菜。"},
+  "穀雨":{month:"4月20日左右",season:"春",tip:"雨生百穀，濕氣重。飲食宜祛濕（四神湯、紅豆）。"},
+  "立夏":{month:"5月5日左右",season:"夏",tip:"夏天開始，養心。飲食宜清淡，多吃苦味（苦瓜）。"},
+  "小滿":{month:"5月21日左右",season:"夏",tip:"濕熱漸重，注意皮膚。飲食宜清熱利濕（綠豆、冬瓜）。"},
+  "芒種":{month:"6月5日左右",season:"夏",tip:"梅雨季，濕熱。飲食宜清淡，少油膩。"},
+  "夏至":{month:"6月21日左右",season:"夏",tip:"白天最長，陽氣最盛。飲食宜清熱，多喝水，避免正午外出。"},
+  "小暑":{month:"7月7日左右",season:"夏",tip:"天氣漸熱，心火旺。飲食宜清熱（蓮子、百合），午休養心。"},
+  "大暑":{month:"7月22日左右",season:"夏",tip:"一年最熱，注意中暑。飲食宜清補（冬瓜、絲瓜），多喝水。"},
+  "立秋":{month:"8月7日左右",season:"秋",tip:"秋天開始，養肺。飲食宜潤燥（梨、百合、銀耳）。"},
+  "處暑":{month:"8月23日左右",season:"秋",tip:"暑氣漸退，早晚溫差大。飲食宜潤肺，注意保暖。"},
+  "白露":{month:"9月7日左右",season:"秋",tip:"早晚轉涼，露水凝結。飲食宜潤燥，注意加衣。"},
+  "秋分":{month:"9月23日左右",season:"秋",tip:"晝夜等長，陰陽平衡。飲食宜平和，作息規律。"},
+  "寒露":{month:"10月8日左右",season:"秋",tip:"天氣轉寒，注意腳部保暖。飲食宜溫潤（芝麻、核桃）。"},
+  "霜降":{month:"10月23日左右",season:"秋",tip:"秋天最後一個節氣，準備入冬。飲食宜平補（山藥、蓮藕）。"},
+  "立冬":{month:"11月7日左右",season:"冬",tip:"冬天開始，養腎。飲食宜溫補（羊肉、桂圓），早睡晚起。"},
+  "小雪":{month:"11月22日左右",season:"冬",tip:"天氣漸冷，注意保暖。飲食宜溫熱，避免生冷。"},
+  "大雪":{month:"12月7日左右",season:"冬",tip:"天氣更冷，注意心血管。飲食宜溫補，適度運動。"},
+  "冬至":{month:"12月21日左右",season:"冬",tip:"白天最短，陰氣最盛。吃湯圓、進補，早睡晚起。"},
+  "小寒":{month:"1月5日左右",season:"冬",tip:"天氣寒冷，注意保暖。飲食宜溫補，避免過度進補。"},
+  "大寒":{month:"1月20日左右",season:"冬",tip:"一年最冷，準備迎接春天。飲食宜溫補，注意心血管。"}
+};
+function show(){
+  var q=document.getElementById("q").value;
+  var d=JIEQI[q];
+  var o=document.getElementById("out");
+  if(!d){o.textContent="請選擇節氣";return;}
+  o.innerHTML="<p style='font-size:22px;color:#D4AF37;text-align:center;'>"+q+"</p><p style='text-align:center;color:#58A6FF;'>"+d.month+" · "+d.season+"季</p><p style='font-size:16px;line-height:2;text-align:center;'>"+d.tip+"</p><p style='font-size:13px;color:#8B949E;text-align:center;margin-top:12px;'>⚠️ 這是傳統養生參考，不能取代醫師。如有不適請就醫。</p>";
+}
+</script>
+</body>
+</html>

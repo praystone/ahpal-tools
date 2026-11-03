@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>用藥交互作用查詢 · 免費線上工具 | 雅寶工具箱</title>
+<meta name="description" content="查詢常見藥品交互作用，最多 5 個。給多重用藥的長輩、慢性病患者使用。純前端、不上傳。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/drug-interaction/">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8637791667872348" crossorigin="anonymous"></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "用藥交互作用查詢", "description": "查詢常見藥品交互作用，最多 5 個。給多重用藥的長輩、慢性病患者使用。純前端、不上傳。", "url": "https://tools.ahpal.com/drug-interaction/", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "這會取代藥師嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不會。這是參考資訊，不能取代藥師或醫師。"}}, {"@type": "Question", "name": "收錄多少組交互作用？", "acceptedAnswer": {"@type": "Answer", "text": "目前 10 組常見的，未來會擴充。"}}, {"@type": "Question", "name": "什麼是交互作用？", "acceptedAnswer": {"@type": "Answer", "text": "兩種以上的藥併用，互相影響藥效或副作用。"}}, {"@type": "Question", "name": "資料會上傳嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不會，全部在瀏覽器。"}}, {"@type": "Question", "name": "可以查中藥嗎？", "acceptedAnswer": {"@type": "Answer", "text": "目前只收錄西藥，中藥請諮詢中醫師。"}}, {"@type": "Question", "name": "可以查保健食品嗎？", "acceptedAnswer": {"@type": "Answer", "text": "目前只收錄魚油、維生素 E 等常見的。"}}, {"@type": "Question", "name": "發現交互作用怎麼辦？", "acceptedAnswer": {"@type": "Answer", "text": "不要自行停藥，請諮詢藥師或醫師。"}}, {"@type": "Question", "name": "可以查食物交互作用嗎？", "acceptedAnswer": {"@type": "Answer", "text": "目前沒有，葡萄柚與某些藥有交互作用，請諮詢藥師。"}}, {"@type": "Question", "name": "可以列印嗎？", "acceptedAnswer": {"@type": "Answer", "text": "可以，按瀏覽器列印。"}}, {"@type": "Question", "name": "孕婦可以用嗎？", "acceptedAnswer": {"@type": "Answer", "text": "請諮詢醫師。有些藥孕婦禁用。"}}]}</script>
+<style>*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:20px;}
+.container{max-width:900px;margin:0 auto;}
+h1{color:#D4AF37;font-size:30px;margin:16px 0 8px;text-align:center;}
+.sub{color:#8B949E;font-size:15px;text-align:center;margin-bottom:24px;}
+.card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin-bottom:20px;}
+label{display:block;color:#C9D1D9;font-size:14px;margin:10px 0 4px;}
+input,textarea,select{width:100%;padding:12px;background:#0D1117;border:1px solid #2D303A;border-radius:8px;color:#E6EDF3;font-size:16px;font-family:inherit;}
+button{padding:12px 28px;background:#D4AF37;color:#0D1117;border:none;border-radius:10px;font-size:16px;font-weight:700;cursor:pointer;margin:8px 6px 0 0;}
+button:hover{opacity:0.85;}
+.result{background:#0D1117;border:1px solid #D4AF37;border-radius:8px;padding:16px;margin-top:16px;font-size:15px;line-height:1.9;white-space:pre-wrap;word-break:break-word;}
+.faq{margin-top:12px;}
+.faq h3{color:#58A6FF;font-size:16px;margin:16px 0 6px;}
+.faq p{color:#C9D1D9;font-size:14px;}
+.tip{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:8px;margin:16px 0;font-size:14px;color:#C9D1D9;}
+.knowledge{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin:20px 0;}
+.knowledge h2{color:#D4AF37;font-size:20px;margin:0 0 12px;}
+.knowledge h3{color:#58A6FF;font-size:16px;margin:18px 0 8px;}
+.knowledge p{color:#C9D1D9;font-size:15px;line-height:1.9;margin-bottom:10px;}
+.misconception{background:rgba(248,81,73,0.06);border-left:4px solid #F85149;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+.misconception strong{color:#F85149;}
+.when-to-use{background:rgba(63,185,80,0.06);border-left:4px solid #3FB950;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+.footer{text-align:center;margin-top:48px;padding-top:20px;border-top:1px solid #2D303A;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+@media print{.ahpal-top-nav,button,.tip{display:none!important;}body{background:#fff;color:#000;}.card{border:1px solid #999;}}</style>
+</head>
+<body>
+<div class="container">
+<nav class="ahpal-top-nav" style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;">
+  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏠 首頁</a>
+  <a href="https://www.ahpal.com/categories.html" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📚 全部分類</a>
+  <a href="https://www.ahpal.com/strategy/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📌 策略文章</a>
+  <a href="https://pet.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">⚔️ 打怪場</a>
+  <a href="https://farm.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🌾 農場</a>
+  <a href="https://tools.ahpal.com/" style="color:#0D1117;background:#D4AF37;text-decoration:none;padding:4px 10px;font-weight:700;">🛠️ 工具箱</a>
+</nav>
+<nav class="breadcrumb" aria-label="breadcrumb" style="font-size:13px;color:#8B949E;margin-bottom:12px;"><a href="https://tools.ahpal.com/" style="color:#58A6FF;text-decoration:none;">工具箱</a> › 用藥交互作用查詢</nav>
+<article>
+<h1>用藥交互作用查詢</h1>
+<p class="sub">查詢常見藥品交互作用，最多 5 個。給多重用藥的長輩、慢性病患者使用。純前端、不上傳。</p>
+<div class="card">
+<label>輸入藥品名稱（一行一筆，最多 5 個）</label>
+<textarea id="drugs" rows="5" placeholder="Aspirin
+Ibuprofen
+Warfarin">Aspirin
+Ibuprofen
+Warfarin</textarea>
+<button onclick="check()">檢查交互作用</button>
+<div class="result" id="out"></div>
+</div>
+<div class="tip">🔒 這個工具<strong>純前端、完全離線、不上傳</strong>。你的資料只留在你的瀏覽器，不會傳到任何伺服器。</div>
+<div class="knowledge">
+<h2>📖 用藥交互作用背後的知識</h2>
+<p>「交互作用」是指兩種以上的藥（或藥與食物、保健食品）併用時，互相影響藥效或副作用。交互作用分兩種：一種是「藥效加乘」（例如兩種抗凝血藥併用，出血風險大增），一種是「藥效抵銷」（例如某些藥影響另一種藥的吸收）。嚴重的交互作用可能導致住院甚至死亡，所以「多重用藥」的長輩特別需要留意。</p>
+<p>台灣的長輩常有多重慢性病，一天吃 5 種以上的藥很常見。這時如果又自己買成藥、保健食品，交互作用風險就增加。最常見的錯誤是「止痛藥混著吃」——阿斯匹靈和布洛芬都是非類固醇抗發炎藥，併用不會更有效，只會增加胃出血風險。</p>
+<h3>⚠️ 常見誤解</h3>
+<div class="misconception"><strong>❌「兩種止痛藥一起吃更有效」</strong> → 錯。同類止痛藥併用不會更有效，只會增加副作用。</div>
+<div class="misconception"><strong>❌「保健食品是食品，不會交互作用」</strong> → 錯。魚油、維生素 E、銀杏都有抗凝血作用，與抗凝血藥併用會增加出血風險。</div>
+<div class="misconception"><strong>❌「中藥溫和，不會交互作用」</strong> → 錯。中藥與西藥也可能交互作用，請諮詢中醫師。</div>
+<div class="misconception"><strong>❌「這個工具查了沒事就安全」</strong> → 錯。它只收錄常見 10 組，不能取代藥師。</div>
+<div class="misconception"><strong>❌「有交互作用就要馬上停藥」</strong> → 錯。不要自行停藥，請諮詢藥師或醫師。</div>
+<h3>🩺 使用時機與注意事項</h3>
+<div class="when-to-use"><strong>✅ 適合：</strong>多重用藥的長輩、慢性病患者、想了解藥品交互作用的人。<br><strong>⚠️ 注意：</strong>這是參考資訊，不能取代藥師。用藥前請諮詢藥師或醫師，尤其抗凝血藥、降血壓藥、降血糖藥。</div>
+<h3>❓ 更多常見問題</h3>
+<h3>什麼是「多重用藥」？</h3><p>同時使用 5 種以上的藥。長輩常見，需特別留意交互作用。</p>
+<h3>葡萄柚為什麼不能配某些藥？</h3><p>葡萄柚會抑制肝臟代謝酵素，讓某些藥濃度升高，增加副作用。</p>
+<h3>酒和藥可以一起嗎？</h3><p>不建議。酒精會影響藥效，尤其止痛藥、安眠藥、降血糖藥。</p>
+<h3>藥可以配茶或咖啡嗎？</h3><p>不建議。茶和咖啡可能影響藥效，最好配白開水。</p>
+<h3>交互作用一定有害嗎？</h3><p>不一定。有些交互作用是醫師刻意設計的（如兩種降血壓藥併用），需由醫師判斷。</p>
+</div>
+<div class="faq"><h2 style="color:#D4AF37;font-size:20px;margin:24px 0 12px;">常見問題</h2><h3>這會取代藥師嗎？</h3><p>不會。這是參考資訊，不能取代藥師或醫師。</p><h3>收錄多少組交互作用？</h3><p>目前 10 組常見的，未來會擴充。</p><h3>什麼是交互作用？</h3><p>兩種以上的藥併用，互相影響藥效或副作用。</p><h3>資料會上傳嗎？</h3><p>不會，全部在瀏覽器。</p><h3>可以查中藥嗎？</h3><p>目前只收錄西藥，中藥請諮詢中醫師。</p><h3>可以查保健食品嗎？</h3><p>目前只收錄魚油、維生素 E 等常見的。</p><h3>發現交互作用怎麼辦？</h3><p>不要自行停藥，請諮詢藥師或醫師。</p><h3>可以查食物交互作用嗎？</h3><p>目前沒有，葡萄柚與某些藥有交互作用，請諮詢藥師。</p><h3>可以列印嗎？</h3><p>可以，按瀏覽器列印。</p><h3>孕婦可以用嗎？</h3><p>請諮詢醫師。有些藥孕婦禁用。</p></div>
+</article>
+<div class="footer"><p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p><p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p></div>
+</div>
+<script>
+var INTER={
+  "aspirin+ibuprofen":"⚠️ 兩者都是非類固醇抗發炎藥，併用增加胃出血風險。",
+  "aspirin+warfarin":"⚠️ 併用大幅增加出血風險，必須由醫師監測。",
+  "ibuprofen+warfarin":"⚠️ 併用增加出血風險，請諮詢醫師。",
+  "aspirin+acetaminophen":"一般可併用，但要注意各自劑量上限。",
+  "ibuprofen+acetaminophen":"可併用（交替使用），但要注意各自劑量。",
+  "warfarin+acetaminophen":"高劑量乙醯胺酚可能影響 warfarin 抗凝效果，需監測。",
+  "aspirin+fish oil":"魚油有抗凝血作用，併用增加出血風險。",
+  "ibuprofen+fish oil":"魚油有抗凝血作用，併用增加出血風險。",
+  "warfarin+fish oil":"魚油有抗凝血作用，併用增加出血風險。",
+  "aspirin+vitamin e":"維生素 E 高劑量有抗凝血作用，併用增加出血風險。",
+  "warfarin+vitamin e":"維生素 E 高劑量有抗凝血作用，併用增加出血風險。"
+};
+function normalize(s){return s.trim().toLowerCase().replace(/\s+/g," ");}
+function check(){
+  var lines=document.getElementById("drugs").value.split("\n").map(normalize).filter(function(x){return x;});
+  var o=document.getElementById("out");
+  if(lines.length<2){o.textContent="請輸入至少 2 個藥品";return;}
+  if(lines.length>5){o.textContent="最多 5 個藥品";return;}
+  var found=[],notFound=[];
+  for(var i=0;i<lines.length;i++){
+    for(var j=i+1;j<lines.length;j++){
+      var a=lines[i],b=lines[j];
+      var k1=a+"+"+b,k2=b+"+"+a;
+      if(INTER[k1]) found.push({pair:a+" + "+b,msg:INTER[k1]});
+      else if(INTER[k2]) found.push({pair:b+" + "+a,msg:INTER[k2]});
+    }
+  }
+  var h="";
+  if(found.length===0){
+    h="<p style='color:#3FB950;font-size:18px;'>✅ 目前資料庫未發現已知交互作用</p>";
+    h+="<p style='color:#8B949E;font-size:13px;margin-top:12px;'>⚠️ 本工具只收錄常見 10 組交互作用，不能取代藥師。請務必諮詢藥師或醫師。</p>";
+  } else {
+    h="<p style='color:#F85149;font-size:18px;'>⚠️ 發現 "+found.length+" 組可能的交互作用</p>";
+    for(var m=0;m<found.length;m++){
+      h+="<div style='background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:12px 16px;border-radius:8px;margin:10px 0;'><strong style='color:#F85149;'>"+found[m].pair+"</strong><br>"+found[m].msg+"</div>";
+    }
+    h+="<p style='color:#8B949E;font-size:13px;margin-top:12px;'>⚠️ 本工具只收錄常見 10 組，不能取代藥師。請務必諮詢藥師或醫師。</p>";
+  }
+  o.innerHTML=h;
+}
+</script>
+</body>
+</html>
