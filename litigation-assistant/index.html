@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>全方位 AI 智慧訴訟助理與狀紙產生器 | 雅寶工具箱 AHPAL.COM</title>
+<meta name="description" content="專為台灣被害人設計的訴訟助理。狀紙自動生成、求償金額精算、證據清單、法庭筆記、存證信函、7-11 列印教學。純前端、完全離線。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/litigation-assistant/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "全方位 AI 智慧訴訟助理與狀紙產生器", "applicationCategory": "BusinessApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}, "description": "專為台灣被害人設計的訴訟助理，整合狀紙生成、求償精算、證據清單、法庭筆記、存證信函、7-11 列印教學。", "url": "https://tools.ahpal.com/litigation-assistant/"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "工具箱", "item": "https://tools.ahpal.com/"}, {"@type": "ListItem", "position": 2, "name": "全方位 AI 智慧訴訟助理", "item": "https://tools.ahpal.com/litigation-assistant/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "全方位 AI 智慧訴訟助理是什麼？", "acceptedAnswer": {"@type": "Answer", "text": "這是一個專為台灣被害人（告訴人）設計的訴訟助理。它整合狀紙自動生成、求償金額精算、證據清單、法庭筆記、存證信函、7-11 列印教學，全部純前端、完全離線。"}}, {"@type": "Question", "name": "為什麼不用 Word 寫狀紙？", "acceptedAnswer": {"@type": "Answer", "text": "因為 Word 在不同電腦會跑版（字體、邊界），且無法自動計算求償金額、無法一鍵生成法庭筆記。本工具整合這些功能，3 分鐘搞定。"}}, {"@type": "Question", "name": "求償金額怎麼算？", "acceptedAnswer": {"@type": "Answer", "text": "本工具內建勞動部最低基本工資（2026 年 28,590 元），輸入無法工作天數，自動算出工作損失。再加上醫療收據、財物損失、精神慰撫金，自動加總並轉換為國字大寫。"}}, {"@type": "Question", "name": "產生的 PDF 會有網址或頁碼嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不會。本工具用 html2pdf.js 直接渲染，絕對沒有網址、日期、頁碼、檔案路徑。"}}, {"@type": "Question", "name": "案件資料會存在哪裡？", "acceptedAnswer": {"@type": "Answer", "text": "存在你的瀏覽器 localStorage，不上傳任何資料。下次打開自動載入。"}}, {"@type": "Question", "name": "支援哪些狀紙模板？", "acceptedAnswer": {"@type": "Answer", "text": "刑事補充陳報狀、刑事附帶民事起訴狀、存證信函、假扣押聲請狀草稿、法庭口頭筆記。"}}, {"@type": "Question", "name": "紅字轉黑白列印怎麼處理？", "acceptedAnswer": {"@type": "Answer", "text": "勾選「紅字轉粗黑底線」後，預覽時顯示紅字，下載 PDF 時自動轉為粗體 + 底線。"}}]}]}</script>
+<style>*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.7;padding:20px;}
+.container{max-width:1500px;margin:0 auto;}
+h1{color:#D4AF37;font-size:26px;margin-bottom:8px;}
+.sub{color:#8B949E;margin-bottom:16px;font-size:14px;}
+.card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:20px;margin-bottom:16px;}
+label{color:#8B949E;font-size:12px;display:block;margin-bottom:4px;}
+input,select,textarea{width:100%;background:#0D1117;color:#E6EDF3;border:1px solid #2D303A;border-radius:6px;padding:8px 10px;font-size:13px;margin-bottom:8px;font-family:inherit;}
+button{background:#D4AF37;color:#0D1117;border:none;border-radius:6px;padding:8px 16px;font-weight:700;cursor:pointer;margin:4px 4px 4px 0;font-size:13px;}
+button:hover{background:#e6c24a;}
+button.blue{background:#58A6FF;}
+button.gray{background:#2D303A;color:#E6EDF3;}
+.tip{background:rgba(63,185,80,0.08);border-left:4px solid #3FB950;padding:10px 14px;border-radius:6px;color:#C9D1D9;font-size:12px;margin-top:8px;}
+.warn{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:10px 14px;border-radius:6px;color:#C9D1D9;font-size:12px;margin-top:8px;}
+.footer{text-align:center;margin-top:40px;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+.breadcrumb{font-size:12px;color:#8B949E;margin-bottom:12px;}
+.breadcrumb a{color:#58A6FF;text-decoration:none;}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;}
+.tab-btn{padding:8px 16px;background:#161B22;border:1px solid #2D303A;border-radius:8px;color:#C9D1D9;cursor:pointer;font-size:13px;font-weight:600;}
+.tab-btn.active{background:#D4AF37;color:#0D1117;border-color:#D4AF37;}
+.tab-content{display:none;}
+.tab-content.active{display:block;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:1100px){.grid2{grid-template-columns:1fr;}}
+#previewWrap{background:#e9ecef;padding:12px;border-radius:8px;overflow:auto;max-height:750px;}
+#preview{background:#fff;color:#000;width:210mm;min-height:297mm;padding:20mm 15mm;margin:0 auto;font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;font-size:12pt;line-height:1.6;box-shadow:0 2px 8px rgba(0,0,0,0.1);}
+#preview h1,#preview h2,#preview h3{color:#000;}
+#preview p{text-indent:2em;margin:0 0 0.5em 0;}
+#preview table{width:100%;border-collapse:collapse;margin:8px 0;}
+#preview th,#preview td{border:1px solid #000;padding:4px 8px;font-size:11pt;}
+#preview th{background:#f0f0f0;font-weight:700;}
+#preview .highlight{color:#cc0000;font-weight:700;}
+#preview .page-break{page-break-after:always;border-top:2px dashed #999;margin:16px 0;padding-top:8px;color:#666;font-size:10pt;text-align:center;}
+.amount-row{display:grid;grid-template-columns:2fr 1fr 1fr;gap:6px;margin-bottom:6px;align-items:center;}
+.status{font-size:12px;color:#8B949E;margin-top:4px;}
+.case-list{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px;}
+.case-chip{padding:6px 12px;background:#2D303A;border-radius:6px;cursor:pointer;font-size:12px;color:#E6EDF3;}
+.case-chip.active{background:#D4AF37;color:#0D1117;font-weight:700;}
+.ol-print{font-size:15pt;line-height:2;color:#000;}
+.ol-print li{text-indent:0;margin-bottom:8px;}
+@media print {.no-print{display:none !important;}}</style>
+</head>
+<body>
+<div class="container">
+<nav style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;">
+  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏠 首頁</a>
+  <a href="https://www.ahpal.com/categories.html" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📚 全部分類</a>
+  <a href="https://www.ahpal.com/strategy/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📌 策略文章</a>
+  <a href="https://novels.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📖 小說站</a>
+  <a href="https://memories.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏛️ 回憶館</a>
+  <a href="https://bbs2.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">💬 BBS2</a>
+  <a href="https://pet.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">⚔️ 打怪場</a>
+  <a href="https://farm.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🌾 農場</a>
+  <a href="https://tools.ahpal.com/" style="color:#0D1117;background:#D4AF37;text-decoration:none;padding:4px 10px;font-weight:700;">🛠️ 工具箱</a>
+</nav>
+<div class="breadcrumb"><a href="https://tools.ahpal.com/">🛠️ 工具箱</a> › 全方位 AI 智慧訴訟助理</div>
+
+<h1>⚖️ 全方位 AI 智慧訴訟助理與狀紙產生器</h1>
+<p class="sub">狀紙自動生成 · 求償精算 · 證據清單 · 法庭筆記 · 存證信函 · 7-11 列印教學</p>
+
+<div class="card no-print">
+  <div class="case-list" id="caseList"></div>
+  <div style="display:flex;gap:6px;flex-wrap:wrap;">
+    <input type="text" id="newCaseName" placeholder="新案件名稱（例如：82號傷害案）" style="flex:1;min-width:200px;margin:0;">
+    <button onclick="addCase()">➕ 新增案件</button>
+    <button class="gray" onclick="deleteCase()">🗑️ 刪除目前案件</button>
+  </div>
+</div>
+
+<div class="tabs no-print" id="tabs">
+  <button class="tab-btn active" data-tab="tab-basic">📝 基本資料</button>
+  <button class="tab-btn" data-tab="tab-claim">💰 求償精算</button>
+  <button class="tab-btn" data-tab="tab-evidence">📎 證據清單</button>
+  <button class="tab-btn" data-tab="tab-pleading">📄 狀紙預覽</button>
+  <button class="tab-btn" data-tab="tab-notes">📋 法庭筆記</button>
+  <button class="tab-btn" data-tab="tab-templates">📮 存證信函</button>
+  <button class="tab-btn" data-tab="tab-print">🖨️ 7-11 列印</button>
+</div>
+
+<div class="tab-content active" id="tab-basic">
+  <div class="card">
+    <h2 style="color:#D4AF37;font-size:18px;margin-bottom:12px;">📝 基本資料</h2>
+    <div class="grid2">
+      <div>
+        <label>案號</label><input type="text" id="caseNo" placeholder="114年度偵字第12345號" oninput="updatePreview()">
+        <label>股別</label><input type="text" id="branch" placeholder="孝股" oninput="updatePreview()">
+        <label>告訴人姓名</label><input type="text" id="plaintiff" placeholder="王小明" oninput="updatePreview()">
+        <label>告訴人住址</label><input type="text" id="plaintiffAddr" placeholder="台北市大安區..." oninput="updatePreview()">
+        <label>告訴人電話</label><input type="text" id="plaintiffPhone" placeholder="0912-345-678" oninput="updatePreview()">
+      </div>
+      <div>
+        <label>被告姓名</label><input type="text" id="defendant" placeholder="陳大華" oninput="updatePreview()">
+        <label>被告住址</label><input type="text" id="defendantAddr" placeholder="新北市板橋區..." oninput="updatePreview()">
+        <label>案發日期</label><input type="date" id="incidentDate" oninput="updatePreview()">
+        <label>狀紙類型</label>
+        <select id="docType" onchange="updatePreview()">
+          <option value="supplement">刑事補充陳報狀</option>
+          <option value="civil">刑事附帶民事起訴狀</option>
+          <option value="complaint">刑事告訴狀</option>
+        </select>
+        <label>案發事實</label>
+        <textarea id="facts" rows="6" placeholder="請描述案發經過..." oninput="updatePreview()"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="tab-content" id="tab-claim">
+  <div class="card">
+    <h2 style="color:#D4AF37;font-size:18px;margin-bottom:12px;">💰 求償金額精算</h2>
+    <div class="grid2">
+      <div>
+        <label>勞動部最低基本工資（月）</label>
+        <input type="number" id="minWage" value="28590" oninput="calcClaim()">
+        <label>無法工作天數</label>
+        <input type="number" id="lostDays" value="30" oninput="calcClaim()">
+        <label>工作損失（自動計算）</label>
+        <input type="text" id="lostIncome" readonly style="background:#0D1117;color:#3FB950;font-weight:700;">
+        <label>醫療收據總額</label>
+        <input type="number" id="medicalCost" value="0" oninput="calcClaim()">
+        <label>財物損失總額</label>
+        <input type="number" id="propertyLoss" value="0" oninput="calcClaim()">
+        <label>精神慰撫金</label>
+        <input type="number" id="mentalCost" value="0" oninput="calcClaim()">
+      </div>
+      <div>
+        <label>求償明細（可自訂項目）</label>
+        <div id="customItems"></div>
+        <button onclick="addCustomItem()">➕ 新增項目</button>
+        <div style="margin-top:16px;padding:16px;background:#0D1117;border-radius:8px;">
+          <div style="color:#8B949E;font-size:12px;margin-bottom:4px;">總計（阿拉伯數字）</div>
+          <div id="totalNum" style="color:#D4AF37;font-size:24px;font-weight:700;">0 元</div>
+          <div style="color:#8B949E;font-size:12px;margin-top:8px;margin-bottom:4px;">總計（國字大寫）</div>
+          <div id="totalChinese" style="color:#58A6FF;font-size:18px;font-weight:700;">零元整</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="tab-content" id="tab-evidence">
+  <div class="card">
+    <h2 style="color:#D4AF37;font-size:18px;margin-bottom:12px;">📎 證據清單</h2>
+    <div id="evidenceList"></div>
+    <button onclick="addEvidence()">➕ 新增證據</button>
+    <label style="margin-top:12px;"><input type="checkbox" id="allOnDisc" style="width:auto;" onchange="updatePreview()"> 全部證據燒錄於光碟（狀紙標註「證物光碟乙片」）</label>
+  </div>
+</div>
+
+<div class="tab-content" id="tab-pleading">
+  <div class="card">
+    <h2 style="color:#D4AF37;font-size:18px;margin-bottom:12px;">📄 狀紙預覽</h2>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
+      <button class="blue" onclick="downloadPDF('pleading')">⬇️ 下載狀紙 PDF</button>
+      <button onclick="updatePreview()">🔄 重新整理</button>
+      <label style="margin:0;display:flex;align-items:center;"><input type="checkbox" id="redToBold" checked style="width:auto;margin:0 6px 0 0;"> 紅字轉粗黑底線</label>
+    </div>
+    <div id="previewWrap"><div id="preview">（請先填寫基本資料）</div></div>
+  </div>
+</div>
+
+<div class="tab-content" id="tab-notes">
+  <div class="card">
+    <h2 style="color:#D4AF37;font-size:18px;margin-bottom:12px;">📋 法庭口頭筆記（小抄）</h2>
+    <label>筆記要點（一行一點）</label>
+    <textarea id="notes" rows="6" placeholder="1. 我拒絕和解&#10;2. 我要求從重量刑&#10;3. 對方犯後態度惡劣">1. 我拒絕和解
+2. 我要求從重量刑
+3. 對方犯後態度惡劣，至今未道歉</textarea>
+    <div style="margin-top:12px;">
+      <button class="blue" onclick="downloadPDF('notes')">⬇️ 下載法庭筆記 PDF</button>
+    </div>
+    <div id="notesPreview" style="margin-top:16px;background:#fff;color:#000;padding:20mm 15mm;font-family:'Noto Sans TC',sans-serif;"></div>
+  </div>
+</div>
+
+<div class="tab-content" id="tab-templates">
+  <div class="card">
+    <h2 style="color:#D4AF37;font-size:18px;margin-bottom:12px;">📮 存證信函 / 假扣押聲請狀</h2>
+    <p style="color:#8B949E;font-size:13px;margin-bottom:12px;">若對方不賠錢，可一鍵生成「存證信函」。若擔心脫產，可生成「假扣押聲請狀」草稿。</p>
+    <button onclick="generateTemplate('demand')">📮 生成存證信函</button>
+    <button onclick="generateTemplate('attachment')">🔒 生成假扣押聲請狀</button>
+    <div id="templatePreview" style="margin-top:16px;background:#fff;color:#000;padding:20mm 15mm;font-family:'Noto Sans TC',sans-serif;"></div>
+  </div>
+</div>
+
+<div class="tab-content" id="tab-print">
+  <div class="card">
+    <h2 style="color:#D4AF37;font-size:18px;margin-bottom:12px;">🖨️ 7-11 IBON 列印教學</h2>
+    <ol style="color:#C9D1D9;font-size:14px;line-height:2;margin-left:24px;">
+      <li>下載 PDF（狀紙、筆記、存證信函）</li>
+      <li>將 PDF 存到 <strong>USB 隨身碟</strong></li>
+      <li>到 7-11 的 <strong>IBON 機台</strong></li>
+      <li>選「列印 / 掃描」→「文件列印」→「USB 隨身碟」</li>
+      <li>選擇 PDF 檔案</li>
+      <li>設定：<strong>A4、單面、黑白、份數 1</strong></li>
+      <li>確認預覽，投幣或刷卡</li>
+      <li>列印完成後，<strong>在具狀人處親筆簽名</strong>（法院要求）</li>
+    </ol>
+    <div class="tip">💡 若需多份，建議「黑白單面」，避免雙面列印造成裝訂困難。</div>
+    <div class="warn">⚠️ 法院要求「親筆簽名」或「蓋章」，列印後請務必簽名。</div>
+  </div>
+</div>
+
+<div style="background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:20px;margin-top:16px;"><h2 style="color:#D4AF37;font-size:20px;margin-bottom:12px;">❓ 常見問題（FAQ）</h2><div style="border-bottom:1px solid #2D303A;padding:12px 0;"><div style="color:#D4AF37;font-weight:700;margin-bottom:6px;">全方位 AI 智慧訴訟助理是什麼？</div><div style="color:#C9D1D9;font-size:13px;line-height:1.8;">這是一個專為台灣被害人（告訴人）設計的訴訟助理。它整合狀紙自動生成、求償金額精算、證據清單、法庭筆記、存證信函、7-11 列印教學，全部純前端、完全離線。</div></div><div style="border-bottom:1px solid #2D303A;padding:12px 0;"><div style="color:#D4AF37;font-weight:700;margin-bottom:6px;">為什麼不用 Word 寫狀紙？</div><div style="color:#C9D1D9;font-size:13px;line-height:1.8;">因為 Word 在不同電腦會跑版（字體、邊界），且無法自動計算求償金額、無法一鍵生成法庭筆記。本工具整合這些功能，3 分鐘搞定。</div></div><div style="border-bottom:1px solid #2D303A;padding:12px 0;"><div style="color:#D4AF37;font-weight:700;margin-bottom:6px;">求償金額怎麼算？</div><div style="color:#C9D1D9;font-size:13px;line-height:1.8;">本工具內建勞動部最低基本工資（2026 年 28,590 元），輸入無法工作天數，自動算出工作損失。再加上醫療收據、財物損失、精神慰撫金，自動加總並轉換為國字大寫。</div></div><div style="border-bottom:1px solid #2D303A;padding:12px 0;"><div style="color:#D4AF37;font-weight:700;margin-bottom:6px;">產生的 PDF 會有網址或頁碼嗎？</div><div style="color:#C9D1D9;font-size:13px;line-height:1.8;">不會。本工具用 html2pdf.js 直接渲染，絕對沒有網址、日期、頁碼、檔案路徑。</div></div><div style="border-bottom:1px solid #2D303A;padding:12px 0;"><div style="color:#D4AF37;font-weight:700;margin-bottom:6px;">案件資料會存在哪裡？</div><div style="color:#C9D1D9;font-size:13px;line-height:1.8;">存在你的瀏覽器 localStorage，不上傳任何資料。下次打開自動載入。</div></div><div style="border-bottom:1px solid #2D303A;padding:12px 0;"><div style="color:#D4AF37;font-weight:700;margin-bottom:6px;">支援哪些狀紙模板？</div><div style="color:#C9D1D9;font-size:13px;line-height:1.8;">刑事補充陳報狀、刑事附帶民事起訴狀、存證信函、假扣押聲請狀草稿、法庭口頭筆記。</div></div><div style="border-bottom:1px solid #2D303A;padding:12px 0;"><div style="color:#D4AF37;font-weight:700;margin-bottom:6px;">紅字轉黑白列印怎麼處理？</div><div style="color:#C9D1D9;font-size:13px;line-height:1.8;">勾選「紅字轉粗黑底線」後，預覽時顯示紅字，下載 PDF 時自動轉為粗體 + 底線。</div></div></div>
+
+<p style="text-align:center;color:#8B949E;font-size:13px;margin-top:24px;"><time datetime="2026-11-03">最後更新：2026-11-03</time></p>
+
+<div class="footer">
+  <p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p>
+  <p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p>
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js"></script>
+<script>
+// ============================================================
+// 狀態管理
+// ============================================================
+var DB = {};
+var currentCase = "default";
+
+function loadDB() {
+  try {
+    var raw = localStorage.getItem("ahpal_litigation_db");
+    if (raw) DB = JSON.parse(raw);
+  } catch(e) { DB = {}; }
+  if (!DB["default"]) {
+    DB["default"] = { name: "預設案件", data: {}, evidence: [], customItems: [] };
+  }
+  if (!DB[currentCase]) currentCase = "default";
+}
+
+function saveDB() {
+  try { localStorage.setItem("ahpal_litigation_db", JSON.stringify(DB)); } catch(e) {}
+}
+
+function renderCaseList() {
+  var el = document.getElementById("caseList");
+  el.innerHTML = "";
+  Object.keys(DB).forEach(function(k) {
+    var chip = document.createElement("div");
+    chip.className = "case-chip" + (k === currentCase ? " active" : "");
+    chip.textContent = DB[k].name;
+    chip.onclick = function() { switchCase(k); };
+    el.appendChild(chip);
+  });
+}
+
+function switchCase(k) {
+  saveCurrentCase();
+  currentCase = k;
+  renderCaseList();
+  loadCurrentCase();
+  updatePreview();
+}
+
+function saveCurrentCase() {
+  if (!DB[currentCase]) return;
+  var keys = ["caseNo","branch","plaintiff","plaintiffAddr","plaintiffPhone","defendant","defendantAddr","incidentDate","docType","facts","minWage","lostDays","medicalCost","propertyLoss","mentalCost","notes"];
+  var d = {};
+  keys.forEach(function(k) { var el = document.getElementById(k); if (el) d[k] = el.value; });
+  DB[currentCase].data = d;
+  DB[currentCase].evidence = collectEvidence();
+  DB[currentCase].customItems = collectCustomItems();
+  saveDB();
+}
+
+function loadCurrentCase() {
+  var c = DB[currentCase];
+  if (!c) return;
+  var d = c.data || {};
+  var keys = ["caseNo","branch","plaintiff","plaintiffAddr","plaintiffPhone","defendant","defendantAddr","incidentDate","docType","facts","minWage","lostDays","medicalCost","propertyLoss","mentalCost","notes"];
+  keys.forEach(function(k) { var el = document.getElementById(k); if (el && d[k] !== undefined) el.value = d[k]; });
+  renderEvidence(c.evidence || []);
+  renderCustomItems(c.customItems || []);
+  if (document.getElementById("notesPreview")) renderNotes();
+  calcClaim();
+}
+
+function addCase() {
+  var name = document.getElementById("newCaseName").value.trim();
+  if (!name) { alert("請輸入案件名稱"); return; }
+  var id = "case_" + Date.now();
+  DB[id] = { name: name, data: {}, evidence: [], customItems: [] };
+  saveDB();
+  currentCase = id;
+  document.getElementById("newCaseName").value = "";
+  renderCaseList();
+  loadCurrentCase();
+  updatePreview();
+}
+
+function deleteCase() {
+  if (Object.keys(DB).length <= 1) { alert("至少要保留一個案件"); return; }
+  if (!confirm("確定刪除「" + DB[currentCase].name + "」？")) return;
+  delete DB[currentCase];
+  saveDB();
+  currentCase = Object.keys(DB)[0];
+  renderCaseList();
+  loadCurrentCase();
+  updatePreview();
+}
+
+// ============================================================
+// 金額計算
+// ============================================================
+function addCustomItem(name, amount) {
+  var div = document.createElement("div");
+  div.className = "amount-row";
+  div.innerHTML = '<input type="text" placeholder="項目名稱" value="' + (name || "") + '" oninput="calcClaim()"><input type="number" placeholder="金額" value="' + (amount || 0) + '" oninput="calcClaim()"><button class="gray" onclick="this.parentElement.remove();calcClaim()" style="padding:6px 10px;margin:0;">✕</button>';
+  document.getElementById("customItems").appendChild(div);
+  calcClaim();
+}
+
+function collectCustomItems() {
+  var items = [];
+  document.querySelectorAll("#customItems .amount-row").forEach(function(row) {
+    var name = row.querySelector("input[type=text]").value.trim();
+    var amount = parseFloat(row.querySelector("input[type=number]").value) || 0;
+    if (name && amount) items.push({ name: name, amount: amount });
+  });
+  return items;
+}
+
+function renderCustomItems(items) {
+  document.getElementById("customItems").innerHTML = "";
+  (items || []).forEach(function(it) { addCustomItem(it.name, it.amount); });
+}
+
+function calcClaim() {
+  var minWage = parseFloat(document.getElementById("minWage").value) || 0;
+  var lostDays = parseFloat(document.getElementById("lostDays").value) || 0;
+  var lostIncome = Math.round(minWage / 30 * lostDays);
+  document.getElementById("lostIncome").value = lostIncome.toLocaleString() + " 元";
+  var medical = parseFloat(document.getElementById("medicalCost").value) || 0;
+  var property = parseFloat(document.getElementById("propertyLoss").value) || 0;
+  var mental = parseFloat(document.getElementById("mentalCost").value) || 0;
+  var customTotal = 0;
+  collectCustomItems().forEach(function(it) { customTotal += it.amount; });
+  var total = lostIncome + medical + property + mental + customTotal;
+  document.getElementById("totalNum").textContent = total.toLocaleString() + " 元";
+  document.getElementById("totalChinese").textContent = numToChinese(total);
+  saveCurrentCase();
+}
+
+function numToChinese(n) {
+  if (n === 0) return "零元整";
+  var digits = ["零","壹","貳","參","肆","伍","陸","柒","捌","玖"];
+  var units = ["","拾","佰","仟","萬","拾","佰","仟","億","拾","佰","仟"];
+  var str = Math.floor(n).toString();
+  var result = "";
+  var zeroFlag = false;
+  for (var i = 0; i < str.length; i++) {
+    var d = parseInt(str.charAt(i));
+    var pos = str.length - 1 - i;
+    if (d === 0) {
+      zeroFlag = true;
+      if (pos === 4 || pos === 8) { result += units[pos]; }
+    } else {
+      if (zeroFlag) { result += "零"; zeroFlag = false; }
+      result += digits[d] + units[pos];
+    }
+  }
+  return result + "元整";
+}
+
+// ============================================================
+// 證據清單
+// ============================================================
+function addEvidence(name, type) {
+  var div = document.createElement("div");
+  div.className = "amount-row";
+  div.innerHTML = '<input type="text" placeholder="證據名稱（例如：診斷證明書）" value="' + (name || "") + '" oninput="updatePreview()"><select onchange="updatePreview()"><option value="正本"' + (type === "正本" ? " selected" : "") + '>正本</option><option value="影本"' + (type === "影本" ? " selected" : "") + '>影本</option><option value="光碟"' + (type === "光碟" ? " selected" : "") + '>光碟</option></select><button class="gray" onclick="this.parentElement.remove();updatePreview()" style="padding:6px 10px;margin:0;">✕</button>';
+  document.getElementById("evidenceList").appendChild(div);
+  updatePreview();
+}
+
+function collectEvidence() {
+  var items = [];
+  document.querySelectorAll("#evidenceList .amount-row").forEach(function(row) {
+    var name = row.querySelector("input[type=text]").value.trim();
+    var type = row.querySelector("select").value;
+    if (name) items.push({ name: name, type: type });
+  });
+  return items;
+}
+
+function renderEvidence(items) {
+  document.getElementById("evidenceList").innerHTML = "";
+  (items || []).forEach(function(it) { addEvidence(it.name, it.type); });
+  if (!items || items.length === 0) {
+    addEvidence("診斷證明書", "正本");
+    addEvidence("醫療收據", "影本");
+  }
+}
+
+// ============================================================
+// 狀紙預覽
+// ============================================================
+function updatePreview() {
+  saveCurrentCase();
+  var d = {};
+  ["caseNo","branch","plaintiff","plaintiffAddr","plaintiffPhone","defendant","defendantAddr","incidentDate","docType","facts"].forEach(function(k) {
+    var el = document.getElementById(k); if (el) d[k] = el.value;
+  });
+  var docTypeNames = { supplement: "刑事補充陳報狀", civil: "刑事附帶民事起訴狀", complaint: "刑事告訴狀" };
+  var title = docTypeNames[d.docType] || "刑事補充陳報狀";
+  var evidence = collectEvidence();
+  var allDisc = document.getElementById("allOnDisc").checked;
+  var evHtml = "";
+  if (evidence.length > 0) {
+    if (allDisc) {
+      evHtml = '<p>證物光碟乙片（內含：' + evidence.map(function(e) { return e.name; }).join("、") + '）</p>';
+    } else {
+      evHtml = '<table><tr><th>編號</th><th>證據名稱</th><th>形式</th></tr>';
+      evidence.forEach(function(e, i) {
+        evHtml += '<tr><td>' + (i + 1) + '</td><td>' + e.name + '</td><td>' + e.type + '</td></tr>';
+      });
+      evHtml += '</table>';
+    }
+  }
+  var factsHtml = (d.facts || "").split("\n").map(function(line) {
+    if (line.indexOf("[分頁]") >= 0) return '<div class="page-break">— 分頁 —</div>';
+    if (line.indexOf("[縮排]") >= 0) return '<p style="padding-left:2em;">' + line.replace("[縮排]", "").replace(/</g, "&lt;") + '</p>';
+    return '<p>' + line.replace(/</g, "&lt;") + '</p>';
+  }).join("");
+  var html = '<div style="text-align:center;font-size:18pt;font-weight:700;margin-bottom:16pt;">' + title + '</div>';
+  html += '<div style="text-align:right;margin-bottom:12pt;">案號：' + (d.caseNo || "＿＿＿＿") + '<br>股別：' + (d.branch || "＿＿＿＿") + '</div>';
+  html += '<div style="margin-bottom:12pt;">';
+  html += '告訴人：' + (d.plaintiff || "＿＿＿＿") + '<br>';
+  html += '住址：' + (d.plaintiffAddr || "＿＿＿＿") + '<br>';
+  html += '電話：' + (d.plaintiffPhone || "＿＿＿＿") + '<br><br>';
+  html += '被告：' + (d.defendant || "＿＿＿＿") + '<br>';
+  html += '住址：' + (d.defendantAddr || "＿＿＿＿");
+  html += '</div>';
+  html += '<div style="text-align:center;font-weight:700;margin:16pt 0;">主　　旨</div>';
+  html += '<p>一、被告涉犯上開罪嫌，業經 貴署偵辦在案。</p>';
+  html += '<p>二、茲補充陳報如下：</p>';
+  html += factsHtml;
+  html += '<div style="text-align:center;font-weight:700;margin:16pt 0;">證　據</div>';
+  html += evHtml;
+  html += '<div style="margin-top:24pt;text-align:right;">具狀人：' + (d.plaintiff || "＿＿＿＿") + '<br>中華民國 ' + (new Date().getFullYear() - 1911) + ' 年 ____ 月 ____ 日</div>';
+  document.getElementById("preview").innerHTML = html;
+}
+
+// ============================================================
+// 法庭筆記
+// ============================================================
+function renderNotes() {
+  var text = document.getElementById("notes").value;
+  var lines = text.split("\n").filter(function(l) { return l.trim(); });
+  var html = '<div style="text-align:center;font-size:18pt;font-weight:700;margin-bottom:16pt;">法庭口頭筆記</div>';
+  html += '<ol class="ol-print">';
+  lines.forEach(function(l) {
+    html += '<li>' + l.replace(/^[0-9]+\.\s*/, "").replace(/</g, "&lt;") + '</li>';
+  });
+  html += '</ol>';
+  document.getElementById("notesPreview").innerHTML = html;
+}
+document.getElementById("notes").addEventListener("input", renderNotes);
+
+// ============================================================
+// 存證信函 / 假扣押
+// ============================================================
+function generateTemplate(type) {
+  var p = document.getElementById("plaintiff").value || "＿＿＿＿";
+  var pa = document.getElementById("plaintiffAddr").value || "＿＿＿＿";
+  var def = document.getElementById("defendant").value || "＿＿＿＿";
+  var total = document.getElementById("totalNum").textContent;
+  var html = "";
+  if (type === "demand") {
+    html = '<div style="text-align:center;font-size:18pt;font-weight:700;margin-bottom:16pt;">存　證　信　函</div>';
+    html += '<p>受文者：' + def + '</p>';
+    html += '<p>發文者：' + p + '（' + pa + '）</p>';
+    html += '<p>主旨：台端因侵權行為致本人受有損害，請於文到 10 日內賠償 ' + total + '，逾期將依法追訴。</p>';
+    html += '<p>說明：</p>';
+    html += '<p>一、台端於民國 ____ 年 ____ 月 ____ 日對本人為侵權行為，業經本人提出告訴在案。</p>';
+    html += '<p>二、本人因台端行為受有醫療費用、工作損失、精神慰撫金等損害，合計 ' + total + '。</p>';
+    html += '<p>三、請於文到 10 日內與本人聯繫賠償事宜，逾期將依法提起民事訴訟並聲請假扣押。</p>';
+    html += '<div style="margin-top:24pt;text-align:right;">發文者：' + p + '<br>中華民國 ' + (new Date().getFullYear() - 1911) + ' 年 ____ 月 ____ 日</div>';
+  } else {
+    html = '<div style="text-align:center;font-size:18pt;font-weight:700;margin-bottom:16pt;">民事假扣押聲請狀（草稿）</div>';
+    html += '<p>聲請人：' + p + '（' + pa + '）</p>';
+    html += '<p>相對人：' + def + '</p>';
+    html += '<p>聲請事項：請准聲請人提供擔保後，就相對人財產於 ' + total + ' 範圍內假扣押。</p>';
+    html += '<p>事實及理由：</p>';
+    html += '<p>一、相對人對聲請人有侵權行為損害賠償債務 ' + total + '。</p>';
+    html += '<p>二、相對人有脫產之虞，若不假扣押，日後有不能強制執行之風險。</p>';
+    html += '<p>三、聲請人願供擔保以代釋明。</p>';
+    html += '<div style="margin-top:24pt;text-align:right;">聲請人：' + p + '<br>中華民國 ' + (new Date().getFullYear() - 1911) + ' 年 ____ 月 ____ 日</div>';
+  }
+  document.getElementById("templatePreview").innerHTML = html;
+}
+
+// ============================================================
+// PDF 下載
+// ============================================================
+function downloadPDF(target) {
+  var el;
+  if (target === "pleading") el = document.getElementById("preview");
+  else if (target === "notes") el = document.getElementById("notesPreview");
+  else if (target === "template") el = document.getElementById("templatePreview");
+  if (!el || el.innerHTML.trim() === "") { alert("請先產生內容"); return; }
+  if (target === "pleading" && document.getElementById("redToBold").checked) {
+    el.querySelectorAll(".highlight").forEach(function(h) {
+      h.style.background = "transparent";
+      h.style.color = "#000";
+      h.style.fontWeight = "bold";
+      h.style.textDecoration = "underline";
+    });
+  }
+  var opt = {
+    margin: [20, 15, 20, 15],
+    filename: "litigation-" + Date.now() + ".pdf",
+    image: { type: "jpeg", quality: 0.98 },
+    html2canvas: { scale: 2, useCORS: true, letterRendering: true },
+    jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+    pagebreak: { mode: ["avoid-all", "css", "legacy"] }
+  };
+  html2pdf().set(opt).from(el).save();
+}
+
+// ============================================================
+// 初始化
+// ============================================================
+document.querySelectorAll(".tab-btn").forEach(function(btn) {
+  btn.addEventListener("click", function() {
+    document.querySelectorAll(".tab-btn").forEach(function(b) { b.classList.remove("active"); });
+    document.querySelectorAll(".tab-content").forEach(function(c) { c.classList.remove("active"); });
+    this.classList.add("active");
+    document.getElementById(this.getAttribute("data-tab")).classList.add("active");
+  });
+});
+
+window.addEventListener("load", function() {
+  loadDB();
+  renderCaseList();
+  loadCurrentCase();
+  updatePreview();
+  renderNotes();
+});
+</script>
+</body>
+</html>
