@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>注音練習 · 免費線上教育工具 | 雅寶工具箱</title>
+<meta name="description" content="輸入國字，顯示注音。給小一~小四學注音、複習注音、家長陪讀使用。純前端、離線、不上傳。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/zhuyin-practice/">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "注音練習", "description": "輸入國字，顯示注音。給小一~小四學注音、複習注音、家長陪讀使用。純前端、離線、不上傳。", "url": "https://tools.ahpal.com/zhuyin-practice/", "applicationCategory": "EducationalApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "這個工具怎麼用？", "acceptedAnswer": {"@type": "Answer", "text": "在上面輸入國字，按「顯示注音」，就會在每個字後面顯示注音。目前收錄常用字，未收錄的字會原樣顯示。"}}, {"@type": "Question", "name": "為什麼有些字沒有注音？", "acceptedAnswer": {"@type": "Answer", "text": "目前是簡易版，收錄常用字。未來會擴充完整注音對照表。"}}, {"@type": "Question", "name": "資料會上傳嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不會，全部在瀏覽器處理，離線也能用。"}}, {"@type": "Question", "name": "可以朗讀嗎？", "acceptedAnswer": {"@type": "Answer", "text": "目前不朗讀，未來可加語音功能。"}}, {"@type": "Question", "name": "適合幾年級？", "acceptedAnswer": {"@type": "Answer", "text": "小一~小四學注音、複習注音都適合。"}}, {"@type": "Question", "name": "注音和拼音有什麼不同？", "acceptedAnswer": {"@type": "Answer", "text": "注音是台灣使用的符號系統（ㄅㄆㄇㄈ），拼音是中國大陸和國際通用的羅馬字母系統。"}}, {"@type": "Question", "name": "為什麼要學注音？", "acceptedAnswer": {"@type": "Answer", "text": "注音是台灣低年級識字的基礎，學會注音才能自己讀有注音的故事書。"}}, {"@type": "Question", "name": "可以列印嗎？", "acceptedAnswer": {"@type": "Answer", "text": "可以，按瀏覽器列印（Ctrl+P）。"}}, {"@type": "Question", "name": "可以存檔嗎？", "acceptedAnswer": {"@type": "Answer", "text": "目前不存檔，建議截圖或複製保存。"}}, {"@type": "Question", "name": "有聲音嗎？", "acceptedAnswer": {"@type": "Answer", "text": "目前沒有，未來可加語音朗讀。"}}]}</script>
+<style>*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:20px;}
+.container{max-width:900px;margin:0 auto;}
+h1{color:#D4AF37;font-size:30px;margin:16px 0 8px;text-align:center;}
+.sub{color:#8B949E;font-size:15px;text-align:center;margin-bottom:24px;}
+.card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin-bottom:20px;}
+label{display:block;color:#C9D1D9;font-size:14px;margin:10px 0 4px;}
+input,textarea,select{width:100%;padding:12px;background:#0D1117;border:1px solid #2D303A;border-radius:8px;color:#E6EDF3;font-size:16px;font-family:inherit;}
+button{padding:12px 28px;background:#D4AF37;color:#0D1117;border:none;border-radius:10px;font-size:16px;font-weight:700;cursor:pointer;margin:8px 6px 0 0;}
+button:hover{opacity:0.85;}
+.result{background:#0D1117;border:1px solid #D4AF37;border-radius:8px;padding:16px;margin-top:16px;font-size:15px;line-height:1.9;white-space:pre-wrap;word-break:break-word;}
+.faq{margin-top:12px;}
+.faq h3{color:#58A6FF;font-size:16px;margin:16px 0 6px;}
+.faq p{color:#C9D1D9;font-size:14px;}
+.tip{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:8px;margin:16px 0;font-size:14px;color:#C9D1D9;}
+.knowledge{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin:20px 0;}
+.knowledge h2{color:#D4AF37;font-size:20px;margin:0 0 12px;}
+.knowledge h3{color:#58A6FF;font-size:16px;margin:18px 0 8px;}
+.knowledge p{color:#C9D1D9;font-size:15px;line-height:1.9;margin-bottom:10px;}
+.knowledge ul{margin:8px 0 12px 20px;color:#C9D1D9;font-size:15px;line-height:1.9;}
+.knowledge li{margin-bottom:6px;}
+.misconception{background:rgba(248,81,73,0.06);border-left:4px solid #F85149;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+.misconception strong{color:#F85149;}
+.when-to-use{background:rgba(63,185,80,0.06);border-left:4px solid #3FB950;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+.footer{text-align:center;margin-top:48px;padding-top:20px;border-top:1px solid #2D303A;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+@media print{.ahpal-top-nav,button,.tip{display:none!important;}body{background:#fff;color:#000;}.card{border:1px solid #999;}}</style>
+</head>
+<body>
+<div class="container">
+<nav class="ahpal-top-nav" style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;">
+  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏠 首頁</a>
+  <a href="https://www.ahpal.com/categories.html" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📚 全部分類</a>
+  <a href="https://www.ahpal.com/strategy/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📌 策略文章</a>
+  <a href="https://pet.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">⚔️ 打怪場</a>
+  <a href="https://farm.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🌾 農場</a>
+  <a href="https://tools.ahpal.com/" style="color:#0D1117;background:#D4AF37;text-decoration:none;padding:4px 10px;font-weight:700;">🛠️ 工具箱</a>
+</nav>
+<nav class="breadcrumb" aria-label="breadcrumb" style="font-size:13px;color:#8B949E;margin-bottom:12px;"><a href="https://tools.ahpal.com/" style="color:#58A6FF;text-decoration:none;">工具箱</a> › 注音練習</nav>
+<article>
+<h1>注音練習</h1>
+<p class="sub">輸入國字，顯示注音。給小一~小四學注音、複習注音、家長陪讀使用。純前端、離線、不上傳。</p>
+<div class="card">
+<label>輸入國字（一行一句）</label>
+<textarea id="txt" rows="4" placeholder="例如：今天天氣很好">今天天氣很好</textarea>
+<button onclick="show()">顯示注音</button>
+<div class="result" id="out"></div>
+</div>
+<div class="tip">🔒 這個工具<strong>純前端、完全離線、不上傳</strong>。你的資料只留在你的瀏覽器，不會傳到任何伺服器。</div>
+<div class="knowledge">
+<h2>📖 注音練習背後的知識</h2>
+<p>注音符號（ㄅㄆㄇㄈ）是台灣特有的拼音系統，1918 年由中華民國教育部制定，至今仍是台灣小學低年級識字的核心工具。小一上學期先學注音，下學期開始用注音讀國字。學會注音，孩子才能自己讀有注音的故事書，這是「自主閱讀」的起點。</p>
+<p>注音有 37 個符號（21 聲母 + 16 韻母）+ 4 個聲調。很多孩子卡在「ㄣ/ㄥ」「ㄌ/ㄖ」「ㄓ/ㄗ」這幾組，因為台灣國語的發音在這些地方容易混淆。與其死背，不如「多聽、多念、多比對」。</p>
+<h3>⚠️ 常見誤解</h3>
+<div class="misconception"><strong>❌「注音只是過渡，學會國字就不用」</strong> → 注音是「查字典」的工具，遇到不會念的字，靠注音查。長大還是用得到。</div>
+<div class="misconception"><strong>❌「注音和拼音一樣」</strong> → 完全不同系統。注音是符號（ㄅㄆㄇ），拼音是羅馬字母（b p m）。台灣用注音，大陸用拼音。</div>
+<div class="misconception"><strong>❌「發音不準沒關係，會寫就好」</strong> → 發音不準會影響「聽寫」和「朗讀」。早期矯正比長大後改容易。</div>
+<div class="misconception"><strong>❌「注音要背得很熟才能讀故事」</strong> → 不用全背熟才能讀。邊讀邊認，讀多了自然熟。</div>
+<div class="misconception"><strong>❌「小孩注音差就是不用功」</strong> → 可能是聽力、構音或視覺辨識問題。持續落後要請老師或語言治療師評估。</div>
+<h3>🩺 使用時機與注意事項</h3>
+<div class="when-to-use"><strong>✅ 適合：</strong>小一~小四學注音、複習注音、家長陪讀、新住民學中文。<br><strong>⚠️ 注意：</strong>這個工具是「輔助對照」，不是「發音教學」。正確發音要聽老師或語音。孩子卡住時，先問「你覺得這個字怎麼念」，再給提示。</div>
+<h3>❓ 更多常見問題</h3>
+<h3>注音有幾個符號？</h3><p>37 個（21 聲母 + 16 韻母）+ 4 個聲調（ˊˇˋ˙）。</p>
+<h3>為什麼「ㄣ」和「ㄥ」容易搞混？</h3><p>台灣國語的這兩個音在口語中常混，要靠「字根」和「多聽」分辨。</p>
+<h3>注音和國字哪個先學？</h3><p>台灣是小一先學注音（約 10 週），再進入國字。注音是「橋樑」。</p>
+<h3>新住民可以學注音嗎？</h3><p>可以，注音對母語非中文的人來說，比拼音更難，但學起來對讀台灣童書有幫助。</p>
+<h3>注音會消失嗎？</h3><p>不會。注音是台灣官方拼音系統，小學課本、字典、路牌都用注音。</p>
+</div>
+<div class="faq"><h2 style="color:#D4AF37;font-size:20px;margin:24px 0 12px;">常見問題</h2><h3>這個工具怎麼用？</h3><p>在上面輸入國字，按「顯示注音」，就會在每個字後面顯示注音。目前收錄常用字，未收錄的字會原樣顯示。</p><h3>為什麼有些字沒有注音？</h3><p>目前是簡易版，收錄常用字。未來會擴充完整注音對照表。</p><h3>資料會上傳嗎？</h3><p>不會，全部在瀏覽器處理，離線也能用。</p><h3>可以朗讀嗎？</h3><p>目前不朗讀，未來可加語音功能。</p><h3>適合幾年級？</h3><p>小一~小四學注音、複習注音都適合。</p><h3>注音和拼音有什麼不同？</h3><p>注音是台灣使用的符號系統（ㄅㄆㄇㄈ），拼音是中國大陸和國際通用的羅馬字母系統。</p><h3>為什麼要學注音？</h3><p>注音是台灣低年級識字的基礎，學會注音才能自己讀有注音的故事書。</p><h3>可以列印嗎？</h3><p>可以，按瀏覽器列印（Ctrl+P）。</p><h3>可以存檔嗎？</h3><p>目前不存檔，建議截圖或複製保存。</p><h3>有聲音嗎？</h3><p>目前沒有，未來可加語音朗讀。</p></div>
+</article>
+<div class="footer"><p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p><p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p></div>
+</div>
+<script>
+var MAP = {"今":"ㄐㄧㄣ","天":"ㄊㄧㄢ","氣":"ㄑㄧˋ","很":"ㄏㄣˇ","好":"ㄏㄠˇ","我":"ㄨㄛˇ","你":"ㄋㄧˇ","他":"ㄊㄚ","們":"ㄇㄣ˙","的":"ㄉㄜ˙","是":"ㄕˋ","不":"ㄅㄨˋ","在":"ㄗㄞˋ","有":"ㄧㄡˇ","這":"ㄓㄜˋ","那":"ㄋㄚˋ","個":"ㄍㄜˋ","人":"ㄖㄣˊ","大":"ㄉㄚˋ","小":"ㄒㄧㄠˇ","學":"ㄒㄩㄝˊ","生":"ㄕㄥ","老":"ㄌㄠˇ","師":"ㄕ","朋":"ㄆㄥˊ","友":"ㄧㄡˇ","書":"ㄕㄨ","看":"ㄎㄢˋ","寫":"ㄒㄧㄝˇ","讀":"ㄉㄨˊ"};
+function show(){
+  var t=document.getElementById("txt").value||"";
+  var out="";
+  for(var i=0;i<t.length;i++){
+    var c=t[i];
+    if(MAP[c]){out+=c+"（"+MAP[c]+"）";}
+    else{out+=c;}
+  }
+  document.getElementById("out").textContent=out||"請輸入文字";
+}
+</script>
+</body>
+</html>

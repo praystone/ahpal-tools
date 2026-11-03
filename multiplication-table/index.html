@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>九九乘法表 · 免費線上教育工具 | 雅寶工具箱</title>
+<meta name="description" content="互動乘法表 + 隨機測驗。給小二~小四學乘法、複習乘法使用。純前端、離線、不上傳。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/multiplication-table/">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "九九乘法表", "description": "互動乘法表 + 隨機測驗。給小二~小四學乘法、複習乘法使用。純前端、離線、不上傳。", "url": "https://tools.ahpal.com/multiplication-table/", "applicationCategory": "EducationalApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "九九乘法表怎麼用？", "acceptedAnswer": {"@type": "Answer", "text": "選「看乘法表」顯示完整表格；選「隨機測驗」出題，輸入答案按檢查。"}}, {"@type": "Question", "name": "適合幾年級？", "acceptedAnswer": {"@type": "Answer", "text": "小二下學期開始學乘法，小三小四複習都適合。"}}, {"@type": "Question", "name": "一定要背嗎？", "acceptedAnswer": {"@type": "Answer", "text": "理解「3×4=3+3+3+3」比死背重要。理解後再背，才不會卡住。"}}, {"@type": "Question", "name": "有 19×19 嗎？", "acceptedAnswer": {"@type": "Answer", "text": "目前是 9×9，未來可加 19×19 擴充版。"}}, {"@type": "Question", "name": "資料會上傳嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不會，全部在瀏覽器。"}}, {"@type": "Question", "name": "可以列印嗎？", "acceptedAnswer": {"@type": "Answer", "text": "可以，按瀏覽器列印（Ctrl+P）。"}}, {"@type": "Question", "name": "為什麼要學乘法？", "acceptedAnswer": {"@type": "Answer", "text": "乘法是「重複相加的快捷方式」，後面學除法、分數、面積都會用到。"}}, {"@type": "Question", "name": "小孩背不起來怎麼辦？", "acceptedAnswer": {"@type": "Answer", "text": "用唱的、用圖的、用遊戲的，每個人方式不同。理解優先，背誦其次。"}}, {"@type": "Question", "name": "可以存檔嗎？", "acceptedAnswer": {"@type": "Answer", "text": "目前不存檔。"}}, {"@type": "Question", "name": "有聲音嗎？", "acceptedAnswer": {"@type": "Answer", "text": "目前沒有，未來可加。"}}]}</script>
+<style>*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:20px;}
+.container{max-width:900px;margin:0 auto;}
+h1{color:#D4AF37;font-size:30px;margin:16px 0 8px;text-align:center;}
+.sub{color:#8B949E;font-size:15px;text-align:center;margin-bottom:24px;}
+.card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin-bottom:20px;}
+label{display:block;color:#C9D1D9;font-size:14px;margin:10px 0 4px;}
+input,textarea,select{width:100%;padding:12px;background:#0D1117;border:1px solid #2D303A;border-radius:8px;color:#E6EDF3;font-size:16px;font-family:inherit;}
+button{padding:12px 28px;background:#D4AF37;color:#0D1117;border:none;border-radius:10px;font-size:16px;font-weight:700;cursor:pointer;margin:8px 6px 0 0;}
+button:hover{opacity:0.85;}
+.result{background:#0D1117;border:1px solid #D4AF37;border-radius:8px;padding:16px;margin-top:16px;font-size:15px;line-height:1.9;white-space:pre-wrap;word-break:break-word;}
+.faq{margin-top:12px;}
+.faq h3{color:#58A6FF;font-size:16px;margin:16px 0 6px;}
+.faq p{color:#C9D1D9;font-size:14px;}
+.tip{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:8px;margin:16px 0;font-size:14px;color:#C9D1D9;}
+.knowledge{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin:20px 0;}
+.knowledge h2{color:#D4AF37;font-size:20px;margin:0 0 12px;}
+.knowledge h3{color:#58A6FF;font-size:16px;margin:18px 0 8px;}
+.knowledge p{color:#C9D1D9;font-size:15px;line-height:1.9;margin-bottom:10px;}
+.knowledge ul{margin:8px 0 12px 20px;color:#C9D1D9;font-size:15px;line-height:1.9;}
+.knowledge li{margin-bottom:6px;}
+.misconception{background:rgba(248,81,73,0.06);border-left:4px solid #F85149;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+.misconception strong{color:#F85149;}
+.when-to-use{background:rgba(63,185,80,0.06);border-left:4px solid #3FB950;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+.footer{text-align:center;margin-top:48px;padding-top:20px;border-top:1px solid #2D303A;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+@media print{.ahpal-top-nav,button,.tip{display:none!important;}body{background:#fff;color:#000;}.card{border:1px solid #999;}}</style>
+</head>
+<body>
+<div class="container">
+<nav class="ahpal-top-nav" style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;">
+  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏠 首頁</a>
+  <a href="https://www.ahpal.com/categories.html" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📚 全部分類</a>
+  <a href="https://www.ahpal.com/strategy/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📌 策略文章</a>
+  <a href="https://pet.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">⚔️ 打怪場</a>
+  <a href="https://farm.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🌾 農場</a>
+  <a href="https://tools.ahpal.com/" style="color:#0D1117;background:#D4AF37;text-decoration:none;padding:4px 10px;font-weight:700;">🛠️ 工具箱</a>
+</nav>
+<nav class="breadcrumb" aria-label="breadcrumb" style="font-size:13px;color:#8B949E;margin-bottom:12px;"><a href="https://tools.ahpal.com/" style="color:#58A6FF;text-decoration:none;">工具箱</a> › 九九乘法表</nav>
+<article>
+<h1>九九乘法表</h1>
+<p class="sub">互動乘法表 + 隨機測驗。給小二~小四學乘法、複習乘法使用。純前端、離線、不上傳。</p>
+<div class="card">
+<label>選擇模式</label>
+<select id="mode"><option value="table">看乘法表</option><option value="quiz">隨機測驗</option></select>
+<button onclick="run()">開始</button>
+<div class="result" id="out"></div>
+</div>
+<div class="tip">🔒 這個工具<strong>純前端、完全離線、不上傳</strong>。你的資料只留在你的瀏覽器，不會傳到任何伺服器。</div>
+<div class="knowledge">
+<h2>📖 九九乘法表背後的知識</h2>
+<p>九九乘法表不是「背誦工具」，是「數學語言的基礎」。小二學乘法，其實是在學「重複相加的快捷方式」：3×4 就是 3+3+3+3。理解這個，比死背更重要。台灣的課綱在小二下學期引入乘法，小三開始兩位數乘法，小四進入直式計算。九九乘法表背熟，後面的除法、分數、面積都會輕鬆很多。</p>
+<h3>⚠️ 常見誤解</h3>
+<div class="misconception"><strong>❌「背不起來就是笨」</strong> → 每個人記憶方式不同，用唱的、用圖的、用遊戲的，都能背起來。</div>
+<div class="misconception"><strong>❌「背熟就好，不用懂」</strong> → 不懂「3×4=3+3+3+3」，國中學代數會卡住。</div>
+<div class="misconception"><strong>❌「九九乘法表只有 9×9」</strong> → 其實有「19×19」的擴充版，印度小學生就背到 19×19。</div>
+<div class="misconception"><strong>❌「用計算機就好」</strong> → 計算機是工具，心算是能力。基礎不穩，後面會辛苦。</div>
+<div class="misconception"><strong>❌「背越快越聰明」</strong> → 理解比速度重要。慢慢懂，比快快背，走得遠。</div>
+<h3>🩺 使用時機與注意事項</h3>
+<div class="when-to-use"><strong>✅ 適合：</strong>小二~小四學生、想複習的家長、老師出題。<br><strong>⚠️ 注意：</strong>這個工具是「輔助練習」，不是「取代老師」。孩子卡住時，先問「你怎麼想的」，再給提示，不要直接給答案。</div>
+<h3>❓ 更多常見問題</h3>
+<h3>為什麼叫「九九」乘法表？</h3><p>因為從「一一得一」到「九九八十一」，共 81 組，所以叫九九乘法表。</p>
+<h3>為什麼台灣小二才學？</h3><p>小二下學期孩子已有「加法」和「數感」基礎，才適合引入乘法。</p>
+<h3>乘法交換律是什麼？</h3><p>3×4 = 4×3。知道這個，81 組可以少背一半。</p>
+<h3>印度 19×19 怎麼背？</h3><p>印度用「Vedic 數學」技巧，例如 13×14 = 13×(13+1) = 169+13 = 182。有興趣可以查「Vedic 乘法」。</p>
+<h3>心算怎麼練？</h3><p>先熟 9×9，再練「湊整」（例如 9×7 = 10×7 - 7 = 63）。</p>
+</div>
+<div class="faq"><h2 style="color:#D4AF37;font-size:20px;margin:24px 0 12px;">常見問題</h2><h3>九九乘法表怎麼用？</h3><p>選「看乘法表」顯示完整表格；選「隨機測驗」出題，輸入答案按檢查。</p><h3>適合幾年級？</h3><p>小二下學期開始學乘法，小三小四複習都適合。</p><h3>一定要背嗎？</h3><p>理解「3×4=3+3+3+3」比死背重要。理解後再背，才不會卡住。</p><h3>有 19×19 嗎？</h3><p>目前是 9×9，未來可加 19×19 擴充版。</p><h3>資料會上傳嗎？</h3><p>不會，全部在瀏覽器。</p><h3>可以列印嗎？</h3><p>可以，按瀏覽器列印（Ctrl+P）。</p><h3>為什麼要學乘法？</h3><p>乘法是「重複相加的快捷方式」，後面學除法、分數、面積都會用到。</p><h3>小孩背不起來怎麼辦？</h3><p>用唱的、用圖的、用遊戲的，每個人方式不同。理解優先，背誦其次。</p><h3>可以存檔嗎？</h3><p>目前不存檔。</p><h3>有聲音嗎？</h3><p>目前沒有，未來可加。</p></div>
+</article>
+<div class="footer"><p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p><p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p></div>
+</div>
+<script>
+function run(){
+  var m=document.getElementById("mode").value;
+  var o=document.getElementById("out");
+  if(m==="table"){
+    var h="<table style='width:100%;border-collapse:collapse;font-size:15px;text-align:center;'>";
+    h+="<tr style='color:#D4AF37;'><th style='border:1px solid #2D303A;padding:6px;'>×</th>";
+    for(var i=1;i<=9;i++) h+="<th style='border:1px solid #2D303A;padding:6px;'>"+i+"</th>";
+    h+="</tr>";
+    for(var a=1;a<=9;a++){
+      h+="<tr><th style='border:1px solid #2D303A;padding:6px;color:#D4AF37;'>"+a+"</th>";
+      for(var b=1;b<=9;b++) h+="<td style='border:1px solid #2D303A;padding:6px;'>"+(a*b)+"</td>";
+      h+="</tr>";
+    }
+    h+="</table>";
+    o.innerHTML=h;
+  } else {
+    var a=Math.floor(Math.random()*9)+1, b=Math.floor(Math.random()*9)+1;
+    o.innerHTML="<p style='font-size:22px;text-align:center;'>"+a+" × "+b+" = ?</p><input id='ans' type='number' style='max-width:200px;margin:10px auto;display:block;'><button onclick='check("+a+","+b+")'>檢查</button><p id='res' style='text-align:center;font-size:20px;'></p>";
+  }
+}
+function check(a,b){
+  var v=parseInt(document.getElementById("ans").value);
+  var r=document.getElementById("res");
+  if(v===a*b){r.textContent="✅ 答對了！"+a+" × "+b+" = "+(a*b);r.style.color="#3FB950";}
+  else{r.textContent="❌ 再想想，"+a+" × "+b+" = "+(a*b);r.style.color="#F85149";}
+}
+</script>
+</body>
+</html>
