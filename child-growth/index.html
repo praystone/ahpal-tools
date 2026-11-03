@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>小孩成長曲線 · 免費線上工具 | 雅寶工具箱</title>
+<meta name="description" content="輸入生日和每次測量的身高體重，自動算月齡並列表，可列印給醫生看。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/child-growth/">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "小孩成長曲線", "description": "輸入生日和每次測量的身高體重，自動算月齡並列表，可列印給醫生看。", "url": "https://tools.ahpal.com/child-growth/", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "怎麼用？", "acceptedAnswer": {"@type": "Answer", "text": "先填生日，再把每次測量的日期、身高、體重貼進來，按「計算」就會算出月齡。"}}, {"@type": "Question", "name": "會判斷正常嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不會。這個工具只整理數據，判斷請交給小兒科醫生。"}}, {"@type": "Question", "name": "資料會上傳嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不會，全部在你瀏覽器。"}}, {"@type": "Question", "name": "可以畫曲線嗎？", "acceptedAnswer": {"@type": "Answer", "text": "目前只列成表格，曲線圖未來可加。"}}, {"@type": "Question", "name": "月齡怎麼算？", "acceptedAnswer": {"@type": "Answer", "text": "用測量日減生日，換算成月（除以 30.44 天）。"}}]}</script>
+<style>*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:20px;}
+.container{max-width:900px;margin:0 auto;}
+h1{color:#D4AF37;font-size:30px;margin:16px 0 8px;text-align:center;}
+.sub{color:#8B949E;font-size:15px;text-align:center;margin-bottom:24px;}
+.card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin-bottom:20px;}
+label{display:block;color:#C9D1D9;font-size:14px;margin:10px 0 4px;}
+input,textarea,select{width:100%;padding:12px;background:#0D1117;border:1px solid #2D303A;border-radius:8px;color:#E6EDF3;font-size:16px;font-family:inherit;}
+button{padding:12px 28px;background:#D4AF37;color:#0D1117;border:none;border-radius:10px;font-size:16px;font-weight:700;cursor:pointer;margin:8px 6px 0 0;}
+button:hover{opacity:0.85;}
+.result{background:#0D1117;border:1px solid #D4AF37;border-radius:8px;padding:16px;margin-top:16px;font-size:15px;line-height:1.9;white-space:pre-wrap;word-break:break-word;}
+.faq{margin-top:12px;}
+.faq h3{color:#58A6FF;font-size:16px;margin:16px 0 6px;}
+.faq p{color:#C9D1D9;font-size:14px;}
+.tip{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:8px;margin:16px 0;font-size:14px;color:#C9D1D9;}
+.footer{text-align:center;margin-top:48px;padding-top:20px;border-top:1px solid #2D303A;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+@media print{.ahpal-top-nav,button,.tip{display:none!important;}body{background:#fff;color:#000;}.card{border:1px solid #999;}}</style>
+</head>
+<body>
+<div class="container">
+<nav class="ahpal-top-nav" style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;">
+  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏠 首頁</a>
+  <a href="https://www.ahpal.com/categories.html" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📚 全部分類</a>
+  <a href="https://www.ahpal.com/strategy/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📌 策略文章</a>
+  <a href="https://pet.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">⚔️ 打怪場</a>
+  <a href="https://farm.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🌾 農場</a>
+  <a href="https://tools.ahpal.com/" style="color:#0D1117;background:#D4AF37;text-decoration:none;padding:4px 10px;font-weight:700;">🛠️ 工具箱</a>
+</nav>
+<nav style="font-size:13px;color:#8B949E;margin-bottom:12px;"><a href="https://tools.ahpal.com/" style="color:#58A6FF;text-decoration:none;">工具箱</a> › 小孩成長曲線</nav>
+<article>
+<h1>小孩成長曲線</h1>
+<p class="sub">輸入生日和每次測量的身高體重，自動算月齡並列表，可列印給醫生看。</p>
+<div class="card">
+<label>生日</label>
+<input type="date" id="birth" value="2020-01-01">
+<p style="color:#C9D1D9;margin-top:12px;">每次測量，一行一筆：<code>日期,身高cm,體重kg</code></p>
+<textarea id="log" rows="6" placeholder="2026-11-03,110,20
+2026-12-03,111,20.5">2026-11-03,110,20
+2026-12-03,111,20.5</textarea>
+<button onclick="calc()">計算</button>
+<div class="result" id="out"></div>
+</div>
+<div class="tip">🔒 這個工具<strong>純前端、完全離線、不上傳</strong>。你的資料只留在你的瀏覽器，不會傳到任何伺服器。</div>
+<div class="faq"><h2 style="color:#D4AF37;font-size:20px;margin:24px 0 12px;">常見問題</h2><h3>怎麼用？</h3><p>先填生日，再把每次測量的日期、身高、體重貼進來，按「計算」就會算出月齡。</p><h3>會判斷正常嗎？</h3><p>不會。這個工具只整理數據，判斷請交給小兒科醫生。</p><h3>資料會上傳嗎？</h3><p>不會，全部在你瀏覽器。</p><h3>可以畫曲線嗎？</h3><p>目前只列成表格，曲線圖未來可加。</p><h3>月齡怎麼算？</h3><p>用測量日減生日，換算成月（除以 30.44 天）。</p></div>
+</article>
+<div class="footer"><p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p><p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p></div>
+</div>
+<script>
+function calc(){
+  var birth=new Date(document.getElementById("birth").value);
+  if(isNaN(birth.getTime())){document.getElementById("out").textContent="請先填生日";return;}
+  var lines=document.getElementById("log").value.split("\n").filter(function(x){return x.trim();});
+  var rows=[];
+  for(var i=0;i<lines.length;i++){
+    var p=lines[i].split(",");
+    if(p.length<3) continue;
+    var d=new Date(p[0].trim());
+    var h=parseFloat(p[1]),w=parseFloat(p[2]);
+    if(isNaN(d.getTime())||isNaN(h)||isNaN(w)) continue;
+    var months=Math.round((d-birth)/(86400000*30.44));
+    rows.push({date:p[0].trim(),h:h,w:w,months:months});
+  }
+  if(rows.length===0){document.getElementById("out").textContent="沒有有效資料";return;}
+  rows.sort(function(a,b){return a.months-b.months;});
+  var out="<table style='width:100%;border-collapse:collapse;font-size:15px;'><tr style='color:#D4AF37;'><th style='border:1px solid #2D303A;padding:8px;'>日期</th><th style='border:1px solid #2D303A;padding:8px;'>月齡</th><th style='border:1px solid #2D303A;padding:8px;'>身高</th><th style='border:1px solid #2D303A;padding:8px;'>體重</th></tr>";
+  for(var j=0;j<rows.length;j++){
+    var r=rows[j];
+    out+="<tr><td style='border:1px solid #2D303A;padding:8px;'>"+r.date+"</td><td style='border:1px solid #2D303A;padding:8px;text-align:center;'>"+r.months+"</td><td style='border:1px solid #2D303A;padding:8px;text-align:center;'>"+r.h+"</td><td style='border:1px solid #2D303A;padding:8px;text-align:center;'>"+r.w+"</td></tr>";
+  }
+  out+="</table>";
+  document.getElementById("out").innerHTML=out;
+}
+</script>
+</body>
+</html>

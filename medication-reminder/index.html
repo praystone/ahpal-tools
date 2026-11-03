@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>吃藥提醒表 · 免費線上工具 | 雅寶工具箱</title>
+<meta name="description" content="輸入藥名和時間，產生大字提醒表，可列印貼冰箱。給銀髮族、慢性病患使用。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/medication-reminder/">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "吃藥提醒表", "description": "輸入藥名和時間，產生大字提醒表，可列印貼冰箱。給銀髮族、慢性病患使用。", "url": "https://tools.ahpal.com/medication-reminder/", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "格式怎麼寫？", "acceptedAnswer": {"@type": "Answer", "text": "一行一筆，藥名,時間。例如「血壓藥,08:00」。用半形逗號。"}}, {"@type": "Question", "name": "可以列印嗎？", "acceptedAnswer": {"@type": "Answer", "text": "可以，按「列印貼冰箱」，會自動隱藏按鈕，只印表格。"}}, {"@type": "Question", "name": "資料會上傳嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不會，全部在你瀏覽器。"}}, {"@type": "Question", "name": "可以存檔嗎？", "acceptedAnswer": {"@type": "Answer", "text": "目前不存檔，重新整理會清空。建議產生後直接列印。"}}, {"@type": "Question", "name": "時間格式？", "acceptedAnswer": {"@type": "Answer", "text": "24 小時制，例如 08:00、21:30。"}}]}</script>
+<style>*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:20px;}
+.container{max-width:900px;margin:0 auto;}
+h1{color:#D4AF37;font-size:30px;margin:16px 0 8px;text-align:center;}
+.sub{color:#8B949E;font-size:15px;text-align:center;margin-bottom:24px;}
+.card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin-bottom:20px;}
+label{display:block;color:#C9D1D9;font-size:14px;margin:10px 0 4px;}
+input,textarea,select{width:100%;padding:12px;background:#0D1117;border:1px solid #2D303A;border-radius:8px;color:#E6EDF3;font-size:16px;font-family:inherit;}
+button{padding:12px 28px;background:#D4AF37;color:#0D1117;border:none;border-radius:10px;font-size:16px;font-weight:700;cursor:pointer;margin:8px 6px 0 0;}
+button:hover{opacity:0.85;}
+.result{background:#0D1117;border:1px solid #D4AF37;border-radius:8px;padding:16px;margin-top:16px;font-size:15px;line-height:1.9;white-space:pre-wrap;word-break:break-word;}
+.faq{margin-top:12px;}
+.faq h3{color:#58A6FF;font-size:16px;margin:16px 0 6px;}
+.faq p{color:#C9D1D9;font-size:14px;}
+.tip{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:8px;margin:16px 0;font-size:14px;color:#C9D1D9;}
+.footer{text-align:center;margin-top:48px;padding-top:20px;border-top:1px solid #2D303A;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+@media print{.ahpal-top-nav,button,.tip{display:none!important;}body{background:#fff;color:#000;}.card{border:1px solid #999;}}</style>
+</head>
+<body>
+<div class="container">
+<nav class="ahpal-top-nav" style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;">
+  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏠 首頁</a>
+  <a href="https://www.ahpal.com/categories.html" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📚 全部分類</a>
+  <a href="https://www.ahpal.com/strategy/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📌 策略文章</a>
+  <a href="https://pet.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">⚔️ 打怪場</a>
+  <a href="https://farm.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🌾 農場</a>
+  <a href="https://tools.ahpal.com/" style="color:#0D1117;background:#D4AF37;text-decoration:none;padding:4px 10px;font-weight:700;">🛠️ 工具箱</a>
+</nav>
+<nav style="font-size:13px;color:#8B949E;margin-bottom:12px;"><a href="https://tools.ahpal.com/" style="color:#58A6FF;text-decoration:none;">工具箱</a> › 吃藥提醒表</nav>
+<article>
+<h1>吃藥提醒表</h1>
+<p class="sub">輸入藥名和時間，產生大字提醒表，可列印貼冰箱。給銀髮族、慢性病患使用。</p>
+<div class="card">
+<p style="color:#C9D1D9;">輸入藥名和時間，一行一筆，格式：<code>藥名,時間</code>（例如：血壓藥,08:00）</p>
+<textarea id="meds" rows="6" placeholder="血壓藥,08:00
+血糖藥,12:30
+睡前藥,21:00">血壓藥,08:00
+血糖藥,12:30
+睡前藥,21:00</textarea>
+<button onclick="gen()">產生提醒表</button>
+<button onclick="window.print()">列印貼冰箱</button>
+<div class="result" id="out"></div>
+</div>
+<div class="tip">🔒 這個工具<strong>純前端、完全離線、不上傳</strong>。你的資料只留在你的瀏覽器，不會傳到任何伺服器。</div>
+<div class="faq"><h2 style="color:#D4AF37;font-size:20px;margin:24px 0 12px;">常見問題</h2><h3>格式怎麼寫？</h3><p>一行一筆，藥名,時間。例如「血壓藥,08:00」。用半形逗號。</p><h3>可以列印嗎？</h3><p>可以，按「列印貼冰箱」，會自動隱藏按鈕，只印表格。</p><h3>資料會上傳嗎？</h3><p>不會，全部在你瀏覽器。</p><h3>可以存檔嗎？</h3><p>目前不存檔，重新整理會清空。建議產生後直接列印。</p><h3>時間格式？</h3><p>24 小時制，例如 08:00、21:30。</p></div>
+</article>
+<div class="footer"><p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p><p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p></div>
+</div>
+<script>
+function gen(){
+  var lines=document.getElementById("meds").value.split("\n").filter(function(x){return x.trim();});
+  var rows=[];
+  for(var i=0;i<lines.length;i++){
+    var p=lines[i].split(",");
+    if(p.length<2) continue;
+    rows.push({name:p[0].trim(),time:p[1].trim()});
+  }
+  rows.sort(function(a,b){return a.time.localeCompare(b.time);});
+  var h="<table style='width:100%;border-collapse:collapse;font-size:18px;'><tr style='color:#D4AF37;'><th style='border:1px solid #2D303A;padding:10px;'>時間</th><th style='border:1px solid #2D303A;padding:10px;'>藥名</th><th style='border:1px solid #2D303A;padding:10px;'>吃了嗎</th></tr>";
+  for(var j=0;j<rows.length;j++){
+    h+="<tr><td style='border:1px solid #2D303A;padding:10px;text-align:center;font-weight:900;'>"+rows[j].time+"</td><td style='border:1px solid #2D303A;padding:10px;'>"+rows[j].name+"</td><td style='border:1px solid #2D303A;padding:10px;text-align:center;'>☐</td></tr>";
+  }
+  h+="</table>";
+  document.getElementById("out").innerHTML=h;
+}
+</script>
+</body>
+</html>

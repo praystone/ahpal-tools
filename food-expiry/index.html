@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>食材保存期限 · 免費線上工具 | 雅寶工具箱</title>
+<meta name="description" content="輸入食材、購買日、保存天數，自動算到期日並排序，快過期的用顏色標示。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/food-expiry/">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "食材保存期限", "description": "輸入食材、購買日、保存天數，自動算到期日並排序，快過期的用顏色標示。", "url": "https://tools.ahpal.com/food-expiry/", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "格式怎麼寫？", "acceptedAnswer": {"@type": "Answer", "text": "一行一筆：食材,購買日,保存天數。例如「牛奶,2026-11-01,7」。"}}, {"@type": "Question", "name": "會提醒我嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不會主動提醒，但會把快過期的排在最上面，用顏色標示。"}}, {"@type": "Question", "name": "資料會上傳嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不會，全部在你瀏覽器。"}}, {"@type": "Question", "name": "可以存檔嗎？", "acceptedAnswer": {"@type": "Answer", "text": "目前不存檔，建議需要時重新輸入或自行複製保存。"}}, {"@type": "Question", "name": "保存天數怎麼算？", "acceptedAnswer": {"@type": "Answer", "text": "冷藏、冷凍、常溫不同，請依實際情況填。"}}]}</script>
+<style>*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:20px;}
+.container{max-width:900px;margin:0 auto;}
+h1{color:#D4AF37;font-size:30px;margin:16px 0 8px;text-align:center;}
+.sub{color:#8B949E;font-size:15px;text-align:center;margin-bottom:24px;}
+.card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin-bottom:20px;}
+label{display:block;color:#C9D1D9;font-size:14px;margin:10px 0 4px;}
+input,textarea,select{width:100%;padding:12px;background:#0D1117;border:1px solid #2D303A;border-radius:8px;color:#E6EDF3;font-size:16px;font-family:inherit;}
+button{padding:12px 28px;background:#D4AF37;color:#0D1117;border:none;border-radius:10px;font-size:16px;font-weight:700;cursor:pointer;margin:8px 6px 0 0;}
+button:hover{opacity:0.85;}
+.result{background:#0D1117;border:1px solid #D4AF37;border-radius:8px;padding:16px;margin-top:16px;font-size:15px;line-height:1.9;white-space:pre-wrap;word-break:break-word;}
+.faq{margin-top:12px;}
+.faq h3{color:#58A6FF;font-size:16px;margin:16px 0 6px;}
+.faq p{color:#C9D1D9;font-size:14px;}
+.tip{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:8px;margin:16px 0;font-size:14px;color:#C9D1D9;}
+.footer{text-align:center;margin-top:48px;padding-top:20px;border-top:1px solid #2D303A;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+@media print{.ahpal-top-nav,button,.tip{display:none!important;}body{background:#fff;color:#000;}.card{border:1px solid #999;}}</style>
+</head>
+<body>
+<div class="container">
+<nav class="ahpal-top-nav" style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;">
+  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏠 首頁</a>
+  <a href="https://www.ahpal.com/categories.html" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📚 全部分類</a>
+  <a href="https://www.ahpal.com/strategy/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📌 策略文章</a>
+  <a href="https://pet.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">⚔️ 打怪場</a>
+  <a href="https://farm.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🌾 農場</a>
+  <a href="https://tools.ahpal.com/" style="color:#0D1117;background:#D4AF37;text-decoration:none;padding:4px 10px;font-weight:700;">🛠️ 工具箱</a>
+</nav>
+<nav style="font-size:13px;color:#8B949E;margin-bottom:12px;"><a href="https://tools.ahpal.com/" style="color:#58A6FF;text-decoration:none;">工具箱</a> › 食材保存期限</nav>
+<article>
+<h1>食材保存期限</h1>
+<p class="sub">輸入食材、購買日、保存天數，自動算到期日並排序，快過期的用顏色標示。</p>
+<div class="card">
+<p style="color:#C9D1D9;">一行一筆：<code>食材,購買日,保存天數</code></p>
+<textarea id="log" rows="7" placeholder="牛奶,2026-11-01,7
+雞蛋,2026-11-01,30
+高麗菜,2026-11-03,14">牛奶,2026-11-01,7
+雞蛋,2026-11-01,30
+高麗菜,2026-11-03,14</textarea>
+<button onclick="calc()">算到期日</button>
+<div class="result" id="out"></div>
+</div>
+<div class="tip">🔒 這個工具<strong>純前端、完全離線、不上傳</strong>。你的資料只留在你的瀏覽器，不會傳到任何伺服器。</div>
+<div class="faq"><h2 style="color:#D4AF37;font-size:20px;margin:24px 0 12px;">常見問題</h2><h3>格式怎麼寫？</h3><p>一行一筆：食材,購買日,保存天數。例如「牛奶,2026-11-01,7」。</p><h3>會提醒我嗎？</h3><p>不會主動提醒，但會把快過期的排在最上面，用顏色標示。</p><h3>資料會上傳嗎？</h3><p>不會，全部在你瀏覽器。</p><h3>可以存檔嗎？</h3><p>目前不存檔，建議需要時重新輸入或自行複製保存。</p><h3>保存天數怎麼算？</h3><p>冷藏、冷凍、常溫不同，請依實際情況填。</p></div>
+</article>
+<div class="footer"><p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p><p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p></div>
+</div>
+<script>
+function calc(){
+  var lines=document.getElementById("log").value.split("\n").filter(function(x){return x.trim();});
+  var rows=[];
+  for(var i=0;i<lines.length;i++){
+    var p=lines[i].split(",");
+    if(p.length<3) continue;
+    var d=new Date(p[1].trim());
+    var days=parseInt(p[2]);
+    if(isNaN(d.getTime())||isNaN(days)) continue;
+    var exp=new Date(d.getTime()+days*86400000);
+    rows.push({name:p[0].trim(),buy:p[1].trim(),days:days,exp:exp});
+  }
+  if(rows.length===0){document.getElementById("out").textContent="沒有有效資料";return;}
+  rows.sort(function(a,b){return a.exp-b.exp;});
+  var today=new Date();today.setHours(0,0,0,0);
+  var h="<table style='width:100%;border-collapse:collapse;font-size:15px;'><tr style='color:#D4AF37;'><th style='border:1px solid #2D303A;padding:8px;'>食材</th><th style='border:1px solid #2D303A;padding:8px;'>購買日</th><th style='border:1px solid #2D303A;padding:8px;'>到期日</th><th style='border:1px solid #2D303A;padding:8px;'>剩幾天</th></tr>";
+  for(var j=0;j<rows.length;j++){
+    var r=rows[j];
+    var left=Math.ceil((r.exp-today)/86400000);
+    var color=left<0?"#F85149":(left<=2?"#D4AF37":"#3FB950");
+    var txt=left<0?"已過期 "+Math.abs(left)+" 天":(left+" 天");
+    h+="<tr><td style='border:1px solid #2D303A;padding:8px;'>"+r.name+"</td><td style='border:1px solid #2D303A;padding:8px;'>"+r.buy+"</td><td style='border:1px solid #2D303A;padding:8px;'>"+r.exp.toISOString().slice(0,10)+"</td><td style='border:1px solid #2D303A;padding:8px;text-align:center;color:"+color+";font-weight:900;'>"+txt+"</td></tr>";
+  }
+  h+="</table>";
+  document.getElementById("out").innerHTML=h;
+}
+</script>
+</body>
+</html>
