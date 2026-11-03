@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>聖經中英對照 · 創世記第 2 章（和合本 + ESV）| 雅寶工具箱</title>
+<meta name="description" content="創世記第 2 章和合本與 ESV 中英對照，附背景知識、常見誤解、10 題 FAQ。純前端、離線、不上傳。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/bible-genesis2/">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8637791667872348" crossorigin="anonymous"></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "聖經中英對照 · 創世記第 2 章", "description": "創世記第 2 章和合本與 ESV 中英對照，附背景知識與常見問題。", "url": "https://tools.ahpal.com/bible-genesis2/", "applicationCategory": "EducationalApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "創世記第 2 章有幾節？", "acceptedAnswer": {"@type": "Answer", "text": "25 節。1~3 節安息，4~14 節伊甸園，15~17 節吩咐，18~25 節造夏娃。"}}, {"@type": "Question", "name": "「伊甸」是什麼意思？", "acceptedAnswer": {"@type": "Answer", "text": "原文是 Eden，意思是「喜樂、歡愉」。伊甸園是「喜樂的園子」。"}}, {"@type": "Question", "name": "「四道河」是哪四道？", "acceptedAnswer": {"@type": "Answer", "text": "比遜、基訓、希底結（底格里斯河）、伯拉河（幼發拉底河）。"}}, {"@type": "Question", "name": "「二人成為一體」是什麼意思？", "acceptedAnswer": {"@type": "Answer", "text": "不只是身體結合，更是生命結合——情感、意志、目標的合一。"}}, {"@type": "Question", "name": "分別善惡樹的果子是蘋果嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不是。聖經只說「分別善惡樹」，沒說是什麼水果。蘋果是西方藝術的想像。"}}, {"@type": "Question", "name": "「用塵土造人」是貶低人嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不是。塵土代表人的有限，吹生氣代表人的尊貴，兩者並存才是完整的人。"}}, {"@type": "Question", "name": "「肋骨造女人」是貶低女人嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不是。肋骨是靠近心臟的骨頭，代表女人是男人心旁的伴侶。第 2 章 24 節講「二人成為一體」，是平等關係。"}}, {"@type": "Question", "name": "和合本和 ESV 有什麼不同？", "acceptedAnswer": {"@type": "Answer", "text": "和合本是 1919 年出版的中文譯本，ESV 是 2001 年出版的英文標準版。兩個都忠於原文。"}}, {"@type": "Question", "name": "可以離線使用嗎？", "acceptedAnswer": {"@type": "Answer", "text": "可以，全部在瀏覽器，不上傳。"}}, {"@type": "Question", "name": "ESV 版權怎麼算？", "acceptedAnswer": {"@type": "Answer", "text": "ESV 版權屬 Crossway，非商業使用免費，需標示版權。"}}]}</script>
+<style>*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.9;padding:20px;}
+.container{max-width:1000px;margin:0 auto;}
+h1{color:#D4AF37;font-size:30px;margin:16px 0 8px;text-align:center;}
+.sub{color:#8B949E;font-size:15px;text-align:center;margin-bottom:24px;}
+.verse-card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:20px 24px;margin-bottom:16px;display:grid;grid-template-columns:1fr 1fr;gap:24px;position:relative;}
+.verse-card::after{content:"";position:absolute;left:50%;top:16px;bottom:16px;width:1px;background:linear-gradient(to bottom,transparent,#D4AF37,transparent);}
+.verse-num{position:absolute;top:-10px;left:20px;background:#0D1117;color:#D4AF37;font-size:12px;font-weight:700;padding:2px 10px;border:1px solid #D4AF37;border-radius:10px;font-family:Consolas,monospace;}
+.zh{color:#E6EDF3;font-size:16px;line-height:2;}
+.en{color:#58A6FF;font-size:15px;line-height:2;font-style:italic;}
+.header-box{background:linear-gradient(135deg,rgba(212,175,55,0.08),rgba(88,166,255,0.05));border:1px solid #D4AF37;border-radius:12px;padding:24px;margin-bottom:24px;text-align:center;}
+.header-box h2{color:#D4AF37;font-size:22px;margin-bottom:8px;}
+.header-box .ver{color:#8B949E;font-size:13px;}
+.tip{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:8px;margin:16px 0;font-size:14px;color:#C9D1D9;}
+.knowledge{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin:20px 0;}
+.knowledge h2{color:#D4AF37;font-size:20px;margin:0 0 12px;}
+.knowledge h3{color:#58A6FF;font-size:16px;margin:18px 0 8px;}
+.knowledge p{color:#C9D1D9;font-size:15px;line-height:1.9;margin-bottom:10px;}
+.misconception{background:rgba(248,81,73,0.06);border-left:4px solid #F85149;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+.misconception strong{color:#F85149;}
+.when-to-use{background:rgba(63,185,80,0.06);border-left:4px solid #3FB950;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+.faq h3{color:#58A6FF;font-size:16px;margin:16px 0 6px;}
+.faq p{color:#C9D1D9;font-size:14px;}
+.footer{text-align:center;margin-top:48px;padding-top:20px;border-top:1px solid #2D303A;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+@media (max-width:700px){.verse-card{grid-template-columns:1fr;}.verse-card::after{display:none;}}
+@media print{.ahpal-top-nav,.tip{display:none!important;}body{background:#fff;color:#000;}.verse-card{border:1px solid #999;}}</style>
+</head>
+<body>
+<div class="container">
+<nav class="ahpal-top-nav" style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;">
+  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏠 首頁</a>
+  <a href="https://www.ahpal.com/categories.html" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📚 全部分類</a>
+  <a href="https://tools.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🛠️ 工具箱</a>
+  <a href="https://tools.ahpal.com/bible-index/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📖 聖經目錄</a>
+  <a href="https://tools.ahpal.com/bible-genesis1/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📖 創世記 1</a>
+  <a href="https://tools.ahpal.com/bible-psalm-index/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📖 詩篇 150 篇</a>
+  <a href="https://pet.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">⚔️ 打怪場</a>
+</nav>
+<nav class="breadcrumb" aria-label="breadcrumb" style="font-size:13px;color:#8B949E;margin-bottom:12px;"><a href="https://tools.ahpal.com/" style="color:#58A6FF;text-decoration:none;">工具箱</a> › <a href="https://tools.ahpal.com/bible-index/" style="color:#58A6FF;text-decoration:none;">聖經目錄</a> › 創世記第 2 章</nav>
+<article>
+<h1>📖 創世記第 2 章</h1>
+<p class="sub">和合本 + ESV 中英對照 · 伊甸園、亞當、夏娃、婚姻設立</p>
+
+<div class="header-box">
+  <h2>那人獨居不好，我要為他造一個配偶幫助他</h2>
+  <div class="ver">和合本（Chinese Union Version）· ESV（English Standard Version）</div>
+</div>
+
+<div class="verse-card">
+  <span class="verse-num">1</span>
+  <div class="zh">天地萬物都造齊了。</div>
+  <div class="en">Thus the heavens and the earth were finished, and all the host of them.</div>
+</div><div class="verse-card">
+  <span class="verse-num">2</span>
+  <div class="zh">到第七日，神造物的工已經完畢，就在第七日歇了他一切的工，安息了。</div>
+  <div class="en">And on the seventh day God finished his work that he had done, and he rested on the seventh day from all his work that he had done.</div>
+</div><div class="verse-card">
+  <span class="verse-num">3</span>
+  <div class="zh">神賜福給第七日，定為聖日；因為在這日，神歇了他一切創造的工，就安息了。</div>
+  <div class="en">So God blessed the seventh day and made it holy, because on it God rested from all his work that he had done in creation.</div>
+</div><div class="verse-card">
+  <span class="verse-num">4</span>
+  <div class="zh">創造天地的來歷，在耶和華神造天地的日子，乃是這樣，</div>
+  <div class="en">These are the generations of the heavens and the earth when they were created, in the day that the Lord God made the earth and the heavens.</div>
+</div><div class="verse-card">
+  <span class="verse-num">5</span>
+  <div class="zh">野地還沒有草木，田間的菜蔬還沒有長起來；因為耶和華神還沒有降雨在地上，也沒有人耕地，</div>
+  <div class="en">When no bush of the field was yet in the land and no small plant of the field had yet sprung up—for the Lord God had not caused it to rain on the land, and there was no man to work the ground,</div>
+</div><div class="verse-card">
+  <span class="verse-num">6</span>
+  <div class="zh">但有霧氣從地上騰，滋潤遍地。</div>
+  <div class="en">and a mist was going up from the land and was watering the whole face of the ground—</div>
+</div><div class="verse-card">
+  <span class="verse-num">7</span>
+  <div class="zh">耶和華神用地上的塵土造人，將生氣吹在他鼻孔裡，他就成了有靈的活人，名叫亞當。</div>
+  <div class="en">then the Lord God formed the man of dust from the ground and breathed into his nostrils the breath of life, and the man became a living creature.</div>
+</div><div class="verse-card">
+  <span class="verse-num">8</span>
+  <div class="zh">耶和華神在東方的伊甸立了一個園子，把所造的人安置在那裡。</div>
+  <div class="en">And the Lord God planted a garden in Eden, in the east, and there he put the man whom he had formed.</div>
+</div><div class="verse-card">
+  <span class="verse-num">9</span>
+  <div class="zh">耶和華神使各樣的樹從地裡長出來，可以悅人的眼目，其上的果子好作食物；園子當中又有生命樹和分別善惡的樹。</div>
+  <div class="en">And out of the ground the Lord God made to spring up every tree that is pleasant to the sight and good for food. The tree of life was in the midst of the garden, and the tree of the knowledge of good and evil.</div>
+</div><div class="verse-card">
+  <span class="verse-num">10</span>
+  <div class="zh">有河從伊甸流出來，滋潤那園子，從那裡分為四道：</div>
+  <div class="en">A river flowed out of Eden to water the garden, and there it divided and became four rivers.</div>
+</div><div class="verse-card">
+  <span class="verse-num">11</span>
+  <div class="zh">第一道名叫比遜，就是環繞哈腓拉全地的。在那裡有金子，</div>
+  <div class="en">The name of the first is the Pishon. It is the one that flowed around the whole land of Havilah, where there is gold.</div>
+</div><div class="verse-card">
+  <span class="verse-num">12</span>
+  <div class="zh">並且那地的金子是好的；在那裡又有珍珠和紅瑪瑙。</div>
+  <div class="en">And the gold of that land is good; bdellium and onyx stone are there.</div>
+</div><div class="verse-card">
+  <span class="verse-num">13</span>
+  <div class="zh">第二道河名叫基訓，就是環繞古實全地的。</div>
+  <div class="en">The name of the second river is the Gihon. It is the one that flowed around the whole land of Cush.</div>
+</div><div class="verse-card">
+  <span class="verse-num">14</span>
+  <div class="zh">第三道河名叫希底結，流在亞述的東邊。第四道河就是伯拉河。</div>
+  <div class="en">And the name of the third river is the Tigris, which flows east of Assyria. And the fourth river is the Euphrates.</div>
+</div><div class="verse-card">
+  <span class="verse-num">15</span>
+  <div class="zh">耶和華神將那人安置在伊甸園，使他修理，看守。</div>
+  <div class="en">The Lord God took the man and put him in the garden of Eden to work it and keep it.</div>
+</div><div class="verse-card">
+  <span class="verse-num">16</span>
+  <div class="zh">耶和華神吩咐他說：園中各樣樹上的果子，你可以隨意吃，</div>
+  <div class="en">And the Lord God commanded the man, saying, You may surely eat of every tree of the garden,</div>
+</div><div class="verse-card">
+  <span class="verse-num">17</span>
+  <div class="zh">只是分別善惡樹上的果子，你不可吃，因為你吃的日子必定死！</div>
+  <div class="en">but of the tree of the knowledge of good and evil you shall not eat, for in the day that you eat of it you shall surely die.</div>
+</div><div class="verse-card">
+  <span class="verse-num">18</span>
+  <div class="zh">耶和華神說：那人獨居不好，我要為他造一個配偶幫助他。</div>
+  <div class="en">Then the Lord God said, It is not good that the man should be alone; I will make him a helper fit for him.</div>
+</div><div class="verse-card">
+  <span class="verse-num">19</span>
+  <div class="zh">耶和華神用土所造成的野地各樣走獸和空中各樣飛鳥都帶到那人面前，看他叫什麼。那人怎樣叫各樣的活物，那就是他的名字。</div>
+  <div class="en">Now out of the ground the Lord God had formed every beast of the field and every bird of the heavens and brought them to the man to see what he would call them. And whatever the man called every living creature, that was its name.</div>
+</div><div class="verse-card">
+  <span class="verse-num">20</span>
+  <div class="zh">那人便給一切牲畜和空中飛鳥、野地走獸都起了名；只是那人沒有遇見配偶幫助他。</div>
+  <div class="en">The man gave names to all livestock and to the birds of the heavens and to every beast of the field. But for Adam there was not found a helper fit for him.</div>
+</div><div class="verse-card">
+  <span class="verse-num">21</span>
+  <div class="zh">耶和華神使他沉睡，他就睡了；於是取下他的一條肋骨，又把肉合起來。</div>
+  <div class="en">So the Lord God caused a deep sleep to fall upon the man, and while he slept took one of his ribs and closed up its place with flesh.</div>
+</div><div class="verse-card">
+  <span class="verse-num">22</span>
+  <div class="zh">耶和華神就用那人身上所取的肋骨造成一個女人，領他到那人跟前。</div>
+  <div class="en">And the rib that the Lord God had taken from the man he made into a woman and brought her to the man.</div>
+</div><div class="verse-card">
+  <span class="verse-num">23</span>
+  <div class="zh">那人說：這是我骨中的骨，肉中的肉，可以稱他為女人，因為他是從男人身上取出來的。</div>
+  <div class="en">Then the man said, This at last is bone of my bones and flesh of my flesh; she shall be called Woman, because she was taken out of Man.</div>
+</div><div class="verse-card">
+  <span class="verse-num">24</span>
+  <div class="zh">因此，人要離開父母，與妻子連合，二人成為一體。</div>
+  <div class="en">Therefore a man shall leave his father and his mother and hold fast to his wife, and they shall become one flesh.</div>
+</div><div class="verse-card">
+  <span class="verse-num">25</span>
+  <div class="zh">當時夫妻二人赤身露體，並不羞恥。</div>
+  <div class="en">And the man and his wife were both naked and were not ashamed.</div>
+</div>
+
+<div class="tip">🔒 這個工具<strong>純前端、完全離線、不上傳</strong>。你的資料只留在你的瀏覽器。ESV 經文版權屬 Crossway，僅供個人閱讀使用。</div>
+
+<div class="knowledge">
+<h2>📖 創世記第 2 章背後的知識</h2>
+<p>創世記第 2 章是「創造的第二天」，但它的重點不是「創造」，而是「關係」：神與人的關係、人與大地的關係、人與人的關係。第 1 章用「六日創造」的宏觀視角，第 2 章用「伊甸園」的微觀視角，兩章互補，不是矛盾。</p>
+<p>第 2 章記載四件事：一是「第七日安息」（1~3 節），神完成創造後歇息，定第七日為聖日；二是「伊甸園」（4~14 節），神在東方的伊甸立園子，有生命樹、分別善惡樹、四道河；三是「造亞當」（7、15~17 節），神用塵土造人、吹生氣、安置在園中、吩咐不可吃分別善惡樹的果子；四是「造夏娃」（18~25 節），神說「那人獨居不好」，用亞當的肋骨造夏娃，設立婚姻。</p>
+<h3>⚠️ 常見誤解</h3>
+<div class="misconception"><strong>❌「創世記 1 章和 2 章是兩個創造故事」</strong> → 不是。第 1 章是宏觀（六日創造），第 2 章是微觀（伊甸園、造人細節），兩章互補，不是矛盾。</div>
+<div class="misconception"><strong>❌「第七日安息是猶太人的規矩」</strong> → 不只是。安息日是「神設立的」，不是「人發明的」，創世記 2:3 說神「賜福給第七日，定為聖日」。</div>
+<div class="misconception"><strong>❌「用塵土造人是貶低人」</strong> → 不是。塵土代表「人的有限」，吹生氣代表「人的尊貴」，兩者並存，才是「人」的完整圖像。</div>
+<div class="misconception"><strong>❌「肋骨造女人是貶低女人」</strong> → 不是。肋骨是「靠近心臟」的骨頭，代表「女人是男人心旁的伴侶」，不是「附屬品」。第 2 章 24 節講「二人成為一體」，是平等關係。</div>
+<div class="misconception"><strong>❌「分別善惡樹的果子是蘋果」</strong> → 不是。聖經只說「分別善惡樹」，沒說是什麼水果。蘋果是西方藝術的想像，不是聖經原文。</div>
+<h3>🩺 使用時機與注意事項</h3>
+<div class="when-to-use"><strong>✅ 適合：</strong>個人靈修、小組讀經、想學英文聖經的人、想認識「婚姻設立」的人、想理解「安息日」的人。<br><strong>⚠️ 注意：</strong>這一章是「關係的章節」，不是「科學的章節」。重點是「神與人的關係」，不是「地球幾歲」。ESV 版權屬 Crossway，僅供個人閱讀使用。</div>
+<h3>❓ 更多常見問題</h3>
+<h3>創世記第 2 章有幾節？</h3><p>25 節。1~3 節安息，4~14 節伊甸園，15~17 節吩咐，18~25 節造夏娃。</p>
+<h3>「伊甸」是什麼意思？</h3><p>「伊甸」原文是「עֵדֶן」（Eden），意思是「喜樂、歡愉」。伊甸園是「喜樂的園子」。</p>
+<h3>「四道河」是哪四道？</h3><p>比遜、基訓、希底結（底格里斯河）、伯拉河（幼發拉底河）。前兩道已不可考，後兩道是今日中東的兩大河。</p>
+<h3>「二人成為一體」是什麼意思？</h3><p>不只是「身體結合」，更是「生命結合」——情感、意志、目標的合一。這是婚姻的核心。</p>
+<h3>這一章與啟示錄有關嗎？</h3><p>有。創世記 2 章的「生命樹」，在啟示錄 22 章再次出現，代表「樂園的恢復」。</p>
+</div>
+<div class="faq"><h2 style="color:#D4AF37;font-size:20px;margin:24px 0 12px;">常見問題</h2><h3>創世記第 2 章有幾節？</h3><p>25 節。1~3 節安息，4~14 節伊甸園，15~17 節吩咐，18~25 節造夏娃。</p><h3>「伊甸」是什麼意思？</h3><p>原文是 Eden，意思是「喜樂、歡愉」。伊甸園是「喜樂的園子」。</p><h3>「四道河」是哪四道？</h3><p>比遜、基訓、希底結（底格里斯河）、伯拉河（幼發拉底河）。</p><h3>「二人成為一體」是什麼意思？</h3><p>不只是身體結合，更是生命結合——情感、意志、目標的合一。</p><h3>分別善惡樹的果子是蘋果嗎？</h3><p>不是。聖經只說「分別善惡樹」，沒說是什麼水果。蘋果是西方藝術的想像。</p><h3>「用塵土造人」是貶低人嗎？</h3><p>不是。塵土代表人的有限，吹生氣代表人的尊貴，兩者並存才是完整的人。</p><h3>「肋骨造女人」是貶低女人嗎？</h3><p>不是。肋骨是靠近心臟的骨頭，代表女人是男人心旁的伴侶。第 2 章 24 節講「二人成為一體」，是平等關係。</p><h3>和合本和 ESV 有什麼不同？</h3><p>和合本是 1919 年出版的中文譯本，ESV 是 2001 年出版的英文標準版。兩個都忠於原文。</p><h3>可以離線使用嗎？</h3><p>可以，全部在瀏覽器，不上傳。</p><h3>ESV 版權怎麼算？</h3><p>ESV 版權屬 Crossway，非商業使用免費，需標示版權。</p></div>
+</article>
+<div class="footer"><p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p><p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p></div>
+</div>
+</body>
+</html>
