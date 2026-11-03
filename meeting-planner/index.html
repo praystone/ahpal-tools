@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>世界會議時間規劃器 | 雅寶工具箱 AHPAL.COM</title>
+<meta name="description" content="找出多個城市都能參加的會議時間，用顏色標示上班時段。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/meeting-planner/">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "世界會議時間規劃器", "applicationCategory": "BusinessApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}, "description": "找出多個城市都能參加的會議時間，用顏色標示上班時段。純前端、完全離線。", "url": "https://tools.ahpal.com/meeting-planner/"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "工具箱", "item": "https://tools.ahpal.com/"}, {"@type": "ListItem", "position": 2, "name": "世界會議時間規劃器", "item": "https://tools.ahpal.com/meeting-planner/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "世界會議時間規劃器是什麼？", "acceptedAnswer": {"@type": "Answer", "text": "世界會議時間規劃器是幫你找出「多個城市都能參加」的會議時間的工具。它用顏色標示各城市的上班時間。"}}, {"@type": "Question", "name": "怎麼用？", "acceptedAnswer": {"@type": "Answer", "text": "選擇與會城市、選擇會議時長，工具會用顏色標示「所有人的上班時間」重疊的時段。"}}, {"@type": "Question", "name": "綠色、黃色、紅色代表什麼？", "acceptedAnswer": {"@type": "Answer", "text": "綠色 = 上班時間（09:00~18:00），黃色 = 清晨或傍晚（07:00~09:00、18:00~22:00），紅色 = 深夜（22:00~07:00）。"}}, {"@type": "Question", "name": "為什麼跨國會議很難排？", "acceptedAnswer": {"@type": "Answer", "text": "因為地球是圓的，各城市時區不同。例如台北與紐約差 13 小時，一方上班時另一方在睡覺。"}}, {"@type": "Question", "name": "這個工具會上傳我的資料嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不會。所有計算都在你的瀏覽器完成，不上傳任何資料。"}}]}]}</script>
+<style>*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:40px 20px;}
+.container{max-width:1000px;margin:0 auto;}
+h1{color:#D4AF37;font-size:28px;margin-bottom:12px;}
+.sub{color:#8B949E;margin-bottom:24px;font-size:14px;}
+.card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin-bottom:16px;}
+label{color:#8B949E;font-size:13px;display:block;margin-bottom:6px;}
+input,select,textarea{width:100%;background:#0D1117;color:#E6EDF3;border:1px solid #2D303A;border-radius:8px;padding:12px;font-size:14px;margin-bottom:12px;font-family:inherit;}
+button{background:#D4AF37;color:#0D1117;border:none;border-radius:8px;padding:10px 20px;font-weight:700;cursor:pointer;margin:8px 8px 8px 0;font-size:14px;}
+button:hover{background:#e6c24a;}
+button.blue{background:#58A6FF;}
+.result{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:16px;font-size:15px;min-height:60px;}
+.result .big{font-size:28px;font-weight:700;color:#D4AF37;text-align:center;padding:12px 0;}
+.tip{background:rgba(63,185,80,0.08);border-left:4px solid #3FB950;padding:12px 16px;border-radius:6px;color:#C9D1D9;font-size:13px;margin-top:12px;}
+.warn{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:12px 16px;border-radius:6px;color:#C9D1D9;font-size:13px;margin-top:12px;}
+.footer{text-align:center;margin-top:60px;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:600px){.row{grid-template-columns:1fr;}}
+.breadcrumb{font-size:13px;color:#8B949E;margin-bottom:16px;}
+.breadcrumb a{color:#58A6FF;text-decoration:none;}
+.doc-section{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:28px 32px;margin-top:32px;}
+.doc-section h2{color:#D4AF37;font-size:22px;margin:24px 0 16px;padding-bottom:8px;border-bottom:2px solid #2D303A;}
+.doc-section h2:first-child{margin-top:0;}
+.doc-section h3{color:#58A6FF;font-size:17px;margin:24px 0 10px;}
+.doc-section p{color:#C9D1D9;margin-bottom:12px;line-height:1.9;}
+.doc-section ul,.doc-section ol{margin:8px 0 16px 24px;color:#C9D1D9;}
+.doc-section li{margin-bottom:8px;line-height:1.8;}
+.doc-section code{background:#0D1117;color:#58A6FF;padding:2px 8px;border-radius:4px;font-family:Consolas,monospace;font-size:13px;}
+.doc-section .highlight{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:6px;margin:16px 0;}
+.doc-section .warnbox{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:14px 18px;border-radius:6px;margin:16px 0;}
+.doc-section table{width:100%;border-collapse:collapse;font-size:14px;margin:12px 0 20px;}
+.doc-section th,.doc-section td{padding:10px 14px;border:1px solid #2D303A;text-align:left;}
+.doc-section th{background:rgba(212,175,55,0.12);color:#D4AF37;}
+.doc-section tr:nth-child(even){background:rgba(255,255,255,0.02);}
+.doc-section .example{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:16px;font-family:Consolas,monospace;font-size:13px;color:#C9D1D9;margin:12px 0;line-height:1.8;}
+.faq-item{border-bottom:1px solid #2D303A;padding:14px 0;}
+.faq-item:last-child{border-bottom:none;}
+.faq-q{color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;}
+.faq-a{color:#C9D1D9;font-size:14px;line-height:1.9;}</style>
+</head>
+<body>
+<div class="container">
+<nav style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;">
+  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏠 首頁</a>
+  <a href="https://www.ahpal.com/categories.html" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📚 全部分類</a>
+  <a href="https://www.ahpal.com/strategy/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📌 策略文章</a>
+  <a href="https://novels.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📖 小說站</a>
+  <a href="https://memories.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏛️ 回憶館</a>
+  <a href="https://bbs2.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">💬 BBS2</a>
+  <a href="https://pet.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">⚔️ 打怪場</a>
+  <a href="https://farm.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🌾 農場</a>
+  <a href="https://tools.ahpal.com/" style="color:#0D1117;background:#D4AF37;text-decoration:none;padding:4px 10px;font-weight:700;">🛠️ 工具箱</a>
+</nav>
+<div class="breadcrumb"><a href="https://tools.ahpal.com/">🛠️ 工具箱</a> › 世界會議時間規劃器</div>
+<article>
+<h1>🌐 世界會議時間規劃器</h1>
+<p class="sub">找出多個城市都能參加的會議時間，用顏色標示上班時段。</p>
+<div class="card">
+  <label>與會城市（可多選）</label>
+  <div id="cityList" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px;margin-bottom:12px;">
+    <label><input type="checkbox" value="Asia/Taipei" checked style="width:auto;"> 台北</label>
+    <label><input type="checkbox" value="Asia/Tokyo" style="width:auto;"> 東京</label>
+    <label><input type="checkbox" value="Asia/Shanghai" style="width:auto;"> 北京</label>
+    <label><input type="checkbox" value="Asia/Singapore" style="width:auto;"> 新加坡</label>
+    <label><input type="checkbox" value="Europe/London" checked style="width:auto;"> 倫敦</label>
+    <label><input type="checkbox" value="Europe/Paris" style="width:auto;"> 巴黎</label>
+    <label><input type="checkbox" value="America/New_York" checked style="width:auto;"> 紐約</label>
+    <label><input type="checkbox" value="America/Los_Angeles" style="width:auto;"> 洛杉磯</label>
+  </div>
+  <button onclick="plan()">📅 規劃會議</button>
+</div>
+<div class="card"><label>建議時段</label><div class="result" id="result"></div></div>
+<div class="doc-section">
+<h2>📚 世界會議時間規劃器是什麼？給門外漢的完整說明</h2>
+<p>你要跟美國、歐洲、亞洲的同事開會，不知道怎麼排時間。這篇文章一次講清楚「跨國會議時間規劃」。</p>
+<h3>一、一句話講完</h3>
+<div class="highlight"><p><strong>世界會議時間規劃器 = 找出「多個城市都能參加」的會議時間。</strong></p><p>它用顏色標示各城市的上班時間，讓你一眼看出「哪個時段所有人都方便」。</p></div>
+<h3>二、顏色代表的意義</h3>
+<table><tr><th>顏色</th><th>時段</th><th>適合度</th></tr>
+<tr><td>🟢 綠色</td><td>09:00~18:00</td><td>上班時間，最適合</td></tr>
+<tr><td>🟡 黃色</td><td>07:00~09:00、18:00~22:00</td><td>清晨或傍晚，可接受</td></tr>
+<tr><td>🔴 紅色</td><td>22:00~07:00</td><td>深夜，不適合</td></tr></table>
+<h3>三、跨國會議的難處</h3>
+<ul>
+<li><strong>時區差</strong>：台北 UTC+8、紐約 UTC-5，差 13 小時。</li>
+<li><strong>上班時間不同</strong>：各國上班時間不同（歐美 9~5、亞洲 9~6）。</li>
+<li><strong>DST 日光節約時間</strong>：某些國家夏季調快 1 小時。</li>
+<li><strong>文化差異</strong>：有些國家午休長，有些國家不午休。</li>
+</ul>
+<h3>四、怎麼用？</h3>
+<div class="example">
+<div>1. 勾選與會城市（例如台北、倫敦、紐約）</div>
+<div>2. 按「規劃會議」</div>
+<div>3. 看哪個時段全部是綠色（或至少黃色）</div>
+<div>4. 選那個時段開會</div>
+</div>
+<h3>五、排會議的建議</h3>
+<ul>
+<li><strong>找「黃金時段」</strong>：所有城市都是綠色（09:00~18:00）的時段。</li>
+<li><strong>避免紅色</strong>：不要讓任何人深夜開會。</li>
+<li><strong>輪流犧牲</strong>：如果沒有黃金時段，讓不同城市輪流「早起或晚睡」。</li>
+<li><strong>錄影</strong>：如果不能全部同步，錄影給無法參加的人。</li>
+</ul>
+<h3>六、常見誤解</h3>
+<ul>
+<li><strong>❌ 誤解：全世界時間一樣。</strong><br>✅ 事實：地球劃分 24 時區，各區時間不同。</li>
+<li><strong>❌ 誤解：時區差固定。</strong><br>✅ 事實：DST（日光節約時間）會讓某些國家夏季差 1 小時。</li>
+<li><strong>❌ 誤解：找「中間時區」就好。</strong><br>✅ 事實：要考慮「所有人的上班時間」，不是「地理中間」。</li>
+<li><strong>❌ 誤解：跨國會議一定有人犧牲。</strong><br>✅ 事實：找對時段，可以「所有人都在上班時間」。</li>
+<li><strong>❌ 誤解：輪流犧牲不公平。</strong><br>✅ 事實：輪流犧牲是「長期公平」，總比「固定某人犧牲」好。</li>
+</ul>
+<h3>七、這個工具能幫你做什麼？</h3>
+<ul><li><strong>選擇 8 個城市</strong>：台北、東京、北京、新加坡、倫敦、巴黎、紐約、洛杉磯</li><li><strong>顏色標示</strong>：綠、黃、紅，一眼看出適合度</li><li><strong>找黃金時段</strong>：找出所有人都綠色的時段</li><li><strong>完全離線</strong>：不上傳任何資料</li></ul>
+<h3>八、常見問題（FAQ）</h3>
+<div class="doc-section"><h2>❓ 常見問題（FAQ）</h2><div class="faq-item"><div class="faq-q">世界會議時間規劃器是什麼？</div><div class="faq-a">世界會議時間規劃器是幫你找出「多個城市都能參加」的會議時間的工具。它用顏色標示各城市的上班時間。</div></div><div class="faq-item"><div class="faq-q">怎麼用？</div><div class="faq-a">選擇與會城市、選擇會議時長，工具會用顏色標示「所有人的上班時間」重疊的時段。</div></div><div class="faq-item"><div class="faq-q">綠色、黃色、紅色代表什麼？</div><div class="faq-a">綠色 = 上班時間（09:00~18:00），黃色 = 清晨或傍晚（07:00~09:00、18:00~22:00），紅色 = 深夜（22:00~07:00）。</div></div><div class="faq-item"><div class="faq-q">為什麼跨國會議很難排？</div><div class="faq-a">因為地球是圓的，各城市時區不同。例如台北與紐約差 13 小時，一方上班時另一方在睡覺。</div></div><div class="faq-item"><div class="faq-q">這個工具會上傳我的資料嗎？</div><div class="faq-a">不會。所有計算都在你的瀏覽器完成，不上傳任何資料。</div></div></div>
+<p style="text-align:center;color:#8B949E;font-size:13px;margin-top:24px;"><time datetime="2026-11-03">最後更新：2026-11-03</time></p>
+</article>
+<div class="footer">
+  <p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p>
+  <p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p>
+</div>
+</div>
+<script>
+var CITIES = [
+  {name:"台北", tz:"Asia/Taipei"},
+  {name:"東京", tz:"Asia/Tokyo"},
+  {name:"北京", tz:"Asia/Shanghai"},
+  {name:"新加坡", tz:"Asia/Singapore"},
+  {name:"倫敦", tz:"Europe/London"},
+  {name:"巴黎", tz:"Europe/Paris"},
+  {name:"紐約", tz:"America/New_York"},
+  {name:"洛杉磯", tz:"America/Los_Angeles"}
+];
+function getColor(hour) {
+  if (hour >= 9 && hour < 18) return "#3FB950";
+  if (hour >= 7 && hour < 22) return "#D4AF37";
+  return "#F85149";
+}
+function plan() {
+  var checked = [];
+  document.querySelectorAll("#cityList input:checked").forEach(function(el) {
+    var tz = el.value;
+    var c = CITIES.find(function(x) { return x.tz === tz; });
+    if (c) checked.push(c);
+  });
+  if (checked.length === 0) { document.getElementById("result").innerHTML = '<p style="color:#F85149;">請至少選一個城市</p>'; return; }
+  var now = new Date();
+  var baseDate = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  var html = '<div style="overflow-x:auto;"><table style="width:100%;border-collapse:collapse;font-size:13px;">';
+  html += '<tr><th style="padding:8px;border:1px solid #2D303A;background:#161B22;color:#D4AF37;text-align:left;">城市</th>';
+  for (var h = 0; h < 24; h++) html += '<th style="padding:4px;border:1px solid #2D303A;background:#161B22;color:#8B949E;font-size:11px;">' + h + '</th>';
+  html += '</tr>';
+  checked.forEach(function(c) {
+    html += '<tr><td style="padding:8px;border:1px solid #2D303A;color:#58A6FF;font-weight:700;">' + c.name + '</td>';
+    for (var h = 0; h < 24; h++) {
+      var utc = new Date(Date.UTC(baseDate.getFullYear(), baseDate.getMonth(), baseDate.getDate(), h));
+      var hour = parseInt(utc.toLocaleString("en-US", {timeZone:c.tz, hour:"2-digit", hour12:false}));
+      html += '<td style="padding:4px;border:1px solid #2D303A;text-align:center;background:' + getColor(hour) + '22;color:' + getColor(hour) + ';">' + hour + '</td>';
+    }
+    html += '</tr>';
+  });
+  html += '</table></div>';
+  html += '<div style="margin-top:12px;font-size:13px;color:#8B949E;">';
+  html += '<span style="display:inline-block;padding:2px 8px;background:rgba(63,185,80,0.2);border-radius:4px;margin-right:8px;">🟢 上班（9~18）</span>';
+  html += '<span style="display:inline-block;padding:2px 8px;background:rgba(212,175,55,0.2);border-radius:4px;margin-right:8px;">🟡 可接受（7~9、18~22）</span>';
+  html += '<span style="display:inline-block;padding:2px 8px;background:rgba(248,81,73,0.2);border-radius:4px;">🔴 深夜（22~7）</span>';
+  html += '</div>';
+  document.getElementById("result").innerHTML = html;
+}
+plan();
+</script>
+</body>
+</html>
