@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>時區換算器 | 雅寶工具箱 AHPAL.COM</title>
+<meta name="description" content="世界時區對照、會議時間換算。純前端、完全離線。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/timezone-converter/">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "時區換算器", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}, "description": "世界時區對照、會議時間換算。純前端、完全離線。", "url": "https://tools.ahpal.com/timezone-converter/"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "工具箱", "item": "https://tools.ahpal.com/"}, {"@type": "ListItem", "position": 2, "name": "時區換算器", "item": "https://tools.ahpal.com/timezone-converter/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "時區換算器是什麼？", "acceptedAnswer": {"@type": "Answer", "text": "時區換算器是把「一個時區的時間」換成「另一個時區的時間」的工具。"}}, {"@type": "Question", "name": "什麼是時區？", "acceptedAnswer": {"@type": "Answer", "text": "時區是「地球劃分的 24 個區域」，每個區域的時間不同。例如台灣 UTC+8、日本 UTC+9。"}}, {"@type": "Question", "name": "為什麼要有時區？", "acceptedAnswer": {"@type": "Answer", "text": "因為地球是圓的，太陽只能照到一半。各區域的「中午」時間不同，所以用時區區分。"}}, {"@type": "Question", "name": "UTC 和 GMT 差在哪？", "acceptedAnswer": {"@type": "Answer", "text": "UTC 是「協調世界時」（原子鐘），GMT 是「格林威治標準時間」（天文）。實務上兩者相同。"}}, {"@type": "Question", "name": "這個工具會上傳我的資料嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不會。所有換算都在你的瀏覽器完成，不上傳任何資料。"}}]}]}</script>
+<style>*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:40px 20px;}
+.container{max-width:1000px;margin:0 auto;}
+h1{color:#D4AF37;font-size:28px;margin-bottom:12px;}
+.sub{color:#8B949E;margin-bottom:24px;font-size:14px;}
+.card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin-bottom:16px;}
+label{color:#8B949E;font-size:13px;display:block;margin-bottom:6px;}
+input,select,textarea{width:100%;background:#0D1117;color:#E6EDF3;border:1px solid #2D303A;border-radius:8px;padding:12px;font-size:14px;margin-bottom:12px;font-family:inherit;}
+button{background:#D4AF37;color:#0D1117;border:none;border-radius:8px;padding:10px 20px;font-weight:700;cursor:pointer;margin:8px 8px 8px 0;font-size:14px;}
+button:hover{background:#e6c24a;}
+button.blue{background:#58A6FF;}
+.result{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:16px;font-size:15px;min-height:60px;}
+.result .big{font-size:28px;font-weight:700;color:#D4AF37;text-align:center;padding:12px 0;}
+.tip{background:rgba(63,185,80,0.08);border-left:4px solid #3FB950;padding:12px 16px;border-radius:6px;color:#C9D1D9;font-size:13px;margin-top:12px;}
+.warn{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:12px 16px;border-radius:6px;color:#C9D1D9;font-size:13px;margin-top:12px;}
+.footer{text-align:center;margin-top:60px;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:600px){.row{grid-template-columns:1fr;}}
+.breadcrumb{font-size:13px;color:#8B949E;margin-bottom:16px;}
+.breadcrumb a{color:#58A6FF;text-decoration:none;}
+.doc-section{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:28px 32px;margin-top:32px;}
+.doc-section h2{color:#D4AF37;font-size:22px;margin:24px 0 16px;padding-bottom:8px;border-bottom:2px solid #2D303A;}
+.doc-section h2:first-child{margin-top:0;}
+.doc-section h3{color:#58A6FF;font-size:17px;margin:24px 0 10px;}
+.doc-section p{color:#C9D1D9;margin-bottom:12px;line-height:1.9;}
+.doc-section ul,.doc-section ol{margin:8px 0 16px 24px;color:#C9D1D9;}
+.doc-section li{margin-bottom:8px;line-height:1.8;}
+.doc-section code{background:#0D1117;color:#58A6FF;padding:2px 8px;border-radius:4px;font-family:Consolas,monospace;font-size:13px;}
+.doc-section .highlight{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:6px;margin:16px 0;}
+.doc-section .warnbox{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:14px 18px;border-radius:6px;margin:16px 0;}
+.doc-section table{width:100%;border-collapse:collapse;font-size:14px;margin:12px 0 20px;}
+.doc-section th,.doc-section td{padding:10px 14px;border:1px solid #2D303A;text-align:left;}
+.doc-section th{background:rgba(212,175,55,0.12);color:#D4AF37;}
+.doc-section tr:nth-child(even){background:rgba(255,255,255,0.02);}
+.doc-section .example{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:16px;font-family:Consolas,monospace;font-size:13px;color:#C9D1D9;margin:12px 0;line-height:1.8;}
+.faq-item{border-bottom:1px solid #2D303A;padding:14px 0;}
+.faq-item:last-child{border-bottom:none;}
+.faq-q{color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;}
+.faq-a{color:#C9D1D9;font-size:14px;line-height:1.9;}</style>
+</head>
+<body>
+<div class="container">
+<nav style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;">
+  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏠 首頁</a>
+  <a href="https://www.ahpal.com/categories.html" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📚 全部分類</a>
+  <a href="https://www.ahpal.com/strategy/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📌 策略文章</a>
+  <a href="https://novels.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📖 小說站</a>
+  <a href="https://memories.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏛️ 回憶館</a>
+  <a href="https://bbs2.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">💬 BBS2</a>
+  <a href="https://pet.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">⚔️ 打怪場</a>
+  <a href="https://farm.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🌾 農場</a>
+  <a href="https://tools.ahpal.com/" style="color:#0D1117;background:#D4AF37;text-decoration:none;padding:4px 10px;font-weight:700;">🛠️ 工具箱</a>
+</nav>
+<div class="breadcrumb"><a href="https://tools.ahpal.com/">🛠️ 工具箱</a> › 時區換算器</div>
+<article>
+<h1>🌍 時區換算器</h1>
+<p class="sub">世界時區對照、會議時間換算。純前端、完全離線。</p>
+<div class="card">
+  <label>現在時間（本地）</label>
+  <div id="localTime" style="font-size:24px;color:#D4AF37;font-weight:700;text-align:center;padding:12px;">--</div>
+  <label>選擇時區（可多選看對照）</label>
+  <div id="tzList" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;"></div>
+</div>
+<div class="card"><label>世界時區對照（即時）</label><div class="result" id="result"></div></div>
+<div class="doc-section">
+<h2>📚 時區換算器是什麼？給門外漢的完整說明</h2>
+<p>你要跟美國客戶開會，不知道對方幾點；你要看日本直播，不知道台灣幾點。這就是「時區換算」。這篇文章一次講清楚。</p>
+<h3>一、一句話講完</h3>
+<div class="highlight"><p><strong>時區換算器 = 把「一個時區的時間」換成「另一個時區的時間」。</strong></p><p>本工具即時顯示世界 12 個主要城市的當前時間。</p></div>
+<h3>二、時區是什麼？</h3>
+<p>時區是「地球劃分的 24 個區域」，每個區域的時間不同。因為地球是圓的，太陽只能照到一半，所以各區域的「中午」時間不同。</p>
+<h3>三、UTC 和 GMT 差在哪？</h3>
+<table><tr><th>名稱</th><th>全名</th><th>基準</th></tr>
+<tr><td>UTC</td><td>協調世界時</td><td>原子鐘</td></tr>
+<tr><td>GMT</td><td>格林威治標準時間</td><td>天文觀測</td></tr></table>
+<p>實務上兩者相同（差距 <1 秒）。</p>
+<h3>四、常見時區</h3>
+<table><tr><th>城市</th><th>時區</th><th>與台灣差</th></tr>
+<tr><td>台北</td><td>UTC+8</td><td>0</td></tr>
+<tr><td>東京</td><td>UTC+9</td><td>+1</td></tr>
+<tr><td>首爾</td><td>UTC+9</td><td>+1</td></tr>
+<tr><td>北京</td><td>UTC+8</td><td>0</td></tr>
+<tr><td>香港</td><td>UTC+8</td><td>0</td></tr>
+<tr><td>新加坡</td><td>UTC+8</td><td>0</td></tr>
+<tr><td>雪梨</td><td>UTC+10/+11</td><td>+2/+3</td></tr>
+<tr><td>倫敦</td><td>UTC+0/+1</td><td>-8/-7</td></tr>
+<tr><td>巴黎</td><td>UTC+1/+2</td><td>-7/-6</td></tr>
+<tr><td>紐約</td><td>UTC-5/-4</td><td>-13/-12</td></tr>
+<tr><td>洛杉磯</td><td>UTC-8/-7</td><td>-16/-15</td></tr>
+</table>
+<h3>五、怎麼用？</h3>
+<div class="example">
+<div>現在台灣時間：14:00</div>
+<div>日本東京：15:00（+1）</div>
+<div>美國紐約：01:00（-13，冬季）</div>
+<div>英國倫敦：06:00（-8，冬季）</div>
+</div>
+<h3>六、常見誤解</h3>
+<ul>
+<li><strong>❌ 誤解：全世界時間一樣。</strong><br>✅ 事實：地球劃分 24 時區，各區時間不同。</li>
+<li><strong>❌ 誤解：時區差固定。</strong><br>✅ 事實：有些地區有「日光節約時間」（DST），差 1 小時。</li>
+<li><strong>❌ 誤解：中國有多大時區？</strong><br>✅ 事實：中國統一用 UTC+8（雖然地理上跨 5 個時區）。</li>
+<li><strong>❌ 誤解：時區換算很簡單。</strong><br>✅ 事實：DST、半小時時區（印度 UTC+5:30）會讓人搞混。</li>
+<li><strong>❌ 誤解：UTC = GMT。</strong><br>✅ 事實：實務上相同，但 UTC 用原子鐘，GMT 用天文觀測。</li>
+</ul>
+<h3>七、這個工具能幫你做什麼？</h3>
+<ul><li><strong>即時顯示</strong>：世界 12 個主要城市的當前時間</li><li><strong>時區對照</strong>：一眼看出各城市時間差</li><li><strong>完全離線</strong>：不上傳任何資料</li></ul>
+<h3>八、常見問題（FAQ）</h3>
+<div class="doc-section"><h2>❓ 常見問題（FAQ）</h2><div class="faq-item"><div class="faq-q">時區換算器是什麼？</div><div class="faq-a">時區換算器是把「一個時區的時間」換成「另一個時區的時間」的工具。</div></div><div class="faq-item"><div class="faq-q">什麼是時區？</div><div class="faq-a">時區是「地球劃分的 24 個區域」，每個區域的時間不同。例如台灣 UTC+8、日本 UTC+9。</div></div><div class="faq-item"><div class="faq-q">為什麼要有時區？</div><div class="faq-a">因為地球是圓的，太陽只能照到一半。各區域的「中午」時間不同，所以用時區區分。</div></div><div class="faq-item"><div class="faq-q">UTC 和 GMT 差在哪？</div><div class="faq-a">UTC 是「協調世界時」（原子鐘），GMT 是「格林威治標準時間」（天文）。實務上兩者相同。</div></div><div class="faq-item"><div class="faq-q">這個工具會上傳我的資料嗎？</div><div class="faq-a">不會。所有換算都在你的瀏覽器完成，不上傳任何資料。</div></div></div>
+<p style="text-align:center;color:#8B949E;font-size:13px;margin-top:24px;"><time datetime="2026-11-03">最後更新：2026-11-03</time></p>
+</article>
+<div class="footer">
+  <p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p>
+  <p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p>
+</div>
+</div>
+<script>
+var TIMEZONES = [
+  {city:"台北", tz:"Asia/Taipei"},
+  {city:"東京", tz:"Asia/Tokyo"},
+  {city:"首爾", tz:"Asia/Seoul"},
+  {city:"北京", tz:"Asia/Shanghai"},
+  {city:"香港", tz:"Asia/Hong_Kong"},
+  {city:"新加坡", tz:"Asia/Singapore"},
+  {city:"雪梨", tz:"Australia/Sydney"},
+  {city:"倫敦", tz:"Europe/London"},
+  {city:"巴黎", tz:"Europe/Paris"},
+  {city:"紐約", tz:"America/New_York"},
+  {city:"洛杉磯", tz:"America/Los_Angeles"},
+  {city:"杜拜", tz:"Asia/Dubai"}
+];
+function update() {
+  var now = new Date();
+  var local = now.toLocaleString("zh-TW", {timeZone:"Asia/Taipei", hour12:false});
+  document.getElementById("localTime").textContent = local;
+  var html = '<table style="width:100%;border-collapse:collapse;">';
+  TIMEZONES.forEach(function(item) {
+    var t = now.toLocaleString("zh-TW", {timeZone: item.tz, hour12:false});
+    html += '<tr style="border-bottom:1px solid #2D303A;"><td style="padding:8px;color:#8B949E;">' + item.city + '</td><td style="padding:8px;text-align:right;color:#58A6FF;font-family:Consolas,monospace;">' + t + '</td></tr>';
+  });
+  html += '</table>';
+  document.getElementById("result").innerHTML = html;
+}
+update();
+setInterval(update, 1000);
+</script>
+</body>
+</html>

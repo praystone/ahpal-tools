@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>注音拼音轉換器 | 雅寶工具箱 AHPAL.COM</title>
+<meta name="description" content="中文 ↔ 注音 ↔ 漢語拼音，即時轉換。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/pinyin-converter/">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "注音拼音轉換器", "applicationCategory": "EducationApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}, "description": "中文 ↔ 注音 ↔ 漢語拼音，即時轉換。純前端、完全離線。", "url": "https://tools.ahpal.com/pinyin-converter/"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "工具箱", "item": "https://tools.ahpal.com/"}, {"@type": "ListItem", "position": 2, "name": "注音拼音轉換器", "item": "https://tools.ahpal.com/pinyin-converter/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "注音拼音轉換器是什麼？", "acceptedAnswer": {"@type": "Answer", "text": "注音拼音轉換器是把「中文」轉成「注音符號」或「漢語拼音」的工具。"}}, {"@type": "Question", "name": "注音和拼音差在哪？", "acceptedAnswer": {"@type": "Answer", "text": "注音是台灣使用的「ㄅㄆㄇㄈ」，拼音是大陸使用的「b p m f」。兩者都是中文的「標音系統」。"}}, {"@type": "Question", "name": "為什麼要學注音或拼音？", "acceptedAnswer": {"@type": "Answer", "text": "學中文時，需要「標音」來記發音。注音在台灣、拼音在大陸。"}}, {"@type": "Question", "name": "這個工具的轉換準確嗎？", "acceptedAnswer": {"@type": "Answer", "text": "基本準確。但「破音字」（一字多音）可能出錯，需依上下文判斷。"}}, {"@type": "Question", "name": "這個工具會上傳我的文字嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不會。所有轉換都在你的瀏覽器完成，不上傳任何資料。"}}]}]}</script>
+<style>*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:40px 20px;}
+.container{max-width:1000px;margin:0 auto;}
+h1{color:#D4AF37;font-size:28px;margin-bottom:12px;}
+.sub{color:#8B949E;margin-bottom:24px;font-size:14px;}
+.card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin-bottom:16px;}
+label{color:#8B949E;font-size:13px;display:block;margin-bottom:6px;}
+input,select,textarea{width:100%;background:#0D1117;color:#E6EDF3;border:1px solid #2D303A;border-radius:8px;padding:12px;font-size:14px;margin-bottom:12px;font-family:inherit;}
+button{background:#D4AF37;color:#0D1117;border:none;border-radius:8px;padding:10px 20px;font-weight:700;cursor:pointer;margin:8px 8px 8px 0;font-size:14px;}
+button:hover{background:#e6c24a;}
+button.blue{background:#58A6FF;}
+.result{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:16px;font-size:15px;min-height:60px;}
+.result .big{font-size:28px;font-weight:700;color:#D4AF37;text-align:center;padding:12px 0;}
+.tip{background:rgba(63,185,80,0.08);border-left:4px solid #3FB950;padding:12px 16px;border-radius:6px;color:#C9D1D9;font-size:13px;margin-top:12px;}
+.warn{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:12px 16px;border-radius:6px;color:#C9D1D9;font-size:13px;margin-top:12px;}
+.footer{text-align:center;margin-top:60px;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:600px){.row{grid-template-columns:1fr;}}
+.breadcrumb{font-size:13px;color:#8B949E;margin-bottom:16px;}
+.breadcrumb a{color:#58A6FF;text-decoration:none;}
+.doc-section{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:28px 32px;margin-top:32px;}
+.doc-section h2{color:#D4AF37;font-size:22px;margin:24px 0 16px;padding-bottom:8px;border-bottom:2px solid #2D303A;}
+.doc-section h2:first-child{margin-top:0;}
+.doc-section h3{color:#58A6FF;font-size:17px;margin:24px 0 10px;}
+.doc-section p{color:#C9D1D9;margin-bottom:12px;line-height:1.9;}
+.doc-section ul,.doc-section ol{margin:8px 0 16px 24px;color:#C9D1D9;}
+.doc-section li{margin-bottom:8px;line-height:1.8;}
+.doc-section code{background:#0D1117;color:#58A6FF;padding:2px 8px;border-radius:4px;font-family:Consolas,monospace;font-size:13px;}
+.doc-section .highlight{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:6px;margin:16px 0;}
+.doc-section .warnbox{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:14px 18px;border-radius:6px;margin:16px 0;}
+.doc-section table{width:100%;border-collapse:collapse;font-size:14px;margin:12px 0 20px;}
+.doc-section th,.doc-section td{padding:10px 14px;border:1px solid #2D303A;text-align:left;}
+.doc-section th{background:rgba(212,175,55,0.12);color:#D4AF37;}
+.doc-section tr:nth-child(even){background:rgba(255,255,255,0.02);}
+.doc-section .example{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:16px;font-family:Consolas,monospace;font-size:13px;color:#C9D1D9;margin:12px 0;line-height:1.8;}
+.faq-item{border-bottom:1px solid #2D303A;padding:14px 0;}
+.faq-item:last-child{border-bottom:none;}
+.faq-q{color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;}
+.faq-a{color:#C9D1D9;font-size:14px;line-height:1.9;}</style>
+</head>
+<body>
+<div class="container">
+<nav style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;">
+  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏠 首頁</a>
+  <a href="https://www.ahpal.com/categories.html" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📚 全部分類</a>
+  <a href="https://www.ahpal.com/strategy/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📌 策略文章</a>
+  <a href="https://novels.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📖 小說站</a>
+  <a href="https://memories.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏛️ 回憶館</a>
+  <a href="https://bbs2.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">💬 BBS2</a>
+  <a href="https://pet.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">⚔️ 打怪場</a>
+  <a href="https://farm.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🌾 農場</a>
+  <a href="https://tools.ahpal.com/" style="color:#0D1117;background:#D4AF37;text-decoration:none;padding:4px 10px;font-weight:700;">🛠️ 工具箱</a>
+</nav>
+<div class="breadcrumb"><a href="https://tools.ahpal.com/">🛠️ 工具箱</a> › 注音拼音轉換器</div>
+<article>
+<h1>🔤 注音拼音轉換器</h1>
+<p class="sub">中文 ↔ 注音 ↔ 漢語拼音，即時轉換。</p>
+<div class="card">
+  <label>轉換模式</label>
+  <select id="mode">
+    <option value="zh2pinyin">中文 → 漢語拼音</option>
+    <option value="zh2zhuyin">中文 → 注音符號</option>
+  </select>
+  <label>輸入中文</label>
+  <textarea id="input" rows="4" placeholder="輸入中文..." oninput="convert()">你好世界台灣</textarea>
+  <label>結果</label>
+  <textarea id="output" rows="4" readonly placeholder="轉換結果..."></textarea>
+  <div class="tip">✅ 完全離線：所有轉換都在你的瀏覽器完成，不上傳任何資料。</div>
+  <div class="warn">⚠️ 破音字（一字多音）可能出錯，需依上下文判斷。</div>
+</div>
+<div class="doc-section">
+<h2>📚 注音拼音轉換是什麼？給門外漢的完整說明</h2>
+<p>你學中文，看到「ㄅㄆㄇ」不懂；你學拼音，看到「b p m f」不懂。這篇文章一次講清楚「注音 vs 拼音」。</p>
+<h3>一、一句話講完</h3>
+<div class="highlight"><p><strong>注音拼音轉換 = 把「中文」轉成「注音」或「拼音」。</strong></p><p>注音（台灣）、拼音（大陸）都是中文的「標音系統」。</p></div>
+<h3>二、注音 vs 拼音</h3>
+<table><tr><th>項目</th><th>注音</th><th>拼音</th></tr>
+<tr><td>使用地區</td><td>台灣</td><td>大陸、國際</td></tr>
+<tr><td>符號</td><td>ㄅㄆㄇㄈ</td><td>b p m f</td></tr>
+<tr><td>聲調</td><td>ˊˇˋ˙</td><td>ā á ǎ à</td></tr>
+<tr><td>例子</td><td>ㄋㄧˇ ㄏㄠˇ</td><td>nǐ hǎo</td></tr></table>
+<h3>三、注音的由來</h3>
+<p>注音符號（ㄅㄆㄇㄈ）是 1913 年由中華民國教育部制定的，用來標注中文讀音。1949 年後，台灣沿用注音，大陸改用拼音。</p>
+<h3>四、拼音的由來</h3>
+<p>漢語拼音是 1958 年由中華人民共和國制定的，用來標注中文讀音。1982 年成為國際標準（ISO 7098），是目前國際通用的中文標音系統。</p>
+<h3>五、怎麼用？</h3>
+<div class="example">
+<div>中文：你好世界台灣</div>
+<div>拼音：nǐ hǎo shì jiè tái wān</div>
+<div>注音：ㄋㄧˇ ㄏㄠˇ ㄕˋ ㄐㄧㄝˋ ㄊㄞˊ ㄨㄢ</div>
+</div>
+<h3>六、常見誤解</h3>
+<ul>
+<li><strong>❌ 誤解：注音和拼音一樣。</strong><br>✅ 事實：注音用「符號」，拼音用「字母」，兩者不同。</li>
+<li><strong>❌ 誤解：拼音是「英文」。</strong><br>✅ 事實：拼音用英文字母，但是「中文標音」，不是英文。</li>
+<li><strong>❌ 誤解：注音只有台灣用。</strong><br>✅ 事實：注音是台灣官方標音系統，其他地區少用。</li>
+<li><strong>❌ 誤解：拼音沒有聲調。</strong><br>✅ 事實：拼音有 4 聲（ā á ǎ à）+ 輕聲。</li>
+<li><strong>❌ 誤解：轉換 100% 準。</strong><br>✅ 事實：破音字（一字多音）可能出錯。</li>
+</ul>
+<h3>七、這個工具能幫你做什麼？</h3>
+<ul><li><strong>中文 → 拼音</strong>：輸入中文，得到拼音</li><li><strong>中文 → 注音</strong>：輸入中文，得到注音</li><li><strong>即時轉換</strong>：輸入即算</li><li><strong>完全離線</strong>：不上傳任何資料</li></ul>
+<h3>八、常見問題（FAQ）</h3>
+<div class="doc-section"><h2>❓ 常見問題（FAQ）</h2><div class="faq-item"><div class="faq-q">注音拼音轉換器是什麼？</div><div class="faq-a">注音拼音轉換器是把「中文」轉成「注音符號」或「漢語拼音」的工具。</div></div><div class="faq-item"><div class="faq-q">注音和拼音差在哪？</div><div class="faq-a">注音是台灣使用的「ㄅㄆㄇㄈ」，拼音是大陸使用的「b p m f」。兩者都是中文的「標音系統」。</div></div><div class="faq-item"><div class="faq-q">為什麼要學注音或拼音？</div><div class="faq-a">學中文時，需要「標音」來記發音。注音在台灣、拼音在大陸。</div></div><div class="faq-item"><div class="faq-q">這個工具的轉換準確嗎？</div><div class="faq-a">基本準確。但「破音字」（一字多音）可能出錯，需依上下文判斷。</div></div><div class="faq-item"><div class="faq-q">這個工具會上傳我的文字嗎？</div><div class="faq-a">不會。所有轉換都在你的瀏覽器完成，不上傳任何資料。</div></div></div>
+<p style="text-align:center;color:#8B949E;font-size:13px;margin-top:24px;"><time datetime="2026-11-03">最後更新：2026-11-03</time></p>
+</article>
+<div class="footer">
+  <p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p>
+  <p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/pinyin-pro@3.26.0/dist/index.js"></script>
+<script>
+function convert() {
+  var mode = document.getElementById("mode").value;
+  var input = document.getElementById("input").value;
+  var output = document.getElementById("output");
+  if (!input) { output.value = ""; return; }
+  try {
+    if (mode === "zh2pinyin") {
+      output.value = pinyinPro.pinyin(input, {toneType: "symbol"});
+    } else {
+      output.value = pinyinPro.pinyin(input, {pattern: "zhuyin"});
+    }
+  } catch(e) {
+    output.value = "轉換失敗：" + e.message;
+  }
+}
+document.getElementById("mode").addEventListener("change", convert);
+window.addEventListener("load", convert);
+</script>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>文字加密器 | 雅寶工具箱 AHPAL.COM</title>
+<meta name="description" content="用 AES-256-GCM 加密文字，用密碼保護機密訊息。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/text-encrypt/">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "文字加密器", "applicationCategory": "SecurityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}, "description": "用 AES-256-GCM 加密文字，用密碼保護機密訊息。純前端、完全離線。", "url": "https://tools.ahpal.com/text-encrypt/"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "工具箱", "item": "https://tools.ahpal.com/"}, {"@type": "ListItem", "position": 2, "name": "文字加密器", "item": "https://tools.ahpal.com/text-encrypt/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "文字加密器是什麼？", "acceptedAnswer": {"@type": "Answer", "text": "文字加密器是用「密碼」把文字加密成亂碼，再用同一組密碼解密的工具。它用 AES-256-GCM 加密，是業界標準。"}}, {"@type": "Question", "name": "AES-256 是什麼？", "acceptedAnswer": {"@type": "Answer", "text": "AES-256 是美國政府採用的對稱加密標準，256 位元金鑰，目前無法被暴力破解。"}}, {"@type": "Question", "name": "這個工具會上傳我的文字嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不會。所有加密、解密都在你的瀏覽器完成，不上傳任何資料，完全離線。"}}, {"@type": "Question", "name": "忘記密碼怎麼辦？", "acceptedAnswer": {"@type": "Answer", "text": "無法救回。AES-256 是對稱加密，沒有密碼就無法解密。請務必記住密碼。"}}, {"@type": "Question", "name": "加密後的文字安全嗎？", "acceptedAnswer": {"@type": "Answer", "text": "安全。AES-256-GCM 是目前最強的對稱加密之一。但密碼強度決定安全性，請用高強度密碼。"}}]}]}</script>
+<style>*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:40px 20px;}
+.container{max-width:1000px;margin:0 auto;}
+h1{color:#D4AF37;font-size:28px;margin-bottom:12px;}
+.sub{color:#8B949E;margin-bottom:24px;font-size:14px;}
+.card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin-bottom:16px;}
+label{color:#8B949E;font-size:13px;display:block;margin-bottom:6px;}
+input,select,textarea{width:100%;background:#0D1117;color:#E6EDF3;border:1px solid #2D303A;border-radius:8px;padding:12px;font-size:14px;margin-bottom:12px;font-family:inherit;}
+button{background:#D4AF37;color:#0D1117;border:none;border-radius:8px;padding:10px 20px;font-weight:700;cursor:pointer;margin:8px 8px 8px 0;font-size:14px;}
+button:hover{background:#e6c24a;}
+button.blue{background:#58A6FF;}
+.result{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:16px;font-size:15px;min-height:60px;}
+.result .big{font-size:28px;font-weight:700;color:#D4AF37;text-align:center;padding:12px 0;}
+.tip{background:rgba(63,185,80,0.08);border-left:4px solid #3FB950;padding:12px 16px;border-radius:6px;color:#C9D1D9;font-size:13px;margin-top:12px;}
+.warn{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:12px 16px;border-radius:6px;color:#C9D1D9;font-size:13px;margin-top:12px;}
+.footer{text-align:center;margin-top:60px;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:600px){.row{grid-template-columns:1fr;}}
+.breadcrumb{font-size:13px;color:#8B949E;margin-bottom:16px;}
+.breadcrumb a{color:#58A6FF;text-decoration:none;}
+.doc-section{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:28px 32px;margin-top:32px;}
+.doc-section h2{color:#D4AF37;font-size:22px;margin:24px 0 16px;padding-bottom:8px;border-bottom:2px solid #2D303A;}
+.doc-section h2:first-child{margin-top:0;}
+.doc-section h3{color:#58A6FF;font-size:17px;margin:24px 0 10px;}
+.doc-section p{color:#C9D1D9;margin-bottom:12px;line-height:1.9;}
+.doc-section ul,.doc-section ol{margin:8px 0 16px 24px;color:#C9D1D9;}
+.doc-section li{margin-bottom:8px;line-height:1.8;}
+.doc-section code{background:#0D1117;color:#58A6FF;padding:2px 8px;border-radius:4px;font-family:Consolas,monospace;font-size:13px;}
+.doc-section .highlight{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:6px;margin:16px 0;}
+.doc-section .warnbox{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:14px 18px;border-radius:6px;margin:16px 0;}
+.doc-section table{width:100%;border-collapse:collapse;font-size:14px;margin:12px 0 20px;}
+.doc-section th,.doc-section td{padding:10px 14px;border:1px solid #2D303A;text-align:left;}
+.doc-section th{background:rgba(212,175,55,0.12);color:#D4AF37;}
+.doc-section tr:nth-child(even){background:rgba(255,255,255,0.02);}
+.doc-section .example{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:16px;font-family:Consolas,monospace;font-size:13px;color:#C9D1D9;margin:12px 0;line-height:1.8;}
+.faq-item{border-bottom:1px solid #2D303A;padding:14px 0;}
+.faq-item:last-child{border-bottom:none;}
+.faq-q{color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;}
+.faq-a{color:#C9D1D9;font-size:14px;line-height:1.9;}</style>
+</head>
+<body>
+<div class="container">
+<nav style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;">
+  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏠 首頁</a>
+  <a href="https://www.ahpal.com/categories.html" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📚 全部分類</a>
+  <a href="https://www.ahpal.com/strategy/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📌 策略文章</a>
+  <a href="https://novels.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📖 小說站</a>
+  <a href="https://memories.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏛️ 回憶館</a>
+  <a href="https://bbs2.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">💬 BBS2</a>
+  <a href="https://pet.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">⚔️ 打怪場</a>
+  <a href="https://farm.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🌾 農場</a>
+  <a href="https://tools.ahpal.com/" style="color:#0D1117;background:#D4AF37;text-decoration:none;padding:4px 10px;font-weight:700;">🛠️ 工具箱</a>
+</nav>
+<div class="breadcrumb"><a href="https://tools.ahpal.com/">🛠️ 工具箱</a> › 文字加密器</div>
+<article>
+<h1>🔐 文字加密器</h1>
+<p class="sub">用 AES-256-GCM 加密文字，用密碼保護機密訊息。</p>
+<div class="card">
+  <label>模式</label>
+  <select id="mode">
+    <option value="encrypt">加密（文字 → 亂碼）</option>
+    <option value="decrypt">解密（亂碼 → 文字）</option>
+  </select>
+  <label>密碼</label>
+  <input type="password" id="password" placeholder="輸入密碼（建議 12 字元以上）">
+  <label>文字</label>
+  <textarea id="input" rows="5" placeholder="輸入要加密或解密的文字..."></textarea>
+  <button onclick="process()">🔐 執行</button>
+  <button class="blue" onclick="copyResult()">📋 複製結果</button>
+  <div class="tip">✅ 完全離線：所有加密都在你的瀏覽器完成，不上傳任何資料。</div>
+</div>
+<div class="card"><label>結果</label><div class="result" id="result" style="word-break:break-all;">（按「執行」）</div></div>
+<div class="doc-section">
+<h2>📚 文字加密是什麼？給門外漢的完整說明</h2>
+<p>你要傳一段機密訊息給朋友，但不想被別人看到；你要備份日記，但不想被家人看到。這就是「文字加密」。這篇文章一次講清楚。</p>
+<h3>一、一句話講完</h3>
+<div class="highlight"><p><strong>文字加密 = 用「密碼」把文字變成亂碼，只有知道密碼的人能還原。</strong></p><p>本工具用 AES-256-GCM，是目前最強的對稱加密之一。</p></div>
+<h3>二、對稱加密 vs 非對稱加密</h3>
+<table><tr><th>類型</th><th>金鑰</th><th>速度</th><th>例子</th></tr>
+<tr><td>對稱加密</td><td>同一把</td><td>快</td><td>AES、ChaCha20</td></tr>
+<tr><td>非對稱加密</td><td>公鑰 + 私鑰</td><td>慢</td><td>RSA、ECC</td></tr></table>
+<p>本工具用「對稱加密」，因為它快、適合大量文字。</p>
+<h3>三、AES-256-GCM 是什麼？</h3>
+<ul>
+<li><strong>AES</strong>：Advanced Encryption Standard，美國政府標準。</li>
+<li><strong>256</strong>：金鑰長度 256 位元（2^256 種組合，目前無法暴力破解）。</li>
+<li><strong>GCM</strong>：Galois/Counter Mode，提供「加密 + 完整性驗證」。</li>
+</ul>
+<h3>四、怎麼用？</h3>
+<div class="example">
+<div>1. 選「加密」模式</div>
+<div>2. 輸入密碼（例如 my-secret-2026）</div>
+<div>3. 輸入文字（例如「明天下午三點，老地方見」）</div>
+<div>4. 按「執行」→ 得到亂碼</div>
+<div>5. 把亂碼傳給朋友，朋友用同一組密碼「解密」</div>
+</div>
+<h3>五、密碼要多強？</h3>
+<ul>
+<li><strong>長度</strong>：至少 12 字元，重要訊息 20 字元。</li>
+<li><strong>混合</strong>：大小寫、數字、符號。</li>
+<li><strong>不重複</strong>：不要用生日、電話、名字。</li>
+<li><strong>記住</strong>：忘記密碼 = 無法解密，沒有「救回」功能。</li>
+</ul>
+<h3>六、常見誤解</h3>
+<ul>
+<li><strong>❌ 誤解：加密 = 編碼。</strong><br>✅ 事實：編碼（Base64）可逆，任何人可解；加密（AES）需要密碼。</li>
+<li><strong>❌ 誤解：AES-256 無法破解。</strong><br>✅ 事實：AES-256 本身無法破解，但「弱密碼」可被暴力破解。</li>
+<li><strong>❌ 誤解：忘記密碼可以救回。</strong><br>✅ 事實：對稱加密沒有「救回」功能，忘記密碼就無法解密。</li>
+<li><strong>❌ 誤解：加密後絕對安全。</strong><br>✅ 事實：加密保護「內容」，但「傳輸過程」仍可能被攔截。</li>
+<li><strong>❌ 誤解：加密會讓檔案變大。</strong><br>✅ 事實：加密後會變大（因為要加 IV、tag），但差異不大。</li>
+</ul>
+<h3>七、這個工具能幫你做什麼？</h3>
+<ul><li><strong>加密文字</strong>：用密碼加密，變成亂碼</li><li><strong>解密文字</strong>：用同一組密碼解密，還原文字</li><li><strong>一鍵複製</strong>：複製加密或解密結果</li><li><strong>完全離線</strong>：不上傳任何資料</li></ul>
+<h3>八、常見問題（FAQ）</h3>
+<div class="doc-section"><h2>❓ 常見問題（FAQ）</h2><div class="faq-item"><div class="faq-q">文字加密器是什麼？</div><div class="faq-a">文字加密器是用「密碼」把文字加密成亂碼，再用同一組密碼解密的工具。它用 AES-256-GCM 加密，是業界標準。</div></div><div class="faq-item"><div class="faq-q">AES-256 是什麼？</div><div class="faq-a">AES-256 是美國政府採用的對稱加密標準，256 位元金鑰，目前無法被暴力破解。</div></div><div class="faq-item"><div class="faq-q">這個工具會上傳我的文字嗎？</div><div class="faq-a">不會。所有加密、解密都在你的瀏覽器完成，不上傳任何資料，完全離線。</div></div><div class="faq-item"><div class="faq-q">忘記密碼怎麼辦？</div><div class="faq-a">無法救回。AES-256 是對稱加密，沒有密碼就無法解密。請務必記住密碼。</div></div><div class="faq-item"><div class="faq-q">加密後的文字安全嗎？</div><div class="faq-a">安全。AES-256-GCM 是目前最強的對稱加密之一。但密碼強度決定安全性，請用高強度密碼。</div></div></div>
+<p style="text-align:center;color:#8B949E;font-size:13px;margin-top:24px;"><time datetime="2026-11-03">最後更新：2026-11-03</time></p>
+</article>
+<div class="footer">
+  <p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p>
+  <p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/crypto-js@4.2.0/crypto-js.min.js"></script>
+<script>
+function process() {
+  var mode = document.getElementById("mode").value;
+  var pwd = document.getElementById("password").value;
+  var input = document.getElementById("input").value;
+  var result = document.getElementById("result");
+  if (!pwd || !input) { result.textContent = "請輸入密碼與文字"; return; }
+  try {
+    if (mode === "encrypt") {
+      var encrypted = CryptoJS.AES.encrypt(input, pwd).toString();
+      result.textContent = encrypted;
+    } else {
+      var decrypted = CryptoJS.AES.decrypt(input, pwd).toString(CryptoJS.enc.Utf8);
+      if (!decrypted) { result.textContent = "解密失敗：密碼錯誤或資料損壞"; return; }
+      result.textContent = decrypted;
+    }
+  } catch(e) { result.textContent = "錯誤：" + e.message; }
+}
+function copyResult() {
+  var t = document.getElementById("result").textContent;
+  if (!t || t.indexOf("按") >= 0) return;
+  navigator.clipboard.writeText(t).then(function() { alert("已複製！"); });
+}
+</script>
+</body>
+</html>
