@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>🛠️ 雅寶工具箱 | AHPAL.COM</title>
-<meta name="description" content="雅寶社區 · 頂客論壇 線上工具箱。HTML 編輯器、JSON 格式化、Base64、Markdown、檔名檢查、ICO 轉換，22 個工具一站搞定。">
+<meta name="description" content="雅寶社區 · 頂客論壇 線上工具箱。HTML 編輯器、JSON 格式化、Base64、Markdown、檔名檢查、ICO 轉換，20 個工具一站搞定。">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://tools.ahpal.com/">
 <style>
@@ -41,7 +41,7 @@ h1{color:#D4AF37;font-size:32px;margin-bottom:12px;text-align:center;}
 </nav>
 <div class="container">
 <h1>🛠️ 雅寶工具箱</h1>
-<p class="sub">雅寶社區 · 頂客論壇 線上工具箱 · 22 個工具一站搞定</p>
+<p class="sub">雅寶社區 · 頂客論壇 線上工具箱 · 20 個工具一站搞定</p>
 
 <div style="max-width:560px;margin:0 auto 24px;">
   <input type="text" id="tool-search" placeholder="🔍 搜尋工具（輸入名稱或關鍵字）..." oninput="filterTools()" style="width:100%;background:#161B22;color:#E6EDF3;border:1px solid #2D303A;border-radius:12px;padding:14px 20px;font-size:15px;outline:none;">
@@ -91,6 +91,21 @@ function filterTools(){
 </script>
 <div class="section-title">📝 文字處理</div>
 <div class="tool-grid">
+<div style="margin:20px auto;max-width:600px;"><input type="search" id="tool-search" placeholder="🔍 搜尋工具（例如：JSON、PDF、QR）..." style="width:100%;padding:14px 18px;background:#161B22;border:1px solid #D4AF37;border-radius:10px;color:#E6EDF3;font-size:15px;"></div>
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+  var inp = document.getElementById("tool-search");
+  if (!inp) return;
+  inp.addEventListener("input", function(){
+    var q = this.value.trim().toLowerCase();
+    var cards = document.querySelectorAll(".tool-card");
+    cards.forEach(function(c){
+      var t = c.textContent.toLowerCase();
+      c.style.display = (!q || t.indexOf(q) >= 0) ? "" : "none";
+    });
+  });
+});
+</script>
 <a href="/html-editor/" class="tool-card"><div class="tool-icon">📝</div><div class="tool-name">視覺化 HTML 編輯器</div><div class="tool-desc">即時預覽、雙向同步、螢光筆標註、手機版模擬、套用文章模板</div><div class="tool-btn">開啟工具 →</div></a>
 <a href="/markdown/" class="tool-card"><div class="tool-icon">📄</div><div class="tool-name">Markdown 預覽器</div><div class="tool-desc">即時渲染 Markdown，支援表格、程式碼區塊</div><div class="tool-btn">開啟工具 →</div></a>
 <a href="/json-formatter/" class="tool-card"><div class="tool-icon">🔧</div><div class="tool-name">JSON 格式化器</div><div class="tool-desc">格式化、驗證、壓縮 JSON，貼上即轉</div><div class="tool-btn">開啟工具 →</div></a>
@@ -114,7 +129,7 @@ function filterTools(){
 <a href="/image-converter/" class="tool-card"><div class="tool-icon">🔄</div><div class="tool-name">圖像格式轉換器</div>
 <a href="/pdf-merge/" class="tool-card"><div class="tool-icon">📄</div><div class="tool-name">PDF 合併工具</div><div class="tool-desc">合併多個 PDF，完全在瀏覽器處理，檔案不上傳，隱私零風險。</div><div class="tool-btn">開啟工具 →</div></a>
 <a href="/pdf-split/" class="tool-card">
-<a href="/area-converter/" class="tool-card"><div class="tool-icon">📐</div><div class="tool-name">坪數換算器</div><div class="tool-desc">坪、平方公尺、平方英尺、甲、公頃互相換算，即時計算。</div><div class="tool-btn">開啟工具 →</div></a>
+<a href="/area-converter/" class="tool-card"><div class="tool-icon">📐</div><div class="tool-name">PDF 分割工具</div><div class="tool-desc">坪、平方公尺、平方英尺、甲、公頃互相換算，即時計算。</div><div class="tool-btn">開啟工具 →</div></a>
 <a href="/bmi/" class="tool-card"><div class="tool-icon">⚖️</div><div class="tool-name">BMI 計算器</div><div class="tool-desc">輸入身高、體重，算出 BMI、判斷範圍、顯示健康體重範圍。</div><div class="tool-btn">開啟工具 →</div></a>
 <a href="/qrcode/" class="tool-card"><div class="tool-icon">📱</div><div class="tool-name">QR Code 產生器</div><div class="tool-desc">輸入文字或網址，即時產生 QR Code，可下載 PNG。</div><div class="tool-btn">開啟工具 →</div></a><div class="tool-icon">✂️</div><div class="tool-name">PDF 分割工具</div><div class="tool-desc">按頁數、按範圍、逐頁分割 PDF，完全在瀏覽器處理，不上傳。</div><div class="tool-btn">開啟工具 →</div></a><div class="tool-desc">PNG、JPG、WebP 互轉，可調品質、即時預覽、一鍵下載。完全離線。</div><div class="tool-btn">開啟工具 →</div></a>
 </div>
