@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>勞健保退休金試算 · 免費線上工具 | 雅寶工具箱</title>
+<meta name="description" content="輸入月薪、年齡、年資，試算勞保年金與勞退新制。給上班族、屆退族、財務規劃使用。純前端、不上傳。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/pension-calculator/">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8637791667872348" crossorigin="anonymous"></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "勞健保退休金試算", "description": "輸入月薪、年齡、年資，試算勞保年金與勞退新制。給上班族、屆退族、財務規劃使用。純前端、不上傳。", "url": "https://tools.ahpal.com/pension-calculator/", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "這個試算準嗎？", "acceptedAnswer": {"@type": "Answer", "text": "僅供參考。實際金額依勞保局公告、投保薪資上限、勞退收益而定。"}}, {"@type": "Question", "name": "勞保和勞退差在哪？", "acceptedAnswer": {"@type": "Answer", "text": "勞保是社會保險（年金），勞退是雇主提撥的退休金（個人帳戶）。兩個都有。"}}, {"@type": "Question", "name": "勞保年金怎麼算？", "acceptedAnswer": {"@type": "Answer", "text": "平均月投保薪資 × 年資 × 1.55%（簡化公式）。實際有投保薪資上限（45,800 元）。"}}, {"@type": "Question", "name": "勞退新制怎麼算？", "acceptedAnswer": {"@type": "Answer", "text": "月薪 × 6% × 12 × 年資（簡化，不計收益）。實際有保證收益。"}}, {"@type": "Question", "name": "可以月領嗎？", "acceptedAnswer": {"@type": "Answer", "text": "勞保年金月領，勞退新制可一次領或月領（依年資）。"}}, {"@type": "Question", "name": "資料會上傳嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不會，全部在瀏覽器。"}}, {"@type": "Question", "name": "適合誰用？", "acceptedAnswer": {"@type": "Answer", "text": "上班族、屆退族、想了解退休金的人。"}}, {"@type": "Question", "name": "有勞保上限嗎？", "acceptedAnswer": {"@type": "Answer", "text": "有，目前投保薪資上限 45,800 元。高薪者實際年金會比試算低。"}}, {"@type": "Question", "name": "國民年金呢？", "acceptedAnswer": {"@type": "Answer", "text": "沒工作、沒勞保的人適用國民年金，這個工具沒算。"}}, {"@type": "Question", "name": "可以列印嗎？", "acceptedAnswer": {"@type": "Answer", "text": "可以，按瀏覽器列印。"}}]}</script>
+<style>*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:20px;}
+.container{max-width:900px;margin:0 auto;}
+h1{color:#D4AF37;font-size:30px;margin:16px 0 8px;text-align:center;}
+.sub{color:#8B949E;font-size:15px;text-align:center;margin-bottom:24px;}
+.card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin-bottom:20px;}
+label{display:block;color:#C9D1D9;font-size:14px;margin:10px 0 4px;}
+input,textarea,select{width:100%;padding:12px;background:#0D1117;border:1px solid #2D303A;border-radius:8px;color:#E6EDF3;font-size:16px;font-family:inherit;}
+button{padding:12px 28px;background:#D4AF37;color:#0D1117;border:none;border-radius:10px;font-size:16px;font-weight:700;cursor:pointer;margin:8px 6px 0 0;}
+button:hover{opacity:0.85;}
+.result{background:#0D1117;border:1px solid #D4AF37;border-radius:8px;padding:16px;margin-top:16px;font-size:15px;line-height:1.9;white-space:pre-wrap;word-break:break-word;}
+.faq{margin-top:12px;}
+.faq h3{color:#58A6FF;font-size:16px;margin:16px 0 6px;}
+.faq p{color:#C9D1D9;font-size:14px;}
+.tip{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:8px;margin:16px 0;font-size:14px;color:#C9D1D9;}
+.knowledge{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin:20px 0;}
+.knowledge h2{color:#D4AF37;font-size:20px;margin:0 0 12px;}
+.knowledge h3{color:#58A6FF;font-size:16px;margin:18px 0 8px;}
+.knowledge p{color:#C9D1D9;font-size:15px;line-height:1.9;margin-bottom:10px;}
+.misconception{background:rgba(248,81,73,0.06);border-left:4px solid #F85149;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+.misconception strong{color:#F85149;}
+.when-to-use{background:rgba(63,185,80,0.06);border-left:4px solid #3FB950;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+.footer{text-align:center;margin-top:48px;padding-top:20px;border-top:1px solid #2D303A;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+@media print{.ahpal-top-nav,button,.tip{display:none!important;}body{background:#fff;color:#000;}.card{border:1px solid #999;}}</style>
+</head>
+<body>
+<div class="container">
+<nav class="ahpal-top-nav" style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;">
+  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏠 首頁</a>
+  <a href="https://www.ahpal.com/categories.html" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📚 全部分類</a>
+  <a href="https://www.ahpal.com/strategy/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📌 策略文章</a>
+  <a href="https://pet.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">⚔️ 打怪場</a>
+  <a href="https://farm.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🌾 農場</a>
+  <a href="https://tools.ahpal.com/" style="color:#0D1117;background:#D4AF37;text-decoration:none;padding:4px 10px;font-weight:700;">🛠️ 工具箱</a>
+</nav>
+<nav class="breadcrumb" aria-label="breadcrumb" style="font-size:13px;color:#8B949E;margin-bottom:12px;"><a href="https://tools.ahpal.com/" style="color:#58A6FF;text-decoration:none;">工具箱</a> › 勞健保退休金試算</nav>
+<article>
+<h1>勞健保退休金試算</h1>
+<p class="sub">輸入月薪、年齡、年資，試算勞保年金與勞退新制。給上班族、屆退族、財務規劃使用。純前端、不上傳。</p>
+<div class="card">
+<label>目前月薪（元）</label>
+<input type="number" id="salary" value="40000">
+<label>目前年齡</label>
+<input type="number" id="age" value="30">
+<label>預計退休年齡</label>
+<input type="number" id="retire" value="65">
+<label>已工作年資（年）</label>
+<input type="number" id="years" value="5">
+<button onclick="calc()">試算</button>
+<div class="result" id="out"></div>
+</div>
+<div class="tip">🔒 這個工具<strong>純前端、完全離線、不上傳</strong>。你的資料只留在你的瀏覽器，不會傳到任何伺服器。</div>
+<div class="knowledge">
+<h2>📖 勞健保退休金背後的知識</h2>
+<p>台灣的退休金有兩層：第一層是「勞保老年年金」（社會保險），第二層是「勞退新制」（雇主提撥的個人帳戶）。很多人以為「有勞保就有退休金」，其實兩個是分開的。勞保年金是「活到老領到老」，勞退新制是「個人帳戶，領完就沒了」（或月領）。</p>
+<p>勞保年金的公式是：平均月投保薪資 × 年資 × 1.55%。但要注意「投保薪資上限」——目前是 45,800 元，即使月薪 10 萬，勞保也只算到 45,800。這是很多人試算後「怎麼比預期少」的原因。勞退新制是雇主每月提撥 6% 到你的個人帳戶，滿 60 歲可領。</p>
+<h3>⚠️ 常見誤解</h3>
+<div class="misconception"><strong>❌「有勞保就有退休金」</strong> → 勞保是社會保險，勞退是個人帳戶，兩個分開。要兩個都有，退休才夠。</div>
+<div class="misconception"><strong>❌「月薪越高，勞保年金越高」</strong> → 有上限（45,800 元）。超過部分不計入。</div>
+<div class="misconception"><strong>❌「勞退新制會破產」</strong> → 勞退新制是「個人帳戶」，不會破產。會破產的是勞保（社會保險）。</div>
+<div class="misconception"><strong>❌「越晚領越多」</strong> → 勞保有「減額」和「增額」年金。提前領減 4%/年，延後領增 4%/年，最多延 5 年。</div>
+<div class="misconception"><strong>❌「這個工具是官方試算」</strong> → 不是。這是簡化試算，實際請用勞保局官方試算工具。</div>
+<h3>🩺 使用時機與注意事項</h3>
+<div class="when-to-use"><strong>✅ 適合：</strong>上班族、屆退族、想了解退休金結構的人、做財務規劃的人。<br><strong>⚠️ 注意：</strong>這是簡化試算，不計投保薪資上限、不計勞退收益、不計通膨。實際金額請用勞保局「勞保老年年金試算」與「勞退新制試算」官方工具。</div>
+<h3>❓ 更多常見問題</h3>
+<h3>勞保年金幾歲可以領？</h3><p>目前法定請領年齡逐步提高到 65 歲（依出生年次不同）。</p>
+<h3>勞退新制幾歲可以領？</h3><p>滿 60 歲可領，可一次領或月領。</p>
+<h3>勞保和國民年金可以同時領嗎？</h3><p>不行，同一時間只能領一種。但年資可以合併計算。</p>
+<h3>什麼是「減額年金」？</h3><p>提前領，每提前 1 年減 4%，最多提前 5 年（減 20%）。</p>
+<h3>什麼是「增額年金」？</h3><p>延後領，每延後 1 年增 4%，最多延後 5 年（增 20%）。</p>
+</div>
+<div class="faq"><h2 style="color:#D4AF37;font-size:20px;margin:24px 0 12px;">常見問題</h2><h3>這個試算準嗎？</h3><p>僅供參考。實際金額依勞保局公告、投保薪資上限、勞退收益而定。</p><h3>勞保和勞退差在哪？</h3><p>勞保是社會保險（年金），勞退是雇主提撥的退休金（個人帳戶）。兩個都有。</p><h3>勞保年金怎麼算？</h3><p>平均月投保薪資 × 年資 × 1.55%（簡化公式）。實際有投保薪資上限（45,800 元）。</p><h3>勞退新制怎麼算？</h3><p>月薪 × 6% × 12 × 年資（簡化，不計收益）。實際有保證收益。</p><h3>可以月領嗎？</h3><p>勞保年金月領，勞退新制可一次領或月領（依年資）。</p><h3>資料會上傳嗎？</h3><p>不會，全部在瀏覽器。</p><h3>適合誰用？</h3><p>上班族、屆退族、想了解退休金的人。</p><h3>有勞保上限嗎？</h3><p>有，目前投保薪資上限 45,800 元。高薪者實際年金會比試算低。</p><h3>國民年金呢？</h3><p>沒工作、沒勞保的人適用國民年金，這個工具沒算。</p><h3>可以列印嗎？</h3><p>可以，按瀏覽器列印。</p></div>
+</article>
+<div class="footer"><p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p><p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p></div>
+</div>
+<script>
+function calc(){
+  var salary=parseFloat(document.getElementById("salary").value)||0;
+  var age=parseInt(document.getElementById("age").value)||0;
+  var retire=parseInt(document.getElementById("retire").value)||65;
+  var years=parseInt(document.getElementById("years").value)||0;
+  if(salary<=0||age<=0||retire<=age){document.getElementById("out").textContent="請填入有效數字（退休年齡要大於目前年齡）";return;}
+  var totalYears=years+(retire-age);
+  // 勞保年金：平均月投保薪資 × 年資 × 1.55%（最高 60 個月平均，這裡簡化用月薪）
+  var labor=Math.round(salary*totalYears*0.0155);
+  // 勞退新制：月薪 × 6% × 12 × 年資（簡化，不計收益）
+  var laborRetire=Math.round(salary*0.06*12*totalYears);
+  // 勞退新制月領（假設 20 年領完，簡化）
+  var laborRetireMonth=Math.round(laborRetire/20/12);
+  var h="<p style='font-size:18px;color:#D4AF37;'>試算結果（僅供參考）</p>";
+  h+="<p>總工作年資：<strong>"+totalYears+"</strong> 年（已 "+years+" 年 + 未來 "+(retire-age)+" 年）</p>";
+  h+="<p>勞保老年年金（月領）：<strong style='color:#3FB950;'>約 "+labor.toLocaleString()+" 元</strong></p>";
+  h+="<p>勞退新制（一次領）：<strong style='color:#58A6FF;'>約 "+laborRetire.toLocaleString()+" 元</strong></p>";
+  h+="<p>勞退新制（月領，20 年攤）：<strong style='color:#58A6FF;'>約 "+laborRetireMonth.toLocaleString()+" 元</strong></p>";
+  h+="<p style='font-size:13px;color:#8B949E;margin-top:12px;'>⚠️ 這是簡化試算，實際金額依勞保局公告為準。勞保年金有投保薪資上限（目前 45,800 元），勞退有收益分配。</p>";
+  document.getElementById("out").innerHTML=h;
+}
+</script>
+</body>
+</html>

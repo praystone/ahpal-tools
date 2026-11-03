@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>高對比模式預覽 · 免費線上工具 | 雅寶工具箱</title>
+<meta name="description" content="計算前景背景對比度，檢查是否符合 WCAG 無障礙標準。給設計師、內容創作者、低視力朋友使用。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/contrast-checker/">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8637791667872348" crossorigin="anonymous"></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "高對比模式預覽", "description": "計算前景背景對比度，檢查是否符合 WCAG 無障礙標準。給設計師、內容創作者、低視力朋友使用。", "url": "https://tools.ahpal.com/contrast-checker/", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "對比度怎麼算？", "acceptedAnswer": {"@type": "Answer", "text": "用 WCAG 公式：先算前景和背景的相對亮度，再算比值 (L1+0.05)/(L2+0.05)。"}}, {"@type": "Question", "name": "什麼是 AA 和 AAA？", "acceptedAnswer": {"@type": "Answer", "text": "WCAG 對比標準。AA 是基本（4.5:1），AAA 是最高（7:1）。大字（18pt+）AA 只要 3:1。"}}, {"@type": "Question", "name": "為什麼要管對比度？", "acceptedAnswer": {"@type": "Answer", "text": "對比度不足，低視力、色盲、強光下的人看不清楚。無障礙設計的基本要求。"}}, {"@type": "Question", "name": "資料會上傳嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不會，全部在瀏覽器。"}}, {"@type": "Question", "name": "可以預覽嗎？", "acceptedAnswer": {"@type": "Answer", "text": "可以，下方有預覽區，會即時顯示前景背景的效果。"}}, {"@type": "Question", "name": "適合誰用？", "acceptedAnswer": {"@type": "Answer", "text": "網站設計師、UI/UX、想檢查自己網站無障礙的人、低視力朋友。"}}, {"@type": "Question", "name": "色盲可以看嗎？", "acceptedAnswer": {"@type": "Answer", "text": "色盲不是對比度問題，是顏色辨識。這個工具是對比度，不是色盲模擬。"}}, {"@type": "Question", "name": "有標準可查嗎？", "acceptedAnswer": {"@type": "Answer", "text": "WCAG 2.1 是國際標準，台灣也有「網站無障礙規範」。"}}, {"@type": "Question", "name": "可以算漸層嗎？", "acceptedAnswer": {"@type": "Answer", "text": "目前只算單色對比，漸層請取最差的一段算。"}}, {"@type": "Question", "name": "可以列印嗎？", "acceptedAnswer": {"@type": "Answer", "text": "可以，按瀏覽器列印。"}}]}</script>
+<style>*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:20px;}
+.container{max-width:900px;margin:0 auto;}
+h1{color:#D4AF37;font-size:30px;margin:16px 0 8px;text-align:center;}
+.sub{color:#8B949E;font-size:15px;text-align:center;margin-bottom:24px;}
+.card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin-bottom:20px;}
+label{display:block;color:#C9D1D9;font-size:14px;margin:10px 0 4px;}
+input,textarea,select{width:100%;padding:12px;background:#0D1117;border:1px solid #2D303A;border-radius:8px;color:#E6EDF3;font-size:16px;font-family:inherit;}
+button{padding:12px 28px;background:#D4AF37;color:#0D1117;border:none;border-radius:10px;font-size:16px;font-weight:700;cursor:pointer;margin:8px 6px 0 0;}
+button:hover{opacity:0.85;}
+.result{background:#0D1117;border:1px solid #D4AF37;border-radius:8px;padding:16px;margin-top:16px;font-size:15px;line-height:1.9;white-space:pre-wrap;word-break:break-word;}
+.faq{margin-top:12px;}
+.faq h3{color:#58A6FF;font-size:16px;margin:16px 0 6px;}
+.faq p{color:#C9D1D9;font-size:14px;}
+.tip{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:8px;margin:16px 0;font-size:14px;color:#C9D1D9;}
+.knowledge{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin:20px 0;}
+.knowledge h2{color:#D4AF37;font-size:20px;margin:0 0 12px;}
+.knowledge h3{color:#58A6FF;font-size:16px;margin:18px 0 8px;}
+.knowledge p{color:#C9D1D9;font-size:15px;line-height:1.9;margin-bottom:10px;}
+.misconception{background:rgba(248,81,73,0.06);border-left:4px solid #F85149;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+.misconception strong{color:#F85149;}
+.when-to-use{background:rgba(63,185,80,0.06);border-left:4px solid #3FB950;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+.footer{text-align:center;margin-top:48px;padding-top:20px;border-top:1px solid #2D303A;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+@media print{.ahpal-top-nav,button,.tip{display:none!important;}body{background:#fff;color:#000;}.card{border:1px solid #999;}}</style>
+</head>
+<body>
+<div class="container">
+<nav class="ahpal-top-nav" style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;">
+  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏠 首頁</a>
+  <a href="https://www.ahpal.com/categories.html" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📚 全部分類</a>
+  <a href="https://www.ahpal.com/strategy/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📌 策略文章</a>
+  <a href="https://pet.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">⚔️ 打怪場</a>
+  <a href="https://farm.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🌾 農場</a>
+  <a href="https://tools.ahpal.com/" style="color:#0D1117;background:#D4AF37;text-decoration:none;padding:4px 10px;font-weight:700;">🛠️ 工具箱</a>
+</nav>
+<nav class="breadcrumb" aria-label="breadcrumb" style="font-size:13px;color:#8B949E;margin-bottom:12px;"><a href="https://tools.ahpal.com/" style="color:#58A6FF;text-decoration:none;">工具箱</a> › 高對比模式預覽</nav>
+<article>
+<h1>高對比模式預覽</h1>
+<p class="sub">計算前景背景對比度，檢查是否符合 WCAG 無障礙標準。給設計師、內容創作者、低視力朋友使用。</p>
+<div class="card">
+<label>前景顏色</label>
+<input type="color" id="fg" value="#E6EDF3">
+<label>背景顏色</label>
+<input type="color" id="bg" value="#0D1117">
+<label>文字大小（px，選填）</label>
+<input type="number" id="size" value="16">
+<button onclick="calc()">計算對比</button>
+<div class="result" id="out"></div>
+<div id="preview" style="margin-top:16px;padding:20px;border-radius:8px;text-align:center;font-size:20px;">預覽文字 Sample Text</div>
+</div>
+<div class="tip">🔒 這個工具<strong>純前端、完全離線、不上傳</strong>。你的資料只留在你的瀏覽器，不會傳到任何伺服器。</div>
+<div class="knowledge">
+<h2>📖 對比度背後的知識</h2>
+<p>對比度是「前景和背景的亮度差」。WCAG 國際標準規定：一般文字 AA 要 4.5:1，AAA 要 7:1；大字（18pt 或 14pt 粗體以上）AA 只要 3:1。為什麼要管？因為全球有 2.53 億人低視力、3 億人色盲，對比度不足，他們看不清楚。這不只是「少數人」的問題，是強光下、老花眼、手機螢幕髒了都會遇到的問題。</p>
+<p>台灣也有「網站無障礙規範」，政府網站必須符合 AA 等級。做網站的人，對比度是基本功，不是選配。這個工具幫你算，不用背公式。</p>
+<h3>⚠️ 常見誤解</h3>
+<div class="misconception"><strong>❌「顏色好看就好，對比度不重要」</strong> → 對比度不足，部分使用者根本看不清楚。好看和可讀要兼顧。</div>
+<div class="misconception"><strong>❌「黑底白字一定對比最高」</strong> → 不一定。純黑 #000 配純白 #FFF 對比 21:1，但有些情境灰底白字更舒服。</div>
+<div class="misconception"><strong>❌「色盲只要看對比度就好」</strong> → 色盲是「顏色辨識」問題，不是對比度。紅綠色盲看紅綠燈會混淆，要靠形狀、位置輔助。</div>
+<div class="misconception"><strong>❌「對比度是設計師的事」</strong> → 內容創作者也要注意。發文、做簡報、寫 email，對比度不夠，讀者就看不到。</div>
+<div class="misconception"><strong>❌「這個工具會幫我改顏色」</strong> → 不會。它只算對比度、告訴你等級，顏色要自己調。</div>
+<h3>🩺 使用時機與注意事項</h3>
+<div class="when-to-use"><strong>✅ 適合：</strong>網站設計師、UI/UX、內容創作者、政府/學校網站、想檢查無障礙的人。<br><strong>⚠️ 注意：</strong>這個工具算的是「單色對比」，漸層、圖片背景請取最差的一段算。實際無障礙還要考慮字級、字型、行距。</div>
+<h3>❓ 更多常見問題</h3>
+<h3>WCAG 是什麼？</h3><p>Web Content Accessibility Guidelines，國際無障礙網頁標準，目前版本 2.1（2.2 已發布）。</p>
+<h3>AA 和 AAA 差在哪？</h3><p>AA 是基本（4.5:1），AAA 是最高（7:1）。政府網站通常要求 AA。</p>
+<h3>大字為什麼標準比較低？</h3><p>大字比較容易辨識，所以 3:1 就夠。一般文字筆畫細，要 4.5:1。</p>
+<h3>色盲有幾種？</h3><p>紅綠色盲（最常見）、藍黃色盲、全色盲。紅綠色盲占男性 8%。</p>
+<h3>對比度夠就好嗎？</h3><p>不夠。還要考慮字級、字型、行距、點擊區域大小。對比度是「必要條件」，不是「充分條件」。</p>
+</div>
+<div class="faq"><h2 style="color:#D4AF37;font-size:20px;margin:24px 0 12px;">常見問題</h2><h3>對比度怎麼算？</h3><p>用 WCAG 公式：先算前景和背景的相對亮度，再算比值 (L1+0.05)/(L2+0.05)。</p><h3>什麼是 AA 和 AAA？</h3><p>WCAG 對比標準。AA 是基本（4.5:1），AAA 是最高（7:1）。大字（18pt+）AA 只要 3:1。</p><h3>為什麼要管對比度？</h3><p>對比度不足，低視力、色盲、強光下的人看不清楚。無障礙設計的基本要求。</p><h3>資料會上傳嗎？</h3><p>不會，全部在瀏覽器。</p><h3>可以預覽嗎？</h3><p>可以，下方有預覽區，會即時顯示前景背景的效果。</p><h3>適合誰用？</h3><p>網站設計師、UI/UX、想檢查自己網站無障礙的人、低視力朋友。</p><h3>色盲可以看嗎？</h3><p>色盲不是對比度問題，是顏色辨識。這個工具是對比度，不是色盲模擬。</p><h3>有標準可查嗎？</h3><p>WCAG 2.1 是國際標準，台灣也有「網站無障礙規範」。</p><h3>可以算漸層嗎？</h3><p>目前只算單色對比，漸層請取最差的一段算。</p><h3>可以列印嗎？</h3><p>可以，按瀏覽器列印。</p></div>
+</article>
+<div class="footer"><p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p><p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p></div>
+</div>
+<script>
+function lum(hex){
+  var r=parseInt(hex.substr(1,2),16)/255;
+  var g=parseInt(hex.substr(3,2),16)/255;
+  var b=parseInt(hex.substr(5,2),16)/255;
+  function f(c){return c<=0.03928?c/12.92:Math.pow((c+0.055)/1.055,2.4);}
+  return 0.2126*f(r)+0.7152*f(g)+0.0722*f(b);
+}
+function calc(){
+  var fg=document.getElementById("fg").value;
+  var bg=document.getElementById("bg").value;
+  var L1=lum(fg),L2=lum(bg);
+  var ratio=((Math.max(L1,L2)+0.05)/(Math.min(L1,L2)+0.05)).toFixed(2);
+  var size=parseInt(document.getElementById("size").value)||16;
+  var isLarge=size>=24||(size>=18.66&&true);
+  var level="";
+  if(ratio>=7) level="<span style='color:#3FB950;'>AAA（最高等級）</span>";
+  else if(ratio>=4.5) level="<span style='color:#D4AF37;'>AA（一般標準）</span>";
+  else if(ratio>=3&&isLarge) level="<span style='color:#D4AF37;'>AA 大字（18pt+）</span>";
+  else level="<span style='color:#F85149;'>未達標準，建議調整</span>";
+  var o=document.getElementById("out");
+  o.innerHTML="<p style='font-size:18px;'>對比度：<strong style='color:#D4AF37;'>"+ratio+":1</strong></p><p>等級："+level+"</p><p style='font-size:13px;color:#8B949E;'>WCAG 標準：AA 4.5:1、AAA 7:1、大字 AA 3:1</p>";
+  var p=document.getElementById("preview");
+  p.style.color=fg; p.style.background=bg; p.style.fontSize=size+"px";
+}
+</script>
+</body>
+</html>
