@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>🆔 身分證驗證 | 雅寶工具箱</title>
+<meta name="description" content="台灣身分證字號格式與檢查碼驗證，純前端、離線、不上傳。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/id-validator/">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8637791667872348" crossorigin="anonymous"></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "🆔 身分證驗證", "description": "台灣身分證字號格式與檢查碼驗證，純前端、離線、不上傳。", "url": "https://tools.ahpal.com/id-validator/", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "身分證字號有幾碼？", "acceptedAnswer": {"@type": "Answer", "text": "10 碼：1 個英文字母 + 9 個數字。"}}, {"@type": "Question", "name": "第 2 碼代表什麼？", "acceptedAnswer": {"@type": "Answer", "text": "性別碼：1 男生、2 女生、8 外籍人士、9 新住民。"}}, {"@type": "Question", "name": "檢查碼怎麼算？", "acceptedAnswer": {"@type": "Answer", "text": "字母轉兩位數（A=10、B=11…），十位×1 + 個位×9 + 第 2 碼×8 + … + 第 9 碼×1，總和 mod 10，用 10 減去後再 mod 10。"}}, {"@type": "Question", "name": "驗證通過就代表真有其人嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不代表。只代表格式合法，任何人算對檢查碼都能產生合法字號。"}}, {"@type": "Question", "name": "A 代表哪個縣市？", "acceptedAnswer": {"@type": "Answer", "text": "台北市。"}}, {"@type": "Question", "name": "B 代表哪個縣市？", "acceptedAnswer": {"@type": "Answer", "text": "台中市。"}}, {"@type": "Question", "name": "E 代表哪個縣市？", "acceptedAnswer": {"@type": "Answer", "text": "高雄市。"}}, {"@type": "Question", "name": "可以離線使用嗎？", "acceptedAnswer": {"@type": "Answer", "text": "可以，全部在瀏覽器，不上傳。"}}, {"@type": "Question", "name": "資料會上傳嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不會，純前端。請勿在不明網站輸入真實身分證字號。"}}, {"@type": "Question", "name": "這個工具是官方認證嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不是。這是依公開規則實作的驗證器，僅供參考，正式申辦以戶政系統為準。"}}]}</script>
+<style>*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:20px;}
+.container{max-width:900px;margin:0 auto;}
+h1{color:#D4AF37;font-size:30px;margin:16px 0 8px;text-align:center;}
+.sub{color:#8B949E;font-size:15px;text-align:center;margin-bottom:24px;}
+.box{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin-bottom:20px;}
+.box label{display:block;color:#58A6FF;font-size:14px;font-weight:700;margin-bottom:8px;}
+.box input,.box select{width:100%;padding:12px 16px;background:#0D1117;border:1px solid #D4AF37;border-radius:8px;color:#E6EDF3;font-size:16px;margin-bottom:12px;}
+.box .btn{padding:12px 28px;background:#D4AF37;color:#0D1117;border:none;border-radius:8px;font-size:16px;font-weight:700;cursor:pointer;}
+.box .btn:hover{background:#E6C65C;}
+.result{margin-top:16px;padding:16px;border-radius:8px;font-size:15px;line-height:1.9;}
+.result.ok{background:rgba(63,185,80,0.08);border-left:4px solid #3FB950;color:#C9D1D9;}
+.result.err{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;color:#C9D1D9;}
+.result.info{background:rgba(88,166,255,0.08);border-left:4px solid #58A6FF;color:#C9D1D9;}
+.knowledge{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin:20px 0;}
+.knowledge h2{color:#D4AF37;font-size:20px;margin:0 0 12px;}
+.knowledge h3{color:#58A6FF;font-size:16px;margin:18px 0 8px;}
+.knowledge p{color:#C9D1D9;font-size:15px;line-height:1.9;margin-bottom:10px;}
+.knowledge table{width:100%;border-collapse:collapse;margin:12px 0;}
+.knowledge th,.knowledge td{border:1px solid #2D303A;padding:8px 12px;font-size:14px;color:#C9D1D9;text-align:left;}
+.knowledge th{background:#0D1117;color:#D4AF37;}
+.misconception{background:rgba(248,81,73,0.06);border-left:4px solid #F85149;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+.misconception strong{color:#F85149;}
+.when-to-use{background:rgba(63,185,80,0.06);border-left:4px solid #3FB950;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+.faq h3{color:#58A6FF;font-size:16px;margin:16px 0 6px;}
+.faq p{color:#C9D1D9;font-size:14px;}
+.tip{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:8px;margin:16px 0;font-size:14px;color:#C9D1D9;}
+.footer{text-align:center;margin-top:48px;padding-top:20px;border-top:1px solid #2D303A;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+@media print{.ahpal-top-nav,.tip{display:none!important;}body{background:#fff;color:#000;}}</style>
+</head>
+<body>
+<div class="container">
+<nav class="ahpal-top-nav" style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;">
+  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏠 首頁</a>
+  <a href="https://www.ahpal.com/categories.html" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📚 全部分類</a>
+  <a href="https://tools.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🛠️ 工具箱</a>
+  <a href="https://pet.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">⚔️ 打怪場</a>
+  <a href="https://farm.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🌾 農場</a>
+</nav>
+<nav class="breadcrumb" aria-label="breadcrumb" style="font-size:13px;color:#8B949E;margin-bottom:12px;"><a href="https://tools.ahpal.com/" style="color:#58A6FF;text-decoration:none;">工具箱</a> › 🆔 身分證驗證</nav>
+<article>
+<h1>🆔 身分證驗證</h1>
+<p class="sub">台灣身分證字號格式與檢查碼驗證，純前端、離線、不上傳。</p>
+<div class="box">
+  <label>輸入身分證字號（1 個英文字母 + 9 個數字）</label>
+  <input type="text" id="id-input" placeholder="例如 A123456789" maxlength="10" style="text-transform:uppercase;">
+  <button class="btn" onclick="checkId()">驗證</button>
+  <div class="result info" id="id-result">請輸入身分證字號，系統會檢查格式與檢查碼。</div>
+</div>
+<script>
+var LETTER_MAP = {{A:10,B:11,C:12,D:13,E:14,F:15,G:16,H:17,I:34,J:18,K:19,L:20,M:21,N:22,O:35,P:23,Q:24,R:25,S:26,T:27,U:28,V:29,W:32,X:30,Y:31,Z:33}};
+var CITY_MAP = {{A:"台北市",B:"台中市",C:"基隆市",D:"台南市",E:"高雄市",F:"新北市",G:"宜蘭縣",H:"桃園市",I:"嘉義市",J:"新竹縣",K:"苗栗縣",L:"台中縣",M:"南投縣",N:"彰化縣",O:"新竹市",P:"雲林縣",Q:"嘉義縣",R:"台南縣",S:"高雄縣",T:"屏東縣",U:"花蓮縣",V:"台東縣",W:"金門縣",X:"澎湖縣",Y:"陽明山",Z:"連江縣"}};
+function checkId(){{
+  var v = (document.getElementById("id-input").value || "").trim().toUpperCase();
+  var el = document.getElementById("id-result");
+  if (!v) {{ el.className = "result err"; el.textContent = "請輸入身分證字號。"; return; }}
+  if (!/^[A-Z][1-9][0-9]{{8}}$/.test(v)) {{
+    el.className = "result err";
+    el.innerHTML = "❌ 格式錯誤。<br>正確格式：1 個英文字母 + 第 1 碼 1~9 + 8 個數字，共 10 碼。<br>你輸入的是：<code>" + v + "</code>";
+    return;
+  }}
+  var letter = v[0];
+  var code = LETTER_MAP[letter];
+  var n1 = Math.floor(code / 10), n2 = code % 10;
+  var digits = v.slice(1).split("").map(Number);
+  var sum = n1 * 1 + n2 * 9;
+  for (var i = 0; i < 9; i++) {{ sum += digits[i] * (8 - i); }}
+  var check = (10 - (sum % 10)) % 10;
+  var lastDigit = digits[8];
+  if (check === lastDigit) {{
+    el.className = "result ok";
+    el.innerHTML = "✅ <strong>驗證通過</strong><br>發證地：<strong>" + CITY_MAP[letter] + "</strong><br>檢查碼正確（" + lastDigit + "）<br><span style='font-size:13px;color:#8B949E;'>這只代表「格式合法」，不代表「這個人真實存在」。</span>";
+  }} else {{
+    el.className = "result err";
+    el.innerHTML = "❌ <strong>檢查碼錯誤</strong><br>算出的檢查碼是 <strong>" + check + "</strong>，但你輸入的是 <strong>" + lastDigit + "</strong>。<br><span style='font-size:13px;color:#8B949E;'>請確認是否打錯。</span>";
+  }}
+}}
+document.getElementById("id-input").addEventListener("keydown", function(e){{ if (e.key === "Enter") checkId(); }});
+</script>
+<div class="knowledge">
+<h2>📖 台灣身分證字號背後的知識</h2>
+<p>台灣的身分證字號（國民身分證統一編號）從 1965 年開始使用，共 10 碼：第 1 碼是英文字母（代表發證縣市），第 2 碼是性別碼（1 男生、2 女生、8 外籍人士、9 新住民），第 3~9 碼是流水號，第 10 碼是檢查碼。檢查碼用「加權總和 mod 10」算出，用來防止打錯。</p>
+<p>英文字母對照表（A=10、B=11、…、Z=33）是固定的，每個字母代表一個縣市。例如 A 是台北市、B 是台中市、C 是基隆市、D 是台南市、E 是高雄市。檢查碼公式：字母轉成兩位數後，十位數 × 1 + 個位數 × 9 + 第 2 碼 × 8 + 第 3 碼 × 7 + … + 第 9 碼 × 1，總和除以 10 的餘數，用 10 減去後再 mod 10，就是檢查碼。</p>
+<h3>⚠️ 常見誤解</h3>
+<div class="misconception"><strong>❌「驗證通過就代表真人」</strong> → 錯。這只代表「格式合法」，任何人只要算對檢查碼就能產生一組「合法」字號，不代表真有這個人。</div>
+<div class="misconception"><strong>❌「身分證字號可以隨便給」</strong> → 不行。身分證字號是個人資料，隨便給可能被冒用。本工具純前端，不上傳，但請勿在不明網站輸入。</div>
+<div class="misconception"><strong>❌「英文字母只是裝飾」</strong> → 不是。字母代表發證縣市，也參與檢查碼計算。</div>
+<div class="misconception"><strong>❌「第 2 碼 1 是男生、2 是女生」</strong> → 對，但 8 是外籍人士、9 是新住民，不只 1 和 2。</div>
+<div class="misconception"><strong>❌「檢查碼算錯就不能用」</strong> → 錯。檢查碼只是防打錯，不是法律效力。實際申辦仍以戶政系統為準。</div>
+<h3>🩺 使用時機與注意事項</h3>
+<div class="when-to-use"><strong>✅ 適合：</strong>填表前自我檢查、開發者測試格式、教育用途、確認是否打錯。<br><strong>⚠️ 注意：</strong>本工具只驗證「格式與檢查碼」，不驗證「真偽」。請勿在不明網站輸入真實身分證字號。本工具純前端、不上傳。</div>
+</div>
+<div class="faq"><h2 style="color:#D4AF37;font-size:20px;margin:24px 0 12px;">常見問題</h2><h3>身分證字號有幾碼？</h3><p>10 碼：1 個英文字母 + 9 個數字。</p><h3>第 2 碼代表什麼？</h3><p>性別碼：1 男生、2 女生、8 外籍人士、9 新住民。</p><h3>檢查碼怎麼算？</h3><p>字母轉兩位數（A=10、B=11…），十位×1 + 個位×9 + 第 2 碼×8 + … + 第 9 碼×1，總和 mod 10，用 10 減去後再 mod 10。</p><h3>驗證通過就代表真有其人嗎？</h3><p>不代表。只代表格式合法，任何人算對檢查碼都能產生合法字號。</p><h3>A 代表哪個縣市？</h3><p>台北市。</p><h3>B 代表哪個縣市？</h3><p>台中市。</p><h3>E 代表哪個縣市？</h3><p>高雄市。</p><h3>可以離線使用嗎？</h3><p>可以，全部在瀏覽器，不上傳。</p><h3>資料會上傳嗎？</h3><p>不會，純前端。請勿在不明網站輸入真實身分證字號。</p><h3>這個工具是官方認證嗎？</h3><p>不是。這是依公開規則實作的驗證器，僅供參考，正式申辦以戶政系統為準。</p></div>
+</article>
+<div class="footer"><p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p><p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p></div>
+</div>
+</body>
+</html>
