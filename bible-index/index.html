@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>聖經目錄 · 66 卷書（舊約 39 + 新約 27）| 雅寶工具箱</title>
+<meta name="description" content="聖經 66 卷書目錄，含舊約 39 卷、新約 27 卷。目前上線詩篇 23、撒迦利亞書 1、啟示錄 1。純前端、離線、不上傳。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/bible-index/">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8637791667872348" crossorigin="anonymous"></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "聖經目錄 · 66 卷書", "description": "聖經 66 卷書目錄，含舊約 39 卷、新約 27 卷。", "url": "https://tools.ahpal.com/bible-index/", "applicationCategory": "EducationalApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "聖經有幾卷書？", "acceptedAnswer": {"@type": "Answer", "text": "66 卷：舊約 39 卷、新約 27 卷。"}}, {"@type": "Question", "name": "目前上線幾篇？", "acceptedAnswer": {"@type": "Answer", "text": "3 篇：詩篇 23、撒迦利亞書 1、啟示錄 1。"}}, {"@type": "Question", "name": "和合本和 ESV 有什麼不同？", "acceptedAnswer": {"@type": "Answer", "text": "和合本是 1919 年出版的中文譯本，ESV 是 2001 年出版的英文標準版。兩個都忠於原文。"}}, {"@type": "Question", "name": "可以離線使用嗎？", "acceptedAnswer": {"@type": "Answer", "text": "可以，全部在瀏覽器，不上傳。"}}, {"@type": "Question", "name": "資料會上傳嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不會，純前端。"}}, {"@type": "Question", "name": "可以列印嗎？", "acceptedAnswer": {"@type": "Answer", "text": "可以，按瀏覽器列印。"}}, {"@type": "Question", "name": "適合誰用？", "acceptedAnswer": {"@type": "Answer", "text": "基督徒、想認識聖經的人、想學英文的人。"}}, {"@type": "Question", "name": "有聲音朗讀嗎？", "acceptedAnswer": {"@type": "Answer", "text": "目前沒有，未來可加。"}}, {"@type": "Question", "name": "ESV 版權怎麼算？", "acceptedAnswer": {"@type": "Answer", "text": "ESV 版權屬 Crossway，非商業使用免費，需標示版權。"}}, {"@type": "Question", "name": "下一卷什麼時候做？", "acceptedAnswer": {"@type": "Answer", "text": "創世記第 1 章、約翰福音第 1 章、羅馬書第 1 章，逐步擴充。"}}]}</script>
+<style>*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:20px;}
+.container{max-width:1100px;margin:0 auto;}
+h1{color:#D4AF37;font-size:30px;margin:16px 0 8px;text-align:center;}
+.sub{color:#8B949E;font-size:15px;text-align:center;margin-bottom:24px;}
+.testament{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin-bottom:20px;}
+.testament h2{color:#D4AF37;font-size:20px;margin:0 0 16px;padding-bottom:8px;border-bottom:1px solid #2D303A;}
+.book-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;}
+.book{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:10px 12px;font-size:14px;transition:all 0.2s;}
+.book.available{border-color:#3FB950;background:rgba(63,185,80,0.06);}
+.book.available:hover{background:rgba(63,185,80,0.15);transform:translateY(-2px);}
+.book a{color:#58A6FF;text-decoration:none;display:block;}
+.book.available a{color:#3FB950;font-weight:700;}
+.book .name{font-weight:700;color:#E6EDF3;}
+.book.available .name{color:#3FB950;}
+.book .meta{font-size:11px;color:#8B949E;margin-top:2px;}
+.book .status{font-size:11px;color:#8B949E;margin-top:2px;}
+.knowledge{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin:20px 0;}
+.knowledge h2{color:#D4AF37;font-size:20px;margin:0 0 12px;}
+.knowledge h3{color:#58A6FF;font-size:16px;margin:18px 0 8px;}
+.knowledge p{color:#C9D1D9;font-size:15px;line-height:1.9;margin-bottom:10px;}
+.misconception{background:rgba(248,81,73,0.06);border-left:4px solid #F85149;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+.misconception strong{color:#F85149;}
+.when-to-use{background:rgba(63,185,80,0.06);border-left:4px solid #3FB950;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+.faq h3{color:#58A6FF;font-size:16px;margin:16px 0 6px;}
+.faq p{color:#C9D1D9;font-size:14px;}
+.tip{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:8px;margin:16px 0;font-size:14px;color:#C9D1D9;}
+.footer{text-align:center;margin-top:48px;padding-top:20px;border-top:1px solid #2D303A;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+@media print{.ahpal-top-nav,.tip{display:none!important;}body{background:#fff;color:#000;}.testament{border:1px solid #999;}}</style>
+</head>
+<body>
+<div class="container">
+<nav class="ahpal-top-nav" style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;">
+  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏠 首頁</a>
+  <a href="https://www.ahpal.com/categories.html" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📚 全部分類</a>
+  <a href="https://tools.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🛠️ 工具箱</a>
+  <a href="https://tools.ahpal.com/bible-psalm23/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📖 詩篇 23</a>
+  <a href="https://tools.ahpal.com/bible-zechariah1/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📖 撒迦利亞 1</a>
+  <a href="https://tools.ahpal.com/bible-revelation1/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📖 啟示錄 1</a>
+  <a href="https://pet.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">⚔️ 打怪場</a>
+</nav>
+<nav class="breadcrumb" aria-label="breadcrumb" style="font-size:13px;color:#8B949E;margin-bottom:12px;"><a href="https://tools.ahpal.com/" style="color:#58A6FF;text-decoration:none;">工具箱</a> › 聖經目錄</nav>
+<article>
+<h1>📖 聖經目錄</h1>
+<p class="sub">66 卷書 · 舊約 39 卷 + 新約 27 卷 · 和合本 + ESV</p>
+
+<div class="testament">
+<h2>📜 舊約（39 卷）</h2>
+<div class="book-grid"><div class="book"><span class="name">創世記</span><span class="meta">50章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">出埃及記</span><span class="meta">40章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">利未記</span><span class="meta">27章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">民數記</span><span class="meta">36章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">申命記</span><span class="meta">34章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">約書亞記</span><span class="meta">24章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">士師記</span><span class="meta">21章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">路得記</span><span class="meta">4章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">撒母耳記上</span><span class="meta">31章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">撒母耳記下</span><span class="meta">24章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">列王紀上</span><span class="meta">22章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">列王紀下</span><span class="meta">25章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">歷代志上</span><span class="meta">29章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">歷代志下</span><span class="meta">36章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">以斯拉記</span><span class="meta">10章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">尼希米記</span><span class="meta">13章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">以斯帖記</span><span class="meta">10章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">約伯記</span><span class="meta">42章</span><span class="status">⏳ 即將推出</span></div><a href="/bible-psalm23/" class="book available"><span class="name">詩篇</span><span class="meta">150篇</span><span class="status">✅ 已上線</span></a><div class="book"><span class="name">箴言</span><span class="meta">31章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">傳道書</span><span class="meta">12章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">雅歌</span><span class="meta">8章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">以賽亞書</span><span class="meta">66章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">耶利米書</span><span class="meta">52章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">耶利米哀歌</span><span class="meta">5章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">以西結書</span><span class="meta">48章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">但以理書</span><span class="meta">12章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">何西阿書</span><span class="meta">14章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">約珥書</span><span class="meta">3章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">阿摩司書</span><span class="meta">9章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">俄巴底亞書</span><span class="meta">1章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">約拿書</span><span class="meta">4章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">彌迦書</span><span class="meta">7章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">那鴻書</span><span class="meta">3章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">哈巴谷書</span><span class="meta">3章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">西番雅書</span><span class="meta">3章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">哈該書</span><span class="meta">2章</span><span class="status">⏳ 即將推出</span></div><a href="/bible-zechariah1/" class="book available"><span class="name">撒迦利亞書</span><span class="meta">14章</span><span class="status">✅ 已上線</span></a><div class="book"><span class="name">瑪拉基書</span><span class="meta">4章</span><span class="status">⏳ 即將推出</span></div></div>
+</div>
+
+<div class="testament">
+<h2>✝️ 新約（27 卷）</h2>
+<div class="book-grid"><div class="book"><span class="name">馬太福音</span><span class="meta">28章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">馬可福音</span><span class="meta">16章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">路加福音</span><span class="meta">24章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">約翰福音</span><span class="meta">21章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">使徒行傳</span><span class="meta">28章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">羅馬書</span><span class="meta">16章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">哥林多前書</span><span class="meta">16章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">哥林多後書</span><span class="meta">13章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">加拉太書</span><span class="meta">6章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">以弗所書</span><span class="meta">6章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">腓立比書</span><span class="meta">4章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">歌羅西書</span><span class="meta">4章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">帖撒羅尼迦前書</span><span class="meta">5章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">帖撒羅尼迦後書</span><span class="meta">3章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">提摩太前書</span><span class="meta">6章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">提摩太後書</span><span class="meta">4章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">提多書</span><span class="meta">3章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">腓利門書</span><span class="meta">1章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">希伯來書</span><span class="meta">13章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">雅各書</span><span class="meta">5章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">彼得前書</span><span class="meta">5章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">彼得後書</span><span class="meta">3章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">約翰一書</span><span class="meta">5章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">約翰二書</span><span class="meta">1章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">約翰三書</span><span class="meta">1章</span><span class="status">⏳ 即將推出</span></div><div class="book"><span class="name">猶大書</span><span class="meta">1章</span><span class="status">⏳ 即將推出</span></div><a href="/bible-revelation1/" class="book available"><span class="name">啟示錄</span><span class="meta">22章</span><span class="status">✅ 已上線</span></a></div>
+</div>
+
+<div class="tip">🔒 這個工具<strong>純前端、完全離線、不上傳</strong>。你的資料只留在你的瀏覽器。ESV 經文版權屬 Crossway，僅供個人閱讀使用。</div>
+
+<div class="knowledge">
+<h2>📖 聖經目錄背後的知識</h2>
+<p>聖經（Bible）是基督教與猶太教的經典，全世界最暢銷的書。它分為兩大部分：舊約（Old Testament）39 卷、新約（New Testament）27 卷，合計 66 卷。舊約是猶太教的經典，新約是基督教的經典，兩者合起來是基督教的聖經。</p>
+<p>舊約從「創世記」開始，講述上帝創造世界、揀選以色列民族、頒布律法、派遣先知；新約從「馬太福音」開始，講述耶穌基督的降生、傳道、受難、復活，以及教會的建立與未來。聖經不只是宗教經典，也是文學、歷史、哲學的寶庫，影響了全世界數十億人。</p>
+<h3>⚠️ 常見誤解</h3>
+<div class="misconception"><strong>❌「聖經只有一本」</strong> → 聖經是「66 卷書的合集」，不是一本書。舊約 39 卷、新約 27 卷。</div>
+<div class="misconception"><strong>❌「舊約是舊的，不重要」</strong> → 舊約是新約的基礎，新約引用舊約超過 300 次。不了解舊約，很難理解新約。</div>
+<div class="misconception"><strong>❌「聖經是英文寫的」</strong> → 聖經原文是希伯來文（舊約）、希臘文（新約），英文、中文都是翻譯。</div>
+<div class="misconception"><strong>❌「和合本是唯一中文譯本」</strong> → 不是。中文譯本有和合本、新譯本、現代中文譯本、呂振中譯本等。和合本最普及。</div>
+<div class="misconception"><strong>❌「66 卷都要一次讀完」</strong> → 不用。可以從「詩篇」「約翰福音」「羅馬書」開始，循序漸進。</div>
+<h3>🩺 使用時機與注意事項</h3>
+<div class="when-to-use"><strong>✅ 適合：</strong>基督徒、想認識聖經的人、想學英文的人、想研究文學歷史的人。<br><strong>⚠️ 注意：</strong>目前只上線 3 篇（詩篇 23、撒迦利亞書 1、啟示錄 1），其餘 63 卷「即將推出」。如果想看哪一卷先上線，歡迎到主站留言。</div>
+<h3>❓ 更多常見問題</h3>
+<h3>聖經有幾卷書？</h3><p>66 卷：舊約 39 卷、新約 27 卷。</p>
+<h3>舊約和新約差在哪？</h3><p>舊約講上帝與以色列民族的關係，新約講耶穌基督與教會。新約引用舊約超過 300 次。</p>
+<h3>聖經有幾章？</h3><p>舊約 929 章、新約 260 章，合計 1,189 章。</p>
+<h3>聖經有幾節？</h3><p>舊約 23,145 節、新約 7,957 節，合計 31,102 節。</p>
+<h3>哪一卷最長？</h3><p>詩篇（150 篇）最長。最短的是約翰三書（1 章）。</p>
+</div>
+<div class="faq"><h2 style="color:#D4AF37;font-size:20px;margin:24px 0 12px;">常見問題</h2><h3>聖經有幾卷書？</h3><p>66 卷：舊約 39 卷、新約 27 卷。</p><h3>目前上線幾篇？</h3><p>3 篇：詩篇 23、撒迦利亞書 1、啟示錄 1。</p><h3>和合本和 ESV 有什麼不同？</h3><p>和合本是 1919 年出版的中文譯本，ESV 是 2001 年出版的英文標準版。兩個都忠於原文。</p><h3>可以離線使用嗎？</h3><p>可以，全部在瀏覽器，不上傳。</p><h3>資料會上傳嗎？</h3><p>不會，純前端。</p><h3>可以列印嗎？</h3><p>可以，按瀏覽器列印。</p><h3>適合誰用？</h3><p>基督徒、想認識聖經的人、想學英文的人。</p><h3>有聲音朗讀嗎？</h3><p>目前沒有，未來可加。</p><h3>ESV 版權怎麼算？</h3><p>ESV 版權屬 Crossway，非商業使用免費，需標示版權。</p><h3>下一卷什麼時候做？</h3><p>創世記第 1 章、約翰福音第 1 章、羅馬書第 1 章，逐步擴充。</p></div>
+</article>
+<div class="footer"><p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p><p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p></div>
+</div>
+</body>
+</html>
