@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>法院訴訟文書 PDF 產生器（A4、無網址頁碼、鎖字體） | 雅寶工具箱 AHPAL.COM</title>
+<meta name="description" content="專為台灣法院訴訟文書設計的 HTML to PDF 產生器。消除網址頁碼、鎖定字體與邊界、紅字轉粗黑底線，7-11 列印不跑版。純前端、完全離線。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/court-pdf/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "法院訴訟文書 PDF 產生器", "applicationCategory": "BusinessApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}, "description": "專為台灣法院訴訟文書設計的 HTML to PDF 產生器，消除網址頁碼、鎖定字體邊界。", "url": "https://tools.ahpal.com/court-pdf/"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "工具箱", "item": "https://tools.ahpal.com/"}, {"@type": "ListItem", "position": 2, "name": "法院訴訟文書 PDF 產生器", "item": "https://tools.ahpal.com/court-pdf/"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "法院訴訟文書 PDF 產生器是什麼？", "acceptedAnswer": {"@type": "Answer", "text": "這是一個專門為台灣法院訴訟文書設計的 HTML to PDF 工具。它使用 html2pdf.js 直接渲染 PDF，徹底消除瀏覽器預設的網址、日期、頁碼，並鎖定字體與邊界，確保 7-11 列印不跑版。"}}, {"@type": "Question", "name": "為什麼不用瀏覽器的「列印」？", "acceptedAnswer": {"@type": "Answer", "text": "因為瀏覽器列印會受使用者印表機設定影響，且常帶有 file:/// 路徑、網址、日期。本工具用 html2pdf.js 直接渲染，100% 控制 PDF 內容。"}}, {"@type": "Question", "name": "產生的 PDF 會有網址或頁碼嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不會。本工具強制不加入任何 header/footer，絕對沒有網址、日期、頁碼、檔案路徑。"}}, {"@type": "Question", "name": "字體會跑版嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不會。本工具鎖定 Noto Sans TC（透過 Google Fonts 載入），跨平台一致，不會因為對方電腦沒有標楷體而跑版。"}}, {"@type": "Question", "name": "這個工具會上傳我的文件嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不會。所有渲染都在你的瀏覽器完成，不上傳任何資料，保護隱私。"}}, {"@type": "Question", "name": "紅字轉黑白列印怎麼處理？", "acceptedAnswer": {"@type": "Answer", "text": "勾選「紅字轉粗黑底線」後，預覽時顯示紅字，下載 PDF 時自動轉為粗體 + 底線，確保 7-11 黑白列印看得清楚。"}}]}]}</script>
+<style>*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:40px 20px;}
+.container{max-width:1400px;margin:0 auto;}
+h1{color:#D4AF37;font-size:28px;margin-bottom:12px;}
+.sub{color:#8B949E;margin-bottom:24px;font-size:14px;}
+.card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin-bottom:16px;}
+label{color:#8B949E;font-size:13px;display:block;margin-bottom:6px;}
+input,select,textarea{width:100%;background:#0D1117;color:#E6EDF3;border:1px solid #2D303A;border-radius:8px;padding:12px;font-size:14px;margin-bottom:12px;font-family:inherit;}
+button{background:#D4AF37;color:#0D1117;border:none;border-radius:8px;padding:10px 20px;font-weight:700;cursor:pointer;margin:8px 8px 8px 0;font-size:14px;}
+button:hover{background:#e6c24a;}
+button.blue{background:#58A6FF;}
+.tip{background:rgba(63,185,80,0.08);border-left:4px solid #3FB950;padding:12px 16px;border-radius:6px;color:#C9D1D9;font-size:13px;margin-top:12px;}
+.warn{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:12px 16px;border-radius:6px;color:#C9D1D9;font-size:13px;margin-top:12px;}
+.footer{text-align:center;margin-top:60px;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+.breadcrumb{font-size:13px;color:#8B949E;margin-bottom:16px;}
+.breadcrumb a{color:#58A6FF;text-decoration:none;}
+.doc-section{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:28px 32px;margin-top:32px;}
+.doc-section h2{color:#D4AF37;font-size:22px;margin:24px 0 16px;padding-bottom:8px;border-bottom:2px solid #2D303A;}
+.doc-section h2:first-child{margin-top:0;}
+.doc-section h3{color:#58A6FF;font-size:17px;margin:24px 0 10px;}
+.doc-section p{color:#C9D1D9;margin-bottom:12px;line-height:1.9;}
+.doc-section ul,.doc-section ol{margin:8px 0 16px 24px;color:#C9D1D9;}
+.doc-section li{margin-bottom:8px;line-height:1.8;}
+.doc-section code{background:#0D1117;color:#58A6FF;padding:2px 8px;border-radius:4px;font-family:Consolas,monospace;font-size:13px;}
+.doc-section .highlight{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:6px;margin:16px 0;}
+.doc-section table{width:100%;border-collapse:collapse;font-size:14px;margin:12px 0 20px;}
+.doc-section th,.doc-section td{padding:10px 14px;border:1px solid #2D303A;text-align:left;}
+.doc-section th{background:rgba(212,175,55,0.12);color:#D4AF37;}
+.doc-section tr:nth-child(even){background:rgba(255,255,255,0.02);}
+.faq-item{border-bottom:1px solid #2D303A;padding:14px 0;}
+.faq-item:last-child{border-bottom:none;}
+.faq-q{color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;}
+.faq-a{color:#C9D1D9;font-size:14px;line-height:1.9;}
+.tool-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:900px){.tool-grid{grid-template-columns:1fr;}}
+#previewWrap{background:#e9ecef;padding:16px;border-radius:8px;overflow:auto;max-height:800px;}
+#preview{background:#fff;color:#000;width:210mm;min-height:297mm;padding:20mm 15mm;margin:0 auto;font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;box-shadow:0 2px 8px rgba(0,0,0,0.1);}
+#preview h1,#preview h2,#preview h3{color:#000;}
+#preview .highlight{background:#ffcccc;color:#cc0000;padding:2px 4px;font-weight:700;}</style>
+</head>
+<body>
+<div class="container">
+<nav style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;">
+  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏠 首頁</a>
+  <a href="https://www.ahpal.com/categories.html" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📚 全部分類</a>
+  <a href="https://www.ahpal.com/strategy/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📌 策略文章</a>
+  <a href="https://novels.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📖 小說站</a>
+  <a href="https://memories.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏛️ 回憶館</a>
+  <a href="https://bbs2.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">💬 BBS2</a>
+  <a href="https://pet.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">⚔️ 打怪場</a>
+  <a href="https://farm.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🌾 農場</a>
+  <a href="https://tools.ahpal.com/" style="color:#0D1117;background:#D4AF37;text-decoration:none;padding:4px 10px;font-weight:700;">🛠️ 工具箱</a>
+</nav>
+<div class="breadcrumb"><a href="https://tools.ahpal.com/">🛠️ 工具箱</a> › 法院訴訟文書 PDF 產生器</div>
+<article>
+<h1>⚖️ 法院訴訟文書 PDF 產生器</h1>
+<p class="sub">專為台灣法院訴訟文書設計。消除網址頁碼、鎖定字體邊界、紅字轉粗黑底線，7-11 列印不跑版。</p>
+
+<div class="card">
+  <div class="tool-grid">
+    <div>
+      <label>貼上文字或 HTML</label>
+      <textarea id="input" rows="15" placeholder="貼上訴訟文書內容...">刑事補充陳報狀
+
+案號：114年度偵字第12345號
+股別：孝股
+
+告訴人：王小明
+住址：台北市大安區...
+
+主旨：補充陳報被告涉案事證。
+
+說明：
+一、被告於案發當日...
+二、經查，被告手機定位...</textarea>
+      <label>字體大小（pt）</label>
+      <input type="number" id="fontSize" value="12" min="8" max="20" step="0.5" oninput="updatePreview()">
+      <label>行距</label>
+      <input type="number" id="lineHeight" value="1.6" min="1" max="3" step="0.1" oninput="updatePreview()">
+      <label>邊界（mm）</label>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;">
+        <div><input type="number" id="marginTop" value="20" min="0" max="50" oninput="updatePreview()" title="上"><div style="font-size:11px;color:#8B949E;text-align:center;">上</div></div>
+        <div><input type="number" id="marginBottom" value="20" min="0" max="50" oninput="updatePreview()" title="下"><div style="font-size:11px;color:#8B949E;text-align:center;">下</div></div>
+        <div><input type="number" id="marginLeft" value="15" min="0" max="50" oninput="updatePreview()" title="左"><div style="font-size:11px;color:#8B949E;text-align:center;">左</div></div>
+        <div><input type="number" id="marginRight" value="15" min="0" max="50" oninput="updatePreview()" title="右"><div style="font-size:11px;color:#8B949E;text-align:center;">右</div></div>
+      </div>
+      <label style="margin-top:12px;"><input type="checkbox" id="redToBold" checked style="width:auto;"> 紅字轉粗黑底線（黑白列印友善）</label>
+      <button onclick="updatePreview()">🔄 預覽</button>
+      <button class="blue" onclick="downloadPDF()">⬇️ 下載 PDF</button>
+      <div class="tip">✅ 完全離線：所有渲染都在你的瀏覽器完成，不上傳任何資料。</div>
+      <div class="warn">⚠️ 產生的 PDF 不含任何網址、日期、頁碼、檔案路徑。</div>
+    </div>
+    <div>
+      <label>預覽（A4 模擬）</label>
+      <div id="previewWrap"><div id="preview">（按「預覽」顯示）</div></div>
+      <div id="pageInfo" style="text-align:center;color:#8B949E;font-size:13px;margin-top:8px;"></div>
+    </div>
+  </div>
+</div>
+
+<div class="doc-section">
+<h2>📚 法院訴訟文書 PDF 產生器是什麼？給門外漢的完整說明</h2>
+<p>你要寄一份訴訟文書給法院，用 Word 排版，結果 7-11 印出來跑版、出現網址、頁碼亂跳。這篇文章一次講清楚「為什麼會跑版」與「怎麼解決」。</p>
+<h3>一、一句話講完</h3>
+<div class="highlight"><p><strong>法院訴訟文書 PDF 產生器 = 把「文字」轉成「完美 A4 公文 PDF」。</strong></p><p>它消除網址頁碼、鎖定字體邊界、紅字轉粗黑底線，7-11 列印不跑版。</p></div>
+<h3>二、為什麼瀏覽器列印會跑版？</h3>
+<ul>
+<li><strong>印表機設定</strong>：每個人的印表機不同，邊界、縮放都不同。</li>
+<li><strong>頁首頁尾</strong>：瀏覽器預設會加網址、日期、頁碼。</li>
+<li><strong>字體缺失</strong>：對方電腦沒有「標楷體」，字體會替換。</li>
+<li><strong>分頁錯亂</strong>：內容超過一頁，文字被切斷。</li>
+</ul>
+<h3>三、本工具怎麼解決？</h3>
+<table><tr><th>痛點</th><th>本工具解法</th></tr>
+<tr><td>網址頁碼</td><td>用 html2pdf.js 直接渲染，不加 header/footer</td></tr>
+<tr><td>字體跑版</td><td>鎖定 Noto Sans TC（Google Fonts）</td></tr>
+<tr><td>邊界錯亂</td><td>CSS 固定 A4 尺寸 + 精準 padding</td></tr>
+<tr><td>分頁切斷</td><td>html2pdf.js 自動分頁，不切斷整行</td></tr>
+<tr><td>紅字黑白列印</td><td>勾選「紅字轉粗黑底線」</td></tr></table>
+<h3>四、A4 公文格式</h3>
+<table><tr><th>項目</th><th>標準</th></tr>
+<tr><td>紙張</td><td>A4（210×297mm）</td></tr>
+<tr><td>上邊界</td><td>20mm</td></tr>
+<tr><td>下邊界</td><td>20mm</td></tr>
+<tr><td>左邊界</td><td>15mm</td></tr>
+<tr><td>右邊界</td><td>15mm</td></tr>
+<tr><td>字體</td><td>12pt（標楷體或正黑體）</td></tr>
+<tr><td>行距</td><td>1.5~1.6 倍</td></tr>
+<tr><td>首行縮排</td><td>2 字元</td></tr></table>
+<h3>五、怎麼用？</h3>
+<div class="ol"><ol>
+<li>貼上文字（或 HTML）</li>
+<li>調字體大小、行距、邊界</li>
+<li>勾選「紅字轉粗黑底線」（黑白列印友善）</li>
+<li>按「預覽」看結果</li>
+<li>按「下載 PDF」</li>
+<li>把 PDF 帶到 7-11 列印</li>
+</ol></div>
+<h3>六、常見誤解</h3>
+<ul>
+<li><strong>❌ 誤解：瀏覽器列印就好。</strong><br>✅ 事實：瀏覽器列印會帶網址、日期、頁碼，且受印表機設定影響。</li>
+<li><strong>❌ 誤解：Word 排版就好。</strong><br>✅ 事實：Word 在不同電腦會跑版（字體、邊界）。</li>
+<li><strong>❌ 誤解：PDF 一定不會跑版。</strong><br>✅ 事實：PDF 是「固定版面」，但「產生 PDF 的過程」可能跑版。</li>
+<li><strong>❌ 誤解：紅字印黑白會看不清楚。</strong><br>✅ 事實：勾選「紅字轉粗黑底線」後，紅字變粗體 + 底線，黑白列印清楚。</li>
+<li><strong>❌ 誤解：一定要上傳到雲端。</strong><br>✅ 事實：本工具純前端，不上傳任何資料。</li>
+</ul>
+<h3>七、這個工具能幫你做什麼？</h3>
+<ul>
+<li><strong>完美 A4 PDF</strong>：消除網址、日期、頁碼、路徑</li>
+<li><strong>鎖定字體</strong>：Noto Sans TC，跨平台一致</li>
+<li><strong>精準邊界</strong>：上下 20mm、左右 15mm（可調）</li>
+<li><strong>紅字轉粗黑底線</strong>：黑白列印友善</li>
+<li><strong>自動分頁</strong>：不切斷整行文字</li>
+<li><strong>完全離線</strong>：不上傳任何資料</li>
+</ul>
+<h3>八、常見問題（FAQ）</h3>
+</div>
+<div class="doc-section"><h2>❓ 常見問題（FAQ）</h2><div class="faq-item"><div class="faq-q">法院訴訟文書 PDF 產生器是什麼？</div><div class="faq-a">這是一個專門為台灣法院訴訟文書設計的 HTML to PDF 工具。它使用 html2pdf.js 直接渲染 PDF，徹底消除瀏覽器預設的網址、日期、頁碼，並鎖定字體與邊界，確保 7-11 列印不跑版。</div></div><div class="faq-item"><div class="faq-q">為什麼不用瀏覽器的「列印」？</div><div class="faq-a">因為瀏覽器列印會受使用者印表機設定影響，且常帶有 file:/// 路徑、網址、日期。本工具用 html2pdf.js 直接渲染，100% 控制 PDF 內容。</div></div><div class="faq-item"><div class="faq-q">產生的 PDF 會有網址或頁碼嗎？</div><div class="faq-a">不會。本工具強制不加入任何 header/footer，絕對沒有網址、日期、頁碼、檔案路徑。</div></div><div class="faq-item"><div class="faq-q">字體會跑版嗎？</div><div class="faq-a">不會。本工具鎖定 Noto Sans TC（透過 Google Fonts 載入），跨平台一致，不會因為對方電腦沒有標楷體而跑版。</div></div><div class="faq-item"><div class="faq-q">這個工具會上傳我的文件嗎？</div><div class="faq-a">不會。所有渲染都在你的瀏覽器完成，不上傳任何資料，保護隱私。</div></div><div class="faq-item"><div class="faq-q">紅字轉黑白列印怎麼處理？</div><div class="faq-a">勾選「紅字轉粗黑底線」後，預覽時顯示紅字，下載 PDF 時自動轉為粗體 + 底線，確保 7-11 黑白列印看得清楚。</div></div></div>
+<p style="text-align:center;color:#8B949E;font-size:13px;margin-top:24px;"><time datetime="2026-11-03">最後更新：2026-11-03</time></p>
+</article>
+<div class="footer">
+  <p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p>
+  <p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js"></script>
+<script>
+function updatePreview() {
+  var input = document.getElementById("input").value;
+  var fs = parseFloat(document.getElementById("fontSize").value) || 12;
+  var lh = parseFloat(document.getElementById("lineHeight").value) || 1.6;
+  var mt = parseFloat(document.getElementById("marginTop").value) || 20;
+  var mb = parseFloat(document.getElementById("marginBottom").value) || 20;
+  var ml = parseFloat(document.getElementById("marginLeft").value) || 15;
+  var mr = parseFloat(document.getElementById("marginRight").value) || 15;
+  var pv = document.getElementById("preview");
+  pv.style.padding = mt + "mm " + mr + "mm " + mb + "mm " + ml + "mm";
+  pv.style.fontSize = fs + "pt";
+  pv.style.lineHeight = lh;
+  var html = input.split("\n").map(function(line) {
+    return '<p style="text-indent:2em;margin:0 0 0.5em 0;">' + line.replace(/</g, "&lt;").replace(/>/g, "&gt;") + '</p>';
+  }).join("");
+  pv.innerHTML = html;
+  // 預估頁數（A4 高度 297mm - 上下邊界，除以行高）
+  var contentH = pv.scrollHeight;
+  var pageH = 297 * 3.7795; // mm to px
+  var pages = Math.ceil(contentH / pageH);
+  document.getElementById("pageInfo").textContent = "預估頁數：" + pages + " 頁";
+}
+function downloadPDF() {
+  var redToBold = document.getElementById("redToBold").checked;
+  var pv = document.getElementById("preview");
+  if (redToBold) {
+    pv.querySelectorAll(".highlight").forEach(function(el) {
+      el.style.background = "transparent";
+      el.style.color = "#000";
+      el.style.fontWeight = "bold";
+      el.style.textDecoration = "underline";
+    });
+  }
+  var fs = parseFloat(document.getElementById("fontSize").value) || 12;
+  var lh = parseFloat(document.getElementById("lineHeight").value) || 1.6;
+  var mt = parseFloat(document.getElementById("marginTop").value) || 20;
+  var mb = parseFloat(document.getElementById("marginBottom").value) || 20;
+  var ml = parseFloat(document.getElementById("marginLeft").value) || 15;
+  var mr = parseFloat(document.getElementById("marginRight").value) || 15;
+  var opt = {
+    margin: [mt, mr, mb, ml],
+    filename: "court-doc-" + Date.now() + ".pdf",
+    image: { type: "jpeg", quality: 0.98 },
+    html2canvas: { scale: 2, useCORS: true, letterRendering: true },
+    jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+    pagebreak: { mode: ["avoid-all", "css", "legacy"] }
+  };
+  html2pdf().set(opt).from(pv).save();
+}
+window.addEventListener("load", updatePreview);
+</script>
+</body>
+</html>
