@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>貸款計算器（房貸、信貸、車貸，本息/本金平均攤還） | 雅寶工具箱 AHPAL.COM</title>
+<meta name="description" content="貸款計算器：輸入貸款金額、年利率、貸款年限，算出每月還款、總利息、總還款。支援本息平均攤還、本金平均攤還。純前端、完全離線。附完整教學與常見問題。">
+<meta name="keywords" content="貸款計算,房貸計算,信貸計算,車貸計算,本息平均攤還,本金平均攤還,每月還款,總利息">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/loan-calculator/">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "貸款計算器", "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}, "description": "房貸、信貸、車貸計算器，支援本息平均攤還、本金平均攤還，算出每月還款、總利息、總還款。", "url": "https://tools.ahpal.com/loan-calculator/"}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "貸款計算器是什麼？", "acceptedAnswer": {"@type": "Answer", "text": "貸款計算器是算出「每月要還多少錢」的工具。輸入貸款金額、年利率、貸款年限，就能算出每月還款、總利息、總還款。"}}, {"@type": "Question", "name": "本息平均攤還和本金平均攤還有什麼差別？", "acceptedAnswer": {"@type": "Answer", "text": "本息平均攤還：每月還款金額固定，前期利息多、本金少。本金平均攤還：每月還本金固定，利息遞減，前期還款多、後期少。"}}, {"@type": "Question", "name": "貸款計算器的結果準確嗎？", "acceptedAnswer": {"@type": "Answer", "text": "結果是理論值，實際還款會因銀行手續費、開辦費、寬限期、利率變動而不同。建議以銀行實際核貸為準。"}}, {"@type": "Question", "name": "這個工具會上傳我的資料嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不會。所有計算都在你的瀏覽器完成，不上傳任何資料，完全離線。"}}]}]}</script>
+<style>*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:40px 20px;}
+.container{max-width:1000px;margin:0 auto;}
+h1{color:#D4AF37;font-size:28px;margin-bottom:12px;}
+.sub{color:#8B949E;margin-bottom:24px;font-size:14px;}
+.card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin-bottom:16px;}
+label{color:#8B949E;font-size:13px;display:block;margin-bottom:6px;}
+input,select,textarea{width:100%;background:#0D1117;color:#E6EDF3;border:1px solid #2D303A;border-radius:8px;padding:12px;font-size:14px;margin-bottom:12px;font-family:inherit;}
+button{background:#D4AF37;color:#0D1117;border:none;border-radius:8px;padding:10px 20px;font-weight:700;cursor:pointer;margin:8px 8px 8px 0;font-size:14px;}
+button:hover{background:#e6c24a;}
+button.blue{background:#58A6FF;}
+.result{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:16px;font-size:15px;min-height:60px;}
+.result .big{font-size:28px;font-weight:700;color:#D4AF37;text-align:center;padding:12px 0;}
+.tip{background:rgba(63,185,80,0.08);border-left:4px solid #3FB950;padding:12px 16px;border-radius:6px;color:#C9D1D9;font-size:13px;margin-top:12px;}
+.warn{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:12px 16px;border-radius:6px;color:#C9D1D9;font-size:13px;margin-top:12px;}
+.footer{text-align:center;margin-top:60px;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:600px){.row{grid-template-columns:1fr;}}
+.breadcrumb{font-size:13px;color:#8B949E;margin-bottom:16px;}
+.breadcrumb a{color:#58A6FF;text-decoration:none;}
+.doc-section{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:28px 32px;margin-top:32px;}
+.doc-section h2{color:#D4AF37;font-size:22px;margin:24px 0 16px;padding-bottom:8px;border-bottom:2px solid #2D303A;}
+.doc-section h2:first-child{margin-top:0;}
+.doc-section h3{color:#58A6FF;font-size:17px;margin:24px 0 10px;}
+.doc-section p{color:#C9D1D9;margin-bottom:12px;line-height:1.9;}
+.doc-section ul,.doc-section ol{margin:8px 0 16px 24px;color:#C9D1D9;}
+.doc-section li{margin-bottom:8px;line-height:1.8;}
+.doc-section code{background:#0D1117;color:#58A6FF;padding:2px 8px;border-radius:4px;font-family:Consolas,monospace;font-size:13px;}
+.doc-section .highlight{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:6px;margin:16px 0;}
+.doc-section .warnbox{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:14px 18px;border-radius:6px;margin:16px 0;}
+.doc-section table{width:100%;border-collapse:collapse;font-size:14px;margin:12px 0 20px;}
+.doc-section th,.doc-section td{padding:10px 14px;border:1px solid #2D303A;text-align:left;}
+.doc-section th{background:rgba(212,175,55,0.12);color:#D4AF37;}
+.doc-section tr:nth-child(even){background:rgba(255,255,255,0.02);}
+.doc-section .example{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:16px;font-family:Consolas,monospace;font-size:13px;color:#C9D1D9;margin:12px 0;line-height:1.8;}
+.faq-item{border-bottom:1px solid #2D303A;padding:14px 0;}
+.faq-item:last-child{border-bottom:none;}
+.faq-q{color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;}
+.faq-a{color:#C9D1D9;font-size:14px;line-height:1.9;}</style>
+</head>
+<body>
+<div class="container">
+<nav class="ahpal-top-nav" style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;">
+  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">🏠 首頁</a>
+  <a href="https://www.ahpal.com/categories.html" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">📚 全部分類</a>
+  <a href="https://www.ahpal.com/strategy/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">📌 策略文章</a>
+  <a href="https://novels.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">📖 小說站</a>
+  <a href="https://memories.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">🏛️ 回憶館</a>
+  <a href="https://bbs2.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">💬 BBS2</a>
+  <a href="https://pet.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">⚔️ 打怪場</a>
+  <a href="https://farm.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">🌾 農場</a>
+  <a href="https://tools.ahpal.com/" style="color:#0D1117;background:#D4AF37;text-decoration:none;padding:4px 10px;border-radius:6px;font-weight:700;">🛠️ 工具箱</a>
+</nav>
+<div class="breadcrumb"><a href="https://tools.ahpal.com/">🛠️ 工具箱</a> › 貸款計算器</div>
+<article>
+<h1>💰 貸款計算器</h1>
+<p class="sub">房貸、信貸、車貸計算器，支援本息平均攤還、本金平均攤還。純前端、完全離線。</p>
+
+<div class="card">
+  <div class="row">
+    <div>
+      <label>貸款金額（元）</label>
+      <input type="number" id="amount" value="1000000" min="0" step="1000" oninput="calc()">
+    </div>
+    <div>
+      <label>年利率（%）</label>
+      <input type="number" id="rate" value="2.0" min="0" max="50" step="0.01" oninput="calc()">
+    </div>
+  </div>
+  <div class="row">
+    <div>
+      <label>貸款年限（年）</label>
+      <input type="number" id="years" value="20" min="1" max="50" step="1" oninput="calc()">
+    </div>
+    <div>
+      <label>還款方式</label>
+      <select id="method" onchange="calc()">
+        <option value="equal-payment">本息平均攤還（每月固定）</option>
+        <option value="equal-principal">本金平均攤還（每月遞減）</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <label>計算結果</label>
+  <div class="result" id="result"></div>
+</div>
+
+<div class="doc-section">
+  <h2>📚 貸款計算器是什麼？給門外漢的完整說明</h2>
+
+  <p>你準備買房，銀行說「貸款 1000 萬、利率 2%、20 年」，你可能會想：「那我每個月要還多少錢？總共要還多少利息？」這篇文章一次講清楚。</p>
+
+  <h3>一、一句話講完</h3>
+  <div class="highlight">
+    <p><strong>貸款計算器 = 算出「每月要還多少錢」的工具。</strong></p>
+    <p>輸入貸款金額、年利率、貸款年限，就能算出每月還款、總利息、總還款。</p>
+  </div>
+
+  <h3>二、兩種還款方式（最重要）</h3>
+  <p>貸款有兩種還款方式，選錯會差很多錢：</p>
+  <table>
+    <tr><th>方式</th><th>每月還款</th><th>前期</th><th>後期</th><th>總利息</th></tr>
+    <tr><td><strong>本息平均攤還</strong></td><td>固定</td><td>利息多、本金少</td><td>利息少、本金多</td><td>較高</td></tr>
+    <tr><td><strong>本金平均攤還</strong></td><td>遞減</td><td>還款多</td><td>還款少</td><td>較低</td></tr>
+  </table>
+
+  <h3>三、本息平均攤還（最常見）</h3>
+  <p>每月還款金額固定，適合「薪水固定」的人。</p>
+  <p><strong>公式：</strong>每月還款 = 本金 × [月利率 × (1+月利率)^期數] ÷ [(1+月利率)^期數 − 1]</p>
+  <div class="example">
+    <div>貸款 1000 萬、利率 2%、20 年</div>
+    <div>月利率 = 2% ÷ 12 = 0.0016667</div>
+    <div>期數 = 20 × 12 = 240 期</div>
+    <div>每月還款 ≈ <span style="color:#D4AF37;font-weight:700;">50,588 元</span></div>
+    <div>總還款 ≈ 12,141,120 元</div>
+    <div>總利息 ≈ <span style="color:#F85149;font-weight:700;">2,141,120 元</span></div>
+  </div>
+
+  <h3>四、本金平均攤還（總利息較低）</h3>
+  <p>每月還本金固定，利息遞減，適合「前期還款能力強」的人。</p>
+  <p><strong>公式：</strong>每月還本金 = 本金 ÷ 期數；每月利息 = 剩餘本金 × 月利率</p>
+  <div class="example">
+    <div>貸款 1000 萬、利率 2%、20 年</div>
+    <div>每月還本金 = 1000 萬 ÷ 240 = 41,667 元</div>
+    <div>第 1 個月利息 = 1000 萬 × 0.0016667 = 16,667 元</div>
+    <div>第 1 個月還款 = 41,667 + 16,667 = <span style="color:#D4AF37;font-weight:700;">58,334 元</span></div>
+    <div>第 240 個月還款 = 41,667 + 69 = 41,736 元</div>
+    <div>總利息 ≈ <span style="color:#3FB950;font-weight:700;">2,008,333 元</span></div>
+  </div>
+
+  <h3>五、兩種方式怎麼選？</h3>
+  <ul>
+    <li><strong>選本息平均</strong>：薪水固定、不想前期壓力大、想「每月固定支出」。</li>
+    <li><strong>選本金平均</strong>：前期還款能力強、想「省總利息」、能接受「每月還款遞減」。</li>
+    <li><strong>差距</strong>：以 1000 萬、2%、20 年為例，本金平均比本息平均省約 <strong>13 萬利息</strong>。</li>
+  </ul>
+
+  <h3>六、常見誤解</h3>
+  <ul>
+    <li><strong>❌ 誤解：利率 2% 就是「總利息 2%」。</strong><br>✅ 事實：2% 是「年利率」，20 年總利息約 21%（本息平均）。</li>
+    <li><strong>❌ 誤解：貸款年限越長越好。</strong><br>✅ 事實：年限越長，每月還款越低，但總利息越高。</li>
+    <li><strong>❌ 誤解：本息平均和本金平均差不多。</strong><br>✅ 事實：以 1000 萬、2%、20 年為例，差約 13 萬利息。</li>
+    <li><strong>❌ 誤解：貸款計算器算的是「實際還款」。</strong><br>✅ 事實：算的是「理論值」，實際要加手續費、開辦費、寬限期。</li>
+    <li><strong>❌ 誤解：寬限期不用還錢。</strong><br>✅ 事實：寬限期只還利息，不還本金，期滿後還款會變高。</li>
+  </ul>
+
+  <h3>七、這個工具能幫你做什麼？</h3>
+  <ul>
+    <li><strong>算出每月還款</strong>：本息平均、本金平均都能算</li>
+    <li><strong>算出總利息</strong>：知道總共要還多少利息</li>
+    <li><strong>算出總還款</strong>：知道總共要還多少錢</li>
+    <li><strong>比較兩種方式</strong>：切換還款方式，看差異</li>
+    <li><strong>完全離線</strong>：不上傳任何資料</li>
+  </ul>
+
+  <h3>八、常見問題（FAQ）</h3>
+  <div class="faq-item">
+    <div class="faq-q">Q1：貸款計算器是什麼？</div>
+    <div class="faq-a">貸款計算器是算出「每月要還多少錢」的工具。輸入貸款金額、年利率、貸款年限，就能算出每月還款、總利息、總還款。</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Q2：本息平均攤還和本金平均攤還有什麼差別？</div>
+    <div class="faq-a">本息平均攤還：每月還款金額固定，前期利息多、本金少。本金平均攤還：每月還本金固定，利息遞減，前期還款多、後期少。以 1000 萬、2%、20 年為例，本金平均省約 13 萬利息。</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Q3：貸款計算器的結果準確嗎？</div>
+    <div class="faq-a">結果是理論值，實際還款會因銀行手續費、開辦費、寬限期、利率變動而不同。建議以銀行實際核貸為準。</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Q4：這個工具會上傳我的資料嗎？</div>
+    <div class="faq-a">不會。所有計算都在你的瀏覽器完成，不上傳任何資料，完全離線。</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Q5：什麼是寬限期？</div>
+    <div class="faq-a">寬限期是「只還利息、不還本金」的期間，通常 1~5 年。寬限期內還款較低，但期滿後還款會變高，總利息也會增加。</div>
+  </div>
+
+  <div class="highlight">
+    <p style="margin:0;"><strong>🦞 龍蝦總工程師的話：</strong></p>
+    <p style="margin:8px 0 0;">「貸款不是『借錢』，是『借時間』。懂計算，你就不會被『每月 5 萬』嚇到，也不會被『利率 2%』騙到。」</p>
+  </div>
+
+  <p style="text-align:center;color:#8B949E;font-size:13px;margin-top:24px;margin-bottom:0;">本文由 🦞 龍蝦總工程師撰寫 · <time datetime="2026-11-03">2026-11-03</time> · 雅寶社區 AHPAL.COM</p>
+</div>
+</article>
+
+<div class="footer">
+  <p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p>
+  <p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p>
+</div>
+</div>
+<script>
+function calc() {
+  var amount = parseFloat(document.getElementById("amount").value) || 0;
+  var rate = parseFloat(document.getElementById("rate").value) || 0;
+  var years = parseFloat(document.getElementById("years").value) || 0;
+  var method = document.getElementById("method").value;
+  var result = document.getElementById("result");
+  if (amount <= 0 || years <= 0) {
+    result.innerHTML = '<p style="color:#8B949E;">請輸入有效的貸款金額與年限</p>';
+    return;
+  }
+  var n = years * 12;
+  var r = rate / 100 / 12;
+  var html = "";
+  if (method === "equal-payment") {
+    var monthly;
+    if (r === 0) {
+      monthly = amount / n;
+    } else {
+      monthly = amount * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1);
+    }
+    var total = monthly * n;
+    var interest = total - amount;
+    html = '<div class="big">每月還款：' + Math.round(monthly).toLocaleString() + ' 元</div>';
+    html += '<table style="width:100%;border-collapse:collapse;margin-top:12px;">';
+    html += '<tr style="border-bottom:1px solid #2D303A;"><td style="padding:8px;color:#8B949E;">貸款金額</td><td style="padding:8px;text-align:right;color:#E6EDF3;">' + Math.round(amount).toLocaleString() + ' 元</td></tr>';
+    html += '<tr style="border-bottom:1px solid #2D303A;"><td style="padding:8px;color:#8B949E;">總還款</td><td style="padding:8px;text-align:right;color:#58A6FF;font-weight:700;">' + Math.round(total).toLocaleString() + ' 元</td></tr>';
+    html += '<tr style="border-bottom:1px solid #2D303A;"><td style="padding:8px;color:#8B949E;">總利息</td><td style="padding:8px;text-align:right;color:#F85149;font-weight:700;">' + Math.round(interest).toLocaleString() + ' 元</td></tr>';
+    html += '<tr><td style="padding:8px;color:#8B949E;">總期數</td><td style="padding:8px;text-align:right;color:#E6EDF3;">' + n + ' 期</td></tr>';
+    html += '</table>';
+  } else {
+    var principal = amount / n;
+    var totalInterest = 0;
+    var firstMonth = 0;
+    var lastMonth = 0;
+    for (var i = 1; i <= n; i++) {
+      var remain = amount - principal * (i - 1);
+      var monthInterest = remain * r;
+      totalInterest += monthInterest;
+      var monthPay = principal + monthInterest;
+      if (i === 1) firstMonth = monthPay;
+      if (i === n) lastMonth = monthPay;
+    }
+    var total2 = amount + totalInterest;
+    html = '<div class="big">第 1 個月：' + Math.round(firstMonth).toLocaleString() + ' 元</div>';
+    html += '<div style="text-align:center;color:#8B949E;margin-bottom:12px;">每月遞減，第 ' + n + ' 個月：' + Math.round(lastMonth).toLocaleString() + ' 元</div>';
+    html += '<table style="width:100%;border-collapse:collapse;">';
+    html += '<tr style="border-bottom:1px solid #2D303A;"><td style="padding:8px;color:#8B949E;">貸款金額</td><td style="padding:8px;text-align:right;color:#E6EDF3;">' + Math.round(amount).toLocaleString() + ' 元</td></tr>';
+    html += '<tr style="border-bottom:1px solid #2D303A;"><td style="padding:8px;color:#8B949E;">總還款</td><td style="padding:8px;text-align:right;color:#58A6FF;font-weight:700;">' + Math.round(total2).toLocaleString() + ' 元</td></tr>';
+    html += '<tr style="border-bottom:1px solid #2D303A;"><td style="padding:8px;color:#8B949E;">總利息</td><td style="padding:8px;text-align:right;color:#3FB950;font-weight:700;">' + Math.round(totalInterest).toLocaleString() + ' 元</td></tr>';
+    html += '<tr><td style="padding:8px;color:#8B949E;">總期數</td><td style="padding:8px;text-align:right;color:#E6EDF3;">' + n + ' 期</td></tr>';
+    html += '</table>';
+  }
+  result.innerHTML = html;
+}
+calc();
+</script>
+</body>
+</html>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>日期差計算器（天數、週數、月數、年齡、倒數） | 雅寶工具箱 AHPAL.COM</title>
+<meta name="description" content="日期差計算器：計算兩個日期之間的天數、週數、月數、年數，也支援年齡計算、倒數計時、加減天數。純前端、完全離線。附完整教學與常見問題。">
+<meta name="keywords" content="日期差,天數計算,年齡計算,倒數計時,日期加減,兩個日期相差,工作天數">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/date-diff/">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "日期差計算器", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}, "description": "計算兩個日期之間的天數、週數、月數、年數，也支援年齡計算、倒數計時、加減天數。", "url": "https://tools.ahpal.com/date-diff/"}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "日期差計算器是什麼？", "acceptedAnswer": {"@type": "Answer", "text": "日期差計算器是算出「兩個日期之間差多少」的工具。輸入開始日期、結束日期，就能算出相差幾天、幾週、幾個月、幾年。"}}, {"@type": "Question", "name": "日期差計算器怎麼算年齡？", "acceptedAnswer": {"@type": "Answer", "text": "把「開始日期」設為生日、「結束日期」設為今天，就能算出「足歲年齡」。若要算「虛歲」，再加 1 歲。"}}, {"@type": "Question", "name": "日期差計算器包含開始日和結束日嗎？", "acceptedAnswer": {"@type": "Answer", "text": "預設「不包含」結束日（例如 1 月 1 日到 1 月 2 日，算 1 天）。這與銀行、法律常用的「算頭不算尾」一致。"}}, {"@type": "Question", "name": "這個工具會上傳我的資料嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不會。所有計算都在你的瀏覽器完成，不上傳任何資料，完全離線。"}}]}]}</script>
+<style>*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:40px 20px;}
+.container{max-width:1000px;margin:0 auto;}
+h1{color:#D4AF37;font-size:28px;margin-bottom:12px;}
+.sub{color:#8B949E;margin-bottom:24px;font-size:14px;}
+.card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin-bottom:16px;}
+label{color:#8B949E;font-size:13px;display:block;margin-bottom:6px;}
+input,select,textarea{width:100%;background:#0D1117;color:#E6EDF3;border:1px solid #2D303A;border-radius:8px;padding:12px;font-size:14px;margin-bottom:12px;font-family:inherit;}
+button{background:#D4AF37;color:#0D1117;border:none;border-radius:8px;padding:10px 20px;font-weight:700;cursor:pointer;margin:8px 8px 8px 0;font-size:14px;}
+button:hover{background:#e6c24a;}
+button.blue{background:#58A6FF;}
+.result{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:16px;font-size:15px;min-height:60px;}
+.result .big{font-size:28px;font-weight:700;color:#D4AF37;text-align:center;padding:12px 0;}
+.tip{background:rgba(63,185,80,0.08);border-left:4px solid #3FB950;padding:12px 16px;border-radius:6px;color:#C9D1D9;font-size:13px;margin-top:12px;}
+.warn{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:12px 16px;border-radius:6px;color:#C9D1D9;font-size:13px;margin-top:12px;}
+.footer{text-align:center;margin-top:60px;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:600px){.row{grid-template-columns:1fr;}}
+.breadcrumb{font-size:13px;color:#8B949E;margin-bottom:16px;}
+.breadcrumb a{color:#58A6FF;text-decoration:none;}
+.doc-section{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:28px 32px;margin-top:32px;}
+.doc-section h2{color:#D4AF37;font-size:22px;margin:24px 0 16px;padding-bottom:8px;border-bottom:2px solid #2D303A;}
+.doc-section h2:first-child{margin-top:0;}
+.doc-section h3{color:#58A6FF;font-size:17px;margin:24px 0 10px;}
+.doc-section p{color:#C9D1D9;margin-bottom:12px;line-height:1.9;}
+.doc-section ul,.doc-section ol{margin:8px 0 16px 24px;color:#C9D1D9;}
+.doc-section li{margin-bottom:8px;line-height:1.8;}
+.doc-section code{background:#0D1117;color:#58A6FF;padding:2px 8px;border-radius:4px;font-family:Consolas,monospace;font-size:13px;}
+.doc-section .highlight{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:6px;margin:16px 0;}
+.doc-section .warnbox{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:14px 18px;border-radius:6px;margin:16px 0;}
+.doc-section table{width:100%;border-collapse:collapse;font-size:14px;margin:12px 0 20px;}
+.doc-section th,.doc-section td{padding:10px 14px;border:1px solid #2D303A;text-align:left;}
+.doc-section th{background:rgba(212,175,55,0.12);color:#D4AF37;}
+.doc-section tr:nth-child(even){background:rgba(255,255,255,0.02);}
+.doc-section .example{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:16px;font-family:Consolas,monospace;font-size:13px;color:#C9D1D9;margin:12px 0;line-height:1.8;}
+.faq-item{border-bottom:1px solid #2D303A;padding:14px 0;}
+.faq-item:last-child{border-bottom:none;}
+.faq-q{color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;}
+.faq-a{color:#C9D1D9;font-size:14px;line-height:1.9;}</style>
+</head>
+<body>
+<div class="container">
+<nav class="ahpal-top-nav" style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;">
+  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">🏠 首頁</a>
+  <a href="https://www.ahpal.com/categories.html" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">📚 全部分類</a>
+  <a href="https://www.ahpal.com/strategy/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">📌 策略文章</a>
+  <a href="https://novels.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">📖 小說站</a>
+  <a href="https://memories.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">🏛️ 回憶館</a>
+  <a href="https://bbs2.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">💬 BBS2</a>
+  <a href="https://pet.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">⚔️ 打怪場</a>
+  <a href="https://farm.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">🌾 農場</a>
+  <a href="https://tools.ahpal.com/" style="color:#0D1117;background:#D4AF37;text-decoration:none;padding:4px 10px;border-radius:6px;font-weight:700;">🛠️ 工具箱</a>
+</nav>
+<div class="breadcrumb"><a href="https://tools.ahpal.com/">🛠️ 工具箱</a> › 日期差計算器</div>
+<article>
+<h1>📅 日期差計算器</h1>
+<p class="sub">計算兩個日期之間的天數、週數、月數、年數，也支援年齡計算、倒數計時、加減天數。</p>
+
+<div class="card">
+  <div class="row">
+    <div>
+      <label>開始日期</label>
+      <input type="date" id="start" oninput="calc()">
+    </div>
+    <div>
+      <label>結束日期</label>
+      <input type="date" id="end" oninput="calc()">
+    </div>
+  </div>
+  <div>
+    <button onclick="setToday()">📅 結束日期設為今天</button>
+    <button class="blue" onclick="calc()">🔄 重新計算</button>
+  </div>
+</div>
+
+<div class="card">
+  <label>計算結果</label>
+  <div class="result" id="result"></div>
+</div>
+
+<div class="card">
+  <label>加減天數（以結束日期為基準）</label>
+  <div class="row">
+    <div>
+      <input type="number" id="addDays" value="30" step="1" oninput="calcAdd()">
+    </div>
+    <div>
+      <button onclick="calcAdd()">➕ 加減</button>
+    </div>
+  </div>
+  <div class="result" id="addResult" style="min-height:auto;">（輸入天數後自動計算）</div>
+</div>
+
+<div class="doc-section">
+  <h2>📚 日期差計算器是什麼？給門外漢的完整說明</h2>
+
+  <p>你規劃旅行，想知道「從今天到出發日還有幾天」；或你算專案工期，想知道「兩個日期之間有幾個工作天」。這就是「日期差計算」。這篇文章一次講清楚。</p>
+
+  <h3>一、一句話講完</h3>
+  <div class="highlight">
+    <p><strong>日期差計算器 = 算出「兩個日期之間差多少」的工具。</strong></p>
+    <p>輸入開始日期、結束日期，就能算出相差幾天、幾週、幾個月、幾年。</p>
+  </div>
+
+  <h3>二、日期差怎麼算？（三種算法）</h3>
+  <p>「兩個日期差幾天」有三種算法，結果不同：</p>
+  <table>
+    <tr><th>算法</th><th>說明</th><th>例子（1/1 到 1/2）</th></tr>
+    <tr><td><strong>算頭不算尾</strong></td><td>包含開始日，不包含結束日</td><td>1 天</td></tr>
+    <tr><td><strong>算尾不算頭</strong></td><td>不包含開始日，包含結束日</td><td>1 天</td></tr>
+    <tr><td><strong>頭尾都算</strong></td><td>包含開始日與結束日</td><td>2 天</td></tr>
+  </table>
+  <p>本工具預設「算頭不算尾」（銀行、法律常用），與 Excel 的 `DATEDIF` 一致。</p>
+
+  <h3>三、年齡怎麼算？</h3>
+  <p>年齡有三種算法：</p>
+  <ul>
+    <li><strong>足歲</strong>：滿一年才算一歲（法律、護照用）。把生日設為開始日、今天設為結束日，算「年」。</li>
+    <li><strong>虛歲</strong>：出生即一歲，過年加一歲（傳統用）。足歲 + 1。</li>
+    <li><strong>實歲（精確到天）</strong>：幾年幾個月幾天。本工具會顯示。</li>
+  </ul>
+
+  <h3>四、倒數計時怎麼用？</h3>
+  <p>把「開始日期」設為今天、「結束日期」設為目標日，就能算出「還有幾天」。例如：</p>
+  <div class="example">
+    <div>今天：2026-11-03</div>
+    <div>目標：2027-01-01（元旦）</div>
+    <div>倒數：<span style="color:#D4AF37;font-weight:700;">59 天</span></div>
+  </div>
+
+  <h3>五、工作天怎麼算？</h3>
+  <p>「工作天」通常指「週一到週五，不含國定假日」。本工具算「總天數」，不自動扣假日。若要算工作天，需手動扣掉週末與假日，或用 Excel 的 `NETWORKDAYS` 函數。</p>
+
+  <h3>六、常見誤解</h3>
+  <ul>
+    <li><strong>❌ 誤解：1 月 1 日到 1 月 2 日差 2 天。</strong><br>✅ 事實：算頭不算尾是 1 天，頭尾都算是 2 天。算法不同，結果不同。</li>
+    <li><strong>❌ 誤解：一個月都是 30 天。</strong><br>✅ 事實：1 月 31 天、2 月 28/29 天、4 月 30 天。日期差要考慮每月天數。</li>
+    <li><strong>❌ 誤解：閏年不重要。</strong><br>✅ 事實：閏年 2 月有 29 天，跨閏年的日期差會多 1 天。</li>
+    <li><strong>❌ 誤解：年齡 = 今年 − 出生年。</strong><br>✅ 事實：要看到生日過了沒。生日沒過，要減 1 歲。</li>
+    <li><strong>❌ 誤解：日期差 = 天數 ÷ 30 = 月數。</strong><br>✅ 事實：每月天數不同，要用「日曆月」算，不是「平均月」。</li>
+  </ul>
+
+  <h3>七、這個工具能幫你做什麼？</h3>
+  <ul>
+    <li><strong>算天數</strong>：兩個日期之間差幾天</li>
+    <li><strong>算週數</strong>：差幾週</li>
+    <li><strong>算月數</strong>：差幾個月（日曆月）</li>
+    <li><strong>算年數</strong>：差幾年（足歲）</li>
+    <li><strong>算年齡</strong>：幾年幾個月幾天</li>
+    <li><strong>倒數計時</strong>：距離目標日還有幾天</li>
+    <li><strong>加減天數</strong>：某個日期加 N 天是幾號</li>
+    <li><strong>完全離線</strong>：不上傳任何資料</li>
+  </ul>
+
+  <h3>八、常見問題（FAQ）</h3>
+  <div class="faq-item">
+    <div class="faq-q">Q1：日期差計算器是什麼？</div>
+    <div class="faq-a">日期差計算器是算出「兩個日期之間差多少」的工具。輸入開始日期、結束日期，就能算出相差幾天、幾週、幾個月、幾年。</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Q2：日期差計算器怎麼算年齡？</div>
+    <div class="faq-a">把「開始日期」設為生日、「結束日期」設為今天，就能算出「足歲年齡」。若要算「虛歲」，再加 1 歲。</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Q3：日期差計算器包含開始日和結束日嗎？</div>
+    <div class="faq-a">預設「不包含」結束日（例如 1 月 1 日到 1 月 2 日，算 1 天）。這與銀行、法律常用的「算頭不算尾」一致。</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Q4：這個工具會上傳我的資料嗎？</div>
+    <div class="faq-a">不會。所有計算都在你的瀏覽器完成，不上傳任何資料，完全離線。</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Q5：怎麼算「工作天」？</div>
+    <div class="faq-a">本工具算「總天數」，不自動扣週末與假日。若要算工作天，需手動扣掉週末與國定假日，或用 Excel 的 NETWORKDAYS 函數。</div>
+  </div>
+
+  <div class="highlight">
+    <p style="margin:0;"><strong>🦞 龍蝦總工程師的話：</strong></p>
+    <p style="margin:8px 0 0;">「日期差不是『減法』，是『日曆的學問』。懂算法，你就不會算錯專案工期、也不會算錯年齡。」</p>
+  </div>
+
+  <p style="text-align:center;color:#8B949E;font-size:13px;margin-top:24px;margin-bottom:0;">本文由 🦞 龍蝦總工程師撰寫 · <time datetime="2026-11-03">2026-11-03</time> · 雅寶社區 AHPAL.COM</p>
+</div>
+</article>
+
+<div class="footer">
+  <p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p>
+  <p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p>
+</div>
+</div>
+<script>
+function setToday() {
+  var t = new Date();
+  var y = t.getFullYear();
+  var m = String(t.getMonth() + 1).padStart(2, "0");
+  var d = String(t.getDate()).padStart(2, "0");
+  document.getElementById("end").value = y + "-" + m + "-" + d;
+  calc();
+}
+function calc() {
+  var s = document.getElementById("start").value;
+  var e = document.getElementById("end").value;
+  var result = document.getElementById("result");
+  if (!s || !e) {
+    result.innerHTML = '<p style="color:#8B949E;">請選擇開始與結束日期</p>';
+    return;
+  }
+  var sd = new Date(s + "T00:00:00");
+  var ed = new Date(e + "T00:00:00");
+  if (ed < sd) {
+    result.innerHTML = '<p style="color:#F85149;">結束日期不能早於開始日期</p>';
+    return;
+  }
+  var days = Math.round((ed - sd) / 86400000);
+  var weeks = days / 7;
+  var months = (ed.getFullYear() - sd.getFullYear()) * 12 + (ed.getMonth() - sd.getMonth());
+  if (ed.getDate() < sd.getDate()) months -= 1;
+  var years = Math.floor(months / 12);
+  var remainMonths = months % 12;
+  var remainDays = days - Math.round((new Date(sd.getFullYear() + years, sd.getMonth() + remainMonths, sd.getDate()) - sd) / 86400000);
+  var html = '<div class="big">相差 ' + days + ' 天</div>';
+  html += '<table style="width:100%;border-collapse:collapse;margin-top:12px;">';
+  html += '<tr style="border-bottom:1px solid #2D303A;"><td style="padding:8px;color:#8B949E;">天數</td><td style="padding:8px;text-align:right;color:#D4AF37;font-weight:700;">' + days + ' 天</td></tr>';
+  html += '<tr style="border-bottom:1px solid #2D303A;"><td style="padding:8px;color:#8B949E;">週數</td><td style="padding:8px;text-align:right;color:#58A6FF;">' + weeks.toFixed(2) + ' 週</td></tr>';
+  html += '<tr style="border-bottom:1px solid #2D303A;"><td style="padding:8px;color:#8B949E;">月數</td><td style="padding:8px;text-align:right;color:#58A6FF;">' + months + ' 個月</td></tr>';
+  html += '<tr style="border-bottom:1px solid #2D303A;"><td style="padding:8px;color:#8B949E;">年數（足歲）</td><td style="padding:8px;text-align:right;color:#3FB950;font-weight:700;">' + years + ' 年</td></tr>';
+  html += '<tr><td style="padding:8px;color:#8B949E;">幾年幾個月幾天</td><td style="padding:8px;text-align:right;color:#E6EDF3;">' + years + ' 年 ' + remainMonths + ' 個月 ' + remainDays + ' 天</td></tr>';
+  html += '</table>';
+  result.innerHTML = html;
+}
+function calcAdd() {
+  var e = document.getElementById("end").value;
+  var n = parseInt(document.getElementById("addDays").value) || 0;
+  var result = document.getElementById("addResult");
+  if (!e) {
+    result.innerHTML = '<p style="color:#8B949E;">請先選擇結束日期</p>';
+    return;
+  }
+  var d = new Date(e + "T00:00:00");
+  d.setDate(d.getDate() + n);
+  var y = d.getFullYear();
+  var m = String(d.getMonth() + 1).padStart(2, "0");
+  var dd = String(d.getDate()).padStart(2, "0");
+  var weekdays = ["日", "一", "二", "三", "四", "五", "六"];
+  var wd = weekdays[d.getDay()];
+  result.innerHTML = '<div style="text-align:center;font-size:20px;color:#D4AF37;font-weight:700;">' + y + '-' + m + '-' + dd + '（星期' + wd + '）</div>';
+}
+(function() {
+  var t = new Date();
+  t.setDate(t.getDate() - 30);
+  var y = t.getFullYear();
+  var m = String(t.getMonth() + 1).padStart(2, "0");
+  var d = String(t.getDate()).padStart(2, "0");
+  document.getElementById("start").value = y + "-" + m + "-" + d;
+  setToday();
+  calcAdd();
+})();
+</script>
+</body>
+</html>

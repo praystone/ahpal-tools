@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>簡繁轉換器（繁體 ↔ 簡體，支援台灣香港用語） | 雅寶工具箱 AHPAL.COM</title>
+<meta name="description" content="簡繁轉換器：繁體中文與簡體中文互相轉換，支援台灣、香港用語差異。純前端、完全離線、不上傳。附完整教學與常見問題。">
+<meta name="keywords" content="簡繁轉換,繁簡轉換,繁體轉簡體,簡體轉繁體,中文轉換,OpenCC,台灣用語,香港用語">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/zh-converter/">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "簡繁轉換器", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}, "description": "繁體中文與簡體中文互相轉換，支援台灣、香港用語差異，純前端、完全離線。", "url": "https://tools.ahpal.com/zh-converter/"}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "簡繁轉換器是什麼？", "acceptedAnswer": {"@type": "Answer", "text": "簡繁轉換器是把繁體中文與簡體中文互相轉換的工具。它基於 OpenCC 的詞庫，能處理一對多、多對一的字詞轉換，並支援台灣、香港用語差異。"}}, {"@type": "Question", "name": "簡繁轉換會不會出錯？", "acceptedAnswer": {"@type": "Answer", "text": "會。中文有大量「一簡對多繁」的字（例如「發」對應「發、髮」），轉換器只能依上下文猜測，可能出錯。建議轉換後人工校對。"}}, {"@type": "Question", "name": "這個工具會上傳我的文字嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不會。所有轉換都在你的瀏覽器完成，不上傳任何資料，完全離線。"}}, {"@type": "Question", "name": "簡繁轉換器支援哪些轉換模式？", "acceptedAnswer": {"@type": "Answer", "text": "支援 4 種：簡體→繁體（台灣）、簡體→繁體（香港）、繁體→簡體、繁體（台灣）→繁體（香港）。"}}]}]}</script>
+<style>*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:40px 20px;}
+.container{max-width:1000px;margin:0 auto;}
+h1{color:#D4AF37;font-size:28px;margin-bottom:12px;}
+.sub{color:#8B949E;margin-bottom:24px;font-size:14px;}
+.card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin-bottom:16px;}
+label{color:#8B949E;font-size:13px;display:block;margin-bottom:6px;}
+input,select,textarea{width:100%;background:#0D1117;color:#E6EDF3;border:1px solid #2D303A;border-radius:8px;padding:12px;font-size:14px;margin-bottom:12px;font-family:inherit;}
+button{background:#D4AF37;color:#0D1117;border:none;border-radius:8px;padding:10px 20px;font-weight:700;cursor:pointer;margin:8px 8px 8px 0;font-size:14px;}
+button:hover{background:#e6c24a;}
+button.blue{background:#58A6FF;}
+.result{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:16px;font-size:15px;min-height:60px;}
+.result .big{font-size:28px;font-weight:700;color:#D4AF37;text-align:center;padding:12px 0;}
+.tip{background:rgba(63,185,80,0.08);border-left:4px solid #3FB950;padding:12px 16px;border-radius:6px;color:#C9D1D9;font-size:13px;margin-top:12px;}
+.warn{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:12px 16px;border-radius:6px;color:#C9D1D9;font-size:13px;margin-top:12px;}
+.footer{text-align:center;margin-top:60px;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:600px){.row{grid-template-columns:1fr;}}
+.breadcrumb{font-size:13px;color:#8B949E;margin-bottom:16px;}
+.breadcrumb a{color:#58A6FF;text-decoration:none;}
+.doc-section{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:28px 32px;margin-top:32px;}
+.doc-section h2{color:#D4AF37;font-size:22px;margin:24px 0 16px;padding-bottom:8px;border-bottom:2px solid #2D303A;}
+.doc-section h2:first-child{margin-top:0;}
+.doc-section h3{color:#58A6FF;font-size:17px;margin:24px 0 10px;}
+.doc-section p{color:#C9D1D9;margin-bottom:12px;line-height:1.9;}
+.doc-section ul,.doc-section ol{margin:8px 0 16px 24px;color:#C9D1D9;}
+.doc-section li{margin-bottom:8px;line-height:1.8;}
+.doc-section code{background:#0D1117;color:#58A6FF;padding:2px 8px;border-radius:4px;font-family:Consolas,monospace;font-size:13px;}
+.doc-section .highlight{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:6px;margin:16px 0;}
+.doc-section .warnbox{background:rgba(248,81,73,0.08);border-left:4px solid #F85149;padding:14px 18px;border-radius:6px;margin:16px 0;}
+.doc-section table{width:100%;border-collapse:collapse;font-size:14px;margin:12px 0 20px;}
+.doc-section th,.doc-section td{padding:10px 14px;border:1px solid #2D303A;text-align:left;}
+.doc-section th{background:rgba(212,175,55,0.12);color:#D4AF37;}
+.doc-section tr:nth-child(even){background:rgba(255,255,255,0.02);}
+.doc-section .example{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:16px;font-family:Consolas,monospace;font-size:13px;color:#C9D1D9;margin:12px 0;line-height:1.8;}
+.faq-item{border-bottom:1px solid #2D303A;padding:14px 0;}
+.faq-item:last-child{border-bottom:none;}
+.faq-q{color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;}
+.faq-a{color:#C9D1D9;font-size:14px;line-height:1.9;}</style>
+</head>
+<body>
+<div class="container">
+<nav class="ahpal-top-nav" style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;">
+  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">🏠 首頁</a>
+  <a href="https://www.ahpal.com/categories.html" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">📚 全部分類</a>
+  <a href="https://www.ahpal.com/strategy/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">📌 策略文章</a>
+  <a href="https://novels.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">📖 小說站</a>
+  <a href="https://memories.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">🏛️ 回憶館</a>
+  <a href="https://bbs2.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">💬 BBS2</a>
+  <a href="https://pet.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">⚔️ 打怪場</a>
+  <a href="https://farm.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;border-radius:6px;">🌾 農場</a>
+  <a href="https://tools.ahpal.com/" style="color:#0D1117;background:#D4AF37;text-decoration:none;padding:4px 10px;border-radius:6px;font-weight:700;">🛠️ 工具箱</a>
+</nav>
+<div class="breadcrumb"><a href="https://tools.ahpal.com/">🛠️ 工具箱</a> › 簡繁轉換器</div>
+<article>
+<h1>🔤 簡繁轉換器</h1>
+<p class="sub">繁體中文 ↔ 簡體中文互相轉換，支援台灣、香港用語差異。純前端、完全離線。</p>
+
+<div class="card">
+  <label>轉換模式</label>
+  <select id="mode">
+    <option value="s2t">簡體 → 繁體（台灣）</option>
+    <option value="s2tw">簡體 → 繁體（台灣，含用語）</option>
+    <option value="s2hk">簡體 → 繁體（香港）</option>
+    <option value="t2s">繁體 → 簡體</option>
+    <option value="tw2s">繁體（台灣）→ 簡體</option>
+    <option value="tw2hk">繁體（台灣）→ 繁體（香港）</option>
+  </select>
+  <label>輸入文字</label>
+  <textarea id="input" rows="6" placeholder="在此貼上或輸入文字..." oninput="convert()">汉字转换测试：发展、头发、面条、干净、台湾</textarea>
+  <label>轉換結果</label>
+  <textarea id="output" rows="6" readonly placeholder="轉換結果會出現在這裡..."></textarea>
+  <button onclick="convert()">🔄 轉換</button>
+  <button class="blue" onclick="copyResult()">📋 複製結果</button>
+  <div class="tip">✅ 完全離線：所有轉換都在你的瀏覽器完成，不會上傳任何資料。</div>
+</div>
+
+<div class="doc-section">
+  <h2>📚 簡繁轉換是什麼？給門外漢的完整說明</h2>
+
+  <p>你在網路上看到一段簡體中文，想轉成繁體；或你寫了一段繁體中文，想轉成簡體給大陸朋友看。這就是「簡繁轉換」。這篇文章一次講清楚。</p>
+
+  <h3>一、一句話講完</h3>
+  <div class="highlight">
+    <p><strong>簡繁轉換 = 把簡體中文與繁體中文互相轉換的過程。</strong></p>
+    <p>它不是「一個字換一個字」那麼簡單，因為中文有大量「一簡對多繁」「一繁對多簡」的字。</p>
+  </div>
+
+  <h3>二、為什麼簡繁轉換很難？</h3>
+  <p>很多人以為簡繁轉換是「查表換字」，其實不是。中文有三個難題：</p>
+  <ul>
+    <li><strong>一簡對多繁</strong>：一個簡體字對應多個繁體字。例如「发」對應「發」（發展）和「髮」（頭髮）。</li>
+    <li><strong>一繁對多簡</strong>：一個繁體字對應多個簡體字。例如「乾」對應「干」（乾淨）、「乾」（乾燥）。</li>
+    <li><strong>用語差異</strong>：台灣、香港、大陸用語不同。例如「軟體」（台灣）vs「软件」（大陸）。</li>
+  </ul>
+
+  <h3>三、常見的「一簡對多繁」例子</h3>
+  <table>
+    <tr><th>簡體</th><th>繁體（可能）</th><th>怎麼判斷</th></tr>
+    <tr><td>发</td><td>發 / 髮</td><td>「發展」用「發」，「頭髮」用「髮」</td></tr>
+    <tr><td>干</td><td>乾 / 幹 / 干</td><td>「乾淨」用「乾」，「幹部」用「幹」，「干涉」用「干」</td></tr>
+    <tr><td>后</td><td>後 / 后</td><td>「後來」用「後」，「皇后」用「后」</td></tr>
+    <tr><td>里</td><td>裡 / 里</td><td>「裡面」用「裡」，「公里」用「里」</td></tr>
+    <tr><td>面</td><td>麵 / 面</td><td>「麵條」用「麵」，「面子」用「面」</td></tr>
+    <tr><td>云</td><td>雲 / 云</td><td>「雲端」用「雲」，「人云亦云」用「云」</td></tr>
+  </table>
+
+  <h3>四、常見的「用語差異」例子</h3>
+  <table>
+    <tr><th>台灣</th><th>大陸</th><th>香港</th></tr>
+    <tr><td>軟體</td><td>软件</td><td>軟件</td></tr>
+    <tr><td>網路</td><td>网络</td><td>網絡</td></tr>
+    <tr><td>資訊</td><td>信息</td><td>資訊</td></tr>
+    <tr><td>計程車</td><td>出租车</td><td>的士</td></tr>
+    <tr><td>腳踏車</td><td>自行车</td><td>單車</td></tr>
+    <tr><td>馬鈴薯</td><td>土豆</td><td>薯仔</td></tr>
+  </table>
+
+  <h3>五、簡繁轉換的 3 種做法</h3>
+  <ol>
+    <li><strong>查表法</strong>：建立「簡體→繁體」對照表，逐字替換。速度快，但無法處理「一簡對多繁」。</li>
+    <li><strong>詞庫法</strong>：建立「詞→詞」對照表，先斷詞再替換。準確度高，但需要大量詞庫。</li>
+    <li><strong>AI 法</strong>：用語言模型理解上下文，再轉換。準確度最高，但速度慢、需要網路。</li>
+  </ol>
+  <p>本工具用「詞庫法」（OpenCC 的詞庫），在速度和準確度之間取得平衡。</p>
+
+  <h3>六、常見誤解</h3>
+  <ul>
+    <li><strong>❌ 誤解：簡繁轉換是「一對一」。</strong><br>✅ 事實：大量字是「一簡對多繁」，需要上下文判斷。</li>
+    <li><strong>❌ 誤解：簡繁轉換 100% 準確。</strong><br>✅ 事實：詞庫法有極限，建議轉換後人工校對。</li>
+    <li><strong>❌ 誤解：簡體字是「簡化版」的繁體字。</strong><br>✅ 事實：有些簡體字是「古字」（如「云」），不是簡化。</li>
+    <li><strong>❌ 誤解：台灣用語 = 大陸用語。</strong><br>✅ 事實：台灣、大陸、香港用語差異很大。</li>
+    <li><strong>❌ 誤解：簡繁轉換只能用來「看」。</strong><br>✅ 事實：也能用來「寫」，例如寫簡體給大陸朋友。</li>
+  </ul>
+
+  <h3>七、這個工具能幫你做什麼？</h3>
+  <ul>
+    <li><strong>簡體 → 繁體（台灣）</strong>：把簡體中文轉成台灣繁體</li>
+    <li><strong>簡體 → 繁體（香港）</strong>：把簡體中文轉成香港繁體</li>
+    <li><strong>繁體 → 簡體</strong>：把繁體中文轉成簡體</li>
+    <li><strong>繁體（台灣）→ 繁體（香港）</strong>：台灣用語轉香港用語</li>
+    <li><strong>一鍵複製</strong>：轉換結果一鍵複製</li>
+    <li><strong>完全離線</strong>：不上傳任何資料</li>
+  </ul>
+
+  <h3>八、常見問題（FAQ）</h3>
+  <div class="faq-item">
+    <div class="faq-q">Q1：簡繁轉換器是什麼？</div>
+    <div class="faq-a">簡繁轉換器是把繁體中文與簡體中文互相轉換的工具。它基於 OpenCC 的詞庫，能處理一對多、多對一的字詞轉換，並支援台灣、香港用語差異。</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Q2：簡繁轉換會不會出錯？</div>
+    <div class="faq-a">會。中文有大量「一簡對多繁」的字（例如「發」對應「發、髮」），轉換器只能依上下文猜測，可能出錯。建議轉換後人工校對。</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Q3：這個工具會上傳我的文字嗎？</div>
+    <div class="faq-a">不會。所有轉換都在你的瀏覽器完成，不上傳任何資料，完全離線。</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Q4：簡繁轉換器支援哪些轉換模式？</div>
+    <div class="faq-a">支援 6 種：簡體→繁體（台灣）、簡體→繁體（台灣含用語）、簡體→繁體（香港）、繁體→簡體、繁體（台灣）→簡體、繁體（台灣）→繁體（香港）。</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Q5：為什麼「发」有時候轉成「發」，有時候轉成「髮」？</div>
+    <div class="faq-a">因為「发」是「一簡對多繁」的字。「發展」的「发」對應「發」，「頭髮」的「发」對應「髮」。轉換器依上下文（詞庫）判斷，但可能出錯。</div>
+  </div>
+
+  <div class="highlight">
+    <p style="margin:0;"><strong>🦞 龍蝦總工程師的話：</strong></p>
+    <p style="margin:8px 0 0;">「簡繁轉換不是『換字』，是『換語境』。懂它的限制，你就不會被它騙。」</p>
+  </div>
+
+  <p style="text-align:center;color:#8B949E;font-size:13px;margin-top:24px;margin-bottom:0;">本文由 🦞 龍蝦總工程師撰寫 · <time datetime="2026-11-03">2026-11-03</time> · 雅寶社區 AHPAL.COM</p>
+</div>
+</article>
+
+<div class="footer">
+  <p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p>
+  <p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/opencc-js@1.0.5/dist/umd/full.min.js"></script>
+<script>
+var converter = null;
+var currentMode = "s2t";
+function initConverter(mode) {
+  if (typeof OpenCC === "undefined") return;
+  try {
+    converter = OpenCC.Converter({ from: mode.split("2")[0], to: mode.split("2")[1] });
+  } catch(e) {
+    converter = null;
+    document.getElementById("output").value = "轉換器載入失敗：" + e.message;
+  }
+}
+function convert() {
+  var mode = document.getElementById("mode").value;
+  if (mode !== currentMode || !converter) {
+    currentMode = mode;
+    initConverter(mode);
+  }
+  var input = document.getElementById("input").value;
+  if (!converter) {
+    document.getElementById("output").value = "轉換器尚未載入，請稍候再試。";
+    return;
+  }
+  try {
+    document.getElementById("output").value = converter(input);
+  } catch(e) {
+    document.getElementById("output").value = "轉換失敗：" + e.message;
+  }
+}
+function copyResult() {
+  var out = document.getElementById("output");
+  out.select();
+  document.execCommand("copy");
+  alert("已複製轉換結果！");
+}
+document.getElementById("mode").addEventListener("change", function() { currentMode = null; convert(); });
+window.addEventListener("load", function() { initConverter(currentMode); convert(); });
+</script>
+</body>
+</html>
