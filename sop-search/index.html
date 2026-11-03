@@ -35,6 +35,86 @@ button.red{background:#F85149;color:#fff;}
 .tab{display:inline-block;padding:8px 16px;background:#0D1117;color:#8B949E;border:1px solid #2D303A;border-radius:8px;cursor:pointer;margin-right:6px;margin-bottom:6px;}
 .tab.active{background:#D4AF37;color:#0D1117;border-color:#D4AF37;font-weight:700;}
 </style>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "SOP 查詢器",
+      "description": "雅寶工作 SOP 全文搜尋。輸入關鍵字，即時找到對應章節。",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "TWD"
+      },
+      "url": "https://tools.ahpal.com/sop-search/"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "工具箱",
+          "item": "https://tools.ahpal.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "SOP 查詢器",
+          "item": "https://tools.ahpal.com/sop-search/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "SOP 查詢器是什麼？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "SOP 查詢器是「全文搜尋雅寶工作 SOP」的工具。輸入關鍵字，即時找到對應章節。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "SOP 是什麼？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "SOP（Standard Operating Procedure）是標準作業程序，記錄「怎麼做、怎麼驗、怎麼回滾」。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "為什麼要有 SOP？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "因為 AI 會換人，但 SOP 不會。SOP 是「交接介面」，讓下一個 AI 不用重踩坑。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "這個工具會上傳我的查詢嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "不會。所有搜尋都在你的瀏覽器完成，不上傳任何資料。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "SOP 資料從哪來？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "從 `scripts/sop/sop-*.txt` 打包成 `sop-data.json`，給 sop-search 用。"
+          }
+        }
+      ]
+    }
+  ]
+}</script>
 </head>
 <body>
 <nav class="ahpal-top-nav" style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;position:relative;z-index:10;">
@@ -49,6 +129,8 @@ button.red{background:#F85149;color:#fff;}
   <a href="https://tools.ahpal.com/" style="color:#0D1117;background:#D4AF37;text-decoration:none;padding:4px 10px;border-radius:6px;font-weight:700;">🛠️ 工具箱</a>
 </nav>
 <div class="container">
+<nav class="breadcrumb" style="font-size:13px;color:#8B949E;margin-bottom:16px;"><a href="https://tools.ahpal.com/" style="color:#58A6FF;text-decoration:none;">🛠️ 工具箱</a> › SOP 查詢器</nav>
+<article>
 <h1>📖 SOP 查詢器</h1>
 <p class="sub">雅寶工作 SOP 全文搜尋。輸入關鍵字，即時找到對應章節。</p>
 
@@ -74,6 +156,9 @@ button.red{background:#F85149;color:#fff;}
   <div style="color:#8B949E;">載入中...</div>
 </div>
 
+<div class="doc-section" style="background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:28px 32px;margin-top:32px;"><h2 style="color:#D4AF37;font-size:22px;margin:0 0 16px;padding-bottom:8px;border-bottom:2px solid #2D303A;">❓ 常見問題（FAQ）</h2><div class="faq-item" style="border-bottom:1px solid #2D303A;padding:14px 0;"><div class="faq-q" style="color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;">SOP 查詢器是什麼？</div><div class="faq-a" style="color:#C9D1D9;font-size:14px;line-height:1.9;">SOP 查詢器是「全文搜尋雅寶工作 SOP」的工具。輸入關鍵字，即時找到對應章節。</div></div><div class="faq-item" style="border-bottom:1px solid #2D303A;padding:14px 0;"><div class="faq-q" style="color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;">SOP 是什麼？</div><div class="faq-a" style="color:#C9D1D9;font-size:14px;line-height:1.9;">SOP（Standard Operating Procedure）是標準作業程序，記錄「怎麼做、怎麼驗、怎麼回滾」。</div></div><div class="faq-item" style="border-bottom:1px solid #2D303A;padding:14px 0;"><div class="faq-q" style="color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;">為什麼要有 SOP？</div><div class="faq-a" style="color:#C9D1D9;font-size:14px;line-height:1.9;">因為 AI 會換人，但 SOP 不會。SOP 是「交接介面」，讓下一個 AI 不用重踩坑。</div></div><div class="faq-item" style="border-bottom:1px solid #2D303A;padding:14px 0;"><div class="faq-q" style="color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;">這個工具會上傳我的查詢嗎？</div><div class="faq-a" style="color:#C9D1D9;font-size:14px;line-height:1.9;">不會。所有搜尋都在你的瀏覽器完成，不上傳任何資料。</div></div><div class="faq-item" style="border-bottom:1px solid #2D303A;padding:14px 0;"><div class="faq-q" style="color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;">SOP 資料從哪來？</div><div class="faq-a" style="color:#C9D1D9;font-size:14px;line-height:1.9;">從 `scripts/sop/sop-*.txt` 打包成 `sop-data.json`，給 sop-search 用。</div></div></div>
+</article>
+<p style="text-align:center;color:#8B949E;font-size:13px;margin-top:24px;"><time datetime="2026-11-03">2026-11-03</time></p>
 <div class="footer">
   <p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p>
   <p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p>

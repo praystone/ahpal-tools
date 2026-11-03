@@ -35,9 +35,92 @@ footer{position:fixed;bottom:0;left:0;right:0;background:#161B22;border-top:1px 
 footer a{color:#58A6FF;text-decoration:none;margin:0 8px;}
 code{background:#0D1117;color:#58A6FF;padding:2px 6px;border-radius:4px;}
 </style>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "文章字數統計器",
+      "description": "雅寶文章字數統計器 — 貼上 HTML，統計純中文字數（排除標籤、CSS、JS、emoji），對照品質門檻 1200 字。完全離線，零依賴。",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "TWD"
+      },
+      "url": "https://tools.ahpal.com/word-counter/"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "工具箱",
+          "item": "https://tools.ahpal.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "文章字數統計器",
+          "item": "https://tools.ahpal.com/word-counter/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "文章字數統計器是什麼？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "文章字數統計器是統計「純中文字數」的工具。貼上 HTML，排除標籤、CSS、JS、emoji，算出純中文字數。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "為什麼要統計純中文字數？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "因為雅寶的品質門檻是「1200 字」，但 HTML 標籤、CSS、JS 不是「內容」，不能算進去。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "怎麼算純中文字數？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "用正則 `[\\u4e00-\\u9fa5]` 抓出所有中文字，再算數量。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "這個工具會上傳我的 HTML 嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "不會。所有統計都在你的瀏覽器完成，不上傳任何資料。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "1200 字是硬性規定嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "是雅寶的品質門檻，低於 1200 字會被品質檢查擋下。"
+          }
+        }
+      ]
+    }
+  ]
+}</script>
 </head>
 <body>
 <div class="container">
+<nav class="breadcrumb" style="font-size:13px;color:#8B949E;margin-bottom:16px;"><a href="https://tools.ahpal.com/" style="color:#58A6FF;text-decoration:none;">🛠️ 工具箱</a> › 文章字數統計器</nav>
+<article>
+<h1>🛠️ 文章字數統計器</h1>
 <h1>📊 文章字數統計器 <span class="sub">Word Counter</span></h1>
 <p class="desc">貼上 HTML，統計純中文字數（排除標籤、CSS、JS、emoji），對照品質門檻 <code>1200 字</code>。完全離線，零依賴。</p>
 
@@ -51,6 +134,8 @@ code{background:#0D1117;color:#58A6FF;padding:2px 6px;border-radius:4px;}
 </div>
 </div>
 
+<div class="doc-section" style="background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:28px 32px;margin-top:32px;"><h2 style="color:#D4AF37;font-size:22px;margin:0 0 16px;padding-bottom:8px;border-bottom:2px solid #2D303A;">❓ 常見問題（FAQ）</h2><div class="faq-item" style="border-bottom:1px solid #2D303A;padding:14px 0;"><div class="faq-q" style="color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;">文章字數統計器是什麼？</div><div class="faq-a" style="color:#C9D1D9;font-size:14px;line-height:1.9;">文章字數統計器是統計「純中文字數」的工具。貼上 HTML，排除標籤、CSS、JS、emoji，算出純中文字數。</div></div><div class="faq-item" style="border-bottom:1px solid #2D303A;padding:14px 0;"><div class="faq-q" style="color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;">為什麼要統計純中文字數？</div><div class="faq-a" style="color:#C9D1D9;font-size:14px;line-height:1.9;">因為雅寶的品質門檻是「1200 字」，但 HTML 標籤、CSS、JS 不是「內容」，不能算進去。</div></div><div class="faq-item" style="border-bottom:1px solid #2D303A;padding:14px 0;"><div class="faq-q" style="color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;">怎麼算純中文字數？</div><div class="faq-a" style="color:#C9D1D9;font-size:14px;line-height:1.9;">用正則 `[\u4e00-\u9fa5]` 抓出所有中文字，再算數量。</div></div><div class="faq-item" style="border-bottom:1px solid #2D303A;padding:14px 0;"><div class="faq-q" style="color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;">這個工具會上傳我的 HTML 嗎？</div><div class="faq-a" style="color:#C9D1D9;font-size:14px;line-height:1.9;">不會。所有統計都在你的瀏覽器完成，不上傳任何資料。</div></div><div class="faq-item" style="border-bottom:1px solid #2D303A;padding:14px 0;"><div class="faq-q" style="color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;">1200 字是硬性規定嗎？</div><div class="faq-a" style="color:#C9D1D9;font-size:14px;line-height:1.9;">是雅寶的品質門檻，低於 1200 字會被品質檢查擋下。</div></div></div>
+</article>
 <footer>
 🏠 <a href="https://www.ahpal.com/">首頁</a>
 🌾 <a href="https://farm.ahpal.com/">農場</a>

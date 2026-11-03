@@ -51,6 +51,86 @@ button.gray{background:#2D303A;color:#E6EDF3;}
 
 #qrcode { display:flex; justify-content:center; padding:20px; background:#fff; border-radius:12px; margin:12px 0; }
 </style>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "QR Code 產生器（純前端、不上傳）",
+      "description": "QR Code 產生器：輸入文字或網址，即時產生 QR Code，可下載 PNG。純前端、完全離線、不上傳。",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "TWD"
+      },
+      "url": "https://tools.ahpal.com/qrcode/"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "工具箱",
+          "item": "https://tools.ahpal.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "QR Code 產生器（純前端、不上傳）",
+          "item": "https://tools.ahpal.com/qrcode/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "QR Code 產生器是什麼？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "QR Code 產生器是把「文字或網址」轉成「QR Code」的工具。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "QR Code 是什麼？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "QR Code（Quick Response Code）是一種二維條碼，能儲存比條碼更多資料，1994 年由日本 Denso Wave 發明。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "支援哪些容錯等級？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "支援 L（7%）、M（15%）、Q（25%）、H（30%）。容錯越高，QR Code 越密，但越耐損。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "這個工具會上傳我的文字嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "不會。所有產生都在你的瀏覽器完成，不上傳任何資料。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "QR Code 可以存多少資料？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "最多 7,089 個數字或 4,296 個英文字元。"
+          }
+        }
+      ]
+    }
+  ]
+}</script>
 </head>
 <body>
 <nav class="ahpal-top-nav" style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;position:relative;z-index:10;">
@@ -65,6 +145,8 @@ button.gray{background:#2D303A;color:#E6EDF3;}
   <a href="https://tools.ahpal.com/" style="color:#0D1117;background:#D4AF37;text-decoration:none;padding:4px 10px;border-radius:6px;font-weight:700;">🛠️ 工具箱</a>
 </nav>
 <div class="container">
+<nav class="breadcrumb" style="font-size:13px;color:#8B949E;margin-bottom:16px;"><a href="https://tools.ahpal.com/" style="color:#58A6FF;text-decoration:none;">🛠️ 工具箱</a> › QR Code 產生器（純前端、不上傳）</nav>
+<article>
 <h1>📱 QR Code 產生器</h1>
 <p class="sub">輸入文字或網址，即時產生 QR Code，可下載 PNG。純前端、完全離線、不上傳。</p>
 
@@ -172,6 +254,9 @@ button.gray{background:#2D303A;color:#E6EDF3;}
 </div>
 
 
+<div class="doc-section" style="background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:28px 32px;margin-top:32px;"><h2 style="color:#D4AF37;font-size:22px;margin:0 0 16px;padding-bottom:8px;border-bottom:2px solid #2D303A;">❓ 常見問題（FAQ）</h2><div class="faq-item" style="border-bottom:1px solid #2D303A;padding:14px 0;"><div class="faq-q" style="color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;">QR Code 產生器是什麼？</div><div class="faq-a" style="color:#C9D1D9;font-size:14px;line-height:1.9;">QR Code 產生器是把「文字或網址」轉成「QR Code」的工具。</div></div><div class="faq-item" style="border-bottom:1px solid #2D303A;padding:14px 0;"><div class="faq-q" style="color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;">QR Code 是什麼？</div><div class="faq-a" style="color:#C9D1D9;font-size:14px;line-height:1.9;">QR Code（Quick Response Code）是一種二維條碼，能儲存比條碼更多資料，1994 年由日本 Denso Wave 發明。</div></div><div class="faq-item" style="border-bottom:1px solid #2D303A;padding:14px 0;"><div class="faq-q" style="color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;">支援哪些容錯等級？</div><div class="faq-a" style="color:#C9D1D9;font-size:14px;line-height:1.9;">支援 L（7%）、M（15%）、Q（25%）、H（30%）。容錯越高，QR Code 越密，但越耐損。</div></div><div class="faq-item" style="border-bottom:1px solid #2D303A;padding:14px 0;"><div class="faq-q" style="color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;">這個工具會上傳我的文字嗎？</div><div class="faq-a" style="color:#C9D1D9;font-size:14px;line-height:1.9;">不會。所有產生都在你的瀏覽器完成，不上傳任何資料。</div></div><div class="faq-item" style="border-bottom:1px solid #2D303A;padding:14px 0;"><div class="faq-q" style="color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;">QR Code 可以存多少資料？</div><div class="faq-a" style="color:#C9D1D9;font-size:14px;line-height:1.9;">最多 7,089 個數字或 4,296 個英文字元。</div></div></div>
+</article>
+<p style="text-align:center;color:#8B949E;font-size:13px;margin-top:24px;"><time datetime="2026-11-03">2026-11-03</time></p>
 <div class="footer">
   <p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p>
   <p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p>

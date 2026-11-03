@@ -37,6 +37,86 @@ textarea{flex:1;padding:14px;background:#0D1117;color:#E6EDF3;border:none;font-f
 .preview img{max-width:100%;height:auto;}
 @media(max-width:800px){.grid{grid-template-columns:1fr;}}
 </style>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "Markdown 預覽器",
+      "description": "免費線上 Markdown 即時預覽工具，完全離線。",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "TWD"
+      },
+      "url": "https://tools.ahpal.com/markdown/"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "工具箱",
+          "item": "https://tools.ahpal.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Markdown 預覽器",
+          "item": "https://tools.ahpal.com/markdown/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Markdown 預覽器是什麼？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Markdown 預覽器是把「Markdown 語法」即時渲染成「HTML」的工具。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Markdown 是什麼？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Markdown 是一種輕量標記語言，用 `#`、`*`、`-` 等符號表示標題、粗體、清單。GitHub、Notion、部落格都用它。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "支援哪些語法？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "支援標題、粗體、斜體、清單、連結、圖片、程式碼區塊、表格、引用。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "這個工具會上傳我的 Markdown 嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "不會。所有渲染都在你的瀏覽器完成，不上傳任何資料。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "為什麼用 Markdown？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "因為它「寫起來像純文字、看起來像排版」，比 HTML 簡單，比純文字豐富。"
+          }
+        }
+      ]
+    }
+  ]
+}</script>
 </head>
 <body>
 <nav class="ahpal-top-nav" style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;position:relative;z-index:10;">
@@ -53,6 +133,8 @@ textarea{flex:1;padding:14px;background:#0D1117;color:#E6EDF3;border:none;font-f
   <a href="https://tools.ahpal.com/" style="color:#0D1117;background:#D4AF37;text-decoration:none;padding:4px 10px;border-radius:6px;font-weight:700;">🛠️ 工具箱</a>
 </nav>
 <div class="container">
+<nav class="breadcrumb" style="font-size:13px;color:#8B949E;margin-bottom:16px;"><a href="https://tools.ahpal.com/" style="color:#58A6FF;text-decoration:none;">🛠️ 工具箱</a> › Markdown 預覽器</nav>
+<article>
 <h1>📝 Markdown 預覽器</h1>
 <p class="sub">即時渲染 Markdown · 完全離線</p>
 <div class="toolbar">

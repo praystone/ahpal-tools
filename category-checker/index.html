@@ -49,9 +49,92 @@ th{background:rgba(212,175,55,0.12);color:#D4AF37;}
 footer{position:fixed;bottom:0;left:0;right:0;background:#161B22;border-top:1px solid #D4AF37;padding:10px;text-align:center;font-size:13px;z-index:100;}
 footer a{color:#58A6FF;text-decoration:none;margin:0 8px;}
 </style>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "分類文章檢查器",
+      "description": "雅寶分類文章檢查器 — 上傳 JSON 與檔名清單，即時檢查幽靈登記、未登記實體、關鍵字重複、檔名重複。完全離線，零依賴。",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "TWD"
+      },
+      "url": "https://tools.ahpal.com/category-checker/"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "工具箱",
+          "item": "https://tools.ahpal.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "分類文章檢查器",
+          "item": "https://tools.ahpal.com/category-checker/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "分類文章檢查器是什麼？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "分類文章檢查器是檢查「JSON 登記」與「實體檔案」是否一致的 API工具。它會抓出幽靈登記、未登記實體、關鍵字重複、檔名重複。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "什麼是幽靈登記？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "幽靈登記是「JSON 有、實體無」的文章。通常是生成失敗，但 JSON 已寫入。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "什麼是未登記實體？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "未登記實體是「實體有、JSON 無」的文章。通常是手動新增，但忘了更新 JSON。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "這個工具會上傳我的檔案嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "不會。所有檢查都在你的瀏覽器完成，不上傳任何資料，完全離線。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "為什麼要檢查關鍵字重複？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "關鍵字重複代表「兩篇文章主題相同」，會稀釋 SEO、讓讀者困惑。"
+          }
+        }
+      ]
+    }
+  ]
+}</script>
 </head>
 <body>
 <div class="container">
+<nav class="breadcrumb" style="font-size:13px;color:#8B949E;margin-bottom:16px;"><a href="https://tools.ahpal.com/" style="color:#58A6FF;text-decoration:none;">🛠️ 工具箱</a> › 分類文章檢查器</nav>
+<article>
+<h1>🛠️ 分類文章檢查器</h1>
 <h1>🔍 分類文章檢查器 <span class="sub">Category Checker</span></h1>
 <p class="desc">上傳分類 JSON 與實體檔名清單，即時檢查幽靈登記、未登記實體、關鍵字重複、檔名重複。完全離線，零依賴，不上傳任何資料到伺服器。</p>
 
@@ -90,6 +173,8 @@ footer a{color:#58A6FF;text-decoration:none;margin:0 8px;}
 <div id="result" class="result"></div>
 </div>
 
+<div class="doc-section" style="background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:28px 32px;margin-top:32px;"><h2 style="color:#D4AF37;font-size:22px;margin:0 0 16px;padding-bottom:8px;border-bottom:2px solid #2D303A;">❓ 常見問題（FAQ）</h2><div class="faq-item" style="border-bottom:1px solid #2D303A;padding:14px 0;"><div class="faq-q" style="color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;">分類文章檢查器是什麼？</div><div class="faq-a" style="color:#C9D1D9;font-size:14px;line-height:1.9;">分類文章檢查器是檢查「JSON 登記」與「實體檔案」是否一致的 API工具。它會抓出幽靈登記、未登記實體、關鍵字重複、檔名重複。</div></div><div class="faq-item" style="border-bottom:1px solid #2D303A;padding:14px 0;"><div class="faq-q" style="color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;">什麼是幽靈登記？</div><div class="faq-a" style="color:#C9D1D9;font-size:14px;line-height:1.9;">幽靈登記是「JSON 有、實體無」的文章。通常是生成失敗，但 JSON 已寫入。</div></div><div class="faq-item" style="border-bottom:1px solid #2D303A;padding:14px 0;"><div class="faq-q" style="color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;">什麼是未登記實體？</div><div class="faq-a" style="color:#C9D1D9;font-size:14px;line-height:1.9;">未登記實體是「實體有、JSON 無」的文章。通常是手動新增，但忘了更新 JSON。</div></div><div class="faq-item" style="border-bottom:1px solid #2D303A;padding:14px 0;"><div class="faq-q" style="color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;">這個工具會上傳我的檔案嗎？</div><div class="faq-a" style="color:#C9D1D9;font-size:14px;line-height:1.9;">不會。所有檢查都在你的瀏覽器完成，不上傳任何資料，完全離線。</div></div><div class="faq-item" style="border-bottom:1px solid #2D303A;padding:14px 0;"><div class="faq-q" style="color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;">為什麼要檢查關鍵字重複？</div><div class="faq-a" style="color:#C9D1D9;font-size:14px;line-height:1.9;">關鍵字重複代表「兩篇文章主題相同」，會稀釋 SEO、讓讀者困惑。</div></div></div>
+</article>
 <footer>
 🏠 <a href="https://www.ahpal.com/">首頁</a>
 🌾 <a href="https://farm.ahpal.com/">農場</a>

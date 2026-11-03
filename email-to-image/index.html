@@ -47,6 +47,86 @@ button.gray{background:#2D303A;color:#E6EDF3;}
 .doc-section .example .val{color:#D4AF37;font-weight:700;}
 .doc-section .example .arrow{color:#58A6FF;}
 </style>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "Email 圖片化（防爬蟲）",
+      "description": "把 Email 地址轉成圖片，防止爬蟲、機器人抓取你的信箱。純前端 Canvas 繪製，完全離線，不傳送任何資料。",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "TWD"
+      },
+      "url": "https://tools.ahpal.com/email-to-image/"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "工具箱",
+          "item": "https://tools.ahpal.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Email 圖片化（防爬蟲）",
+          "item": "https://tools.ahpal.com/email-to-image/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Email 圖片化是什麼？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Email 圖片化是把 Email 地址轉成「圖片」的工具，防止爬蟲、機器人抓取你的信箱。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "為什麼要把 Email 轉成圖片？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "因為爬蟲會掃描網頁上的 Email，發送垃圾郵件。轉成圖片後，爬蟲抓不到文字，但人眼看得懂。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "圖片化能 100% 防爬蟲嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "不能。進階爬蟲會用 OCR（光學字元辨識）讀圖片。圖片化只能防「簡單爬蟲」，不能防「進階爬蟲」。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "這個工具會上傳我的 Email 嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "不會。所有繪製都在你的瀏覽器完成（Canvas），不上傳任何資料。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "可以調整圖片樣式嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "可以。本工具支援字級、顏色、背景、下載 PNG。"
+          }
+        }
+      ]
+    }
+  ]
+}</script>
 </head>
 <body>
 <nav class="ahpal-top-nav" style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;position:relative;z-index:10;">
@@ -61,6 +141,8 @@ button.gray{background:#2D303A;color:#E6EDF3;}
   <a href="https://tools.ahpal.com/" style="color:#0D1117;background:#D4AF37;text-decoration:none;padding:4px 10px;border-radius:6px;font-weight:700;">🛠️ 工具箱</a>
 </nav>
 <div class="container">
+<nav class="breadcrumb" style="font-size:13px;color:#8B949E;margin-bottom:16px;"><a href="https://tools.ahpal.com/" style="color:#58A6FF;text-decoration:none;">🛠️ 工具箱</a> › Email 圖片化（防爬蟲）</nav>
+<article>
 <h1>📧 Email 圖片化（防爬蟲）</h1>
 <p class="sub">把 Email 地址轉成圖片，防止爬蟲、機器人抓取你的信箱。純前端 Canvas 繪製，完全離線，不傳送任何資料。</p>
 
@@ -97,6 +179,9 @@ button.gray{background:#2D303A;color:#E6EDF3;}
   </div>
 </div>
 
+<div class="doc-section" style="background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:28px 32px;margin-top:32px;"><h2 style="color:#D4AF37;font-size:22px;margin:0 0 16px;padding-bottom:8px;border-bottom:2px solid #2D303A;">❓ 常見問題（FAQ）</h2><div class="faq-item" style="border-bottom:1px solid #2D303A;padding:14px 0;"><div class="faq-q" style="color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;">Email 圖片化是什麼？</div><div class="faq-a" style="color:#C9D1D9;font-size:14px;line-height:1.9;">Email 圖片化是把 Email 地址轉成「圖片」的工具，防止爬蟲、機器人抓取你的信箱。</div></div><div class="faq-item" style="border-bottom:1px solid #2D303A;padding:14px 0;"><div class="faq-q" style="color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;">為什麼要把 Email 轉成圖片？</div><div class="faq-a" style="color:#C9D1D9;font-size:14px;line-height:1.9;">因為爬蟲會掃描網頁上的 Email，發送垃圾郵件。轉成圖片後，爬蟲抓不到文字，但人眼看得懂。</div></div><div class="faq-item" style="border-bottom:1px solid #2D303A;padding:14px 0;"><div class="faq-q" style="color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;">圖片化能 100% 防爬蟲嗎？</div><div class="faq-a" style="color:#C9D1D9;font-size:14px;line-height:1.9;">不能。進階爬蟲會用 OCR（光學字元辨識）讀圖片。圖片化只能防「簡單爬蟲」，不能防「進階爬蟲」。</div></div><div class="faq-item" style="border-bottom:1px solid #2D303A;padding:14px 0;"><div class="faq-q" style="color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;">這個工具會上傳我的 Email 嗎？</div><div class="faq-a" style="color:#C9D1D9;font-size:14px;line-height:1.9;">不會。所有繪製都在你的瀏覽器完成（Canvas），不上傳任何資料。</div></div><div class="faq-item" style="border-bottom:1px solid #2D303A;padding:14px 0;"><div class="faq-q" style="color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;">可以調整圖片樣式嗎？</div><div class="faq-a" style="color:#C9D1D9;font-size:14px;line-height:1.9;">可以。本工具支援字級、顏色、背景、下載 PNG。</div></div></div>
+</article>
+<p style="text-align:center;color:#8B949E;font-size:13px;margin-top:24px;"><time datetime="2026-11-03">2026-11-03</time></p>
 <div class="footer">
   <p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p>
   <p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p>

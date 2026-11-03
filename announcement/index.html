@@ -35,6 +35,86 @@ button.red{background:#F85149;color:#fff;}
 .tab{display:inline-block;padding:8px 16px;background:#0D1117;color:#8B949E;border:1px solid #2D303A;border-radius:8px;cursor:pointer;margin-right:6px;margin-bottom:6px;}
 .tab.active{background:#D4AF37;color:#0D1117;border-color:#D4AF37;font-weight:700;}
 </style>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "公告欄發布器（唯讀預覽）",
+      "description": "產生公告發布的 PowerShell 指令，唯讀預覽，不實際發送。複製指令到終端機執行。",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "TWD"
+      },
+      "url": "https://tools.ahpal.com/announcement/"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "工具箱",
+          "item": "https://tools.ahpal.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "公告欄發布器（唯讀預覽）",
+          "item": "https://tools.ahpal.com/announcement/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "公告欄發布器是什麼？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "公告欄發布器是產生「公告發布 PowerShell 指令」的工具。它不實際發送，只產出指令，讓你複製到終端機執行。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "為什麼要用這個工具？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "因為手寫 PowerShell 指令容易出錯（跳脫、引號、Token）。這個工具幫你組好，你只要複製貼上。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "這個工具會發送公告嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "不會。它是「唯讀預覽」，只產出指令，不連線、不發送。實際發送要你自己貼到終端機。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "公告格式要注意什麼？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "每行「文字 + 空格 + 網址」，不支援 Markdown、HTML。網址後面不要有標點，否則 linkify() 會失敗。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Token 放哪裡？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Token 只放 .env（ADMIN_TOKEN），不寫進前端、不貼對話、不進 git。"
+          }
+        }
+      ]
+    }
+  ]
+}</script>
 </head>
 <body>
 <nav class="ahpal-top-nav" style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;position:relative;z-index:10;">
@@ -49,6 +129,8 @@ button.red{background:#F85149;color:#fff;}
   <a href="https://tools.ahpal.com/" style="color:#0D1117;background:#D4AF37;text-decoration:none;padding:4px 10px;border-radius:6px;font-weight:700;">🛠️ 工具箱</a>
 </nav>
 <div class="container">
+<nav class="breadcrumb" style="font-size:13px;color:#8B949E;margin-bottom:16px;"><a href="https://tools.ahpal.com/" style="color:#58A6FF;text-decoration:none;">🛠️ 工具箱</a> › 公告欄發布器（唯讀預覽）</nav>
+<article>
 <h1>📢 公告欄發布器</h1>
 
 <div class="card" id="current-announcements">
@@ -152,6 +234,9 @@ button.red{background:#F85149;color:#fff;}
   <div class="result" id="output">（按「產生」後，結果會出現在這裡）</div>
 </div>
 
+<div class="doc-section" style="background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:28px 32px;margin-top:32px;"><h2 style="color:#D4AF37;font-size:22px;margin:0 0 16px;padding-bottom:8px;border-bottom:2px solid #2D303A;">❓ 常見問題（FAQ）</h2><div class="faq-item" style="border-bottom:1px solid #2D303A;padding:14px 0;"><div class="faq-q" style="color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;">公告欄發布器是什麼？</div><div class="faq-a" style="color:#C9D1D9;font-size:14px;line-height:1.9;">公告欄發布器是產生「公告發布 PowerShell 指令」的工具。它不實際發送，只產出指令，讓你複製到終端機執行。</div></div><div class="faq-item" style="border-bottom:1px solid #2D303A;padding:14px 0;"><div class="faq-q" style="color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;">為什麼要用這個工具？</div><div class="faq-a" style="color:#C9D1D9;font-size:14px;line-height:1.9;">因為手寫 PowerShell 指令容易出錯（跳脫、引號、Token）。這個工具幫你組好，你只要複製貼上。</div></div><div class="faq-item" style="border-bottom:1px solid #2D303A;padding:14px 0;"><div class="faq-q" style="color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;">這個工具會發送公告嗎？</div><div class="faq-a" style="color:#C9D1D9;font-size:14px;line-height:1.9;">不會。它是「唯讀預覽」，只產出指令，不連線、不發送。實際發送要你自己貼到終端機。</div></div><div class="faq-item" style="border-bottom:1px solid #2D303A;padding:14px 0;"><div class="faq-q" style="color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;">公告格式要注意什麼？</div><div class="faq-a" style="color:#C9D1D9;font-size:14px;line-height:1.9;">每行「文字 + 空格 + 網址」，不支援 Markdown、HTML。網址後面不要有標點，否則 linkify() 會失敗。</div></div><div class="faq-item" style="border-bottom:1px solid #2D303A;padding:14px 0;"><div class="faq-q" style="color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;">Token 放哪裡？</div><div class="faq-a" style="color:#C9D1D9;font-size:14px;line-height:1.9;">Token 只放 .env（ADMIN_TOKEN），不寫進前端、不貼對話、不進 git。</div></div></div>
+</article>
+<p style="text-align:center;color:#8B949E;font-size:13px;margin-top:24px;"><time datetime="2026-11-03">2026-11-03</time></p>
 <div class="footer">
   <p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p>
   <p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p>

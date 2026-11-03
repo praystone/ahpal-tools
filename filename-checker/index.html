@@ -43,9 +43,92 @@ footer{position:fixed;bottom:0;left:0;right:0;background:#161B22;border-top:1px 
 footer a{color:#58A6FF;text-decoration:none;margin:0 8px;}
 code{background:#0D1117;color:#58A6FF;padding:2px 6px;border-radius:4px;}
 </style>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "文章檔名檢查器",
+      "description": "雅寶文章檔名檢查器 — 貼上關鍵字產出英文 kebab-case 檔名；貼上檔名檢查中文、空格、大寫、漏 .html。完全離線，零依賴。",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "TWD"
+      },
+      "url": "https://tools.ahpal.com/filename-checker/"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "工具箱",
+          "item": "https://tools.ahpal.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "文章檔名檢查器",
+          "item": "https://tools.ahpal.com/filename-checker/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "文章檔名檢查器是什麼？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "文章檔名檢查器是檢查「文章檔名」是否符合規範的工具。它會抓出中文、空格、大寫、漏 .html。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "為什麼檔名要用英文？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "因為中文檔名在 URL 會被編碼成 %E4%B8%AD...，難看、難記、SEO 差。英文 kebab-case 最好。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "什麼是 kebab-case？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "kebab-case 是「小寫 + 連字號」的命名法，例如 `how-to-make-coffee.html`。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "這個工具會上傳我的檔名嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "不會。所有檢查都在你的瀏覽器完成，不上傳任何資料。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "檔名要多長？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "建議 3~8 個單字，總長 20~60 字元，對應關鍵字語意。"
+          }
+        }
+      ]
+    }
+  ]
+}</script>
 </head>
 <body>
 <div class="container">
+<nav class="breadcrumb" style="font-size:13px;color:#8B949E;margin-bottom:16px;"><a href="https://tools.ahpal.com/" style="color:#58A6FF;text-decoration:none;">🛠️ 工具箱</a> › 文章檔名檢查器</nav>
+<article>
+<h1>🛠️ 文章檔名檢查器</h1>
 <h1>📝 文章檔名檢查器 <span class="sub">Filename Checker</span></h1>
 <p class="desc">貼上關鍵字產出英文 kebab-case 檔名；貼上檔名檢查中文、空格、大寫、漏 <code>.html</code>。完全離線，零依賴。</p>
 
@@ -77,6 +160,8 @@ code{background:#0D1117;color:#58A6FF;padding:2px 6px;border-radius:4px;}
 </div>
 </div>
 
+<div class="doc-section" style="background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:28px 32px;margin-top:32px;"><h2 style="color:#D4AF37;font-size:22px;margin:0 0 16px;padding-bottom:8px;border-bottom:2px solid #2D303A;">❓ 常見問題（FAQ）</h2><div class="faq-item" style="border-bottom:1px solid #2D303A;padding:14px 0;"><div class="faq-q" style="color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;">文章檔名檢查器是什麼？</div><div class="faq-a" style="color:#C9D1D9;font-size:14px;line-height:1.9;">文章檔名檢查器是檢查「文章檔名」是否符合規範的工具。它會抓出中文、空格、大寫、漏 .html。</div></div><div class="faq-item" style="border-bottom:1px solid #2D303A;padding:14px 0;"><div class="faq-q" style="color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;">為什麼檔名要用英文？</div><div class="faq-a" style="color:#C9D1D9;font-size:14px;line-height:1.9;">因為中文檔名在 URL 會被編碼成 %E4%B8%AD...，難看、難記、SEO 差。英文 kebab-case 最好。</div></div><div class="faq-item" style="border-bottom:1px solid #2D303A;padding:14px 0;"><div class="faq-q" style="color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;">什麼是 kebab-case？</div><div class="faq-a" style="color:#C9D1D9;font-size:14px;line-height:1.9;">kebab-case 是「小寫 + 連字號」的命名法，例如 `how-to-make-coffee.html`。</div></div><div class="faq-item" style="border-bottom:1px solid #2D303A;padding:14px 0;"><div class="faq-q" style="color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;">這個工具會上傳我的檔名嗎？</div><div class="faq-a" style="color:#C9D1D9;font-size:14px;line-height:1.9;">不會。所有檢查都在你的瀏覽器完成，不上傳任何資料。</div></div><div class="faq-item" style="border-bottom:1px solid #2D303A;padding:14px 0;"><div class="faq-q" style="color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;">檔名要多長？</div><div class="faq-a" style="color:#C9D1D9;font-size:14px;line-height:1.9;">建議 3~8 個單字，總長 20~60 字元，對應關鍵字語意。</div></div></div>
+</article>
 <footer>
 🏠 <a href="https://www.ahpal.com/">首頁</a>
 🌾 <a href="https://farm.ahpal.com/">農場</a>

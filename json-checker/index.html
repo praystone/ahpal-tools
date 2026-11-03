@@ -35,6 +35,86 @@ button.red{background:#F85149;color:#fff;}
 .tab{display:inline-block;padding:8px 16px;background:#0D1117;color:#8B949E;border:1px solid #2D303A;border-radius:8px;cursor:pointer;margin-right:6px;margin-bottom:6px;}
 .tab.active{background:#D4AF37;color:#0D1117;border-color:#D4AF37;font-weight:700;}
 </style>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "JSON 對帳器",
+      "description": "上傳分類 JSON 與實體檔名清單，即時檢查幽靈登記、未登記實體、關鍵字重複。純前端，不上傳。",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "TWD"
+      },
+      "url": "https://tools.ahpal.com/json-checker/"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "工具箱",
+          "item": "https://tools.ahpal.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "JSON 對帳器",
+          "item": "https://tools.ahpal.com/json-checker/"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "JSON 對帳器是什麼？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "JSON 對帳器是檢查「JSON 登記」與「實體檔名清單」是否一致的工具。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "什麼是幽靈登記？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "幽靈登記是「JSON 有、實體無」的文章。通常是生成失敗，但 JSON 已寫入。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "什麼是未登記實體？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "未登記實體是「實體有、JSON 無」的文章。通常是手動新增，但忘了更新 JSON。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "這個工具會上傳我的檔案嗎？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "不會。所有檢查都在你的瀏覽器完成，不上傳任何資料。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "為什麼要對帳？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "因為「JSON 總數 = 實體總數」不代表「每一筆都對得上」。可能有幽靈、未登記、重複。"
+          }
+        }
+      ]
+    }
+  ]
+}</script>
 </head>
 <body>
 <nav class="ahpal-top-nav" style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;position:relative;z-index:10;">
@@ -49,6 +129,8 @@ button.red{background:#F85149;color:#fff;}
   <a href="https://tools.ahpal.com/" style="color:#0D1117;background:#D4AF37;text-decoration:none;padding:4px 10px;border-radius:6px;font-weight:700;">🛠️ 工具箱</a>
 </nav>
 <div class="container">
+<nav class="breadcrumb" style="font-size:13px;color:#8B949E;margin-bottom:16px;"><a href="https://tools.ahpal.com/" style="color:#58A6FF;text-decoration:none;">🛠️ 工具箱</a> › JSON 對帳器</nav>
+<article>
 <h1>🔍 JSON 對帳器</h1>
 <p class="sub">上傳分類 JSON 與實體檔名清單，即時檢查幽靈登記、未登記實體、關鍵字重複。純前端，不上傳。</p>
 
@@ -72,6 +154,9 @@ button.red{background:#F85149;color:#fff;}
   <div class="result" id="output">（按「開始對帳」後，結果會出現在這裡）</div>
 </div>
 
+<div class="doc-section" style="background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:28px 32px;margin-top:32px;"><h2 style="color:#D4AF37;font-size:22px;margin:0 0 16px;padding-bottom:8px;border-bottom:2px solid #2D303A;">❓ 常見問題（FAQ）</h2><div class="faq-item" style="border-bottom:1px solid #2D303A;padding:14px 0;"><div class="faq-q" style="color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;">JSON 對帳器是什麼？</div><div class="faq-a" style="color:#C9D1D9;font-size:14px;line-height:1.9;">JSON 對帳器是檢查「JSON 登記」與「實體檔名清單」是否一致的工具。</div></div><div class="faq-item" style="border-bottom:1px solid #2D303A;padding:14px 0;"><div class="faq-q" style="color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;">什麼是幽靈登記？</div><div class="faq-a" style="color:#C9D1D9;font-size:14px;line-height:1.9;">幽靈登記是「JSON 有、實體無」的文章。通常是生成失敗，但 JSON 已寫入。</div></div><div class="faq-item" style="border-bottom:1px solid #2D303A;padding:14px 0;"><div class="faq-q" style="color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;">什麼是未登記實體？</div><div class="faq-a" style="color:#C9D1D9;font-size:14px;line-height:1.9;">未登記實體是「實體有、JSON 無」的文章。通常是手動新增，但忘了更新 JSON。</div></div><div class="faq-item" style="border-bottom:1px solid #2D303A;padding:14px 0;"><div class="faq-q" style="color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;">這個工具會上傳我的檔案嗎？</div><div class="faq-a" style="color:#C9D1D9;font-size:14px;line-height:1.9;">不會。所有檢查都在你的瀏覽器完成，不上傳任何資料。</div></div><div class="faq-item" style="border-bottom:1px solid #2D303A;padding:14px 0;"><div class="faq-q" style="color:#D4AF37;font-weight:700;font-size:16px;margin-bottom:8px;">為什麼要對帳？</div><div class="faq-a" style="color:#C9D1D9;font-size:14px;line-height:1.9;">因為「JSON 總數 = 實體總數」不代表「每一筆都對得上」。可能有幽靈、未登記、重複。</div></div></div>
+</article>
+<p style="text-align:center;color:#8B949E;font-size:13px;margin-top:24px;"><time datetime="2026-11-03">2026-11-03</time></p>
 <div class="footer">
   <p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p>
   <p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p>
