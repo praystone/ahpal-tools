@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>發票對獎 · 免費線上工具 | 雅寶工具箱</title>
+<meta name="description" content="貼發票號碼，示範對獎。給家庭、小店、想整理發票的人使用。純前端、不上傳。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/invoice-lottery/">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8637791667872348" crossorigin="anonymous"></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "發票對獎", "description": "貼發票號碼，示範對獎。給家庭、小店、想整理發票的人使用。純前端、不上傳。", "url": "https://tools.ahpal.com/invoice-lottery/", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "這會對真實中獎號碼嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不會。這是示範用，中獎號碼是假設的。實際請依財政部公告。"}}, {"@type": "Question", "name": "發票格式？", "acceptedAnswer": {"@type": "Answer", "text": "8 位數字，一行一筆。"}}, {"@type": "Question", "name": "可以對電子發票嗎？", "acceptedAnswer": {"@type": "Answer", "text": "可以，把電子發票號碼貼進來。"}}, {"@type": "Question", "name": "什麼是特別獎？", "acceptedAnswer": {"@type": "Answer", "text": "1000 萬元，只有 1 個號碼。"}}, {"@type": "Question", "name": "什麼是特獎？", "acceptedAnswer": {"@type": "Answer", "text": "200 萬元，3 個號碼。"}}, {"@type": "Question", "name": "頭獎怎麼對？", "acceptedAnswer": {"@type": "Answer", "text": "對 8 碼全中 20 萬，對 7 碼 4 萬，依此類推。"}}, {"@type": "Question", "name": "資料會上傳嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不會，全部在瀏覽器。"}}, {"@type": "Question", "name": "可以存檔嗎？", "acceptedAnswer": {"@type": "Answer", "text": "目前不存檔，建議對完截圖。"}}, {"@type": "Question", "name": "什麼時候對獎？", "acceptedAnswer": {"@type": "Answer", "text": "單月 25 日開獎（例如 11/25 開 9-10 月）。"}}, {"@type": "Question", "name": "中獎怎麼領？", "acceptedAnswer": {"@type": "Answer", "text": "五獎、六獎可在超商領，其他要到郵局或指定銀行。"}}]}</script>
+<style>*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:20px;}
+.container{max-width:900px;margin:0 auto;}
+h1{color:#D4AF37;font-size:30px;margin:16px 0 8px;text-align:center;}
+.sub{color:#8B949E;font-size:15px;text-align:center;margin-bottom:24px;}
+.card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin-bottom:20px;}
+label{display:block;color:#C9D1D9;font-size:14px;margin:10px 0 4px;}
+input,textarea,select{width:100%;padding:12px;background:#0D1117;border:1px solid #2D303A;border-radius:8px;color:#E6EDF3;font-size:16px;font-family:inherit;}
+button{padding:12px 28px;background:#D4AF37;color:#0D1117;border:none;border-radius:10px;font-size:16px;font-weight:700;cursor:pointer;margin:8px 6px 0 0;}
+button:hover{opacity:0.85;}
+.result{background:#0D1117;border:1px solid #D4AF37;border-radius:8px;padding:16px;margin-top:16px;font-size:15px;line-height:1.9;white-space:pre-wrap;word-break:break-word;}
+.faq{margin-top:12px;}
+.faq h3{color:#58A6FF;font-size:16px;margin:16px 0 6px;}
+.faq p{color:#C9D1D9;font-size:14px;}
+.tip{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:8px;margin:16px 0;font-size:14px;color:#C9D1D9;}
+.knowledge{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin:20px 0;}
+.knowledge h2{color:#D4AF37;font-size:20px;margin:0 0 12px;}
+.knowledge h3{color:#58A6FF;font-size:16px;margin:18px 0 8px;}
+.knowledge p{color:#C9D1D9;font-size:15px;line-height:1.9;margin-bottom:10px;}
+.misconception{background:rgba(248,81,73,0.06);border-left:4px solid #F85149;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+.misconception strong{color:#F85149;}
+.when-to-use{background:rgba(63,185,80,0.06);border-left:4px solid #3FB950;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+.footer{text-align:center;margin-top:48px;padding-top:20px;border-top:1px solid #2D303A;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+@media print{.ahpal-top-nav,button,.tip{display:none!important;}body{background:#fff;color:#000;}.card{border:1px solid #999;}}</style>
+</head>
+<body>
+<div class="container">
+<nav class="ahpal-top-nav" style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;">
+  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏠 首頁</a>
+  <a href="https://www.ahpal.com/categories.html" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📚 全部分類</a>
+  <a href="https://www.ahpal.com/strategy/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📌 策略文章</a>
+  <a href="https://pet.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">⚔️ 打怪場</a>
+  <a href="https://farm.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🌾 農場</a>
+  <a href="https://tools.ahpal.com/" style="color:#0D1117;background:#D4AF37;text-decoration:none;padding:4px 10px;font-weight:700;">🛠️ 工具箱</a>
+</nav>
+<nav class="breadcrumb" aria-label="breadcrumb" style="font-size:13px;color:#8B949E;margin-bottom:12px;"><a href="https://tools.ahpal.com/" style="color:#58A6FF;text-decoration:none;">工具箱</a> › 發票對獎</nav>
+<article>
+<h1>發票對獎</h1>
+<p class="sub">貼發票號碼，示範對獎。給家庭、小店、想整理發票的人使用。純前端、不上傳。</p>
+<div class="card">
+<label>貼發票號碼（一行一筆，8 位數字）</label>
+<textarea id="inv" rows="8" placeholder="12345678
+87654321
+11112222">12345678
+87654321
+11112222</textarea>
+<label>期別（選填，例如：113年11-12月）</label>
+<input id="period" placeholder="113年11-12月">
+<button onclick="check()">對獎（示範用）</button>
+<div class="result" id="out"></div>
+<p style="color:#8B949E;font-size:13px;margin-top:12px;">⚠️ 這只是「示範對獎」，實際中獎號碼請依財政部公告。</p>
+</div>
+<div class="tip">🔒 這個工具<strong>純前端、完全離線、不上傳</strong>。你的資料只留在你的瀏覽器，不會傳到任何伺服器。</div>
+<div class="knowledge">
+<h2>📖 統一發票對獎背後的知識</h2>
+<p>台灣的統一發票對獎制度，從 1951 年開始，目的是「鼓勵消費者索取發票、防止商家逃漏稅」。每兩個月開獎一次（單月 25 日），獎項有：特別獎 1000 萬（1 組）、特獎 200 萬（3 組）、頭獎 20 萬（3 組，對 8 碼）、二獎 4 萬（對 7 碼）、三獎 1 萬（對 6 碼）、四獎 4000（對 5 碼）、五獎 1000（對 4 碼）、六獎 200（對 3 碼）。</p>
+<p>很多人不知道「六獎 200 元」也可以在超商直接換等值商品，不一定要領現金。另外，電子發票會自動對獎，但紙本發票要自己對。這個工具幫你「整理、排序」，但中獎號碼要依財政部公告。</p>
+<h3>⚠️ 常見誤解</h3>
+<div class="misconception"><strong>❌「對中 3 碼就有 200 元」</strong> → 對中末 3 碼是六獎 200 元，但要跟頭獎號碼的末 3 碼相同，不是任意 3 碼。</div>
+<div class="misconception"><strong>❌「電子發票不用對」</strong> → 電子發票會自動對獎，但中獎會通知，要記得領。</div>
+<div class="misconception"><strong>❌「發票丟了就不能領」</strong> → 紙本發票丟了不能領，電子發票在載具裡，不會丟。</div>
+<div class="misconception"><strong>❌「這個工具會對真實號碼」</strong> → 不會。這是示範用，實際請依財政部公告。</div>
+<div class="misconception"><strong>❌「中獎要扣稅」</strong> → 五獎以上要扣 20% 所得稅，六獎 200 元不用。</div>
+<h3>🩺 使用時機與注意事項</h3>
+<div class="when-to-use"><strong>✅ 適合：</strong>家庭、小店、想整理發票的人。<br><strong>⚠️ 注意：</strong>這是示範工具，中獎號碼是假設的。實際對獎請到財政部稅務入口網，或使用官方統一發票兌獎 App。</div>
+<h3>❓ 更多常見問題</h3>
+<h3>什麼是「載具」？</h3><p>儲存電子發票的工具，如手機條碼、悠遊卡、信用卡。可自動對獎。</p>
+<h3>電子發票中獎怎麼領？</h3><p>會通知，可到超商多媒體機（如 ibon）列印，或設定匯款。</p>
+<h3>發票可以捐贈嗎？</h3><p>可以，捐給社福團體，他們會對獎。</p>
+<h3>中獎期限多久？</h3><p>開獎後 3 個月內要領，逾期失效。</p>
+<h3>紙本發票可以存雲端嗎？</h3><p>可以，用官方 App 掃描存入載具。</p>
+</div>
+<div class="faq"><h2 style="color:#D4AF37;font-size:20px;margin:24px 0 12px;">常見問題</h2><h3>這會對真實中獎號碼嗎？</h3><p>不會。這是示範用，中獎號碼是假設的。實際請依財政部公告。</p><h3>發票格式？</h3><p>8 位數字，一行一筆。</p><h3>可以對電子發票嗎？</h3><p>可以，把電子發票號碼貼進來。</p><h3>什麼是特別獎？</h3><p>1000 萬元，只有 1 個號碼。</p><h3>什麼是特獎？</h3><p>200 萬元，3 個號碼。</p><h3>頭獎怎麼對？</h3><p>對 8 碼全中 20 萬，對 7 碼 4 萬，依此類推。</p><h3>資料會上傳嗎？</h3><p>不會，全部在瀏覽器。</p><h3>可以存檔嗎？</h3><p>目前不存檔，建議對完截圖。</p><h3>什麼時候對獎？</h3><p>單月 25 日開獎（例如 11/25 開 9-10 月）。</p><h3>中獎怎麼領？</h3><p>五獎、六獎可在超商領，其他要到郵局或指定銀行。</p></div>
+</article>
+<div class="footer"><p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p><p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p></div>
+</div>
+<script>
+function check(){
+  var lines=document.getElementById("inv").value.split("\n").filter(function(x){return x.trim();});
+  var period=document.getElementById("period").value||"（未填）";
+  var special="12345678";
+  var grand=["87654321","11112222","22223333"];
+  var first=["11112222","33334444","55556666"];
+  var h="<p style='color:#D4AF37;'>期別："+period+"</p>";
+  h+="<p>共 "+lines.length+" 張發票</p>";
+  h+="<table style='width:100%;border-collapse:collapse;font-size:15px;margin-top:12px;'><tr style='color:#D4AF37;'><th style='border:1px solid #2D303A;padding:8px;'>發票號碼</th><th style='border:1px solid #2D303A;padding:8px;'>結果</th></tr>";
+  for(var i=0;i<lines.length;i++){
+    var n=lines[i].trim();
+    var result="未中獎",color="#8B949E";
+    if(n===special){result="🎉 特別獎 1000 萬";color="#3FB950";}
+    else if(grand.indexOf(n)>=0){result="🎉 特獎 200 萬";color="#3FB950";}
+    else {
+      for(var j=0;j<first.length;j++){
+        if(n.slice(-7)===first[j].slice(-7)){result="頭獎 20 萬（對 7 碼）";color="#D4AF37";break;}
+        if(n.slice(-6)===first[j].slice(-6)){result="二獎 4 萬（對 6 碼）";color="#D4AF37";break;}
+        if(n.slice(-5)===first[j].slice(-5)){result="三獎 1 萬（對 5 碼）";color="#D4AF37";break;}
+        if(n.slice(-4)===first[j].slice(-4)){result="四獎 4000（對 4 碼）";color="#D4AF37";break;}
+        if(n.slice(-3)===first[j].slice(-3)){result="五獎 1000（對 3 碼）";color="#D4AF37";break;}
+      }
+    }
+    h+="<tr><td style='border:1px solid #2D303A;padding:8px;text-align:center;'>"+n+"</td><td style='border:1px solid #2D303A;padding:8px;color:"+color+";'>"+result+"</td></tr>";
+  }
+  h+="</table>";
+  h+="<p style='font-size:13px;color:#8B949E;margin-top:12px;'>⚠️ 示範號碼，非真實中獎號碼。實際請依財政部公告。</p>";
+  document.getElementById("out").innerHTML=h;
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>台灣常見藥品查詢 · 免費線上工具 | 雅寶工具箱</title>
+<meta name="description" content="查詢 10 個常見藥品的用途與注意事項。給想了解藥品的人、家有長輩、出國備藥參考。純前端、不上傳。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/medicine-lookup/">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8637791667872348" crossorigin="anonymous"></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "台灣常見藥品查詢", "description": "查詢 10 個常見藥品的用途與注意事項。給想了解藥品的人、家有長輩、出國備藥參考。純前端、不上傳。", "url": "https://tools.ahpal.com/medicine-lookup/", "applicationCategory": "UtilityApplication", "operatingSystem": "Any", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "TWD"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "這可以取代醫師嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不行。這是參考資訊，不能取代醫師診斷或藥師指示。"}}, {"@type": "Question", "name": "藥品資訊準嗎？", "acceptedAnswer": {"@type": "Answer", "text": "僅供參考。實際用藥請依藥袋說明或諮詢藥師。"}}, {"@type": "Question", "name": "收錄多少藥？", "acceptedAnswer": {"@type": "Answer", "text": "目前 10 個常見藥，未來會擴充。"}}, {"@type": "Question", "name": "資料會上傳嗎？", "acceptedAnswer": {"@type": "Answer", "text": "不會，全部在瀏覽器。"}}, {"@type": "Question", "name": "可以查處方藥嗎？", "acceptedAnswer": {"@type": "Answer", "text": "目前收錄常見成藥，處方藥請諮詢醫師。"}}, {"@type": "Question", "name": "孕婦可以用嗎？", "acceptedAnswer": {"@type": "Answer", "text": "請諮詢醫師。有些藥孕婦禁用。"}}, {"@type": "Question", "name": "兒童可以用嗎？", "acceptedAnswer": {"@type": "Answer", "text": "請諮詢醫師。兒童劑量依體重計算。"}}, {"@type": "Question", "name": "可以查交互作用嗎？", "acceptedAnswer": {"@type": "Answer", "text": "目前沒有，請諮詢藥師。"}}, {"@type": "Question", "name": "可以列印嗎？", "acceptedAnswer": {"@type": "Answer", "text": "可以，按瀏覽器列印。"}}, {"@type": "Question", "name": "藥物過敏怎麼辦？", "acceptedAnswer": {"@type": "Answer", "text": "立即停藥、就醫，並告知醫師過敏史。"}}]}</script>
+<style>*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:20px;}
+.container{max-width:900px;margin:0 auto;}
+h1{color:#D4AF37;font-size:30px;margin:16px 0 8px;text-align:center;}
+.sub{color:#8B949E;font-size:15px;text-align:center;margin-bottom:24px;}
+.card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin-bottom:20px;}
+label{display:block;color:#C9D1D9;font-size:14px;margin:10px 0 4px;}
+input,textarea,select{width:100%;padding:12px;background:#0D1117;border:1px solid #2D303A;border-radius:8px;color:#E6EDF3;font-size:16px;font-family:inherit;}
+button{padding:12px 28px;background:#D4AF37;color:#0D1117;border:none;border-radius:10px;font-size:16px;font-weight:700;cursor:pointer;margin:8px 6px 0 0;}
+button:hover{opacity:0.85;}
+.result{background:#0D1117;border:1px solid #D4AF37;border-radius:8px;padding:16px;margin-top:16px;font-size:15px;line-height:1.9;white-space:pre-wrap;word-break:break-word;}
+.faq{margin-top:12px;}
+.faq h3{color:#58A6FF;font-size:16px;margin:16px 0 6px;}
+.faq p{color:#C9D1D9;font-size:14px;}
+.tip{background:rgba(212,175,55,0.08);border-left:4px solid #D4AF37;padding:14px 18px;border-radius:8px;margin:16px 0;font-size:14px;color:#C9D1D9;}
+.knowledge{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin:20px 0;}
+.knowledge h2{color:#D4AF37;font-size:20px;margin:0 0 12px;}
+.knowledge h3{color:#58A6FF;font-size:16px;margin:18px 0 8px;}
+.knowledge p{color:#C9D1D9;font-size:15px;line-height:1.9;margin-bottom:10px;}
+.misconception{background:rgba(248,81,73,0.06);border-left:4px solid #F85149;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+.misconception strong{color:#F85149;}
+.when-to-use{background:rgba(63,185,80,0.06);border-left:4px solid #3FB950;padding:14px 18px;border-radius:8px;margin:10px 0;font-size:14px;color:#C9D1D9;}
+.footer{text-align:center;margin-top:48px;padding-top:20px;border-top:1px solid #2D303A;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+@media print{.ahpal-top-nav,button,.tip{display:none!important;}body{background:#fff;color:#000;}.card{border:1px solid #999;}}</style>
+</head>
+<body>
+<div class="container">
+<nav class="ahpal-top-nav" style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;">
+  <a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🏠 首頁</a>
+  <a href="https://www.ahpal.com/categories.html" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📚 全部分類</a>
+  <a href="https://www.ahpal.com/strategy/" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">📌 策略文章</a>
+  <a href="https://pet.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">⚔️ 打怪場</a>
+  <a href="https://farm.ahpal.com/" target="_blank" rel="noopener" style="color:#58A6FF;text-decoration:none;padding:4px 10px;">🌾 農場</a>
+  <a href="https://tools.ahpal.com/" style="color:#0D1117;background:#D4AF37;text-decoration:none;padding:4px 10px;font-weight:700;">🛠️ 工具箱</a>
+</nav>
+<nav class="breadcrumb" aria-label="breadcrumb" style="font-size:13px;color:#8B949E;margin-bottom:12px;"><a href="https://tools.ahpal.com/" style="color:#58A6FF;text-decoration:none;">工具箱</a> › 台灣常見藥品查詢</nav>
+<article>
+<h1>台灣常見藥品查詢</h1>
+<p class="sub">查詢 10 個常見藥品的用途與注意事項。給想了解藥品的人、家有長輩、出國備藥參考。純前端、不上傳。</p>
+<div class="card">
+<label>輸入藥品名稱（中文或英文）</label>
+<input id="q" placeholder="例如：普拿疼、Aspirin、Ibuprofen">
+<button onclick="lookup()">查詢</button>
+<div style="margin-top:12px;color:#8B949E;font-size:14px;">常用藥：
+<button onclick="setQ('普拿疼')" style="padding:4px 12px;font-size:14px;margin:4px;">普拿疼</button>
+<button onclick="setQ('Aspirin')" style="padding:4px 12px;font-size:14px;margin:4px;">Aspirin</button>
+<button onclick="setQ('Ibuprofen')" style="padding:4px 12px;font-size:14px;margin:4px;">Ibuprofen</button>
+</div>
+<div class="result" id="out"></div>
+</div>
+<div class="tip">🔒 這個工具<strong>純前端、完全離線、不上傳</strong>。你的資料只留在你的瀏覽器，不會傳到任何伺服器。</div>
+<div class="knowledge">
+<h2>📖 常見藥品背後的知識</h2>
+<p>台灣的藥品分「處方藥」、「指示藥」、「成藥」三級。處方藥要醫師開立，指示藥可在藥局買（需藥師指示），成藥可在超商買。很多人以為「成藥安全」，其實成藥也有副作用和交互作用，不能亂吃。</p>
+<p>最常見的止痛藥分兩大類：乙醯胺酚（普拿疼）和非類固醇抗發炎藥（布洛芬、阿斯匹靈）。乙醯胺酚不傷胃，但過量傷肝；非類固醇抗發炎藥不傷肝，但傷胃。選擇要看個人狀況，不是「哪個比較強」。</p>
+<h3>⚠️ 常見誤解</h3>
+<div class="misconception"><strong>❌「止痛藥吃多會傷腎」</strong> → 乙醯胺酚不傷腎但傷肝；非類固醇抗發炎藥才傷腎。要看成分。</div>
+<div class="misconception"><strong>❌「感冒藥可以預防感冒」</strong> → 不行。感冒藥只緩解症狀，不預防、不殺病毒。</div>
+<div class="misconception"><strong>❌「抗生素可以治感冒」</strong> → 不行。感冒多為病毒，抗生素殺細菌，亂用會產生抗藥性。</div>
+<div class="misconception"><strong>❌「藥吃一半好就停」</strong> → 抗生素必須吃完療程，否則易復發、產生抗藥性。</div>
+<div class="misconception"><strong>❌「這個工具可以取代藥師」</strong> → 不行。這是參考資訊，用藥請諮詢藥師。</div>
+<h3>🩺 使用時機與注意事項</h3>
+<div class="when-to-use"><strong>✅ 適合：</strong>想了解常見藥品的人、家有長輩、出國備藥參考。<br><strong>⚠️ 注意：</strong>這是參考資訊，不能取代醫師診斷或藥師指示。用藥前請諮詢專業人員，尤其孕婦、兒童、慢性病患者。</div>
+<h3>❓ 更多常見問題</h3>
+<h3>什麼是「處方藥」？</h3><p>需醫師開立處方箋才能領的藥，如抗生素、降血壓藥。</p>
+<h3>什麼是「指示藥」？</h3><p>不需處方，但需藥師指示，如部分感冒藥、胃藥。</p>
+<h3>什麼是「成藥」？</h3><p>安全性高，可在超商買，如普拿疼、綠油精。</p>
+<h3>藥品過敏怎麼辦？</h3><p>立即停藥、就醫，並記錄過敏藥名，告知醫師。</p>
+<h3>藥可以配茶或咖啡嗎？</h3><p>不建議。茶和咖啡可能影響藥效，最好配白開水。</p>
+</div>
+<div class="faq"><h2 style="color:#D4AF37;font-size:20px;margin:24px 0 12px;">常見問題</h2><h3>這可以取代醫師嗎？</h3><p>不行。這是參考資訊，不能取代醫師診斷或藥師指示。</p><h3>藥品資訊準嗎？</h3><p>僅供參考。實際用藥請依藥袋說明或諮詢藥師。</p><h3>收錄多少藥？</h3><p>目前 10 個常見藥，未來會擴充。</p><h3>資料會上傳嗎？</h3><p>不會，全部在瀏覽器。</p><h3>可以查處方藥嗎？</h3><p>目前收錄常見成藥，處方藥請諮詢醫師。</p><h3>孕婦可以用嗎？</h3><p>請諮詢醫師。有些藥孕婦禁用。</p><h3>兒童可以用嗎？</h3><p>請諮詢醫師。兒童劑量依體重計算。</p><h3>可以查交互作用嗎？</h3><p>目前沒有，請諮詢藥師。</p><h3>可以列印嗎？</h3><p>可以，按瀏覽器列印。</p><h3>藥物過敏怎麼辦？</h3><p>立即停藥、就醫，並告知醫師過敏史。</p></div>
+</article>
+<div class="footer"><p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p><p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p></div>
+</div>
+<script>
+var DICT={
+  "普拿疼":"主成分：乙醯胺酚（Acetaminophen）。用途：退燒、止痛（頭痛、肌肉痛、經痛）。成人每次 500mg，每 4~6 小時一次，每日不超過 4000mg。⚠️ 過量傷肝，不可與酒精併用。",
+  "Acetaminophen":"中文：乙醯胺酚（普拿疼主成分）。用途：退燒、止痛。成人每日上限 4000mg。⚠️ 過量傷肝。",
+  "Aspirin":"中文：阿斯匹靈。用途：止痛、退燒、抗發炎、低劑量防心血管疾病。⚠️ 兒童不可用（雷氏症候群）、胃潰瘍者慎用。",
+  "Ibuprofen":"中文：布洛芬。用途：止痛、退燒、抗發炎。成人每次 200~400mg，每 4~6 小時一次。⚠️ 胃潰瘍者慎用、不可與阿斯匹靈併用。",
+  "Panadol":"中文：普拿疼（品牌名）。主成分乙醯胺酚。用途：退燒、止痛。",
+  "感冒藥":"常見成分：乙醯胺酚、抗組織胺、偽麻黃鹼。用途：緩解感冒症狀。⚠️ 多種感冒藥併用可能過量。",
+  "胃藥":"常見成分：制酸劑（鋁、鎂）、H2 阻斷劑、質子幫浦抑制劑。用途：中和胃酸、抑制胃酸分泌。",
+  "抗生素":"用途：殺細菌。⚠️ 對病毒無效（感冒多為病毒）、必須吃完療程、不可自行停藥。",
+  "類固醇":"用途：抗發炎、免疫抑制。⚠️ 長期使用有副作用，不可自行停藥。",
+  "止痛藥":"分兩大類：乙醯胺酚（普拿疼）、非類固醇抗發炎藥（布洛芬、阿斯匹靈）。用途：止痛、退燒。"
+};
+function setQ(w){document.getElementById("q").value=w;lookup();}
+function lookup(){
+  var q=document.getElementById("q").value.trim();
+  var o=document.getElementById("out");
+  var found=null,key="";
+  for(var k in DICT){if(k.toLowerCase()===q.toLowerCase()){found=DICT[k];key=k;break;}}
+  if(found){
+    o.innerHTML="<p style='font-size:22px;color:#D4AF37;text-align:center;'>"+key+"</p><p style='font-size:15px;line-height:2;'>"+found+"</p><p style='font-size:13px;color:#F85149;text-align:center;margin-top:12px;'>⚠️ 本工具僅供參考，不可取代醫師診斷或藥師指示。用藥前請諮詢專業人員。</p>";
+  } else {
+    o.innerHTML="<p style='color:#8B949E;'>目前未收錄「"+q+"」。建議查詢衛福部藥品許可證查詢系統，或諮詢藥師。</p>";
+  }
+}
+</script>
+</body>
+</html>
