@@ -1,105 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url><loc>https://tools.ahpal.com/</loc><lastmod>2026-11-04</lastmod><priority>1.0</priority></url>
-<url><loc>https://tools.ahpal.com/announcement/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/area-converter/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/article-gen/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/barcode-generator/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/base-converter/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/base64/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/bible-genesis-index/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/bible-genesis1/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/bible-genesis2/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/bible-index/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/bible-psalm-index/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/bible-psalm1/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/bible-psalm100/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/bible-psalm117/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/bible-psalm23/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/bible-revelation-index/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/bible-revelation1/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/bible-revelation2/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/bible-revelation3/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/bible-revelation4/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/bible-revelation5/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/bible-revelation6/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/bible-revelation7/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/bible-zechariah-index/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/bible-zechariah1/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/bible-zechariah2/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/big-text/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/bmi/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/calorie-calculator/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/car-loan-calculator/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/category-checker/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/child-growth/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/child-milestones/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/color-picker/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/contrast-checker/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/court-pdf/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/credit-card-interest/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/csv-json/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/currency-converter/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/date-diff/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/drug-interaction/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/email-to-image/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/family-budget/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/filename-checker/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/food-expiry/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/fraction-calculator/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/gsat-estimator/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/health-log/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/html-editor/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/id-validator/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/image-compressor/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/image-converter/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/image-to-pdf/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/income-tax/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/invoice-lottery/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/json-checker/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/json-formatter/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/litigation-assistant/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/loan-calculator/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/major-explorer/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/markdown/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/medication-reminder/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/medicine-lookup/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/meeting-planner/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/mortgage-calculator/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/multiplication-table/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/password-generator/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/pdf-compressor/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/pdf-merge/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/pdf-split/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/pension-calculator/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/periodic-table/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/phone-checker/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/pinyin-converter/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/png-to-ico/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/postal-code/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/pregnancy-calculator/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/qr-scanner/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/qrcode/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/random-generator/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/roman-numeral/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/sign-language/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/sleep-calculator/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/solar-terms/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/sop-search/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/taiwan-lottery/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/taiwan-plants/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/text-encrypt/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/text-to-image/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/text-to-speech/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/timestamp/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/timezone-converter/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/toeic-converter/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/tvet-estimator/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/unit-converter/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/url-encoder/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/video-to-gif/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/vocab-flashcard/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/word-counter/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/zh-converter/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
-<url><loc>https://tools.ahpal.com/zhuyin-practice/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/</loc><lastmod>2026-11-04</lastmod><priority>1.0</priority></url>
+  <url><loc>https://tools.ahpal.com/announcement/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/area-converter/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/article-gen/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/barcode-generator/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/base-converter/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/base64/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/bible-genesis-index/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/bible-genesis1/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/bible-genesis2/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/bible-index/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/bible-psalm-index/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/bible-psalm1/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/bible-psalm100/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/bible-psalm117/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/bible-psalm23/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/bible-revelation-index/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/bible-revelation1/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/bible-revelation2/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/bible-revelation3/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/bible-revelation4/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/bible-revelation5/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/bible-revelation6/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/bible-revelation7/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/bible-zechariah-index/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/bible-zechariah1/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/bible-zechariah2/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/big-text/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/bmi/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/calorie-calculator/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/car-loan-calculator/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/category-checker/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/child-growth/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/child-milestones/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/color-picker/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/contrast-checker/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/court-pdf/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/credit-card-interest/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/csv-json/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/currency-converter/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/date-diff/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/drug-interaction/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/email-to-image/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/fable-fox-grapes/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/fable-index/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/fable-north-wind-sun/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/fable-tortoise-hare/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/family-budget/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/filename-checker/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/food-expiry/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/fraction-calculator/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/gsat-estimator/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/health-log/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/html-editor/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/id-validator/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/image-compressor/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/image-converter/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/image-to-pdf/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/income-tax/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/invoice-lottery/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/json-checker/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/json-formatter/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/litigation-assistant/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/loan-calculator/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/major-explorer/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/markdown/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/medication-reminder/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/medicine-lookup/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/meeting-planner/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/mortgage-calculator/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/multiplication-table/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/password-generator/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/pdf-compressor/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/pdf-merge/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/pdf-split/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/pension-calculator/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/periodic-table/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/phone-checker/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/pinyin-converter/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/png-to-ico/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/postal-code/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/pregnancy-calculator/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/qr-scanner/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/qrcode/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/random-generator/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/roman-numeral/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/sign-language/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/sleep-calculator/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/solar-terms/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/sop-search/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/taiwan-lottery/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/taiwan-plants/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/text-encrypt/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/text-to-image/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/text-to-speech/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/timestamp/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/timezone-converter/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/toeic-converter/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/tvet-estimator/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/unit-converter/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/url-encoder/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/video-to-gif/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/vocab-flashcard/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/word-counter/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/zh-converter/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://tools.ahpal.com/zhuyin-practice/</loc><lastmod>2026-11-04</lastmod><priority>0.8</priority></url>
 </urlset>
