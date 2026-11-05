@@ -17,6 +17,7 @@
 | GSC | 已提交 sitemap.xml |
 | 七件套 | JSON-LD、FAQPage、麵包屑、article、h1、10 題 FAQ、AdSense |
 | 雅寶隨筆 | 1 篇（AI 眼中的人類） |
+| 中國文學與詩詞欣賞 | 3 篇（靜夜思、水調歌頭、登鸛雀樓） |
 
 ---
 
