@@ -98,6 +98,20 @@ button:disabled{opacity:0.4;cursor:not-allowed;}
 </label>
 <label>輸出檔名</label>
 <input type="text" id="out-name" value="output.mp4">
+
+<div style="margin-top:20px;padding-top:20px;border-top:1px solid #2D303A;">
+<h3 style="color:#D4AF37;font-size:16px;margin-bottom:12px;">📦 批次處理（多檔一次產生）</h3>
+<label>選擇多個影片（可一次選多個）</label>
+<input type="file" id="batch-input" accept="video/*" multiple>
+<div class="meta" id="batch-info">尚未選擇批次檔案。</div>
+<button id="btn-batch" disabled onclick="generateBatch()" style="margin-top:12px;">🚀 產生批次指令</button>
+<div class="output" id="batch-output"></div>
+<div class="copy-row" id="batch-copy" style="display:none;">
+<button class="blue" onclick="copyText('batch-output')">📋 複製全部指令</button>
+<button class="gray" onclick="downloadBat()">💾 下載 convert.bat</button>
+</div>
+<div class="note" style="margin-top:12px;">📌 「下載 convert.bat」後，把影片拖到 convert.bat 上，就會自動轉檔（Windows）。</div>
+</div>
 <div style="display:flex;gap:8px;margin-top:8px;">
 <button id="btn-save-preset" class="gray" onclick="savePreset()" style="flex:1;margin-top:0;">💾 儲存目前設定</button>
 <button id="btn-load-preset" class="gray" onclick="loadPreset()" style="flex:1;margin-top:0;">📂 載入設定</button>
@@ -295,6 +309,89 @@ function generateCmd(){
   el.cropCopy.style.display = 'flex';
 }
 window.generateCmd = generateCmd;
+
+// ===== 批次處理 =====
+var batchFiles = [];
+var batchEl = {
+  input: document.getElementById('batch-input'),
+  info: document.getElementById('batch-info'),
+  btn: document.getElementById('btn-batch'),
+  output: document.getElementById('batch-output'),
+  copy: document.getElementById('batch-copy')
+};
+var lastBatchCmds = '';
+var lastBatFile = '';
+
+if (batchEl.input) {
+  batchEl.input.addEventListener('change', function(e){
+    batchFiles = Array.from(e.target.files);
+    if (batchFiles.length === 0) return;
+    batchEl.info.innerHTML = '已選擇 <strong>' + batchFiles.length + '</strong> 個檔案：' + batchFiles.map(function(f){ return f.name; }).join('、');
+    batchEl.btn.disabled = false;
+  });
+}
+
+function generateBatch(){
+  if (batchFiles.length === 0) return;
+  var ratio = document.getElementById('crop-ratio').value;
+  var strategy = document.getElementById('crop-strategy').value;
+  var targets = { '16:9':[1920,1080], '9:16':[1080,1920], '1:1':[1080,1080], '4:5':[1080,1350] };
+  var t = targets[ratio];
+  var W = t[0];
+  var H = t[1];
+  var crf = document.getElementById('adv-crf') ? document.getElementById('adv-crf').value : '18';
+  var preset = document.getElementById('adv-preset') ? document.getElementById('adv-preset').value : 'fast';
+  var bitrate = document.getElementById('adv-bitrate') ? document.getElementById('adv-bitrate').value.trim() : '';
+  var fps = document.getElementById('adv-fps') ? document.getElementById('adv-fps').value.trim() : '';
+  var audioNorm = document.getElementById('audio-normalize') && document.getElementById('audio-normalize').checked;
+  var vf;
+  if (strategy === 'pad') {
+    vf = 'scale=' + W + ':' + H + ':force_original_aspect_ratio=decrease,pad=' + W + ':' + H + ':(ow-iw)/2:(oh-ih)/2:color=black,setsar=1:1';
+  } else {
+    vf = 'crop=min(iw\\,ih*' + W + '/' + H + '):min(ih\\,iw*' + H + '/' + W + '),scale=' + W + ':' + H + ',setsar=1:1';
+  }
+  if (fps) vf = vf + ',fps=' + fps;
+  var cv = '-c:v libx264 -crf ' + crf + ' -preset ' + preset;
+  if (bitrate) cv += ' -maxrate ' + bitrate + ' -bufsize ' + bitrate;
+  var audioArgs = audioNorm ? '-af loudnorm=I=-16:TP=-1.5:LRA=11 -c:a aac -b:a 192k' : '-c:a copy';
+
+  var cmds = [];
+  var batLines = ['@echo off', 'chcp 65001 >nul', 'echo AHPAL Shorts 批次轉檔', 'echo ================================'];
+  for (var i = 0; i < batchFiles.length; i++) {
+    var f = batchFiles[i];
+    var baseName = f.name.replace(/\.[^.]+$/, '');
+    var outName = baseName + '_' + ratio.replace(':','x') + '.mp4';
+    var cmd = 'ffmpeg -n -i "' + f.name + '" -vf "' + vf + '" ' + cv + ' ' + audioArgs + ' -movflags +faststart "' + outName + '"';
+    cmds.push(cmd);
+    batLines.push('echo [' + (i+1) + '/' + batchFiles.length + '] ' + f.name);
+    batLines.push(cmd);
+    batLines.push('if errorlevel 1 echo [失敗] ' + f.name);
+  }
+  batLines.push('echo.');
+  batLines.push('echo 全部完成！按任意鍵結束。');
+  batLines.push('pause >nul');
+
+  lastBatchCmds = cmds.join('\n\n');
+  lastBatFile = batLines.join('\r\n');
+  batchEl.output.classList.add('show');
+  batchEl.output.textContent = lastBatchCmds;
+  batchEl.copy.style.display = 'flex';
+}
+window.generateBatch = generateBatch;
+
+function downloadBat(){
+  if (!lastBatFile) { alert('請先按「產生批次指令」'); return; }
+  var blob = new Blob([lastBatFile], { type: 'text/plain;charset=utf-8' });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = 'convert.bat';
+  a.click();
+  URL.revokeObjectURL(url);
+  alert('已下載 convert.bat！把影片拖到它上面，就會自動轉檔。');
+}
+window.downloadBat = downloadBat;
+
 
 // ===== 儲存 / 載入常用設定 =====
 function savePreset(){
