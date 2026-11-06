@@ -51,9 +51,92 @@ button:disabled{opacity:0.4;cursor:not-allowed;}
 .footer a{color:#58A6FF;text-decoration:none;}
 @media(max-width:600px){.tabs{flex-direction:column;}}
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "Shorts 工作台",
+      "url": "https://tools.ahpal.com/video-toolkit/",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "Web",
+      "description": "YouTube Shorts 專用工作台：影片裁切指令、格式轉換、標題與說明欄產生器、Hashtag 建議、發布檢查清單。純前端、離線、不上傳。",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TWD" },
+      "featureList": [
+        "影片比例裁切指令（16:9 / 9:16 / 1:1 / 4:5）",
+        "格式轉換（MOV / MKV / AVI → MP4 / WebM / GIF / MP3）",
+        "標題與說明欄產生器（自動萃取關鍵詞）",
+        "Hashtag 建議（3~5 個）",
+        "批次處理（多檔一次產生指令 + convert.bat）"
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://www.ahpal.com/" },
+        { "@type": "ListItem", "position": 2, "name": "工具箱", "item": "https://tools.ahpal.com/" },
+        { "@type": "ListItem", "position": 3, "name": "Shorts 工作台" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "為什麼 Shorts 要用 9:16 而不是 16:9？",
+          "acceptedAnswer": { "@type": "Answer", "text": "YouTube Shorts 是直式全螢幕格式，規格為 1080×1920（9:16）。用 16:9 上傳，YouTube 會自動加黑邊或裁切，畫面會變小或失真。正確做法是先裁切成 9:16 再上傳。" }
+        },
+        {
+          "@type": "Question",
+          "name": "黑邊填充和直接裁切有什麼不同？",
+          "acceptedAnswer": { "@type": "Answer", "text": "黑邊填充（pad）保留完整畫面，在上下或左右補黑邊，適合「不想裁掉任何內容」的場景。直接裁切（crop）裁掉多餘部分讓畫面填滿，適合「要畫面飽滿」的場景，但會切掉邊緣內容。" }
+        },
+        {
+          "@type": "Question",
+          "name": "MKV 轉 MP4 為什麼可以這麼快？",
+          "acceptedAnswer": { "@type": "Answer", "text": "因為 MKV 和 MP4 常使用相同的編碼（H.264 + AAC），轉換時用 -c copy 參數直接複製串流，不重新編碼，所以 10 秒內就能完成。這就是「無損轉封裝」的原理。" }
+        },
+        {
+          "@type": "Question",
+          "name": "Shorts 標題為什麼要控制在 60 字元以內？",
+          "acceptedAnswer": { "@type": "Answer", "text": "YouTube Shorts 在手機上顯示標題的空間有限，大約 40~60 字元就會被截斷。超過的部分觀眾看不到，所以關鍵詞和鉤子要放在前 40 字元。" }
+        },
+        {
+          "@type": "Question",
+          "name": "Hashtag 要放幾個才有效？",
+          "acceptedAnswer": { "@type": "Answer", "text": "建議 3~5 個。YouTube 演算法會顯示前 3 個 Hashtag 在標題下方，超過 60 個全部忽略。放太多會分散主題焦點，放太少則失去分類效果。" }
+        },
+        {
+          "@type": "Question",
+          "name": "批次處理的 convert.bat 怎麼用？",
+          "acceptedAnswer": { "@type": "Answer", "text": "下載 convert.bat 後，把多個影片檔拖到 convert.bat 圖示上，Windows 會自動開啟命令提示字元，依序轉檔。轉檔完成的檔案會放在同一資料夾。" }
+        },
+        {
+          "@type": "Question",
+          "name": "音訊正規化（loudnorm）是什麼？",
+          "acceptedAnswer": { "@type": "Answer", "text": "loudnorm 是 ffmpeg 的音訊標準化濾鏡，把音量統一調整到目標響度（本工具設為 -16 LUFS，符合 YouTube 標準）。適合「多支影片音量不一致」的場景。" }
+        },
+        {
+          "@type": "Question",
+          "name": "產生的 ffmpeg 指令要在哪裡執行？",
+          "acceptedAnswer": { "@type": "Answer", "text": "在終端機執行。Windows 用 PowerShell 或 CMD，Mac 用 Terminal。先 cd 到影片所在資料夾，再貼上指令。需要先安裝 ffmpeg（Windows：winget install ffmpeg；Mac：brew install ffmpeg）。" }
+        }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <div class="container">
+<nav class="breadcrumb" aria-label="breadcrumb" style="font-size:13px;color:#8B949E;margin-bottom:16px;padding:8px 0;">
+<a href="https://www.ahpal.com/" style="color:#58A6FF;text-decoration:none;">首頁</a>
+<span style="margin:0 6px;">›</span>
+<a href="https://tools.ahpal.com/" style="color:#58A6FF;text-decoration:none;">工具箱</a>
+<span style="margin:0 6px;">›</span>
+<span style="color:#D4AF37;">Shorts 工作台</span>
+</nav>
 <h1>🎬 Shorts 工作台</h1>
 <p class="sub">裁切指令 · 標題 + 說明 · Hashtag · 發布檢查 · 純前端 · 離線 · 不上傳</p>
 <nav class="nav">
@@ -217,6 +300,43 @@ button:disabled{opacity:0.4;cursor:not-allowed;}
 <div class="meta" id="check-result">已勾選 0 / 10 項</div>
 </div>
 </div>
+
+<article class="knowledge" style="background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin-top:24px;">
+<h2 style="color:#D4AF37;font-size:20px;margin-bottom:16px;">📚 Shorts 工作台完整說明（給創作者與 AI）</h2>
+
+<h3 style="color:#58A6FF;font-size:16px;margin:20px 0 10px;">一、為什麼 Shorts 要 9:16？</h3>
+<p style="color:#C9D1D9;line-height:1.9;">YouTube Shorts 是直式全螢幕格式，規格為 <strong style="color:#D4AF37;">1080×1920（9:16）</strong>。用 16:9 上傳，YouTube 會自動加黑邊或裁切，畫面會變小或失真。正確做法是先裁切成 9:16 再上傳。</p>
+
+<h3 style="color:#58A6FF;font-size:16px;margin:20px 0 10px;">二、裁切策略：黑邊填充 vs 直接裁切</h3>
+<table style="width:100%;border-collapse:collapse;font-size:14px;color:#C9D1D9;margin:12px 0;">
+<tr style="background:rgba(212,175,55,0.1);"><th style="padding:8px;border:1px solid #2D303A;text-align:left;color:#D4AF37;">策略</th><th style="padding:8px;border:1px solid #2D303A;text-align:left;color:#D4AF37;">做法</th><th style="padding:8px;border:1px solid #2D303A;text-align:left;color:#D4AF37;">適合</th></tr>
+<tr><td style="padding:8px;border:1px solid #2D303A;">黑邊填充（pad）</td><td style="padding:8px;border:1px solid #2D303A;">保留完整畫面，補黑邊</td><td style="padding:8px;border:1px solid #2D303A;">不想裁掉任何內容</td></tr>
+<tr><td style="padding:8px;border:1px solid #2D303A;">直接裁切（crop）</td><td style="padding:8px;border:1px solid #2D303A;">裁掉多餘部分，畫面填滿</td><td style="padding:8px;border:1px solid #2D303A;">要畫面飽滿</td></tr>
+</table>
+
+<h3 style="color:#58A6FF;font-size:16px;margin:20px 0 10px;">三、格式轉換：MKV → MP4 為什麼能 10 秒完成？</h3>
+<p style="color:#C9D1D9;line-height:1.9;">因為 MKV 和 MP4 常使用相同的編碼（H.264 + AAC），轉換時用 <code style="background:#0D1117;padding:2px 6px;border-radius:4px;color:#58A6FF;">-c copy</code> 參數直接複製串流，<strong style="color:#D4AF37;">不重新編碼</strong>，所以 10 秒內就能完成。這就是「無損轉封裝」的原理。</p>
+
+<h3 style="color:#58A6FF;font-size:16px;margin:20px 0 10px;">四、標題 SEO：前 40 字元決定一切</h3>
+<p style="color:#C9D1D9;line-height:1.9;">YouTube Shorts 在手機上顯示標題的空間有限，大約 <strong style="color:#D4AF37;">40~60 字元</strong>就會被截斷。超過的部分觀眾看不到，所以關鍵詞和鉤子要放在前 40 字元。本工具的標題產生器會自動截短，確保不超過 60 字元。</p>
+
+<h3 style="color:#58A6FF;font-size:16px;margin:20px 0 10px;">五、Hashtag 策略：3~5 個最有效</h3>
+<p style="color:#C9D1D9;line-height:1.9;">YouTube 演算法會顯示<strong style="color:#D4AF37;">前 3 個 Hashtag</strong>在標題下方，超過 60 個全部忽略。建議 3~5 個：太少失去分類效果，太多分散主題焦點。</p>
+
+<h3 style="color:#58A6FF;font-size:16px;margin:20px 0 10px;">六、批次處理：convert.bat 怎麼用？</h3>
+<p style="color:#C9D1D9;line-height:1.9;">下載 <code style="background:#0D1117;padding:2px 6px;border-radius:4px;color:#58A6FF;">convert.bat</code> 後，把多個影片檔拖到它圖示上，Windows 會自動開啟命令提示字元，依序轉檔。轉檔完成的檔案會放在同一資料夾。</p>
+
+<h3 style="color:#58A6FF;font-size:16px;margin:20px 0 10px;">七、音訊正規化（loudnorm）是什麼？</h3>
+<p style="color:#C9D1D9;line-height:1.9;"><code style="background:#0D1117;padding:2px 6px;border-radius:4px;color:#58A6FF;">loudnorm</code> 是 ffmpeg 的音訊標準化濾鏡，把音量統一調整到目標響度（本工具設為 <strong style="color:#D4AF37;">-16 LUFS</strong>，符合 YouTube 標準）。適合「多支影片音量不一致」的場景。</p>
+
+<div style="background:rgba(212,175,55,0.06);border-left:4px solid #D4AF37;padding:16px 20px;border-radius:8px;margin-top:24px;">
+<p style="color:#D4AF37;font-weight:700;margin:0;">🦞 龍蝦總工程師的話：</p>
+<p style="color:#C9D1D9;margin:8px 0 0 0;">「工具不是萬能，但懂原理的人，能把工具用到極致。裁切、轉換、標題、Hashtag、批次，五件事一次搞定，這就是 Shorts 工作台的價值。」</p>
+</div>
+
+<p style="color:#8B949E;font-size:12px;margin-top:20px;">本文由 🦞 龍蝦總工程師撰寫 · 2026-11-06 · 雅寶社區 AHPAL.COM</p>
+</article>
+
 <div class="footer"><p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p><p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p></div>
 </div>
 <script>
