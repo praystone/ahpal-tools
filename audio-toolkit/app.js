@@ -663,7 +663,9 @@ if (btnAutoSub) {
       var modelData = await modelManager.loadModel('base', true, function(progress) {
         whisperStatus.textContent = '自動辨識：下載模型 ' + Math.round(progress) + '%';
       });
-      whisperStatus.textContent = '自動辨識：模型載入完成，開始辨識...';
+      whisperStatus.textContent = '自動辨識：初始化 WASM 模組...';
+      await whisperService.initModel(modelData);
+      whisperStatus.textContent = '自動辨識：模型初始化完成，開始辨識...';
       btnAutoSub.textContent = '⏳ 辨識中...';
 
       // 把 AudioBuffer 轉成 16kHz Float32Array
