@@ -121,7 +121,7 @@ async function initFFmpeg(){
   setProgress(35, '下載 wasm 35%');
   const wasmURL = await toBlobURL(CORE + '/ffmpeg-core.wasm', 'application/wasm');
   setProgress(70, '載入引擎 70%');
-  await ffmpeg.load({ coreURL, wasmURL });
+  await ffmpeg.load({ coreURL, wasmURL, classWorkerURL: './vendor/worker.js' });
   loaded = true;
   setProgress(100, '引擎就緒 100%');
   setStatus('引擎就緒，可以開始處理。');
