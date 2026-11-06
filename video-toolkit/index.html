@@ -21,9 +21,16 @@ h1{color:#D4AF37;font-size:28px;margin-bottom:8px;}
 .tab.active{background:#D4AF37;color:#0D1117;border-color:#D4AF37;font-weight:700;}
 label{display:block;color:#8B949E;font-size:13px;margin-bottom:6px;margin-top:14px;}
 select,input[type=file]{width:100%;background:#0D1117;color:#E6EDF3;border:1px solid #2D303A;border-radius:8px;padding:10px 12px;font-size:14px;}
-button{background:#D4AF37;color:#0D1117;border:none;border-radius:8px;padding:12px 24px;font-weight:700;cursor:pointer;font-size:15px;margin-top:16px;}
+button{background:#D4AF37;color:#0D1117;border:none;border-radius:8px;padding:12px 24px;font-weight:700;cursor:pointer;font-size:15px;margin-top:16px;position:relative;}
 button:disabled{opacity:0.4;cursor:not-allowed;}
-.status{margin-top:14px;padding:12px;background:#0D1117;border-radius:8px;font-size:13px;color:#8B949E;min-height:40px;white-space:pre-wrap;}
+button .spinner{display:none;width:14px;height:14px;border:2px solid #0D1117;border-top-color:transparent;border-radius:50%;animation:spin 0.8s linear infinite;margin-right:8px;vertical-align:middle;}
+button.loading .spinner{display:inline-block;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.status{margin-top:14px;padding:12px;background:#0D1117;border-radius:8px;font-size:13px;color:#8B949E;min-height:60px;white-space:pre-wrap;}
+.progress-wrap{margin-top:12px;display:none;}
+.progress-bar{height:8px;background:#0D1117;border-radius:4px;overflow:hidden;border:1px solid #2D303A;}
+.progress-fill{height:100%;background:linear-gradient(90deg,#D4AF37,#58A6FF);width:0%;transition:width 0.3s;}
+.progress-text{font-size:12px;color:#8B949E;margin-top:4px;text-align:center;}
 .download{display:none;margin-top:14px;}
 .download a{display:inline-block;background:#3FB950;color:#0D1117;padding:10px 24px;border-radius:8px;text-decoration:none;font-weight:700;}
 .footer{text-align:center;margin-top:40px;color:#8B949E;font-size:13px;}
@@ -55,7 +62,7 @@ button:disabled{opacity:0.4;cursor:not-allowed;}
 <option value="pad">黑邊填充（保留完整畫面）</option>
 <option value="crop">直接裁切（裁掉多餘部分）</option>
 </select>
-<button id="btn-crop" disabled onclick="doCrop()">開始裁切</button>
+<button id="btn-crop" disabled onclick="doCrop()"><span class="spinner"></span><span class="btn-text">開始裁切</span></button>
 </div>
 <div id="panel-convert" style="display:none;">
 <label>輸出格式</label>
@@ -64,50 +71,82 @@ button:disabled{opacity:0.4;cursor:not-allowed;}
 <option value="webm">WebM（VP9）</option>
 <option value="gif">GIF（短片段）</option>
 </select>
-<button id="btn-convert" disabled onclick="doConvert()">開始轉換</button>
+<button id="btn-convert" disabled onclick="doConvert()"><span class="spinner"></span><span class="btn-text">開始轉換</span></button>
+</div>
+<div class="progress-wrap" id="progress-wrap">
+<div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+<div class="progress-text" id="progress-text">0%</div>
 </div>
 <div class="status" id="status">請先上傳影片。</div>
 <div class="download" id="download-area"><a id="download-link" download>⬇️ 下載結果</a></div>
-<div class="note">📌 處理全程在瀏覽器內，檔案不上傳。首次使用需從 CDN 載入約 32MB 引擎，請稍候。</div>
+<div class="note">📌 處理全程在瀏覽器內，檔案不上傳。首次使用需從 CDN 載入約 32MB 引擎，請稍候（進度條會動）。</div>
 </div>
 <div class="footer"><p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p><p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p></div>
 </div>
 <script type="module">
 import { FFmpeg } from 'https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.12.15/dist/esm/index.js';
 let ffmpeg = null, inputFile = null, loaded = false;
-const el = { file: document.getElementById('file-input'), status: document.getElementById('status'), btnCrop: document.getElementById('btn-crop'), btnConvert: document.getElementById('btn-convert'), downloadArea: document.getElementById('download-area'), downloadLink: document.getElementById('download-link') };
+const el = { file: document.getElementById('file-input'), status: document.getElementById('status'), btnCrop: document.getElementById('btn-crop'), btnConvert: document.getElementById('btn-convert'), downloadArea: document.getElementById('download-area'), downloadLink: document.getElementById('download-link'), progressWrap: document.getElementById('progress-wrap'), progressFill: document.getElementById('progress-fill'), progressText: document.getElementById('progress-text') };
+
 function setStatus(t){ el.status.textContent = t; }
+function setProgress(pct, label){
+  el.progressWrap.style.display = 'block';
+  el.progressFill.style.width = pct + '%';
+  el.progressText.textContent = label || (pct + '%');
+}
+function hideProgress(){ el.progressWrap.style.display = 'none'; el.progressFill.style.width = '0%'; }
+function lockBtn(btn){ btn.disabled = true; btn.classList.add('loading'); }
+function unlockBtn(btn){ btn.disabled = false; btn.classList.remove('loading'); }
+
 async function toBlobURL(url, mime){
   const r = await fetch(url);
+  if (!r.ok) throw new Error('fetch ' + url + ' 失敗：HTTP ' + r.status);
   const b = await r.blob();
   return URL.createObjectURL(new Blob([b], { type: mime }));
 }
+
 async function initFFmpeg(){
   if (loaded) return;
-  setStatus('載入處理引擎（約 32MB，首次較慢）...');
+  setStatus('載入處理引擎（約 32MB，首次較慢，請看進度條）...');
+  setProgress(5, '載入引擎 5%');
   ffmpeg = new FFmpeg();
+  ffmpeg.on('log', ({ message }) => { console.log('[ffmpeg]', message); });
+  ffmpeg.on('progress', ({ progress }) => {
+    const pct = Math.min(95, Math.round(progress * 100));
+    setProgress(pct, '處理中 ' + pct + '%');
+  });
   const CORE = 'https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.12.10/dist/esm';
+  setProgress(15, '下載 core.js 15%');
   const coreURL = await toBlobURL(CORE + '/ffmpeg-core.js', 'text/javascript');
+  setProgress(35, '下載 wasm 35%');
   const wasmURL = await toBlobURL(CORE + '/ffmpeg-core.wasm', 'application/wasm');
+  setProgress(70, '載入引擎 70%');
   await ffmpeg.load({ coreURL, wasmURL });
   loaded = true;
-  setStatus('引擎就緒。');
+  setProgress(100, '引擎就緒 100%');
+  setStatus('引擎就緒，可以開始處理。');
+  setTimeout(hideProgress, 1500);
 }
+
 el.file.addEventListener('change', async (e) => {
   inputFile = e.target.files[0];
   if (!inputFile) return;
   setStatus('已選擇：' + inputFile.name + '（' + (inputFile.size/1024/1024).toFixed(1) + ' MB）');
   el.btnCrop.disabled = false; el.btnConvert.disabled = false;
-  try { await initFFmpeg(); } catch(err){ setStatus('引擎載入失敗：' + err.message); }
+  try { await initFFmpeg(); } catch(err){ setStatus('引擎載入失敗：' + err.message); console.error(err); }
 });
+
 function switchTab(name){
   document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.tab === name));
   document.getElementById('panel-crop').style.display = name === 'crop' ? '' : 'none';
   document.getElementById('panel-convert').style.display = name === 'convert' ? '' : 'none';
 }
+
 async function doCrop(){
   if (!inputFile || !loaded) return;
   el.downloadArea.style.display = 'none';
+  const btn = el.btnCrop;
+  lockBtn(btn);
   const ratio = document.getElementById('crop-ratio').value;
   const strategy = document.getElementById('crop-strategy').value;
   const targets = { '16:9':[1920,1080], '9:16':[1080,1920], '1:1':[1080,1080], '4:5':[1080,1350] };
@@ -116,35 +155,48 @@ async function doCrop(){
   const inName = 'input.' + (['mov','mkv','avi'].includes(ext) ? ext : 'mp4');
   const outName = 'output.mp4';
   setStatus('處理中（裁切 ' + ratio + '）...');
-  const data = new Uint8Array(await inputFile.arrayBuffer());
-  await ffmpeg.writeFile(inName, data);
-  let vf;
-  if (strategy === 'pad') {
-    vf = 'scale=' + W + ':' + H + ':force_original_aspect_ratio=decrease,pad=' + W + ':' + H + ':(ow-iw)/2:(oh-ih)/2:color=black,setsar=1:1';
-  } else {
-    vf = 'crop=min(iw\\,ih*' + W + '/' + H + '):min(ih\\,iw*' + H + '/' + W + '),scale=' + W + ':' + H + ',setsar=1:1';
-  }
+  setProgress(0, '準備中 0%');
   try {
+    const data = new Uint8Array(await inputFile.arrayBuffer());
+    await ffmpeg.writeFile(inName, data);
+    let vf;
+    if (strategy === 'pad') {
+      vf = 'scale=' + W + ':' + H + ':force_original_aspect_ratio=decrease,pad=' + W + ':' + H + ':(ow-iw)/2:(oh-ih)/2:color=black,setsar=1:1';
+    } else {
+      vf = 'crop=min(iw\\,ih*' + W + '/' + H + '):min(ih\\,iw*' + H + '/' + W + '),scale=' + W + ':' + H + ',setsar=1:1';
+    }
     await ffmpeg.exec(['-i', inName, '-vf', vf, '-c:v', 'libx264', '-crf', '18', '-preset', 'fast', '-c:a', 'copy', '-movflags', '+faststart', outName]);
     const out = await ffmpeg.readFile(outName);
     const blob = new Blob([out.buffer], { type: 'video/mp4' });
     el.downloadLink.href = URL.createObjectURL(blob);
     el.downloadLink.download = 'ahpal-' + ratio.replace(':','x') + '-' + strategy + '.mp4';
     el.downloadArea.style.display = 'block';
+    setProgress(100, '完成 100%');
     setStatus('完成！' + (blob.size/1024/1024).toFixed(1) + ' MB');
-  } catch(err){ setStatus('裁切失敗：' + err.message); }
+    setTimeout(hideProgress, 2000);
+  } catch(err){
+    setStatus('裁切失敗：' + err.message);
+    console.error(err);
+    hideProgress();
+  } finally {
+    unlockBtn(btn);
+  }
 }
+
 async function doConvert(){
   if (!inputFile || !loaded) return;
   el.downloadArea.style.display = 'none';
+  const btn = el.btnConvert;
+  lockBtn(btn);
   const fmt = document.getElementById('convert-fmt').value;
   const ext = inputFile.name.split('.').pop().toLowerCase();
   const inName = 'input.' + (['mov','mkv','avi'].includes(ext) ? ext : 'mp4');
   const outName = 'output.' + fmt;
   setStatus('轉換中（→ ' + fmt.toUpperCase() + '）...');
-  const data = new Uint8Array(await inputFile.arrayBuffer());
-  await ffmpeg.writeFile(inName, data);
+  setProgress(0, '準備中 0%');
   try {
+    const data = new Uint8Array(await inputFile.arrayBuffer());
+    await ffmpeg.writeFile(inName, data);
     let args;
     if (fmt === 'mp4') args = ['-i', inName, '-c:v', 'libx264', '-crf', '20', '-c:a', 'aac', '-movflags', '+faststart', outName];
     else if (fmt === 'webm') args = ['-i', inName, '-c:v', 'libvpx-vp9', '-crf', '30', '-b:v', '0', '-c:a', 'libopus', outName];
@@ -156,8 +208,16 @@ async function doConvert(){
     el.downloadLink.href = URL.createObjectURL(blob);
     el.downloadLink.download = 'ahpal-converted.' + fmt;
     el.downloadArea.style.display = 'block';
+    setProgress(100, '完成 100%');
     setStatus('完成！' + (blob.size/1024/1024).toFixed(1) + ' MB');
-  } catch(err){ setStatus('轉換失敗：' + err.message); }
+    setTimeout(hideProgress, 2000);
+  } catch(err){
+    setStatus('轉換失敗：' + err.message);
+    console.error(err);
+    hideProgress();
+  } finally {
+    unlockBtn(btn);
+  }
 }
 
 // 把函式掛到 window，讓 HTML onclick 抓得到
