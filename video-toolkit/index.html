@@ -70,6 +70,7 @@ button:disabled{opacity:0.4;cursor:not-allowed;}
 <div class="tabs">
 <div class="tab active" data-tab="crop" onclick="switchTab('crop')">📐 裁切指令</div>
 <div class="tab" data-tab="title" onclick="switchTab('title')">📝 標題 + 說明</div>
+<div class="tab" data-tab="convert" onclick="switchTab('convert')">🔄 格式轉換</div>
 <div class="tab" data-tab="hashtag" onclick="switchTab('hashtag')">🏷️ Hashtag 建議</div>
 <div class="tab" data-tab="check" onclick="switchTab('check')">✅ 發布檢查</div>
 </div>
@@ -122,6 +123,29 @@ button:disabled{opacity:0.4;cursor:not-allowed;}
 </div>
 </div>
 </div>
+<div class="panel" id="panel-convert">
+<div class="card">
+<h2>🔄 格式轉換指令產生器</h2>
+<label>選擇影片（讀取格式與解析度）</label>
+<input type="file" id="conv-file" accept="video/*">
+<div class="meta" id="conv-info">尚未選擇檔案。</div>
+<label>輸出格式</label>
+<select id="conv-fmt">
+<option value="mp4">MP4（H.264 + AAC，通用）</option>
+<option value="mp4copy">MP4（無損轉封裝，MKV 專用，極快）</option>
+<option value="webm">WebM（VP9，網頁用）</option>
+<option value="gif">GIF（短片段，5 秒）</option>
+<option value="mp3">MP3（只抽音軌）</option>
+</select>
+<button id="btn-conv" disabled onclick="generateConvert()">🚀 產生轉換指令</button>
+<div class="output" id="conv-output"></div>
+<div class="copy-row" id="conv-copy" style="display:none;">
+<button class="blue" onclick="copyText('conv-output')">📋 一鍵複製</button>
+</div>
+<div class="note">📌 MKV → MP4 選「無損轉封裝」最快（10 秒內）。其他格式會重新編碼，畫質設 CRF 20。</div>
+</div>
+</div>
+
 <div class="panel" id="panel-hashtag">
 <div class="card">
 <h2>🏷️ Hashtag 建議（3~5 個最有效）</h2>
@@ -314,6 +338,63 @@ function generateAll(){
   document.getElementById('desc-copy').style.display = 'flex';
 }
 window.generateAll = generateAll;
+
+// ===== 格式轉換 =====
+var convFile = null;
+var convEl = {
+  file: document.getElementById('conv-file'),
+  info: document.getElementById('conv-info'),
+  btn: document.getElementById('btn-conv'),
+  output: document.getElementById('conv-output'),
+  copy: document.getElementById('conv-copy')
+};
+if (convEl.file) {
+  convEl.file.addEventListener('change', function(e){
+    var f = e.target.files[0];
+    if (!f) return;
+    convFile = f;
+    var ext = f.name.split('.').pop().toLowerCase();
+    var url = URL.createObjectURL(f);
+    var v = document.createElement('video');
+    v.preload = 'metadata';
+    v.onloadedmetadata = function(){
+      convEl.info.innerHTML = '<strong>' + f.name + '</strong><div>格式：' + ext.toUpperCase() + '　解析度：' + v.videoWidth + ' × ' + v.videoHeight + '　時長：' + v.duration.toFixed(1) + ' 秒　大小：' + (f.size/1024/1024).toFixed(1) + ' MB</div>';
+      convEl.btn.disabled = false;
+      URL.revokeObjectURL(url);
+    };
+    v.onerror = function(){ convEl.info.textContent = '無法讀取此影片。'; convEl.btn.disabled = false; };
+    v.src = url;
+  });
+}
+function generateConvert(){
+  if (!convFile) return;
+  var fmt = document.getElementById('conv-fmt').value;
+  var ext = convFile.name.split('.').pop().toLowerCase();
+  var inputName = convFile.name;
+  var ts = Date.now();
+  var cmd = '';
+  var outName = '';
+  if (fmt === 'mp4copy') {
+    outName = 'output_' + ts + '.mp4';
+    cmd = 'ffmpeg -n -i "' + inputName + '" -c copy "' + outName + '"';
+  } else if (fmt === 'mp4') {
+    outName = 'output_' + ts + '.mp4';
+    cmd = 'ffmpeg -n -i "' + inputName + '" -c:v libx264 -crf 20 -preset fast -c:a aac -movflags +faststart "' + outName + '"';
+  } else if (fmt === 'webm') {
+    outName = 'output_' + ts + '.webm';
+    cmd = 'ffmpeg -n -i "' + inputName + '" -c:v libvpx-vp9 -crf 30 -b:v 0 -c:a libopus "' + outName + '"';
+  } else if (fmt === 'gif') {
+    outName = 'output_' + ts + '.gif';
+    cmd = 'ffmpeg -n -i "' + inputName + '" -vf "fps=10,scale=480:-1:flags=lanczos" -t 5 "' + outName + '"';
+  } else if (fmt === 'mp3') {
+    outName = 'output_' + ts + '.mp3';
+    cmd = 'ffmpeg -n -i "' + inputName + '" -vn -c:a libmp3lame -q:a 2 "' + outName + '"';
+  }
+  convEl.output.classList.add('show');
+  convEl.output.textContent = cmd;
+  convEl.copy.style.display = 'flex';
+}
+window.generateConvert = generateConvert;
 
 // Hashtag 建議（修正：無多餘句點）
 function generateHashtags(){
