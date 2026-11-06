@@ -6,6 +6,13 @@ var startTime = 0;
 var playTimer = null;
 var totalDuration = 0;
 var activeSubIndex = -1;
+var coverImage = null;
+var recordedBlob = null;
+var mediaRecorder = null;
+var recordChunks = [];
+var recordCanvasStream = null;
+var recordAudioDest = null;
+var recordAnimId = null;
 
 var fileInput = document.getElementById('file-input');
 var statusEl = document.getElementById('status');
@@ -25,6 +32,16 @@ var btnAddSub = document.getElementById('btn-add-sub');
 var btnClearSub = document.getElementById('btn-clear-sub');
 var btnExportSrt = document.getElementById('btn-export-srt');
 var btnExportVtt = document.getElementById('btn-export-vtt');
+var coverInput = document.getElementById('cover-input');
+var videoTitle = document.getElementById('video-title');
+var renderCanvas = document.getElementById('render-canvas');
+var previewVideo = document.getElementById('preview-video');
+var btnRecord = document.getElementById('btn-record');
+var btnStopRecord = document.getElementById('btn-stop-record');
+var btnDownloadWebm = document.getElementById('btn-download-webm');
+var btnMp4Cmd = document.getElementById('btn-mp4-cmd');
+var recordStatus = document.getElementById('record-status');
+var mp4Output = document.getElementById('mp4-output');
 
 function getCtx() {
   if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -121,6 +138,7 @@ function updateTotalDuration() {
   });
   renderSubLane();
   timeInfo.textContent = '總時長：' + fmtTime(totalDuration);
+  updateRecordButtons();
 }
 
 function renderTracks() {
@@ -163,6 +181,7 @@ function renderTracks() {
   btnStop.disabled = tracks.length === 0;
   btnClear.disabled = tracks.length === 0;
   btnExport.disabled = tracks.length === 0;
+  updateRecordButtons();
 }
 
 function renderSubLane() {
@@ -205,7 +224,6 @@ function updateSubButtons() {
   btnExportVtt.disabled = subtitles.length === 0;
 }
 
-// 上傳音檔
 fileInput.addEventListener('change', async function(e) {
   var files = Array.from(e.target.files);
   if (files.length === 0) return;
@@ -226,7 +244,6 @@ fileInput.addEventListener('change', async function(e) {
   updateTotalDuration();
 });
 
-// 播放
 btnPlay.addEventListener('click', async function() {
   if (tracks.length === 0) return;
   var ctx = getCtx();
@@ -260,7 +277,6 @@ function tickPlayhead() {
   var pct = totalDuration > 0 ? (elapsed / totalDuration * 100) : 0;
   playheadEl.style.left = pct + '%';
   timeInfo.textContent = '時間：' + fmtTime(elapsed) + ' / ' + fmtTime(totalDuration);
-  // 更新字幕高亮
   var idx = -1;
   for (var i = 0; i < subtitles.length; i++) {
     if (elapsed >= subtitles[i].start && elapsed <= subtitles[i].end) { idx = i; break; }
@@ -279,7 +295,6 @@ function stopAll() {
 btnStop.addEventListener('click', stopAll);
 btnClear.addEventListener('click', function() { tracks = []; renderTracks(); updateTotalDuration(); });
 
-// 匯出 WAV
 btnExport.addEventListener('click', async function() {
   if (tracks.length === 0) return;
   statusEl.textContent = '匯出中...';
@@ -352,13 +367,11 @@ function encodeWav(buffer) {
   return ab;
 }
 
-// 字幕：點時間軸標記
 subLane.addEventListener('click', function(e) {
   if (totalDuration <= 0) return;
   var rect = subLane.getBoundingClientRect();
   var pct = (e.clientX - rect.left) / rect.width;
   var t = pct * totalDuration;
-  // 找最近的結束點，或新增一條
   if (subtitles.length > 0) {
     var last = subtitles[subtitles.length - 1];
     if (last.end === null) {
@@ -371,7 +384,6 @@ subLane.addEventListener('click', function(e) {
   renderSubLane(); renderSubList();
 });
 
-// 加入字幕（自動平均分配）
 btnAddSub.addEventListener('click', function() {
   var lines = subInput.value.split('\n').map(function(s) { return s.trim(); }).filter(function(s) { return s.length > 0; });
   if (lines.length === 0) { alert('請先貼上字幕文字'); return; }
@@ -385,7 +397,6 @@ btnAddSub.addEventListener('click', function() {
 
 btnClearSub.addEventListener('click', function() { subtitles = []; renderSubLane(); renderSubList(); });
 
-// 匯出 SRT
 btnExportSrt.addEventListener('click', function() {
   if (subtitles.length === 0) return;
   var lines = [];
@@ -399,7 +410,6 @@ btnExportSrt.addEventListener('click', function() {
   downloadText(lines.join('\n'), 'ahpal-subtitles-' + Date.now() + '.srt');
 });
 
-// 匯出 VTT
 btnExportVtt.addEventListener('click', function() {
   if (subtitles.length === 0) return;
   var lines = ['WEBVTT', ''];
@@ -423,5 +433,183 @@ function downloadText(content, filename) {
   URL.revokeObjectURL(url);
 }
 
-// 初始化字幕狀態
-updateSubButtons();
+// ═══════════════════════════════════════════════════════
+// 影片輸出
+// ═══════════════════════════════════════════════════════
+coverInput.addEventListener('change', function(e) {
+  var f = e.target.files[0];
+  if (!f) return;
+  var img = new Image();
+  img.onload = function() { coverImage = img; recordStatus.textContent = '封面圖已載入：' + f.name; };
+  img.src = URL.createObjectURL(f);
+});
+
+function renderVideoFrame(ctx, elapsed) {
+  var w = renderCanvas.width;
+  var h = renderCanvas.height;
+  ctx.fillStyle = '#0D1117';
+  ctx.fillRect(0, 0, w, h);
+  // 封面圖
+  if (coverImage) {
+    var scale = Math.max(w / coverImage.width, h / coverImage.height);
+    var iw = coverImage.width * scale;
+    var ih = coverImage.height * scale;
+    ctx.drawImage(coverImage, (w - iw) / 2, (h - ih) / 2, iw, ih);
+    ctx.fillStyle = 'rgba(13,17,23,0.6)';
+    ctx.fillRect(0, 0, w, h);
+  }
+  // 標題
+  var title = videoTitle.value.trim() || '雅寶音訊工作台';
+  ctx.fillStyle = '#D4AF37';
+  ctx.font = 'bold 48px -apple-system, "Microsoft JhengHei", sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText(title, w / 2, h / 4);
+  // 波形
+  if (tracks.length > 0 && tracks[0].buffer) {
+    var buf = tracks[0].buffer;
+    var data = buf.getChannelData(0);
+    var waveY = h * 0.55;
+    var waveH = h * 0.25;
+    ctx.strokeStyle = '#58A6FF';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    var step = Math.floor(data.length / w);
+    for (var i = 0; i < w; i++) {
+      var v = data[Math.min(i * step, data.length - 1)];
+      var y = waveY - v * waveH;
+      if (i === 0) ctx.moveTo(i, y); else ctx.lineTo(i, y);
+    }
+    ctx.stroke();
+  }
+  // 字幕
+  if (subtitles.length > 0) {
+    for (var s = 0; s < subtitles.length; s++) {
+      var sub = subtitles[s];
+      var end = sub.end === null ? sub.start + 2 : sub.end;
+      if (elapsed >= sub.start && elapsed <= end) {
+        ctx.fillStyle = 'rgba(0,0,0,0.7)';
+        ctx.fillRect(0, h * 0.85, w, h * 0.1);
+        ctx.fillStyle = '#E6EDF3';
+        ctx.font = 'bold 32px -apple-system, "Microsoft JhengHei", sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText(sub.text, w / 2, h * 0.92);
+        break;
+      }
+    }
+  }
+  // 時間
+  ctx.fillStyle = '#8B949E';
+  ctx.font = '20px monospace';
+  ctx.textAlign = 'right';
+  ctx.fillText(fmtTime(elapsed) + ' / ' + fmtTime(totalDuration), w - 20, h - 20);
+}
+
+function updateRecordButtons() {
+  btnRecord.disabled = tracks.length === 0 || playing;
+  btnStopRecord.disabled = !mediaRecorder;
+  btnDownloadWebm.disabled = !recordedBlob;
+  btnMp4Cmd.disabled = !recordedBlob;
+}
+
+btnRecord.addEventListener('click', async function() {
+  if (tracks.length === 0) return;
+  var ctx = getCtx();
+  if (ctx.state === 'suspended') await ctx.resume();
+  stopAll();
+
+  // 初始化 Canvas
+  var rctx = renderCanvas.getContext('2d');
+  renderVideoFrame(rctx, 0);
+
+  // 建立 MediaStream：Canvas 畫面 + 混音音訊
+  recordCanvasStream = renderCanvas.captureStream(30);
+  recordAudioDest = ctx.createMediaStreamDestination();
+  var hasSolo = tracks.some(function(t) { return t.solo; });
+  tracks.forEach(function(t) {
+    if (!t.buffer) return;
+    if (t.mute) return;
+    if (hasSolo && !t.solo) return;
+    var src = ctx.createBufferSource();
+    src.buffer = t.buffer;
+    var gain = ctx.createGain();
+    gain.gain.value = t.volume;
+    src.connect(gain);
+    gain.connect(recordAudioDest);
+    src.start(0);
+    t._recordSrc = src;
+  });
+  recordAudioDest.stream.getAudioTracks().forEach(function(track) {
+    recordCanvasStream.addTrack(track);
+  });
+
+  // MediaRecorder
+  recordChunks = [];
+  var mimeType = 'video/webm;codecs=vp9,opus';
+  if (!MediaRecorder.isTypeSupported(mimeType)) {
+    mimeType = 'video/webm;codecs=vp8,opus';
+    if (!MediaRecorder.isTypeSupported(mimeType)) mimeType = 'video/webm';
+  }
+  try {
+    mediaRecorder = new MediaRecorder(recordCanvasStream, { mimeType: mimeType });
+  } catch (e) {
+    recordStatus.textContent = 'MediaRecorder 不支援：' + e.message;
+    return;
+  }
+  mediaRecorder.ondataavailable = function(ev) { if (ev.data.size > 0) recordChunks.push(ev.data); };
+  mediaRecorder.onstop = function() {
+    recordedBlob = new Blob(recordChunks, { type: 'video/webm' });
+    previewVideo.src = URL.createObjectURL(recordedBlob);
+    previewVideo.style.display = 'block';
+    recordStatus.textContent = '錄製完成！檔案大小：' + (recordedBlob.size / 1024 / 1024).toFixed(2) + ' MB';
+    updateRecordButtons();
+  };
+  mediaRecorder.start(100);
+
+  // 開始播放 + 渲染動畫
+  playing = true;
+  startTime = ctx.currentTime;
+  playheadEl.style.display = 'block';
+  var renderStart = ctx.currentTime;
+
+  function renderLoop() {
+    var elapsed = ctx.currentTime - renderStart;
+    if (elapsed >= totalDuration) {
+      stopRecording();
+      return;
+    }
+    renderVideoFrame(rctx, elapsed);
+    playheadEl.style.left = (elapsed / totalDuration * 100) + '%';
+    timeInfo.textContent = '時間：' + fmtTime(elapsed) + ' / ' + fmtTime(totalDuration);
+    recordAnimId = requestAnimationFrame(renderLoop);
+  }
+  renderLoop();
+  recordStatus.textContent = '錄製中...';
+  updateRecordButtons();
+});
+
+btnStopRecord.addEventListener('click', stopRecording);
+function stopRecording() {
+  if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+    mediaRecorder.stop();
+  }
+  if (recordAnimId) { cancelAnimationFrame(recordAnimId); recordAnimId = null; }
+  tracks.forEach(function(t) { if (t._recordSrc) { try { t._recordSrc.stop(); } catch(e) {} t._recordSrc = null; } });
+  playing = false;
+  updateRecordButtons();
+}
+
+btnDownloadWebm.addEventListener('click', function() {
+  if (!recordedBlob) return;
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(recordedBlob);
+  a.download = 'ahpal-video-' + Date.now() + '.webm';
+  a.click();
+});
+
+btnMp4Cmd.addEventListener('click', function() {
+  if (!recordedBlob) return;
+  var cmd = 'ffmpeg -i "ahpal-video.webm" -c:v libx264 -crf 20 -preset fast -c:a aac -movflags +faststart "ahpal-video.mp4"';
+  mp4Output.style.display = 'block';
+  mp4Output.textContent = cmd;
+  recordStatus.textContent = '轉 MP4 指令已產生（複製到終端機執行）。';
+});

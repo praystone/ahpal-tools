@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>多軌音訊工作台 v3 · 字幕時間軸 · SRT/VTT 匯出 | 雅寶工具箱</title>
-<meta name="description" content="免費線上多軌音訊工作台：多軌混音、WAV 匯出、字幕時間軸編輯、SRT/VTT 字幕匯出。純前端、完全離線、不上傳。">
+<title>多軌音訊工作台 v4 · 字幕 · 影片輸出 | 雅寶工具箱</title>
+<meta name="description" content="免費線上多軌音訊工作台：多軌混音、WAV 匯出、字幕時間軸、SRT/VTT 匯出、音訊+封面→WebM 影片輸出。純前端、完全離線、不上傳。">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://tools.ahpal.com/audio-toolkit/">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8637791667872348" crossorigin="anonymous"></script>
@@ -46,18 +46,22 @@ h1{color:#D4AF37;font-size:26px;margin-bottom:8px;}
 .sub-item.active{border-color:#58A6FF;}
 .sub-item .idx{color:#D4AF37;font-weight:700;min-width:30px;}
 .sub-item .times{color:#8B949E;font-size:11px;min-width:130px;}
-.sub-item .text{flex:1;color:#E6EDF3;}
 .sub-item input{flex:1;background:#161B22;color:#E6EDF3;border:1px solid #2D303A;border-radius:4px;padding:4px 8px;font-size:12px;}
+.video-wrap{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:12px;margin-top:12px;}
+.video-wrap canvas{width:100%;max-width:640px;display:block;margin:0 auto;border-radius:8px;background:#161B22;}
+.video-wrap .preview{width:100%;max-width:640px;display:block;margin:12px auto 0;border-radius:8px;background:#000;}
 .footer{text-align:center;margin-top:30px;color:#8B949E;font-size:12px;}
 .footer a{color:#58A6FF;text-decoration:none;}
 .note{background:rgba(212,175,55,0.06);border-left:4px solid #D4AF37;padding:10px 14px;border-radius:6px;margin-top:12px;font-size:12px;color:#C9D1D9;}
 textarea{width:100%;background:#0D1117;color:#E6EDF3;border:1px solid #2D303A;border-radius:8px;padding:10px;font-size:13px;font-family:inherit;min-height:100px;resize:vertical;}
+input[type=text]{width:100%;background:#0D1117;color:#E6EDF3;border:1px solid #2D303A;border-radius:8px;padding:8px 12px;font-size:13px;}
+label{display:block;color:#8B949E;font-size:12px;margin-bottom:4px;margin-top:10px;}
 </style>
 </head>
 <body>
 <div class="container">
-<h1>🎵 多軌音訊工作台 v3</h1>
-<p class="sub">多軌 · 混音 · WAV 匯出 · 字幕時間軸 · SRT/VTT 匯出 · 純前端 · 離線 · 不上傳</p>
+<h1>🎵 多軌音訊工作台 v4</h1>
+<p class="sub">多軌 · 混音 · 字幕 · 影片輸出 · 純前端 · 離線 · 不上傳</p>
 <nav class="nav">
 <a href="https://www.ahpal.com/">🏠 首頁</a>
 <a href="https://www.ahpal.com/categories.html">📚 全部分類</a>
@@ -92,7 +96,7 @@ textarea{width:100%;background:#0D1117;color:#E6EDF3;border:1px solid #2D303A;bo
 <div class="timeline" id="timeline">
 <div class="ruler" id="ruler"></div>
 <div id="track-lanes"></div>
-<div class="sub-lane" id="sub-lane" title="點擊此處標記字幕時間"></div>
+<div class="sub-lane" id="sub-lane" title="點擊標記字幕時間"></div>
 <div class="playhead" id="playhead" style="display:none;"></div>
 </div>
 <div class="status" id="time-info">時間：0.00 / 0.00 秒</div>
@@ -100,8 +104,8 @@ textarea{width:100%;background:#0D1117;color:#E6EDF3;border:1px solid #2D303A;bo
 
 <div class="card">
 <h2 style="color:#D4AF37;font-size:16px;margin-bottom:12px;">📝 字幕編輯器</h2>
-<label style="display:block;color:#8B949E;font-size:12px;margin-bottom:6px;">貼上字幕文字（每行一條）</label>
-<textarea id="sub-input" placeholder="例：&#10;青花瓷旗袍在賽博空間旋轉&#10;AI 生成的東方美學視覺實驗&#10;你最喜欢哪个镜头？"></textarea>
+<label>貼上字幕文字（每行一條）</label>
+<textarea id="sub-input" placeholder="例：&#10;青花瓷旗袍在賽博空間旋轉&#10;AI 生成的東方美學視覺實驗"></textarea>
 <div class="controls" style="margin-top:8px;">
 <button class="btn" id="btn-add-sub">➕ 加入字幕</button>
 <button class="btn gray" id="btn-clear-sub">🗑️ 清空字幕</button>
@@ -111,7 +115,27 @@ textarea{width:100%;background:#0D1117;color:#E6EDF3;border:1px solid #2D303A;bo
 <div class="sub-list" id="sub-list"></div>
 </div>
 
-<div class="note">📌 第三階段：字幕時間軸 + SRT/VTT 匯出。點時間軸上的「字幕軌」標記時間，或用「加入字幕」自動平均分配。第四階段會加 Whisper.wasm 自動語音辨識（首次下載 74MB 模型）。</div>
+<div class="card">
+<h2 style="color:#D4AF37;font-size:16px;margin-bottom:12px;">🎬 影片輸出（音訊 + 封面 → WebM）</h2>
+<label>封面圖（可選，JPG/PNG）</label>
+<input type="file" id="cover-input" accept="image/*">
+<label>影片標題（可選，顯示在畫面上）</label>
+<input type="text" id="video-title" placeholder="例：青花瓷旗袍 × 賽博龐克">
+<div class="video-wrap">
+<canvas id="render-canvas" width="1280" height="720"></canvas>
+<video class="preview" id="preview-video" controls style="display:none;"></video>
+</div>
+<div class="controls" style="margin-top:12px;">
+<button class="btn blue" id="btn-record" disabled>🎬 開始錄製 WebM</button>
+<button class="btn gray" id="btn-stop-record" disabled>⏹️ 停止錄製</button>
+<button class="btn green" id="btn-download-webm" disabled>💾 下載 WebM</button>
+<button class="btn" id="btn-mp4-cmd" disabled>📋 產生轉 MP4 指令</button>
+</div>
+<div class="status" id="record-status">尚未開始錄製。</div>
+<div class="output" id="mp4-output" style="display:none;background:#0D1117;border:1px solid #D4AF37;border-radius:8px;padding:12px;margin-top:10px;font-family:Consolas,monospace;font-size:12px;color:#58A6FF;white-space:pre-wrap;word-break:break-all;"></div>
+</div>
+
+<div class="note">📌 第四階段：音訊 + 封面圖 → WebM 影片。錄製時會即時渲染 Canvas（封面 + 波形 + 字幕），配混音音訊。WebM 下載後，用 ffmpeg 指令轉 MP4。</div>
 <div class="footer"><p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p><p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p></div>
 </div>
 <script src="./app.js"></script>
