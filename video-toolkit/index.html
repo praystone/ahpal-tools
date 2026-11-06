@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Shorts 工作台 · 裁切指令 + 標題 + 說明欄 + 引流 | 雅寶工具箱</title>
-<meta name="description" content="YouTube Shorts 專用工作台：影片裁切指令產生、標題產生器、說明欄產生器、Hashtag 建議、發布檢查清單。純前端、離線、不上傳。">
+<title>Shorts 工作台 · 裁切 + 標題說明 + Hashtag + 檢查 | 雅寶工具箱</title>
+<meta name="description" content="YouTube Shorts 專用工作台：影片裁切指令、標題與說明欄產生器、Hashtag 建議、發布檢查清單。純前端、離線、不上傳。">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://tools.ahpal.com/video-toolkit/">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8637791667872348" crossorigin="anonymous"></script>
@@ -55,7 +55,7 @@ button:disabled{opacity:0.4;cursor:not-allowed;}
 <body>
 <div class="container">
 <h1>🎬 Shorts 工作台</h1>
-<p class="sub">裁切指令 · 標題 · 說明欄 · Hashtag · 發布檢查 · 純前端 · 離線 · 不上傳</p>
+<p class="sub">裁切指令 · 標題 + 說明 · Hashtag · 發布檢查 · 純前端 · 離線 · 不上傳</p>
 <nav class="nav">
 <a href="https://www.ahpal.com/">🏠 首頁</a>
 <a href="https://www.ahpal.com/categories.html">📚 全部分類</a>
@@ -69,8 +69,7 @@ button:disabled{opacity:0.4;cursor:not-allowed;}
 </nav>
 <div class="tabs">
 <div class="tab active" data-tab="crop" onclick="switchTab('crop')">📐 裁切指令</div>
-<div class="tab" data-tab="title" onclick="switchTab('title')">📝 標題產生器</div>
-<div class="tab" data-tab="desc" onclick="switchTab('desc')">📄 說明欄產生器</div>
+<div class="tab" data-tab="title" onclick="switchTab('title')">📝 標題 + 說明</div>
 <div class="tab" data-tab="hashtag" onclick="switchTab('hashtag')">🏷️ Hashtag 建議</div>
 <div class="tab" data-tab="check" onclick="switchTab('check')">✅ 發布檢查</div>
 </div>
@@ -104,34 +103,19 @@ button:disabled{opacity:0.4;cursor:not-allowed;}
 </div>
 <div class="panel" id="panel-title">
 <div class="card">
-<h2>📝 標題產生器（前 40 字元要有力）</h2>
-<label>主題 / 一句話描述</label>
-<input type="text" id="title-topic" placeholder="例：青花瓷旗袍旋轉、月夜旗袍女神、賽博旗袍光影">
-<label>風格（可選）</label>
-<select id="title-style">
-<option value="all">全部風格</option>
-<option value="hook">鉤子型（反差 / 數字 / 懸念）</option>
-<option value="aesthetic">美學型（東方 / 光影 / 質感）</option>
-<option value="story">故事型（場景 / 情緒 / 懷念）</option>
-</select>
-<button onclick="generateTitles()">🚀 產生 6 個標題</button>
-<div id="title-output"></div>
-</div>
-</div>
-<div class="panel" id="panel-desc">
-<div class="card">
-<h2>📄 說明欄產生器</h2>
+<h2>📝 標題 + 說明欄產生器</h2>
 <label>影片主題（一句話）</label>
-<input type="text" id="desc-topic" placeholder="例：青花瓷旗袍在賽博空間旋轉，AI 生成的東方美學視覺實驗">
+<input type="text" id="title-topic" placeholder="例：青花瓷旗袍在賽博空間旋轉，AI 生成的東方美學視覺實驗">
 <label>官網連結</label>
 <input type="text" id="desc-site" value="https://www.ahpal.com">
 <label>頻道連結</label>
 <input type="text" id="desc-channel" value="https://www.youtube.com/@StPra-pg5qq">
 <label>互動提問（可選）</label>
 <input type="text" id="desc-ask" placeholder="例：你最喜歡哪個鏡頭？留言 1 旋轉、2 光影、3 細節">
-<label>Hashtag（可選，空白分隔）</label>
+<label>Hashtag（可選）</label>
 <input type="text" id="desc-tags" value="#AIArt #Qipao #青花瓷旗袍 #東方美學 #Shorts">
-<button onclick="generateDesc()">🚀 產生說明欄</button>
+<button onclick="generateAll()">🚀 產生標題 + 說明</button>
+<div id="title-output"></div>
 <div class="output" id="desc-output"></div>
 <div class="copy-row" id="desc-copy" style="display:none;">
 <button class="blue" onclick="copyText('desc-output')">📋 一鍵複製說明欄</button>
@@ -210,7 +194,6 @@ function generateCmd(){
   if (!videoMeta) return;
   var ratio = document.getElementById('crop-ratio').value;
   var strategy = document.getElementById('crop-strategy').value;
-  var outName = document.getElementById('out-name').value.trim() || 'output.mp4';
   var targets = { '16:9':[1920,1080], '9:16':[1080,1920], '1:1':[1080,1080], '4:5':[1080,1350] };
   var t = targets[ratio];
   var W = t[0];
@@ -242,11 +225,15 @@ function copyBatchCmd(){
 }
 window.copyBatchCmd = copyBatchCmd;
 
-// 標題產生器
-function generateTitles(){
+// 標題 + 說明（合併）
+function generateAll(){
   var topic = document.getElementById('title-topic').value.trim();
-  if (!topic) { alert('請先輸入主題'); return; }
-  var style = document.getElementById('title-style').value;
+  if (!topic) { alert('請先輸入影片主題'); return; }
+  var site = document.getElementById('desc-site').value.trim();
+  var channel = document.getElementById('desc-channel').value.trim();
+  var ask = document.getElementById('desc-ask').value.trim() || '你最喜歡哪個鏡頭？留言告訴我。';
+  var tags = document.getElementById('desc-tags').value.trim();
+  // 產生 6 個標題
   var emojis = ['✨','🌙','💫','🌸','🔥','🎨'];
   var templates = [
     topic + ' 360°｜AI 視覺藝術 ' + emojis[0],
@@ -256,26 +243,16 @@ function generateTitles(){
     '你有看過這樣的 ' + topic + ' 嗎？ ' + emojis[4],
     'AI 生成的 ' + topic + '，美到不敢眨眼 ' + emojis[5]
   ];
-  var html = '';
+  var titleHtml = '<div class="output-item ok"><div class="label">📝 標題選項（6 個）</div></div>';
   for (var i = 0; i < templates.length; i++) {
     var t = templates[i];
     var len = t.length;
     var warn = len > 60 ? ' warn' : ' ok';
     var meta = len > 60 ? '⚠️ 超過 60 字元，手機可能截斷' : '✅ 長度適中';
-    html += '<div class="output-item' + warn + '"><div class="label">選項 ' + (i+1) + '（' + len + ' 字元）</div><div class="value">' + t + '</div><div class="meta">' + meta + '</div></div>';
+    titleHtml += '<div class="output-item' + warn + '"><div class="label">選項 ' + (i+1) + '（' + len + ' 字元）</div><div class="value">' + t + '</div><div class="meta">' + meta + '</div></div>';
   }
-  document.getElementById('title-output').innerHTML = html;
-}
-window.generateTitles = generateTitles;
-
-// 說明欄產生器
-function generateDesc(){
-  var topic = document.getElementById('desc-topic').value.trim();
-  if (!topic) { alert('請先輸入主題'); return; }
-  var site = document.getElementById('desc-site').value.trim();
-  var channel = document.getElementById('desc-channel').value.trim();
-  var ask = document.getElementById('desc-ask').value.trim() || '你最喜歡哪個鏡頭？留言告訴我。';
-  var tags = document.getElementById('desc-tags').value.trim();
+  document.getElementById('title-output').innerHTML = titleHtml;
+  // 產生說明欄
   var lines = [];
   lines.push(topic);
   lines.push('');
@@ -287,18 +264,18 @@ function generateDesc(){
   lines.push('');
   lines.push(tags);
   var full = lines.join('\n');
-  var out = document.getElementById('desc-output');
-  out.classList.add('show');
-  out.textContent = full;
+  var descOut = document.getElementById('desc-output');
+  descOut.classList.add('show');
+  descOut.textContent = full;
   document.getElementById('desc-copy').style.display = 'flex';
 }
-window.generateDesc = generateDesc;
+window.generateAll = generateAll;
 
-// Hashtag 建議
+// Hashtag 建議（修正：無多餘句點）
 function generateHashtags(){
   var topic = document.getElementById('ht-topic').value.trim();
   if (!topic) { alert('請先輸入關鍵字'); return; }
-  var base = ['#AIArt', '#Shorts', '#VisualArt', '#AIGC', '#東方美學'].
+  var base = ['#AIArt', '#Shorts', '#VisualArt', '#AIGC', '#東方美學'];
   var extra = topic.split(/[\s,，、]+/).filter(function(x){ return x.length > 0; }).map(function(x){ return '#' + x; });
   var all = base.concat(extra).slice(0, 5);
   var html = '<div class="output-item ok"><div class="label">建議 Hashtag（3~5 個）</div><div class="value">' + all.join(' ') + '</div><div class="meta">前 3 個會顯示在標題下方，選最核心的放前面</div></div>';
