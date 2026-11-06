@@ -3,53 +3,83 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>影片裁切指令產生器 · 16:9 / 9:16 / 1:1 / 4:5 | 雅寶工具箱</title>
-<meta name="description" content="免費線上影片裁切指令產生器：上傳影片讀取解析度，選比例與策略，一鍵產生 ffmpeg 指令。支援 16:9 / 9:16 / 1:1 / 4:5，黑邊填充與直接裁切。純前端、離線、不上傳。">
+<title>Shorts 工作台 · 裁切指令 + 標題 + 說明欄 + 引流 | 雅寶工具箱</title>
+<meta name="description" content="YouTube Shorts 專用工作台：影片裁切指令產生、標題產生器、說明欄產生器、Hashtag 建議、發布檢查清單。純前端、離線、不上傳。">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://tools.ahpal.com/video-toolkit/">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8637791667872348" crossorigin="anonymous"></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"影片裁切指令產生器","url":"https://tools.ahpal.com/video-toolkit/","applicationCategory":"MultimediaApplication","operatingSystem":"Web","description":"產生 ffmpeg 裁切指令，支援 16:9 / 9:16 / 1:1 / 4:5。"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Shorts 工作台","url":"https://tools.ahpal.com/video-toolkit/","applicationCategory":"MultimediaApplication","operatingSystem":"Web","description":"YouTube Shorts 裁切指令、標題、說明欄、Hashtag、發布檢查。"}</script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:20px;}
-.container{max-width:900px;margin:0 auto;}
+.container{max-width:1000px;margin:0 auto;}
 h1{color:#D4AF37;font-size:28px;margin-bottom:8px;}
-.sub{color:#8B949E;margin-bottom:24px;font-size:14px;}
+.sub{color:#8B949E;margin-bottom:20px;font-size:14px;}
+.nav{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;}
+.nav a{color:#58A6FF;text-decoration:none;padding:4px 10px;}
+.nav a.active{color:#0D1117;background:#D4AF37;font-weight:700;}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;}
+.tab{padding:10px 18px;background:#161B22;border:1px solid #2D303A;border-radius:8px;color:#C9D1D9;cursor:pointer;font-size:14px;}
+.tab.active{background:#D4AF37;color:#0D1117;border-color:#D4AF37;font-weight:700;}
+.panel{display:none;}
+.panel.active{display:block;}
 .card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin-bottom:16px;}
 .card h2{color:#D4AF37;font-size:18px;margin-bottom:16px;}
 label{display:block;color:#8B949E;font-size:13px;margin-bottom:6px;margin-top:14px;}
-select,input[type=file],input[type=text]{width:100%;background:#0D1117;color:#E6EDF3;border:1px solid #2D303A;border-radius:8px;padding:10px 12px;font-size:14px;}
+input[type=text],input[type=file],select,textarea{width:100%;background:#0D1117;color:#E6EDF3;border:1px solid #2D303A;border-radius:8px;padding:10px 12px;font-size:14px;font-family:inherit;}
+textarea{min-height:80px;resize:vertical;}
 button{background:#D4AF37;color:#0D1117;border:none;border-radius:8px;padding:12px 24px;font-weight:700;cursor:pointer;font-size:15px;margin-top:16px;}
 button.blue{background:#58A6FF;}
 button.gray{background:#2D303A;color:#E6EDF3;}
 button:hover{opacity:0.9;}
 button:disabled{opacity:0.4;cursor:not-allowed;}
-.info{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:12px;font-size:13px;color:#8B949E;margin-top:12px;}
-.info strong{color:#D4AF37;}
 .output{background:#0D1117;border:1px solid #D4AF37;border-radius:8px;padding:16px;font-family:Consolas,monospace;font-size:13px;color:#58A6FF;white-space:pre-wrap;word-break:break-all;margin-top:16px;display:none;}
 .output.show{display:block;}
+.output-item{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:14px;margin-top:10px;}
+.output-item .label{font-size:12px;color:#8B949E;margin-bottom:4px;}
+.output-item .value{font-size:14px;color:#E6EDF3;}
+.output-item .meta{font-size:12px;color:#8B949E;margin-top:6px;}
+.output-item.warn .value{color:#F85149;}
+.output-item.ok .value{color:#3FB950;}
 .copy-row{display:flex;gap:8px;margin-top:8px;}
 .copy-row button{flex:1;margin-top:0;}
-.footer{text-align:center;margin-top:40px;color:#8B949E;font-size:13px;}
-.footer a{color:#58A6FF;text-decoration:none;}
 .note{background:rgba(212,175,55,0.06);border-left:4px solid #D4AF37;padding:12px 16px;border-radius:6px;margin-top:14px;font-size:13px;color:#C9D1D9;}
 .meta{font-size:12px;color:#8B949E;margin-top:6px;}
+.checklist label{display:flex;align-items:flex-start;gap:8px;margin-top:10px;cursor:pointer;}
+.checklist input[type=checkbox]{width:18px;height:18px;margin-top:4px;}
+.footer{text-align:center;margin-top:40px;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+@media(max-width:600px){.tabs{flex-direction:column;}}
 </style>
 </head>
 <body>
 <div class="container">
-<h1>🎬 影片裁切指令產生器</h1>
-<p class="sub">上傳影片 → 選比例 → 產生 ffmpeg 指令 → 複製到終端機執行</p>
-
-<div class="card">
-<h2>一、上傳影片（讀取解析度）</h2>
-<label>選擇影片（MP4 / MOV / MKV / AVI / WebM）</label>
-<input type="file" id="file-input" accept="video/*">
-<div class="info" id="file-info">尚未選擇檔案。</div>
+<h1>🎬 Shorts 工作台</h1>
+<p class="sub">裁切指令 · 標題 · 說明欄 · Hashtag · 發布檢查 · 純前端 · 離線 · 不上傳</p>
+<nav class="nav">
+<a href="https://www.ahpal.com/">🏠 首頁</a>
+<a href="https://www.ahpal.com/categories.html">📚 全部分類</a>
+<a href="https://www.ahpal.com/strategy/">📌 策略文章</a>
+<a href="https://novels.ahpal.com/">📖 小說站</a>
+<a href="https://memories.ahpal.com/">🏛️ 回憶館</a>
+<a href="https://bbs2.ahpal.com/">💬 BBS2</a>
+<a href="https://pet.ahpal.com/">⚔️ 打怪場</a>
+<a href="https://farm.ahpal.com/">🌾 農場</a>
+<a href="https://tools.ahpal.com/" class="active">🛠️ 工具箱</a>
+</nav>
+<div class="tabs">
+<div class="tab active" data-tab="crop" onclick="switchTab('crop')">📐 裁切指令</div>
+<div class="tab" data-tab="title" onclick="switchTab('title')">📝 標題產生器</div>
+<div class="tab" data-tab="desc" onclick="switchTab('desc')">📄 說明欄產生器</div>
+<div class="tab" data-tab="hashtag" onclick="switchTab('hashtag')">🏷️ Hashtag 建議</div>
+<div class="tab" data-tab="check" onclick="switchTab('check')">✅ 發布檢查</div>
 </div>
-
+<div class="panel active" id="panel-crop">
 <div class="card">
-<h2>二、選擇裁切參數</h2>
+<h2>📐 影片裁切指令產生器</h2>
+<label>選擇影片（讀取解析度）</label>
+<input type="file" id="file-input" accept="video/*">
+<div class="meta" id="file-info">尚未選擇檔案。</div>
 <label>目標比例</label>
 <select id="crop-ratio">
 <option value="16:9">16:9（YouTube 橫式 · 1920×1080）</option>
@@ -59,66 +89,124 @@ button:disabled{opacity:0.4;cursor:not-allowed;}
 </select>
 <label>裁切策略</label>
 <select id="crop-strategy">
-<option value="pad">黑邊填充（保留完整畫面，上下/左右補黑）</option>
-<option value="crop">直接裁切（裁掉多餘部分，畫面填滿）</option>
+<option value="pad">黑邊填充（保留完整畫面）</option>
+<option value="crop">直接裁切（畫面填滿）</option>
 </select>
-<label>輸出檔名（可選）</label>
-<input type="text" id="out-name" placeholder="output.mp4" value="output.mp4">
+<label>輸出檔名</label>
+<input type="text" id="out-name" value="output.mp4">
 <button id="btn-gen" disabled onclick="generateCmd()">🚀 產生 ffmpeg 指令</button>
+<div class="output" id="crop-output"></div>
+<div class="copy-row" id="crop-copy" style="display:none;">
+<button class="blue" onclick="copyText('crop-output')">📋 一鍵複製</button>
+<button class="gray" onclick="copyBatchCmd()">📦 批次版</button>
 </div>
-
-<div class="output" id="output"></div>
-<div class="copy-row" id="copy-row" style="display:none;">
-<button class="blue" onclick="copyCmd()">📋 一鍵複製指令</button>
-<button class="gray" onclick="copyBatch()">📦 複製批次版</button>
 </div>
-
+</div>
+<div class="panel" id="panel-title">
 <div class="card">
-<h2>三、怎麼用</h2>
-<ol style="margin-left:20px;color:#C9D1D9;font-size:14px;line-height:2;">
-<li>複製上面的指令</li>
-<li>打開終端機（Windows：PowerShell / CMD；Mac：Terminal）</li>
-<li>cd 到影片所在資料夾</li>
-<li>貼上指令，按 Enter</li>
-<li>等 ffmpeg 跑完，輸出檔就在同一資料夾</li>
-</ol>
-<div class="note">📌 需要先安裝 ffmpeg。Windows 可用 winget install ffmpeg；Mac 可用 brew install ffmpeg。</div>
+<h2>📝 標題產生器（前 40 字元要有力）</h2>
+<label>主題 / 一句話描述</label>
+<input type="text" id="title-topic" placeholder="例：青花瓷旗袍旋轉、月夜旗袍女神、賽博旗袍光影">
+<label>風格（可選）</label>
+<select id="title-style">
+<option value="all">全部風格</option>
+<option value="hook">鉤子型（反差 / 數字 / 懸念）</option>
+<option value="aesthetic">美學型（東方 / 光影 / 質感）</option>
+<option value="story">故事型（場景 / 情緒 / 懷念）</option>
+</select>
+<button onclick="generateTitles()">🚀 產生 6 個標題</button>
+<div id="title-output"></div>
 </div>
-
+</div>
+<div class="panel" id="panel-desc">
+<div class="card">
+<h2>📄 說明欄產生器</h2>
+<label>影片主題（一句話）</label>
+<input type="text" id="desc-topic" placeholder="例：青花瓷旗袍在賽博空間旋轉，AI 生成的東方美學視覺實驗">
+<label>官網連結</label>
+<input type="text" id="desc-site" value="https://www.ahpal.com">
+<label>頻道連結</label>
+<input type="text" id="desc-channel" value="https://www.youtube.com/@StPra-pg5qq">
+<label>互動提問（可選）</label>
+<input type="text" id="desc-ask" placeholder="例：你最喜歡哪個鏡頭？留言 1 旋轉、2 光影、3 細節">
+<label>Hashtag（可選，空白分隔）</label>
+<input type="text" id="desc-tags" value="#AIArt #Qipao #青花瓷旗袍 #東方美學 #Shorts">
+<button onclick="generateDesc()">🚀 產生說明欄</button>
+<div class="output" id="desc-output"></div>
+<div class="copy-row" id="desc-copy" style="display:none;">
+<button class="blue" onclick="copyText('desc-output')">📋 一鍵複製說明欄</button>
+</div>
+</div>
+</div>
+<div class="panel" id="panel-hashtag">
+<div class="card">
+<h2>🏷️ Hashtag 建議（3~5 個最有效）</h2>
+<label>主題關鍵字</label>
+<input type="text" id="ht-topic" placeholder="例：旗袍、青花瓷、賽博龐克、AI 藝術">
+<button onclick="generateHashtags()">🚀 產生 Hashtag</button>
+<div id="hashtag-output"></div>
+<div class="note">📌 YouTube 演算法：Hashtag 前 3 個會顯示在標題下方，超過 60 個全部忽略。建議 3~5 個，不要塞滿。</div>
+</div>
+</div>
+<div class="panel" id="panel-check">
+<div class="card">
+<h2>✅ 發布檢查清單</h2>
+<div class="checklist" id="checklist">
+<label><input type="checkbox" data-check="1"> 標題前 40 字元有「關鍵詞 + 鉤子 + Emoji」</label>
+<label><input type="checkbox" data-check="2"> 標題總長度 ≤ 100 字元（建議 40~60）</label>
+<label><input type="checkbox" data-check="3"> 說明欄第一行（100~150 字元）有「關鍵詞 + 鉤子」</label>
+<label><input type="checkbox" data-check="4"> 說明欄有官網連結（放第三行，不放第一行）</label>
+<label><input type="checkbox" data-check="5"> 說明欄有訂閱頻道連結</label>
+<label><input type="checkbox" data-check="6"> 說明欄有互動提問（留言 1/2/3）</label>
+<label><input type="checkbox" data-check="7"> Hashtag 3~5 個，前 3 個是核心關鍵詞</label>
+<label><input type="checkbox" data-check="8"> 影片比例正確（Shorts 用 9:16，1080×1920）</label>
+<label><input type="checkbox" data-check="9"> 影片長度 ≤ 60 秒（Shorts 上限 3 分鐘，但 60 秒內完播率最高）</label>
+<label><input type="checkbox" data-check="10"> 有標記「使用 AI 製作」（YouTube 政策要求）</label>
+</div>
+<div class="meta" id="check-result">已勾選 0 / 10 項</div>
+</div>
+</div>
 <div class="footer"><p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p><p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p></div>
 </div>
-
 <script>
-let videoMeta = null;
-let lastCmd = '';
-let lastBatch = '';
+var videoMeta = null;
+var lastCmd = '';
+var lastBatch = '';
 
-const el = {
+function switchTab(name){
+  document.querySelectorAll('.tab').forEach(function(t){ t.classList.toggle('active', t.dataset.tab === name); });
+  document.querySelectorAll('.panel').forEach(function(p){ p.classList.toggle('active', p.id === 'panel-' + name); });
+}
+window.switchTab = switchTab;
+
+var el = {
   file: document.getElementById('file-input'),
   info: document.getElementById('file-info'),
   btnGen: document.getElementById('btn-gen'),
-  output: document.getElementById('output'),
-  copyRow: document.getElementById('copy-row')
+  cropOut: document.getElementById('crop-output'),
+  cropCopy: document.getElementById('crop-copy')
 };
 
-el.file.addEventListener('change', function(e) {
-  var f = e.target.files[0];
-  if (!f) return;
-  var url = URL.createObjectURL(f);
-  var v = document.createElement('video');
-  v.preload = 'metadata';
-  v.onloadedmetadata = function() {
-    videoMeta = { w: v.videoWidth, h: v.videoHeight, dur: v.duration, name: f.name, size: f.size };
-    var ratio = (v.videoWidth / v.videoHeight).toFixed(2);
-    el.info.innerHTML = '<strong>' + f.name + '</strong><div class="meta">解析度：' + v.videoWidth + ' × ' + v.videoHeight + '　比例：' + ratio + '　時長：' + v.duration.toFixed(1) + ' 秒　大小：' + (f.size/1024/1024).toFixed(1) + ' MB</div>';
-    el.btnGen.disabled = false;
-    URL.revokeObjectURL(url);
-  };
-  v.onerror = function() { el.info.textContent = '無法讀取此影片（瀏覽器不支援此格式）。'; };
-  v.src = url;
-});
+if (el.file) {
+  el.file.addEventListener('change', function(e){
+    var f = e.target.files[0];
+    if (!f) return;
+    var url = URL.createObjectURL(f);
+    var v = document.createElement('video');
+    v.preload = 'metadata';
+    v.onloadedmetadata = function(){
+      videoMeta = { w: v.videoWidth, h: v.videoHeight, dur: v.duration, name: f.name, size: f.size };
+      var ratio = (v.videoWidth / v.videoHeight).toFixed(2);
+      el.info.innerHTML = '<strong>' + f.name + '</strong><div>解析度：' + v.videoWidth + ' × ' + v.videoHeight + '　比例：' + ratio + '　時長：' + v.duration.toFixed(1) + ' 秒　大小：' + (f.size/1024/1024).toFixed(1) + ' MB</div>';
+      el.btnGen.disabled = false;
+      URL.revokeObjectURL(url);
+    };
+    v.onerror = function(){ el.info.textContent = '無法讀取此影片。'; };
+    v.src = url;
+  });
+}
 
-function generateCmd() {
+function generateCmd(){
   if (!videoMeta) return;
   var ratio = document.getElementById('crop-ratio').value;
   var strategy = document.getElementById('crop-strategy').value;
@@ -134,24 +222,105 @@ function generateCmd() {
   } else {
     vf = 'crop=min(iw\\,ih*' + W + '/' + H + '):min(ih\\,iw*' + H + '/' + W + '),scale=' + W + ':' + H + ',setsar=1:1';
   }
-  lastCmd = 'ffmpeg -i "' + inputName + '" -vf "' + vf + '" -c:v libx264 -crf 18 -preset fast -c:a copy -movflags +faststart "' + outName + '"';
-  lastBatch = 'ffmpeg -i "%1" -vf "' + vf + '" -c:v libx264 -crf 18 -preset fast -c:a copy -movflags +faststart "%~n1_' + ratio.replace(':','x') + '.mp4"';
-  el.output.classList.add('show');
-  el.output.textContent = lastCmd;
-  el.copyRow.style.display = 'flex';
+  var safeName = 'output_' + Date.now() + '.mp4';
+  lastCmd = 'ffmpeg -n -i "' + inputName + '" -vf "' + vf + '" -c:v libx264 -crf 18 -preset fast -c:a copy -movflags +faststart "' + safeName + '"';
+  lastBatch = 'ffmpeg -n -i "%1" -vf "' + vf + '" -c:v libx264 -crf 18 -preset fast -c:a copy -movflags +faststart "%~n1_' + ratio.replace(':','x') + '.mp4"';
+  el.cropOut.classList.add('show');
+  el.cropOut.textContent = lastCmd;
+  el.cropCopy.style.display = 'flex';
 }
+window.generateCmd = generateCmd;
 
-function copyCmd() {
-  navigator.clipboard.writeText(lastCmd).then(function() {
-    alert('已複製指令！貼到終端機執行即可。');
-  });
+function copyText(id){
+  var t = document.getElementById(id).textContent;
+  navigator.clipboard.writeText(t).then(function(){ alert('已複製！'); });
 }
+window.copyText = copyText;
 
-function copyBatch() {
-  navigator.clipboard.writeText(lastBatch).then(function() {
-    alert('已複製批次版指令！\n\n用法：把這行存成 convert.bat（Windows），\n然後把影片拖到 convert.bat 上，就會自動轉檔。');
-  });
+function copyBatchCmd(){
+  navigator.clipboard.writeText(lastBatch).then(function(){ alert('已複製批次版！存成 convert.bat，把影片拖上去即可。'); });
 }
+window.copyBatchCmd = copyBatchCmd;
+
+// 標題產生器
+function generateTitles(){
+  var topic = document.getElementById('title-topic').value.trim();
+  if (!topic) { alert('請先輸入主題'); return; }
+  var style = document.getElementById('title-style').value;
+  var emojis = ['✨','🌙','💫','🌸','🔥','🎨'];
+  var templates = [
+    topic + ' 360°｜AI 視覺藝術 ' + emojis[0],
+    '3 個 ' + topic + ' 的絕美瞬間 ' + emojis[1],
+    '傳統 × 賽博：' + topic + '的光影碰撞 ' + emojis[2],
+    topic + '：東方美學的極致 ' + emojis[3],
+    '你有看過這樣的 ' + topic + ' 嗎？ ' + emojis[4],
+    'AI 生成的 ' + topic + '，美到不敢眨眼 ' + emojis[5]
+  ];
+  var html = '';
+  for (var i = 0; i < templates.length; i++) {
+    var t = templates[i];
+    var len = t.length;
+    var warn = len > 60 ? ' warn' : ' ok';
+    var meta = len > 60 ? '⚠️ 超過 60 字元，手機可能截斷' : '✅ 長度適中';
+    html += '<div class="output-item' + warn + '"><div class="label">選項 ' + (i+1) + '（' + len + ' 字元）</div><div class="value">' + t + '</div><div class="meta">' + meta + '</div></div>';
+  }
+  document.getElementById('title-output').innerHTML = html;
+}
+window.generateTitles = generateTitles;
+
+// 說明欄產生器
+function generateDesc(){
+  var topic = document.getElementById('desc-topic').value.trim();
+  if (!topic) { alert('請先輸入主題'); return; }
+  var site = document.getElementById('desc-site').value.trim();
+  var channel = document.getElementById('desc-channel').value.trim();
+  var ask = document.getElementById('desc-ask').value.trim() || '你最喜歡哪個鏡頭？留言告訴我。';
+  var tags = document.getElementById('desc-tags').value.trim();
+  var lines = [];
+  lines.push(topic);
+  lines.push('');
+  lines.push('💬 ' + ask);
+  lines.push('');
+  lines.push('🌐 更多 AI 視覺藝術：' + site);
+  lines.push('');
+  lines.push('🔗 訂閱頻道看更多：' + channel);
+  lines.push('');
+  lines.push(tags);
+  var full = lines.join('\n');
+  var out = document.getElementById('desc-output');
+  out.classList.add('show');
+  out.textContent = full;
+  document.getElementById('desc-copy').style.display = 'flex';
+}
+window.generateDesc = generateDesc;
+
+// Hashtag 建議
+function generateHashtags(){
+  var topic = document.getElementById('ht-topic').value.trim();
+  if (!topic) { alert('請先輸入關鍵字'); return; }
+  var base = ['#AIArt', '#Shorts', '#VisualArt', '#AIGC', '#東方美學'].
+  var extra = topic.split(/[\s,，、]+/).filter(function(x){ return x.length > 0; }).map(function(x){ return '#' + x; });
+  var all = base.concat(extra).slice(0, 5);
+  var html = '<div class="output-item ok"><div class="label">建議 Hashtag（3~5 個）</div><div class="value">' + all.join(' ') + '</div><div class="meta">前 3 個會顯示在標題下方，選最核心的放前面</div></div>';
+  document.getElementById('hashtag-output').innerHTML = html;
+}
+window.generateHashtags = generateHashtags;
+
+// 發布檢查
+document.querySelectorAll('#checklist input[type=checkbox]').forEach(function(cb){
+  cb.addEventListener('change', function(){
+    var total = document.querySelectorAll('#checklist input[type=checkbox]').length;
+    var checked = document.querySelectorAll('#checklist input[type=checkbox]:checked').length;
+    var r = document.getElementById('check-result');
+    if (checked === total) {
+      r.innerHTML = '🎉 全部 ' + total + ' 項都通過了！可以發布了。';
+      r.style.color = '#3FB950';
+    } else {
+      r.innerHTML = '已勾選 ' + checked + ' / ' + total + ' 項';
+      r.style.color = '#8B949E';
+    }
+  });
+});
 </script>
 </body>
 </html>
