@@ -505,10 +505,10 @@ function renderVideoFrame(ctx, elapsed) {
 }
 
 function updateRecordButtons() {
-  btnRecord.disabled = tracks.length === 0 || playing;
-  btnStopRecord.disabled = !mediaRecorder;
-  btnDownloadWebm.disabled = !recordedBlob;
-  btnMp4Cmd.disabled = !recordedBlob;
+  btnRecord.disabled = tracks.length === 0 || mediaRecorder !== null;
+  btnStopRecord.disabled = mediaRecorder === null;
+  btnDownloadWebm.disabled = recordedBlob === null;
+  btnMp4Cmd.disabled = recordedBlob === null;
 }
 
 btnRecord.addEventListener('click', async function() {
@@ -561,6 +561,7 @@ btnRecord.addEventListener('click', async function() {
     previewVideo.src = URL.createObjectURL(recordedBlob);
     previewVideo.style.display = 'block';
     recordStatus.textContent = '錄製完成！檔案大小：' + (recordedBlob.size / 1024 / 1024).toFixed(2) + ' MB';
+    mediaRecorder = null;
     updateRecordButtons();
   };
   mediaRecorder.start(100);
