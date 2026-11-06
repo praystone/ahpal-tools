@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>影片處理工作台 · 比例裁切 + 格式轉換 | 雅寶工具箱</title>
+<meta name="description" content="免費線上影片處理：16:9 / 9:16 / 1:1 / 4:5 比例裁切，MOV / MKV / AVI 轉 MP4 / WebM / GIF。純前端、離線、不上傳。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/video-toolkit/">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8637791667872348" crossorigin="anonymous"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:20px;}
+.container{max-width:900px;margin:0 auto;}
+h1{color:#D4AF37;font-size:28px;margin-bottom:8px;}
+.sub{color:#8B949E;margin-bottom:24px;font-size:14px;}
+.card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin-bottom:16px;}
+.tabs{display:flex;gap:8px;margin-bottom:16px;}
+.tab{padding:8px 20px;background:#0D1117;border:1px solid #2D303A;border-radius:8px;color:#C9D1D9;cursor:pointer;font-size:14px;}
+.tab.active{background:#D4AF37;color:#0D1117;border-color:#D4AF37;font-weight:700;}
+label{display:block;color:#8B949E;font-size:13px;margin-bottom:6px;margin-top:14px;}
+select,input[type=file]{width:100%;background:#0D1117;color:#E6EDF3;border:1px solid #2D303A;border-radius:8px;padding:10px 12px;font-size:14px;}
+button{background:#D4AF37;color:#0D1117;border:none;border-radius:8px;padding:12px 24px;font-weight:700;cursor:pointer;font-size:15px;margin-top:16px;}
+button:disabled{opacity:0.4;cursor:not-allowed;}
+.status{margin-top:14px;padding:12px;background:#0D1117;border-radius:8px;font-size:13px;color:#8B949E;min-height:40px;white-space:pre-wrap;}
+.download{display:none;margin-top:14px;}
+.download a{display:inline-block;background:#3FB950;color:#0D1117;padding:10px 24px;border-radius:8px;text-decoration:none;font-weight:700;}
+.footer{text-align:center;margin-top:40px;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🎬 影片處理工作台</h1>
+<p class="sub">比例裁切 · 格式轉換 · 純前端 · 完全離線 · 檔案不上傳</p>
+<div class="card">
+<div class="tabs">
+<div class="tab active" data-tab="crop" onclick="switchTab('crop')">📐 比例裁切</div>
+<div class="tab" data-tab="convert" onclick="switchTab('convert')">🔄 格式轉換</div>
+</div>
+<label>上傳影片（MP4 / MOV / MKV / AVI / WebM）</label>
+<input type="file" id="file-input" accept="video/*">
+<div id="panel-crop">
+<label>目標比例</label>
+<select id="crop-ratio">
+<option value="16:9">16:9（YouTube 橫式 · 1920×1080）</option>
+<option value="9:16">9:16（Shorts / Reels · 1080×1920）</option>
+<option value="1:1">1:1（方形 · 1080×1080）</option>
+<option value="4:5">4:5（IG 貼文 · 1080×1350）</option>
+</select>
+<label>裁切策略</label>
+<select id="crop-strategy">
+<option value="pad">黑邊填充（保留完整畫面）</option>
+<option value="crop">直接裁切（裁掉多餘部分）</option>
+</select>
+<button id="btn-crop" disabled onclick="doCrop()">開始裁切</button>
+</div>
+<div id="panel-convert" style="display:none;">
+<label>輸出格式</label>
+<select id="convert-fmt">
+<option value="mp4">MP4（H.264 + AAC）</option>
+<option value="webm">WebM（VP9）</option>
+<option value="gif">GIF（短片段）</option>
+</select>
+<button id="btn-convert" disabled onclick="doConvert()">開始轉換</button>
+</div>
+<div class="status" id="status">請先上傳影片。</div>
+<div class="download" id="download-area"><a id="download-link" download>⬇️ 下載結果</a></div>
+</div>
+<div class="footer"><p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p><p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p></div>
+</div>
+<script src="./vendor/ffmpeg.js"></script>
+<script>
+const { FFmpeg } = FFmpegWASM;
+let ffmpeg = null, inputFile = null, loaded = false;
+const el = { file: document.getElementById('file-input'), status: document.getElementById('status'), btnCrop: document.getElementById('btn-crop'), btnConvert: document.getElementById('btn-convert'), downloadArea: document.getElementById('download-area'), downloadLink: document.getElementById('download-link') };
+function setStatus(t){ el.status.textContent = t; }
+async function toBlobURL(url, mime){
+  const r = await fetch(url);
+  const b = await r.blob();
+  return URL.createObjectURL(new Blob([b], { type: mime }));
+}
+async function initFFmpeg(){
+  if (loaded) return;
+  setStatus('載入處理引擎（約 32MB，首次較慢）...');
+  ffmpeg = new FFmpeg();
+  const base = './vendor/';
+  // 關鍵：ESM core + toBlobURL
+  const coreURL = await toBlobURL(base + 'ffmpeg-core.js', 'text/javascript');
+  const wasmURL = await toBlobURL(base + 'ffmpeg-core.wasm', 'application/wasm');
+  await ffmpeg.load({ coreURL, wasmURL });
+  loaded = true;
+  setStatus('引擎就緒。');
+}
+el.file.addEventListener('change', async (e) => {
+  inputFile = e.target.files[0];
+  if (!inputFile) return;
+  setStatus('已選擇：' + inputFile.name + '（' + (inputFile.size/1024/1024).toFixed(1) + ' MB）');
+  el.btnCrop.disabled = false; el.btnConvert.disabled = false;
+  try { await initFFmpeg(); } catch(err){ setStatus('引擎載入失敗：' + err.message); }
+});
+function switchTab(name){
+  document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.tab === name));
+  document.getElementById('panel-crop').style.display = name === 'crop' ? '' : 'none';
+  document.getElementById('panel-convert').style.display = name === 'convert' ? '' : 'none';
+}
+async function doCrop(){
+  if (!inputFile || !loaded) return;
+  el.downloadArea.style.display = 'none';
+  const ratio = document.getElementById('crop-ratio').value;
+  const strategy = document.getElementById('crop-strategy').value;
+  const targets = { '16:9':[1920,1080], '9:16':[1080,1920], '1:1':[1080,1080], '4:5':[1080,1350] };
+  const [W,H] = targets[ratio];
+  const ext = inputFile.name.split('.').pop().toLowerCase();
+  const inName = 'input.' + (['mov','mkv','avi'].includes(ext) ? ext : 'mp4');
+  const outName = 'output.mp4';
+  setStatus('處理中（裁切 ' + ratio + '）...');
+  const data = new Uint8Array(await inputFile.arrayBuffer());
+  await ffmpeg.writeFile(inName, data);
+  let vf;
+  if (strategy === 'pad') {
+    vf = 'scale=' + W + ':' + H + ':force_original_aspect_ratio=decrease,pad=' + W + ':' + H + ':(ow-iw)/2:(oh-ih)/2:color=black,setsar=1:1';
+  } else {
+    vf = 'crop=min(iw\\,ih*' + W + '/' + H + '):min(ih\\,iw*' + H + '/' + W + '),scale=' + W + ':' + H + ',setsar=1:1';
+  }
+  try {
+    await ffmpeg.exec(['-i', inName, '-vf', vf, '-c:v', 'libx264', '-crf', '18', '-preset', 'fast', '-c:a', 'copy', '-movflags', '+faststart', outName]);
+    const out = await ffmpeg.readFile(outName);
+    const blob = new Blob([out.buffer], { type: 'video/mp4' });
+    el.downloadLink.href = URL.createObjectURL(blob);
+    el.downloadLink.download = 'ahpal-' + ratio.replace(':','x') + '-' + strategy + '.mp4';
+    el.downloadArea.style.display = 'block';
+    setStatus('完成！' + (blob.size/1024/1024).toFixed(1) + ' MB');
+  } catch(err){ setStatus('裁切失敗：' + err.message); }
+}
+async function doConvert(){
+  if (!inputFile || !loaded) return;
+  el.downloadArea.style.display = 'none';
+  const fmt = document.getElementById('convert-fmt').value;
+  const ext = inputFile.name.split('.').pop().toLowerCase();
+  const inName = 'input.' + (['mov','mkv','avi'].includes(ext) ? ext : 'mp4');
+  const outName = 'output.' + fmt;
+  setStatus('轉換中（→ ' + fmt.toUpperCase() + '）...');
+  const data = new Uint8Array(await inputFile.arrayBuffer());
+  await ffmpeg.writeFile(inName, data);
+  try {
+    let args;
+    if (fmt === 'mp4') args = ['-i', inName, '-c:v', 'libx264', '-crf', '20', '-c:a', 'aac', '-movflags', '+faststart', outName];
+    else if (fmt === 'webm') args = ['-i', inName, '-c:v', 'libvpx-vp9', '-crf', '30', '-b:v', '0', '-c:a', 'libopus', outName];
+    else args = ['-i', inName, '-vf', 'fps=10,scale=480:-1:flags=lanczos', '-t', '5', outName];
+    await ffmpeg.exec(args);
+    const out = await ffmpeg.readFile(outName);
+    const mime = fmt === 'mp4' ? 'video/mp4' : fmt === 'webm' ? 'video/webm' : 'image/gif';
+    const blob = new Blob([out.buffer], { type: mime });
+    el.downloadLink.href = URL.createObjectURL(blob);
+    el.downloadLink.download = 'ahpal-converted.' + fmt;
+    el.downloadArea.style.display = 'block';
+    setStatus('完成！' + (blob.size/1024/1024).toFixed(1) + ' MB');
+  } catch(err){ setStatus('轉換失敗：' + err.message); }
+}
+</script>
+</body>
+</html>
