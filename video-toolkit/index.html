@@ -258,14 +258,97 @@ function generateCmd(){
   } else {
     vf = 'crop=min(iw\\,ih*' + W + '/' + H + '):min(ih\\,iw*' + H + '/' + W + '),scale=' + W + ':' + H + ',setsar=1:1';
   }
+
+  // 讀進階參數
+  var crf = document.getElementById('adv-crf') ? document.getElementById('adv-crf').value : '18';
+  var preset = document.getElementById('adv-preset') ? document.getElementById('adv-preset').value : 'fast';
+  var bitrate = document.getElementById('adv-bitrate') ? document.getElementById('adv-bitrate').value.trim() : '';
+  var fps = document.getElementById('adv-fps') ? document.getElementById('adv-fps').value.trim() : '';
+  var audioNorm = document.getElementById('audio-normalize') && document.getElementById('audio-normalize').checked;
+
+  // 組裝 -vf（fps 如果有值就加）
+  var vfFinal = vf;
+  if (fps) {
+    vfFinal = vf + ',fps=' + fps;
+  }
+
+  // 組裝 -c:v 參數
+  var cv = '-c:v libx264 -crf ' + crf + ' -preset ' + preset;
+  if (bitrate) {
+    cv += ' -maxrate ' + bitrate + ' -bufsize ' + bitrate;
+  }
+
+  // 組裝音訊參數
+  var audioArgs;
+  if (audioNorm) {
+    audioArgs = '-af loudnorm=I=-16:TP=-1.5:LRA=11 -c:a aac -b:a 192k';
+  } else {
+    audioArgs = '-c:a copy';
+  }
+
   var safeName = 'output_' + Date.now() + '.mp4';
-  lastCmd = 'ffmpeg -n -i "' + inputName + '" -vf "' + vf + '" -c:v libx264 -crf 18 -preset fast -c:a copy -movflags +faststart "' + safeName + '"';
-  lastBatch = 'ffmpeg -n -i "%1" -vf "' + vf + '" -c:v libx264 -crf 18 -preset fast -c:a copy -movflags +faststart "%~n1_' + ratio.replace(':','x') + '.mp4"';
+  lastCmd = 'ffmpeg -n -i "' + inputName + '" -vf "' + vfFinal + '" ' + cv + ' ' + audioArgs + ' -movflags +faststart "' + safeName + '"';
+  lastBatch = 'ffmpeg -n -i "%1" -vf "' + vfFinal + '" ' + cv + ' ' + audioArgs + ' -movflags +faststart "%~n1_' + ratio.replace(':','x') + '.mp4"';
+
   el.cropOut.classList.add('show');
   el.cropOut.textContent = lastCmd;
   el.cropCopy.style.display = 'flex';
 }
 window.generateCmd = generateCmd;
+
+// ===== 儲存 / 載入常用設定 =====
+function savePreset(){
+  var preset = {
+    ratio: document.getElementById('crop-ratio').value,
+    strategy: document.getElementById('crop-strategy').value,
+    audioNorm: document.getElementById('audio-normalize').checked,
+    crf: document.getElementById('adv-crf').value,
+    preset: document.getElementById('adv-preset').value,
+    bitrate: document.getElementById('adv-bitrate').value,
+    fps: document.getElementById('adv-fps').value
+  };
+  localStorage.setItem('ahpal-shorts-preset', JSON.stringify(preset));
+  alert('✅ 已儲存目前設定！下次打開會自動載入。');
+}
+window.savePreset = savePreset;
+
+function loadPreset(){
+  var raw = localStorage.getItem('ahpal-shorts-preset');
+  if (!raw) {
+    alert('還沒有儲存的設定。先調整參數，按「儲存目前設定」。');
+    return;
+  }
+  try {
+    var p = JSON.parse(raw);
+    if (p.ratio) document.getElementById('crop-ratio').value = p.ratio;
+    if (p.strategy) document.getElementById('crop-strategy').value = p.strategy;
+    if (typeof p.audioNorm === 'boolean') document.getElementById('audio-normalize').checked = p.audioNorm;
+    if (p.crf) document.getElementById('adv-crf').value = p.crf;
+    if (p.preset) document.getElementById('adv-preset').value = p.preset;
+    if (p.bitrate !== undefined) document.getElementById('adv-bitrate').value = p.bitrate;
+    if (p.fps !== undefined) document.getElementById('adv-fps').value = p.fps;
+    alert('✅ 已載入儲存的設定！');
+  } catch(e) {
+    alert('載入失敗：' + e.message);
+  }
+}
+window.loadPreset = loadPreset;
+
+// 頁面載入時，自動載入上次儲存的設定（如果有）
+document.addEventListener('DOMContentLoaded', function(){
+  var raw = localStorage.getItem('ahpal-shorts-preset');
+  if (raw) {
+    try {
+      var p = JSON.parse(raw);
+      if (p.ratio && document.getElementById('crop-ratio')) document.getElementById('crop-ratio').value = p.ratio;
+      if (p.strategy && document.getElementById('crop-strategy')) document.getElementById('crop-strategy').value = p.strategy;
+      if (typeof p.audioNorm === 'boolean' && document.getElementById('audio-normalize')) document.getElementById('audio-normalize').checked = p.audioNorm;
+      if (p.crf && document.getElementById('adv-crf')) document.getElementById('adv-crf').value = p.crf;
+      if (p.preset && document.getElementById('adv-preset')) document.getElementById('adv-preset').value = p.preset;
+    } catch(e) {}
+  }
+});
+
 
 function copyText(id){
   var t = document.getElementById(id).textContent;
