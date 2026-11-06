@@ -159,6 +159,11 @@ async function doConvert(){
     setStatus('完成！' + (blob.size/1024/1024).toFixed(1) + ' MB');
   } catch(err){ setStatus('轉換失敗：' + err.message); }
 }
+
+// 把函式掛到 window，讓 HTML onclick 抓得到
+window.switchTab = switchTab;
+window.doCrop = doCrop;
+window.doConvert = doConvert;
 </script>
 </body>
 </html>
