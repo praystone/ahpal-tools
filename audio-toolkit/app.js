@@ -1,3 +1,19 @@
+
+// ═══════════════════════════════════════════════════════
+// Whisper.wasm 自動語音辨識（動態載入，首次下載模型）
+// ═══════════════════════════════════════════════════════
+var whisperModule = null;
+var whisperService = null;
+var modelManager = null;
+var whisperModelLoaded = false;
+
+async function loadWhisper() {
+  if (whisperModule) return whisperModule;
+  // 動態 import @timur00kh/whisper.wasm（ESM）
+  whisperModule = await import('https://cdn.jsdelivr.net/npm/@timur00kh/whisper.wasm@canary/+esm');
+  return whisperModule;
+}
+
 var audioCtx = null;
 var tracks = [];
 var subtitles = [];
@@ -614,3 +630,80 @@ btnMp4Cmd.addEventListener('click', function() {
   mp4Output.textContent = cmd;
   recordStatus.textContent = '轉 MP4 指令已產生（複製到終端機執行）。';
 });
+
+
+// ═══════════════════════════════════════════════════════
+// 自動辨識字幕
+// ═══════════════════════════════════════════════════════
+var btnAutoSub = document.getElementById('btn-auto-sub');
+var whisperStatus = document.getElementById('whisper-status');
+
+if (btnAutoSub) {
+  btnAutoSub.addEventListener('click', async function() {
+    if (tracks.length === 0) { alert('請先上傳音檔'); return; }
+    if (!tracks[0].buffer) { alert('音檔尚未解碼完成'); return; }
+    if (totalDuration > 120) {
+      whisperStatus.textContent = '自動辨識：音檔超過 120 秒，請先裁切（Whisper.wasm 限制 120 秒）。';
+      return;
+    }
+
+    btnAutoSub.disabled = true;
+    btnAutoSub.textContent = '⏳ 載入模型...';
+    whisperStatus.textContent = '自動辨識：載入模型（首次約 142MB，之後快取）...';
+
+    try {
+      var mod = await loadWhisper();
+      var ModelManager = mod.ModelManager;
+      var WhisperWasmService = mod.WhisperWasmService;
+
+      modelManager = new ModelManager({ logLevel: 0 });
+      whisperService = new WhisperWasmService({ logLevel: 0 });
+
+      // 載入 base 模型（中文最佳平衡）
+      var modelData = await modelManager.loadModel('base', true, function(progress) {
+        whisperStatus.textContent = '自動辨識：下載模型 ' + Math.round(progress) + '%';
+      });
+      whisperStatus.textContent = '自動辨識：模型載入完成，開始辨識...';
+      btnAutoSub.textContent = '⏳ 辨識中...';
+
+      // 把 AudioBuffer 轉成 16kHz Float32Array
+      var audioData = await bufferTo16kFloat32(tracks[0].buffer);
+
+      // 執行辨識（中文）
+      var result = await whisperService.transcribe(audioData, null, {
+        language: 'zh',
+        threads: 4
+      });
+
+      // 填入字幕
+      subtitles = result.segments.map(function(seg) {
+        return {
+          start: seg.timeStart / 1000,
+          end: seg.timeEnd / 1000,
+          text: seg.text.trim()
+        };
+      });
+      renderSubLane();
+      renderSubList();
+      whisperStatus.textContent = '自動辨識完成！共 ' + subtitles.length + ' 條字幕。請手動校對（中文辨識率約 80%）。';
+    } catch (err) {
+      whisperStatus.textContent = '自動辨識失敗：' + err.message;
+      console.error(err);
+    } finally {
+      btnAutoSub.disabled = false;
+      btnAutoSub.textContent = '🎤 自動辨識字幕';
+    }
+  });
+}
+
+// 把 AudioBuffer 轉成 16kHz 單聲道 Float32Array
+async function bufferTo16kFloat32(buffer) {
+  var targetRate = 16000;
+  var offline = new OfflineAudioContext(1, Math.ceil(buffer.duration * targetRate), targetRate);
+  var src = offline.createBufferSource();
+  src.buffer = buffer;
+  src.connect(offline.destination);
+  src.start(0);
+  var rendered = await offline.startRendering();
+  return rendered.getChannelData(0);
+}

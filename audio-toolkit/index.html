@@ -107,12 +107,17 @@ label{display:block;color:#8B949E;font-size:12px;margin-bottom:4px;margin-top:10
 <label>貼上字幕文字（每行一條）</label>
 <textarea id="sub-input" placeholder="例：&#10;青花瓷旗袍在賽博空間旋轉&#10;AI 生成的東方美學視覺實驗"></textarea>
 <div class="controls" style="margin-top:8px;">
+<button class="btn blue" id="btn-auto-sub">🎤 自動辨識字幕</button>
 <button class="btn" id="btn-add-sub">➕ 加入字幕</button>
 <button class="btn gray" id="btn-clear-sub">🗑️ 清空字幕</button>
 <button class="btn green" id="btn-export-srt" disabled>📄 匯出 SRT</button>
 <button class="btn green" id="btn-export-vtt" disabled>📄 匯出 VTT</button>
 </div>
 <div class="sub-list" id="sub-list"></div>
+<div class="note" id="whisper-note" style="margin-top:8px;">
+📌 <strong>自動辨識告知</strong>：首次使用需下載約 <strong>142MB</strong> 的 AI 模型（`base`，中文辨識率約 80%），之後快取在瀏覽器（IndexedDB），不再重複下載。音訊完全不上傳，辨識在您的電腦本地執行。辨識結果需手動校對。
+</div>
+<div class="status" id="whisper-status">自動辨識：尚未開始。</div>
 </div>
 
 <div class="card">
