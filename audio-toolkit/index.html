@@ -64,6 +64,63 @@ canvas{width:100%;height:120px;display:block;}
 <div class="note">📌 這是第一階段原型：上傳 + 波形 + 播放。下一階段會加多軌、混音、匯出 WAV、字幕時間軸。</div>
 <div class="footer"><p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p><p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p></div>
 </div>
+<script src="./app.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.8;padding:20px;}
+.container{max-width:1000px;margin:0 auto;}
+h1{color:#D4AF37;font-size:28px;margin-bottom:8px;}
+.sub{color:#8B949E;margin-bottom:20px;font-size:14px;}
+.nav{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;}
+.nav a{color:#58A6FF;text-decoration:none;padding:4px 10px;}
+.nav a.active{color:#0D1117;background:#D4AF37;font-weight:700;}
+.card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:24px;margin-bottom:16px;}
+label{display:block;color:#8B949E;font-size:13px;margin-bottom:6px;margin-top:14px;}
+input[type=file]{width:100%;background:#0D1117;color:#E6EDF3;border:1px solid #2D303A;border-radius:8px;padding:10px 12px;font-size:14px;}
+button{background:#D4AF37;color:#0D1117;border:none;border-radius:8px;padding:10px 20px;font-weight:700;cursor:pointer;font-size:14px;margin-top:10px;}
+button.blue{background:#58A6FF;}
+button.gray{background:#2D303A;color:#E6EDF3;}
+button:disabled{opacity:0.4;cursor:not-allowed;}
+.meta{font-size:12px;color:#8B949E;margin-top:8px;}
+.wave-wrap{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:12px;margin-top:16px;position:relative;}
+canvas{width:100%;height:120px;display:block;}
+.controls{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;}
+.footer{text-align:center;margin-top:40px;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+.note{background:rgba(212,175,55,0.06);border-left:4px solid #D4AF37;padding:12px 16px;border-radius:6px;margin-top:14px;font-size:13px;color:#C9D1D9;}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🎵 音訊工作台 v1</h1>
+<p class="sub">上傳音檔 · 波形顯示 · 播放控制 · 純前端 · 離線 · 不上傳</p>
+<nav class="nav">
+<a href="https://www.ahpal.com/">🏠 首頁</a>
+<a href="https://www.ahpal.com/categories.html">📚 全部分類</a>
+<a href="https://www.ahpal.com/strategy/">📌 策略文章</a>
+<a href="https://novels.ahpal.com/">📖 小說站</a>
+<a href="https://memories.ahpal.com/">🏛️ 回憶館</a>
+<a href="https://bbs2.ahpal.com/">💬 BBS2</a>
+<a href="https://pet.ahpal.com/">⚔️ 打怪場</a>
+<a href="https://farm.ahpal.com/">🌾 農場</a>
+<a href="https://tools.ahpal.com/" class="active">🛠️ 工具箱</a>
+</nav>
+<div class="card">
+<h2 style="color:#D4AF37;font-size:18px;margin-bottom:16px;">📂 上傳音檔</h2>
+<input type="file" id="file-input" accept="audio/*">
+<div class="meta" id="file-info">尚未選擇檔案。</div>
+<div class="wave-wrap"><canvas id="waveform"></canvas></div>
+<div class="controls">
+<button id="btn-play" disabled>▶️ 播放</button>
+<button id="btn-stop" class="gray" disabled>⏹️ 停止</button>
+<button id="btn-zoom-in" class="gray" disabled>🔍+ 放大</button>
+<button id="btn-zoom-out" class="gray" disabled>🔍- 縮小</button>
+</div>
+<div class="meta" id="play-info">時間：0.00 / 0.00 秒</div>
+</div>
+<div class="note">📌 這是第一階段原型：上傳 + 波形 + 播放。下一階段會加多軌、混音、匯出 WAV、字幕時間軸。</div>
+<div class="footer"><p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p><p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p></div>
+</div>
 <script>
 var audioCtx = null;
 var buffer = null;
