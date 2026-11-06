@@ -78,11 +78,11 @@ button:disabled{opacity:0.4;cursor:not-allowed;}
 <ol style="margin-left:20px;color:#C9D1D9;font-size:14px;line-height:2;">
 <li>複製上面的指令</li>
 <li>打開終端機（Windows：PowerShell / CMD；Mac：Terminal）</li>
-<li><code style="background:#0D1117;padding:2px 6px;border-radius:4px;color:#58A6FF;">cd</code> 到影片所在資料夾</li>
+<li>cd 到影片所在資料夾</li>
 <li>貼上指令，按 Enter</li>
 <li>等 ffmpeg 跑完，輸出檔就在同一資料夾</li>
 </ol>
-<div class="note">📌 需要先安裝 ffmpeg。Windows 可用 <code style="background:#0D1117;padding:2px 6px;border-radius:4px;">winget install ffmpeg</code>；Mac 可用 <code style="background:#0D1117;padding:2px 6px;border-radius:4px;">brew install ffmpeg</code>。</div>
+<div class="note">📌 需要先安裝 ffmpeg。Windows 可用 winget install ffmpeg；Mac 可用 brew install ffmpeg。</div>
 </div>
 
 <div class="footer"><p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p><p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p></div>
@@ -98,62 +98,58 @@ const el = {
   info: document.getElementById('file-info'),
   btnGen: document.getElementById('btn-gen'),
   output: document.getElementById('output'),
-  copyRow: document.getElementById('copy-row'),
+  copyRow: document.getElementById('copy-row')
 };
 
-el.file.addEventListener('change', (e) => {
-  const f = e.target.files[0];
+el.file.addEventListener('change', function(e) {
+  var f = e.target.files[0];
   if (!f) return;
-  const url = URL.createObjectURL(f);
-  const v = document.createElement('video');
+  var url = URL.createObjectURL(f);
+  var v = document.createElement('video');
   v.preload = 'metadata';
-  v.onloadedmetadata = () => {
+  v.onloadedmetadata = function() {
     videoMeta = { w: v.videoWidth, h: v.videoHeight, dur: v.duration, name: f.name, size: f.size };
-    const ratio = (v.videoWidth / v.videoHeight).toFixed(2);
+    var ratio = (v.videoWidth / v.videoHeight).toFixed(2);
     el.info.innerHTML = '<strong>' + f.name + '</strong><div class="meta">解析度：' + v.videoWidth + ' × ' + v.videoHeight + '　比例：' + ratio + '　時長：' + v.duration.toFixed(1) + ' 秒　大小：' + (f.size/1024/1024).toFixed(1) + ' MB</div>';
     el.btnGen.disabled = false;
     URL.revokeObjectURL(url);
   };
-  v.onerror = () => { el.info.textContent = '無法讀取此影片（瀏覽器不支援此格式）。'; };
+  v.onerror = function() { el.info.textContent = '無法讀取此影片（瀏覽器不支援此格式）。'; };
   v.src = url;
 });
 
 function generateCmd() {
   if (!videoMeta) return;
-  const ratio = document.getElementById('crop-ratio').value;
-  const strategy = document.getElementById('crop-strategy').value;
-  const outName = document.getElementById('out-name').value.trim() || 'output.mp4';
-  const targets = { '16:9':[1920,1080], '9:16':[1080,1920], '1:1':[1080,1080], '4:5':[1080,1350] };
-  const [W,H] = targets[ratio];
-  const inputName = videoMeta.name;
-
-  let vf;
+  var ratio = document.getElementById('crop-ratio').value;
+  var strategy = document.getElementById('crop-strategy').value;
+  var outName = document.getElementById('out-name').value.trim() || 'output.mp4';
+  var targets = { '16:9':[1920,1080], '9:16':[1080,1920], '1:1':[1080,1080], '4:5':[1080,1350] };
+  var t = targets[ratio];
+  var W = t[0];
+  var H = t[1];
+  var inputName = videoMeta.name;
+  var vf;
   if (strategy === 'pad') {
     vf = 'scale=' + W + ':' + H + ':force_original_aspect_ratio=decrease,pad=' + W + ':' + H + ':(ow-iw)/2:(oh-ih)/2:color=black,setsar=1:1';
   } else {
     vf = 'crop=min(iw\\,ih*' + W + '/' + H + '):min(ih\\,iw*' + H + '/' + W + '),scale=' + W + ':' + H + ',setsar=1:1';
   }
-
   lastCmd = 'ffmpeg -i "' + inputName + '" -vf "' + vf + '" -c:v libx264 -crf 18 -preset fast -c:a copy -movflags +faststart "' + outName + '"';
   lastBatch = 'ffmpeg -i "%1" -vf "' + vf + '" -c:v libx264 -crf 18 -preset fast -c:a copy -movflags +faststart "%~n1_' + ratio.replace(':','x') + '.mp4"';
-
   el.output.classList.add('show');
   el.output.textContent = lastCmd;
   el.copyRow.style.display = 'flex';
 }
 
 function copyCmd() {
-  navigator.clipboard.writeText(lastCmd).then(() => {
+  navigator.clipboard.writeText(lastCmd).then(function() {
     alert('已複製指令！貼到終端機執行即可。');
   });
 }
 
 function copyBatch() {
-  navigator.clipboard.writeText(lastBatch).then(() => {
-    alert('已複製批次版指令！
-
-用法：把這行存成 convert.bat（Windows），
-然後把影片拖到 convert.bat 上，就會自動轉檔。');
+  navigator.clipboard.writeText(lastBatch).then(function() {
+    alert('已複製批次版指令！\n\n用法：把這行存成 convert.bat（Windows），\n然後把影片拖到 convert.bat 上，就會自動轉檔。');
   });
 }
 </script>
