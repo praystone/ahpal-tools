@@ -92,8 +92,37 @@ button:disabled{opacity:0.4;cursor:not-allowed;}
 <option value="pad">黑邊填充（保留完整畫面）</option>
 <option value="crop">直接裁切（畫面填滿）</option>
 </select>
+<label>音訊處理</label>
+<label style="display:flex;align-items:center;gap:8px;margin-top:6px;cursor:pointer;">
+<input type="checkbox" id="audio-normalize" style="width:18px;height:18px;"> 音訊正規化（loudnorm，音量標準化）
+</label>
 <label>輸出檔名</label>
 <input type="text" id="out-name" value="output.mp4">
+<div style="display:flex;gap:8px;margin-top:8px;">
+<button id="btn-save-preset" class="gray" onclick="savePreset()" style="flex:1;margin-top:0;">💾 儲存目前設定</button>
+<button id="btn-load-preset" class="gray" onclick="loadPreset()" style="flex:1;margin-top:0;">📂 載入設定</button>
+</div>
+<details style="margin-top:16px;background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:12px;">
+<summary style="cursor:pointer;color:#D4AF37;font-weight:700;font-size:14px;">⚙️ 進階參數（可選，展開調整）</summary>
+<div style="margin-top:12px;">
+<label>CRF 品質（數字越小畫質越好，18~28 常用）</label>
+<input type="number" id="adv-crf" value="18" min="0" max="51" style="width:100%;background:#0D1117;color:#E6EDF3;border:1px solid #2D303A;border-radius:8px;padding:10px 12px;">
+<label>Preset 速度（越慢畫質越好）</label>
+<select id="adv-preset">
+<option value="ultrafast">ultrafast（最快）</option>
+<option value="superfast">superfast</option>
+<option value="veryfast">veryfast</option>
+<option value="fast" selected>fast（預設）</option>
+<option value="medium">medium</option>
+<option value="slow">slow</option>
+<option value="veryslow">veryslow（最慢）</option>
+</select>
+<label>位元率上限（可選，例如 8M，留空用 CRF）</label>
+<input type="text" id="adv-bitrate" placeholder="例：8M（留空用 CRF）" style="width:100%;background:#0D1117;color:#E6EDF3;border:1px solid #2D303A;border-radius:8px;padding:10px 12px;">
+<label>幀率（可選，留空保留原幀率）</label>
+<input type="text" id="adv-fps" placeholder="例：30（留空保留）" style="width:100%;background:#0D1117;color:#E6EDF3;border:1px solid #2D303A;border-radius:8px;padding:10px 12px;">
+</div>
+</details>
 <button id="btn-gen" disabled onclick="generateCmd()">🚀 產生 ffmpeg 指令</button>
 <div class="output" id="crop-output"></div>
 <div class="copy-row" id="crop-copy" style="display:none;">
