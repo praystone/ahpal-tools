@@ -111,6 +111,9 @@ RegionMap.prototype.renderList = function(list) {
     if (t[f.note]) html += '<div class="note">' + t[f.note] + '</div>';
     if (t[f.url]) html += '<div class="link"><a href="' + t[f.url] + '" target="_blank" rel="noopener">官方連結 →</a></div>';
     div.innerHTML = html;
+    div.style.cursor = 'pointer';
+    div.dataset.idx = self.data.indexOf(t);
+    div.addEventListener('click', function() { self.openDetail(t); });
     self.gridEl.appendChild(div);
   });
   if (this.countEl) this.countEl.textContent = '共 ' + list.length + ' 項（' + this.currentRegion + '）';
@@ -146,6 +149,43 @@ RegionMap.prototype.renderMap = function(list) {
 RegionMap.prototype.refreshMap = function() {
   if (this.map) this.map.invalidateSize();
   this.renderMap(this.getFiltered());
+};
+
+RegionMap.prototype.openDetail = function(t) {
+  var self = this;
+  var f = this.fields;
+  var name = t[f.name] || '';
+  var cat  = t[f.category] || '';
+  var reg  = t[f.region] || '';
+  var body = t.detail || ('<p>' + (t[f.note] || '（尚無詳細內容）') + '</p>');
+
+  var old = document.getElementById('rm-detail-modal');
+  if (old) old.remove();
+
+  var wrap = document.createElement('div');
+  wrap.id = 'rm-detail-modal';
+  wrap.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px;';
+  wrap.addEventListener('click', function(e) { if (e.target === wrap) wrap.remove(); });
+
+  var box = document.createElement('div');
+  box.style.cssText = 'background:#161B22;border:1px solid #D4AF37;border-radius:12px;max-width:760px;width:100%;max-height:85vh;overflow-y:auto;padding:24px 28px;color:#E6EDF3;line-height:1.9;position:relative;';
+
+  var closeBtn = document.createElement('button');
+  closeBtn.textContent = '✕';
+  closeBtn.style.cssText = 'position:absolute;top:12px;right:14px;background:transparent;border:1px solid #D4AF37;color:#D4AF37;border-radius:6px;width:32px;height:32px;cursor:pointer;font-size:16px;';
+  closeBtn.addEventListener('click', function() { wrap.remove(); });
+
+  var meta = '<div style="color:#58A6FF;font-size:13px;margin-bottom:12px;">' + cat + (cat && reg ? '｜' : '') + reg + '</div>';
+  var content = '<div class="rm-detail-body" style="font-size:14px;">' + body + '</div>';
+
+  box.innerHTML = meta + content;
+  box.appendChild(closeBtn);
+  wrap.appendChild(box);
+  document.body.appendChild(wrap);
+
+  // Esc 關閉
+  var esc = function(e) { if (e.key === 'Escape') { wrap.remove(); document.removeEventListener('keydown', esc); } };
+  document.addEventListener('keydown', esc);
 };
 
 // 全域掛載（讓 index.html 可以直接 new RegionMap）
