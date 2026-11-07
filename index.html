@@ -24,7 +24,7 @@
 </div>
 <div class="search-box"><input type="search" id="tool-search" placeholder="🔍 搜尋工具（輸入名稱或關鍵字）..."></div>
 <div class="cats"><button class="cat-btn active" data-cat="all">全部</button><button class="cat-btn" data-cat="ahpal">🦞 雅寶專屬</button><button class="cat-btn" data-cat="text">📝 文字處理</button><button class="cat-btn" data-cat="dev">🛠️ 開發工具</button><button class="cat-btn" data-cat="image">🎬 影音圖片</button><button class="cat-btn" data-cat="pdf">📄 PDF 工具</button><button class="cat-btn" data-cat="calc">🧮 計算工具</button><button class="cat-btn" data-cat="life">🏠 生活工具</button><button class="cat-btn" data-cat="edu">📚 教育工具</button>
-  <button class="cat-btn" data-cat="culture">🏮 文化探索</button><button class="cat-btn" data-cat="fable">📖 寓言童話</button><button class="cat-btn" data-cat="bible">📖 宗教目錄</button><button class="cat-btn" data-cat="essay">📝 雅寶隨筆</button><button class="cat-btn" data-cat="poetry">📜 詩詞</button><button class="cat-btn" data-cat="literature-en">📖 英美文學</button><button class="cat-btn" data-cat="enka">🎤 日本演歌</button><button class="cat-btn" data-cat="songs-en">🎵 英文歌曲</button></div>
+  <span id="culture"></span><button class="cat-btn" data-cat="culture">🏮 文化探索</button><button class="cat-btn" data-cat="fable">📖 寓言童話</button><button class="cat-btn" data-cat="bible">📖 宗教目錄</button><button class="cat-btn" data-cat="essay">📝 雅寶隨筆</button><button class="cat-btn" data-cat="poetry">📜 詩詞</button><button class="cat-btn" data-cat="literature-en">📖 英美文學</button><button class="cat-btn" data-cat="enka">🎤 日本演歌</button><button class="cat-btn" data-cat="songs-en">🎵 英文歌曲</button></div>
 <div class="tools-grid" id="tools-grid">
 <a href="/secret-toolkit/" class="tool-card" data-cat="culture">
   <div class="tool-icon">🏞️</div>
@@ -230,4 +230,16 @@
 })();
 </script>
 
+<script>
+(function(){
+  if (location.hash === "#culture") {
+    setTimeout(function(){
+      var btn = document.querySelector('.cat-btn[data-cat="culture"]');
+      if (btn) { btn.click(); }
+      var el = document.getElementById("culture");
+      if (el) { el.scrollIntoView({behavior:"smooth", block:"start"}); }
+    }, 100);
+  }
+})();
+</script>
 </body></html>
