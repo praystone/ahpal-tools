@@ -1,105 +1,16 @@
-var temples = [];
-var currentRegion = '全部';
-var map = null;
-var markers = [];
-var searchInput = document.getElementById('search-input');
-var templeGrid = document.getElementById('temple-grid');
-var resultCount = document.getElementById('result-count');
-var regionBarTemples = document.getElementById('region-bar-temples');
-var regionBarMap = document.getElementById('region-bar-map');
-var mapCount = document.getElementById('map-count');
+// ═══════════════════════════════════════════════════════
+// folk-toolkit/app.js
+// 只留「宮廟專屬」的知識庫內容 + 初始化共用 RegionMap
+// ═══════════════════════════════════════════════════════
 
-function renderRegions() {
-  var regions = ['全部', '台灣', '華北', '華東', '華南'];
-  var html = '';
-  regions.forEach(function(r) {
-    html += '<button class="region-btn' + (r === currentRegion ? ' active' : '') + '" data-region="' + r + '">' + r + '</button>';
-  });
-  regionBarTemples.innerHTML = html;
-  regionBarMap.innerHTML = html;
-  // 綁定事件
-  document.querySelectorAll('.region-btn').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      currentRegion = btn.dataset.region;
-      renderRegions();
-      renderTemples(getFilteredTemples());
-      if (map) renderMap(getFilteredTemples());
-    });
-  });
-}
-
-function getFilteredTemples() {
-  var q = searchInput.value.trim().toLowerCase();
-  return temples.filter(function(t) {
-    var matchRegion = currentRegion === '全部' || (t.region || '台灣') === currentRegion;
-    var matchQ = !q || t.name.toLowerCase().indexOf(q) >= 0
-                 || t.god.toLowerCase().indexOf(q) >= 0
-                 || (t.area || '').toLowerCase().indexOf(q) >= 0;
-    return matchRegion && matchQ;
-  });
-}
-
-function renderTemples(list) {
-  templeGrid.innerHTML = '';
-  list.forEach(function(t) {
-    var div = document.createElement('div');
-    div.className = 'temple';
-    var html = '<div class="name">' + t.name + '</div>';
-    html += '<div class="god">主神：' + t.god + '</div>';
-    html += '<div class="region">' + (t.area || '') + (t.region && t.region !== '台灣' ? ' · ' + t.region : '') + '</div>';
-    if (t.note) html += '<div class="note">' + t.note + '</div>';
-    if (t.url) html += '<div class="link"><a href="' + t.url + '" target="_blank" rel="noopener">官方網站 →</a></div>';
-    div.innerHTML = html;
-    templeGrid.appendChild(div);
-  });
-  resultCount.textContent = '共 ' + list.length + ' 間宮廟（' + currentRegion + '）';
-}
-
-function renderMap(list) {
-  if (!map) {
-    map = L.map('map').setView([23.5, 121.0], 7);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© OpenStreetMap contributors',
-      maxZoom: 18
-    }).addTo(map);
-  }
-  markers.forEach(function(m) { map.removeLayer(m); });
-  markers = [];
-  var valid = list.filter(function(t) { return t.lat && t.lng; });
-  valid.forEach(function(t) {
-    var m = L.marker([t.lat, t.lng]).addTo(map);
-    var popup = '<strong>' + t.name + '</strong><br>主神：' + t.god + '<br>' + (t.area || '');
-    if (t.note) popup += '<br><small>' + t.note + '</small>';
-    if (t.url) popup += '<br><a href="' + t.url + '" target="_blank">官方網站</a>';
-    m.bindPopup(popup);
-    markers.push(m);
-  });
-  if (valid.length > 0) {
-    var group = L.featureGroup(markers);
-    map.fitBounds(group.getBounds().pad(0.1));
-  }
-  mapCount.textContent = '地圖上有 ' + valid.length + ' 間宮廟（有座標）（' + currentRegion + '）';
-}
-
-fetch('./data.json')
-  .then(function(r) { return r.json(); })
-  .then(function(data) {
-    temples = data.temples || [];
-    // 補預設 area（如果沒有，用 region 代替）
-    temples.forEach(function(t) {
-      if (!t.area && t.region) t.area = t.region;
-      if (!t.region) t.region = '台灣';
-    });
-    renderRegions();
-    renderTemples(getFilteredTemples());
-  })
-  .catch(function(err) {
-    resultCount.textContent = '載入失敗：' + err.message;
-  });
-
-searchInput.addEventListener('input', function() {
-  renderTemples(getFilteredTemples());
+var rm = new RegionMap({
+  dataUrl: './data.json',
+  containerId: 'temple-grid',
+  mapId: 'map',
+  cardClass: 'item-card',
+  fields: { name: 'name', category: 'god', region: 'region', note: 'note', url: 'url' }
 });
+rm.init();
 
 // 頁籤切換
 document.querySelectorAll('.tab').forEach(function(tab) {
@@ -109,8 +20,7 @@ document.querySelectorAll('.tab').forEach(function(tab) {
     tab.classList.add('active');
     document.getElementById('panel-' + tab.dataset.tab).classList.add('active');
     if (tab.dataset.tab === 'map') {
-      setTimeout(function() { if (map) map.invalidateSize(); }, 100);
-      renderMap(getFilteredTemples());
+      setTimeout(function() { rm.refreshMap(); }, 100);
     }
   });
 });

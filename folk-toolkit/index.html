@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>漢人民俗與宮廟文化大全 · 宮廟資料庫 · 祭祀年曆 · 地圖導覽 | 雅寶工具箱</title>
+<title>漢人民俗與宮廟文化大全 · 宮廟資料庫 · 地圖導覽 | 雅寶工具箱</title>
 <meta name="description" content="漢人民俗與宮廟文化大全：各地區重要宮廟資料庫、祭祀年曆、科儀知識庫、地圖導覽。純前端、完全離線、不上傳。">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://tools.ahpal.com/folk-toolkit/">
@@ -28,14 +28,14 @@ h1{color:#D4AF37;font-size:28px;margin-bottom:8px;}
 .panel.active{display:block;}
 .card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:20px;margin-bottom:16px;}
 .search{width:100%;padding:12px 16px;background:#0D1117;color:#E6EDF3;border:1px solid #D4AF37;border-radius:10px;font-size:15px;margin-bottom:16px;}
-.temple-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;}
-.temple{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:14px;}
-.temple .name{color:#D4AF37;font-weight:700;font-size:16px;}
-.temple .god{color:#58A6FF;font-size:13px;margin-top:4px;}
-.temple .region{color:#8B949E;font-size:12px;margin-top:2px;}
-.temple .note{color:#C9D1D9;font-size:12px;margin-top:8px;line-height:1.6;}
-.temple .link{font-size:11px;margin-top:8px;}
-.temple .link a{color:#58A6FF;}
+.item-card{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:14px;}
+.item-card .name{color:#D4AF37;font-weight:700;font-size:16px;}
+.item-card .category{color:#58A6FF;font-size:13px;margin-top:4px;}
+.item-card .region{color:#8B949E;font-size:12px;margin-top:2px;}
+.item-card .note{color:#C9D1D9;font-size:12px;margin-top:8px;line-height:1.6;}
+.item-card .link{font-size:11px;margin-top:8px;}
+.item-card .link a{color:#58A6FF;}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;}
 #map{height:500px;border-radius:8px;margin-top:12px;}
 .footer{text-align:center;margin-top:40px;color:#8B949E;font-size:13px;}
 .footer a{color:#58A6FF;text-decoration:none;}
@@ -68,16 +68,16 @@ h1{color:#D4AF37;font-size:28px;margin-bottom:8px;}
 
 <div class="panel active" id="panel-temples">
 <div class="card">
-<div class="region-bar" id="region-bar-temples"></div>
-<input type="search" class="search" id="search-input" placeholder="🔍 搜尋宮廟名稱、主神、地區...">
-<div class="temple-grid" id="temple-grid"></div>
-<div class="note-box" id="result-count">載入中...</div>
+<div class="region-bar" id="temple-grid-regions"></div>
+<input type="search" class="search" id="temple-grid-search" placeholder="🔍 搜尋宮廟名稱、主神、地區...">
+<div class="grid" id="temple-grid"></div>
+<div class="note-box" id="temple-grid-count">載入中...</div>
 </div>
 </div>
 
 <div class="panel" id="panel-map">
 <div class="card">
-<div class="region-bar" id="region-bar-map"></div>
+<div class="region-bar" id="map-regions"></div>
 <div id="map"></div>
 <div class="note-box" id="map-count">載入中...</div>
 </div>
@@ -85,9 +85,9 @@ h1{color:#D4AF37;font-size:28px;margin-bottom:8px;}
 
 <div class="panel" id="panel-calendar">
 <div class="card">
-<h2 style="color:#D4AF37;font-size:18px;margin-bottom:12px;">📅 祭祀年曆（農曆月份對照）</h2>
+<h2 style="color:#D4AF37;font-size:18px;margin-bottom:12px;">📅 祭祀年曆</h2>
 <div id="calendar-content"></div>
-<div class="note-box">📌 第一階段先做「媽祖遶境」「王船祭」「原住民歲時祭儀」三大類。完整年曆留第三階段。</div>
+<div class="note-box">📌 第一階段先做「媽祖遶境」「王船祭」「原住民歲時祭儀」三大類。</div>
 </div>
 </div>
 
@@ -95,7 +95,7 @@ h1{color:#D4AF37;font-size:28px;margin-bottom:8px;}
 <div class="card">
 <h2 style="color:#D4AF37;font-size:18px;margin-bottom:12px;">📖 科儀知識庫</h2>
 <div id="knowledge-content"></div>
-<div class="note-box">📌 第一階段先做 10 篇。完整知識庫留第三階段。</div>
+<div class="note-box">📌 第一階段先做 10 篇。</div>
 </div>
 </div>
 
@@ -104,19 +104,20 @@ h1{color:#D4AF37;font-size:28px;margin-bottom:8px;}
 <h2 style="color:#D4AF37;font-size:18px;margin-bottom:12px;">🔗 資料來源</h2>
 <ul style="color:#C9D1D9;line-height:2;margin-left:20px;">
 <li>文化部「宗教禮俗類」開放資料</li>
-<li>國家文化記憶庫（王船祭、媽祖遶境科儀記錄）</li>
+<li>國家文化記憶庫</li>
 <li>TRFC 臺灣宗教與民俗文化平臺</li>
 <li>PTT 宮廟官方網站列表</li>
-<li>原住民族委員會（歲時祭儀公告）</li>
+<li>原住民族委員會</li>
 <li>OpenStreetMap（地圖圖磚）</li>
 </ul>
-<div class="note-box">📌 本頁資料為「公開資料整理」，不是「官方認證」。如需精確資訊，請以各宮廟官方網站為準。</div>
+<div class="note-box">📌 本頁資料為「公開資料整理」，不是「官方認證」。</div>
 </div>
 </div>
 
 <div class="footer"><p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p><p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p></div>
 </div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+<script src="../_shared/region-map.js"></script>
 <script src="./app.js"></script>
 </body>
 </html>
