@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>中華美食探索 · 各地區代表菜 · 菜系知識庫 | 雅寶工具箱</title>
+<meta name="description" content="中華美食探索：各地區代表菜、菜系知識庫、地圖導覽。純前端、完全離線、不上傳。">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tools.ahpal.com/food-toolkit/">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8637791667872348" crossorigin="anonymous"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft JhengHei",sans-serif;background:#0D1117;color:#E6EDF3;line-height:1.7;padding:20px;}
+.container{max-width:1100px;margin:0 auto;}
+h1{color:#D4AF37;font-size:28px;margin-bottom:8px;}
+.sub{color:#8B949E;margin-bottom:20px;font-size:14px;}
+.nav{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;padding:10px 14px;background:linear-gradient(135deg,#161B22,#0D1117);border:1px solid #D4AF37;border-radius:10px;margin:0 0 20px 0;font-size:14px;}
+.nav a{color:#58A6FF;text-decoration:none;padding:4px 10px;}
+.nav a.active{color:#0D1117;background:#D4AF37;font-weight:700;}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;}
+.tab{padding:10px 18px;background:#161B22;border:1px solid #2D303A;border-radius:8px;color:#C9D1D9;cursor:pointer;font-size:14px;}
+.tab.active{background:#D4AF37;color:#0D1117;border-color:#D4AF37;font-weight:700;}
+.region-bar{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;}
+.region-btn{padding:6px 14px;background:#0D1117;border:1px solid #2D303A;border-radius:20px;color:#C9D1D9;cursor:pointer;font-size:13px;}
+.region-btn.active{background:#58A6FF;color:#0D1117;border-color:#58A6FF;font-weight:700;}
+.panel{display:none;}
+.panel.active{display:block;}
+.card{background:#161B22;border:1px solid #2D303A;border-radius:12px;padding:20px;margin-bottom:16px;}
+.search{width:100%;padding:12px 16px;background:#0D1117;color:#E6EDF3;border:1px solid #D4AF37;border-radius:10px;font-size:15px;margin-bottom:16px;}
+.item-card{background:#0D1117;border:1px solid #2D303A;border-radius:8px;padding:14px;}
+.item-card .name{color:#D4AF37;font-weight:700;font-size:16px;}
+.item-card .category{color:#58A6FF;font-size:13px;margin-top:4px;}
+.item-card .region{color:#8B949E;font-size:12px;margin-top:2px;}
+.item-card .note{color:#C9D1D9;font-size:12px;margin-top:8px;line-height:1.6;}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;}
+#map{height:500px;border-radius:8px;margin-top:12px;}
+.footer{text-align:center;margin-top:40px;color:#8B949E;font-size:13px;}
+.footer a{color:#58A6FF;text-decoration:none;}
+.note-box{background:rgba(212,175,55,0.06);border-left:4px solid #D4AF37;padding:12px 16px;border-radius:6px;margin-top:16px;font-size:13px;color:#C9D1D9;}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🍜 中華美食探索</h1>
+<p class="sub">各地區代表菜 · 菜系知識庫 · 地圖導覽 · 純前端 · 離線 · 不上傳</p>
+<nav class="nav">
+<a href="https://www.ahpal.com/">🏠 首頁</a>
+<a href="https://www.ahpal.com/categories.html">📚 全部分類</a>
+<a href="https://www.ahpal.com/strategy/">📌 策略文章</a>
+<a href="https://novels.ahpal.com/">📖 小說站</a>
+<a href="https://memories.ahpal.com/">🏛️ 回憶館</a>
+<a href="https://bbs2.ahpal.com/">💬 BBS2</a>
+<a href="https://pet.ahpal.com/">⚔️ 打怪場</a>
+<a href="https://farm.ahpal.com/">🌾 農場</a>
+<a href="https://tools.ahpal.com/" class="active">🛠️ 工具箱</a>
+</nav>
+<div class="tabs">
+<div class="tab active" data-tab="foods">🍜 美食資料庫</div>
+<div class="tab" data-tab="map">🗺️ 地圖導覽</div>
+<div class="tab" data-tab="knowledge">📖 菜系知識庫</div>
+<div class="tab" data-tab="sources">🔗 資料來源</div>
+</div>
+<div class="panel active" id="panel-foods">
+<div class="card">
+<div class="region-bar" id="food-grid-regions"></div>
+<input type="search" class="search" id="food-grid-search" placeholder="🔍 搜尋菜名、菜系、地區...">
+<div class="grid" id="food-grid"></div>
+<div class="note-box" id="food-grid-count">載入中...</div>
+</div>
+</div>
+<div class="panel" id="panel-map">
+<div class="card">
+<div class="region-bar" id="map-regions"></div>
+<div id="map"></div>
+<div class="note-box" id="map-count">載入中...</div>
+</div>
+</div>
+<div class="panel" id="panel-knowledge">
+<div class="card">
+<h2 style="color:#D4AF37;font-size:18px;margin-bottom:12px;">📖 菜系知識庫</h2>
+<div id="knowledge-content"></div>
+</div>
+</div>
+<div class="panel" id="panel-sources">
+<div class="card">
+<h2 style="color:#D4AF37;font-size:18px;margin-bottom:12px;">🔗 資料來源</h2>
+<ul style="color:#C9D1D9;line-height:2;margin-left:20px;">
+<li>各地區飲食文化公開資料</li>
+<li>OpenStreetMap（地圖圖磚）</li>
+</ul>
+<div class="note-box">📌 本頁資料為「公開資料整理」，不是「官方認證」。</div>
+</div>
+</div>
+<div class="footer"><p>© 2026 雅寶社區 · 頂客論壇 (AHPAL.COM)</p><p><a href="https://tools.ahpal.com/">← 回到工具箱</a></p></div>
+</div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+<script src="../_shared/region-map.js"></script>
+<script src="./app.js"></script>
+</body>
+</html>
