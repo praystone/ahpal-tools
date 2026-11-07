@@ -1,0 +1,215 @@
+{
+  "temples": [
+    {
+      "name": "大甲鎮瀾宮",
+      "god": "天上聖母（媽祖）",
+      "region": "台中市大甲區",
+      "note": "每年農曆三月大甲媽祖遶境進香，九天八夜、全程逾300公里[citation:12]",
+      "url": "https://www.dajiamazu.org.tw/"
+    },
+    {
+      "name": "北港朝天宮",
+      "god": "天上聖母（媽祖）",
+      "region": "雲林縣北港鎮",
+      "note": "台灣媽祖信仰重鎮，每年元宵遶境、三月進香",
+      "url": "https://www.matsu.org.tw/"
+    },
+    {
+      "name": "白沙屯拱天宮",
+      "god": "天上聖母（媽祖）",
+      "region": "苗栗縣通霄鎮",
+      "note": "白沙屯媽祖徒步進香，路線不固定、全憑媽祖鑾轎指引",
+      "url": "https://www.baishatun.com.tw/"
+    },
+    {
+      "name": "鹿港天后宮",
+      "god": "天上聖母（媽祖）",
+      "region": "彰化縣鹿港鎮",
+      "note": "鹿港三大古廟之一，媽祖信仰中心",
+      "url": "https://www.lugangmazu.org/"
+    },
+    {
+      "name": "新港奉天宮",
+      "god": "天上聖母（媽祖）",
+      "region": "嘉義縣新港鄉",
+      "note": "每年元宵遶境，大甲媽祖遶境進香的目的地之一",
+      "url": "https://www.hsinkang.org.tw/"
+    },
+    {
+      "name": "台南祀典大天后宮",
+      "god": "天上聖母（媽祖）",
+      "region": "台南市中西區",
+      "note": "清領時期第一間官建媽祖廟，台灣媽祖信仰初期中心[citation:5]",
+      "url": "https://www.tianhou.org.tw/"
+    },
+    {
+      "name": "艋舺龍山寺",
+      "god": "觀世音菩薩",
+      "region": "台北市萬華區",
+      "note": "台北三大古廟之一，國家二級古蹟",
+      "url": "https://www.lungshan.org.tw/"
+    },
+    {
+      "name": "大龍峒保安宮",
+      "god": "保生大帝",
+      "region": "台北市大同區",
+      "note": "國家二級古蹟，每年保生大帝聖誕遶境",
+      "url": "https://www.baoan.org.tw/"
+    },
+    {
+      "name": "行天宮",
+      "god": "關聖帝君（恩主公）",
+      "region": "台北市中山區",
+      "note": "台北香火最盛廟宇之一，以「問事」聞名",
+      "url": "https://www.ht.org.tw/"
+    },
+    {
+      "name": "松山慈祐宮",
+      "god": "天上聖母（媽祖）",
+      "region": "台北市松山區",
+      "note": "松山地區信仰中心，每年媽祖聖誕遶境",
+      "url": "http://www.kuantu.org.tw/"
+    },
+    {
+      "name": "台北霞海城隍廟",
+      "god": "霞海城隍",
+      "region": "台北市大同區",
+      "note": "大稻埕信仰中心，以「求姻緣」聞名",
+      "url": "http://tpecitygod.org/"
+    },
+    {
+      "name": "台灣省城隍廟",
+      "god": "城隍爺",
+      "region": "台北市中正區",
+      "note": "清代台灣省城隍廟",
+      "url": "http://www.fonran.com.tw/citygod/"
+    },
+    {
+      "name": "松山慈惠堂",
+      "god": "瑤池金母",
+      "region": "台北市信義區",
+      "note": "母娘信仰重要廟宇",
+      "url": "https://www.sstht.org.tw/"
+    },
+    {
+      "name": "指南宮",
+      "god": "呂洞賓（純陽祖師）",
+      "region": "台北市文山區",
+      "note": "道教重要宮廟，木柵指南宮",
+      "url": "https://www.chih-nan-temple.org/"
+    },
+    {
+      "name": "烘爐地南山福德宮",
+      "god": "土地公",
+      "region": "新北市中和區",
+      "note": "北台灣最著名土地公廟，以「求財」聞名",
+      "url": "https://www.hunglodei.org/"
+    },
+    {
+      "name": "板橋慈惠宮",
+      "god": "天上聖母（媽祖）",
+      "region": "新北市板橋區",
+      "note": "板橋地區媽祖信仰中心",
+      "url": "https://www.cihuimazu.org.tw/"
+    },
+    {
+      "name": "竹林山觀音寺",
+      "god": "觀世音菩薩",
+      "region": "新北市林口區",
+      "note": "林口地區信仰中心",
+      "url": "https://www.zlskyt.com.tw/"
+    },
+    {
+      "name": "新竹都城隍廟",
+      "god": "城隍爺",
+      "region": "新竹市",
+      "note": "新竹地區信仰中心，每年中元普渡盛大",
+      "url": "https://www.weiling.org.tw/"
+    },
+    {
+      "name": "桃園慈護宮",
+      "god": "天上聖母（媽祖）",
+      "region": "桃園市",
+      "note": "桃園地區媽祖信仰中心",
+      "url": "https://www.cihugong.org.tw/"
+    },
+    {
+      "name": "台中樂成宮",
+      "god": "天上聖母（媽祖）",
+      "region": "台中市東區",
+      "note": "台中旱溪媽祖，每年遶境",
+      "url": "https://www.lech.org.tw/"
+    },
+    {
+      "name": "台中萬和宮",
+      "god": "天上聖母（媽祖）",
+      "region": "台中市南屯區",
+      "note": "台中 oldest 媽祖廟之一，字姓戲無形文化資產[citation:15]",
+      "url": "https://www.wanhegong.org.tw/"
+    },
+    {
+      "name": "南投紫南宮",
+      "god": "土地公",
+      "region": "南投縣竹山鎮",
+      "note": "以「求發財金」聞名全台",
+      "url": "https://www.landgod.org.tw/"
+    },
+    {
+      "name": "西螺福興宮",
+      "god": "天上聖母（媽祖）",
+      "region": "雲林縣西螺鎮",
+      "note": "西螺媽祖，每年遶境",
+      "url": "https://www.taipingmatzu.org.tw/"
+    },
+    {
+      "name": "北港武德宮",
+      "god": "武財神（趙公明）",
+      "region": "雲林縣北港鎮",
+      "note": "全台武財神信仰中心",
+      "url": "https://www.wude.org.tw/"
+    },
+    {
+      "name": "麥寮拱範宮",
+      "god": "天上聖母（媽祖）",
+      "region": "雲林縣麥寮鄉",
+      "note": "麥寮地區媽祖信仰中心",
+      "url": "http://kongfantemple.org.tw/"
+    },
+    {
+      "name": "嘉義九華山地藏庵",
+      "god": "地藏王菩薩",
+      "region": "嘉義市",
+      "note": "嘉義地區地藏信仰中心",
+      "url": "https://www.cydza.org.tw/"
+    },
+    {
+      "name": "台南大天后宮",
+      "god": "天上聖母（媽祖）",
+      "region": "台南市中西區",
+      "note": "同「祀典大天后宮」",
+      "url": "https://www.tianhou.org.tw/"
+    },
+    {
+      "name": "安定長興宮",
+      "god": "玉勅代天巡狩（王爺）",
+      "region": "台南市安定區",
+      "note": "台灣最早王船祭典廟宇，每逢丑辰未戌年舉辦王醮[citation:4]",
+      "url": ""
+    },
+    {
+      "name": "小琉球三隆宮",
+      "god": "王爺",
+      "region": "屏東縣琉球鄉",
+      "note": "小琉球迎王平安祭典，三年一科[citation:15]",
+      "url": ""
+    },
+    {
+      "name": "東港東隆宮",
+      "god": "溫王爺",
+      "region": "屏東縣東港鎮",
+      "note": "東港迎王平安祭典，三年一科，全台知名",
+      "url": ""
+    }
+  ],
+  "updated": "2026-11-07"
+}
