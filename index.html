@@ -227,6 +227,16 @@
     });
   });
   search.addEventListener('input', apply);
+  try {
+    var params = new URLSearchParams(location.search);
+    var cat = params.get('cat');
+    if (cat) {
+      var target = document.querySelector('.cat-btn[data-cat="' + cat + '"]');
+      if (target) {
+        target.click();
+      }
+    }
+  } catch(e) {}
 })();
 </script>
 
